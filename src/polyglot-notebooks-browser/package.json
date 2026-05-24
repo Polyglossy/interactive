@@ -6,11 +6,11 @@
     "dist"
   ],
   "scripts": {
-    "compile": "npm run rollup",
+    "compile": "tsc -p ./ && npm run rollup",
     "compile-ci": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "test": "mocha tests/**/*.test.ts",
     "ciTest": "node ../ensure-testresults-directory.js && npm test -- --reporter mocha-multi-reporters --reporter-options configFile=testConfig.json",
-    "rollup": "npm run compile-ci -- -i src/index.ts -o dist/dotnet-interactive.js",
+    "rollup": "npm run compile-ci -- -i dist/index.js -o dist/dotnet-interactive.js",
     "watch": "tsc -watch -p ./"
   },
   "repository": {
