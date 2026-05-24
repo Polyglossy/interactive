@@ -56,13 +56,15 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
             const launchOptions = await acquirePromise;
             return launchOptions;
         } catch (err) {
+            acquirePromise = undefined;
             diagnosticChannel.appendLine(`Error acquiring dotnet-interactive tool: ${err}`);
         }
     }));
 
     async function createToolManifest(dotnetPath: string, globalStoragePath: string): Promise<void> {
         const result = await executeSafeAndLog(diagnosticChannel, 'create-tool-manifest', dotnetPath, ['new', 'tool-manifest'], globalStoragePath);
-        if (result.code !== 0) {
+        const overwriteExistingManifest = result.code === 73 && /dotnet-tools\.json/i.test(result.error) && /--force/i.test(result.error);
+        if (result.code !== 0 && !overwriteExistingManifest) {
             throw new Error(`Unable to create local tool manifest.  Command failed with code ${result.code}.\n\nSTDOUT:\n${result.output}\n\nSTDERR:\n${result.error}`);
         }
     }
