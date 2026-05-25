@@ -48,12 +48,12 @@ Before a row changes from `proposed` to `approved`, confirm all of the following
 
 - The replacement does not use Microsoft-owned trademark-bearing product identity.
 - The replacement matches the fork's naming convention across .NET, TypeScript, VS Code, and docs.
-- The first-change phase is consistent with [phased-rename-plan.md](c:/Users/Skills/source/Polyglossy-interactive/Fork-n-run/phased-rename-plan.md).
+- The first-change phase is consistent with [phased-rename-plan.md](./phased-rename-plan.md).
 - Compatibility intent is explicit for any client-server or persisted-state seam.
 - There is at least one command or scenario that proves the new name works.
 
 ## Review Notes
 
 - Do not guess final names in code from this file until legal/product naming is approved.
-- Add rows whenever a new shipped identity is discovered in [rename-surface-inventory.md](c:/Users/Skills/source/Polyglossy-interactive/Fork-n-run/rename-surface-inventory.md).
+- Add rows whenever a new shipped identity is discovered in [rename-surface-inventory.md](./rename-surface-inventory.md).
 - Keep deferred legacy aliases in this file until they are intentionally removed.

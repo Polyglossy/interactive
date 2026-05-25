@@ -95,7 +95,7 @@ Copy this block for each phase execution.
 
 #### Stop Conditions Triggered
 
-- None or list triggered hold criteria from [phased-rename-plan.md](c:/Users/Skills/source/Polyglossy-interactive/Fork-n-run/phased-rename-plan.md).
+- None or list triggered hold criteria from [phased-rename-plan.md](./phased-rename-plan.md).
 
 ## Recommended Command Set by Phase
 
