@@ -6,7 +6,6 @@ import * as rxjs from "rxjs";
 import * as connection from "../connection";
 import { Logger } from "../logger";
 import { KernelHost } from '../kernelHost';
-import { v4 as uuid } from 'uuid';
 import { KernelInfo } from '../contracts';
 import { KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
 
@@ -14,6 +13,15 @@ type KernelMessagingApi = {
     onDidReceiveKernelMessage: (arg: any) => any;
     postKernelMessage: (data: unknown) => void;
 };
+
+function createUuid(): string {
+    const value = globalThis.crypto?.randomUUID?.();
+    if (!value) {
+        throw new Error('crypto.randomUUID is not available.');
+    }
+
+    return value;
+}
 
 export function activate(context: KernelMessagingApi) {
     configure(window, context);
@@ -35,7 +43,7 @@ function configure(global: any, context: KernelMessagingApi) {
         }
     });
 
-    const webViewId = uuid();
+    const webViewId = createUuid();
     context.onDidReceiveKernelMessage((arg: any) => {
         if (arg.envelope && arg.webViewId === webViewId) {
             const envelope = arg.envelope as connection.KernelCommandOrEventEnvelopeModel;
