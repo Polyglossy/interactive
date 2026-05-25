@@ -53,7 +53,7 @@ describe('Acquisition tests', () => {
                 isRoot: true,
                 tools: {}
             };
-            fs.writeFile(manifestPath, JSON.stringify(manifestContent), () => resolve());
+            fs.writeFile(manifestPath, JSON.stringify(manifestContent), err => err ? reject(err) : resolve());
         });
     }
 

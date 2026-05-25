@@ -11,13 +11,14 @@ import * as connection from './polyglot-notebooks/connection';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 import { Logger } from './polyglot-notebooks';
 
+let _fallbackId = 1;
 function createUuid(): string {
     const value = globalThis.crypto?.randomUUID?.();
-    if (!value) {
-        throw new Error('crypto.randomUUID is not available.');
+    if (value) {
+        return value;
     }
 
-    return value;
+    return `fallback_${Date.now().toString(16)}_${_fallbackId++}`;
 }
 
 export function executeSafe(command: string, args: Array<string>, workingDirectory?: string | undefined): Promise<{ code: number, output: string, error: string }> {
