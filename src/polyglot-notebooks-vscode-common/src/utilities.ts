@@ -4,13 +4,21 @@
 import * as compareVersions from 'compare-versions';
 import * as cp from 'child_process';
 import * as path from 'path';
-import { v4 as uuid } from 'uuid';
 import { InstallInteractiveArgs, ProcessStart } from "./interfaces";
 import { NotebookCellOutput, NotebookCellOutputItem, ReportChannel, Uri } from './interfaces/vscode-like';
 import * as commandsAndEvents from './polyglot-notebooks/commandsAndEvents';
 import * as connection from './polyglot-notebooks/connection';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 import { Logger } from './polyglot-notebooks';
+
+function createUuid(): string {
+    const value = globalThis.crypto?.randomUUID?.();
+    if (!value) {
+        throw new Error('crypto.randomUUID is not available.');
+    }
+
+    return value;
+}
 
 export function executeSafe(command: string, args: Array<string>, workingDirectory?: string | undefined): Promise<{ code: number, output: string, error: string }> {
     return new Promise<{ code: number, output: string, error: string }>(resolve => {
@@ -67,7 +75,7 @@ export async function executeSafeAndLog(outputChannel: ReportChannel, operationN
 
 export function createOutput(outputItems: Array<NotebookCellOutputItem>, outputId?: string): NotebookCellOutput {
     if (!outputId) {
-        outputId = uuid();
+        outputId = createUuid();
     }
 
     const output: NotebookCellOutput = {
