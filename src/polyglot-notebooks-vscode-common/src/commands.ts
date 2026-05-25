@@ -8,7 +8,7 @@ import { InstallInteractiveArgs, InteractiveLaunchOptions } from './interfaces';
 import { ClientMapper } from './clientMapper';
 import { getEol, toNotebookDocument } from './vscodeUtilities';
 import { DotNetPathManager } from './extension';
-import { computeToolInstallArguments, executeSafe, executeSafeAndLog, extensionToDocumentType, getVersionNumber } from './utilities';
+import { computeToolInstallArguments, executeSafe, executeSafeAndLog, extensionToDocumentType, getVersionNumber, toolManifestExists } from './utilities';
 
 import * as notebookControllers from './notebookControllers';
 import * as metadataUtilities from './metadataUtilities';
@@ -63,8 +63,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
 
     async function createToolManifest(dotnetPath: string, globalStoragePath: string): Promise<void> {
         const result = await executeSafeAndLog(diagnosticChannel, 'create-tool-manifest', dotnetPath, ['new', 'tool-manifest'], globalStoragePath);
-        const overwriteExistingManifest = result.code === 73 && /dotnet-tools\.json/i.test(result.error) && /--force/i.test(result.error);
-        if (result.code !== 0 && !overwriteExistingManifest) {
+        if (result.code !== 0 && !toolManifestExists(globalStoragePath)) {
             throw new Error(`Unable to create local tool manifest.  Command failed with code ${result.code}.\n\nSTDOUT:\n${result.output}\n\nSTDERR:\n${result.error}`);
         }
     }
