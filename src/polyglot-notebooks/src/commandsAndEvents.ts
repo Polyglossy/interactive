@@ -3,6 +3,7 @@
 
 import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
+import { createUuid } from "./uuid";
 export * from "./contracts";
 
 export interface DocumentKernelInfoCollection {
@@ -32,15 +33,6 @@ export interface KernelCommandEnvelopeHandler {
     (eventEnvelope: KernelCommandEnvelope): Promise<void>;
 }
 
-let _fallbackId = 1;
-function createUuid(): string {
-    const value = globalThis.crypto?.randomUUID?.();
-    if (value) {
-        return value;
-    }
-
-    return `fallback_${Date.now().toString(16)}_${_fallbackId++}`;
-}
 export class KernelCommandEnvelope {
 
     private _childCommandCounter: number = 1;

@@ -8,21 +8,12 @@ import { Logger } from "../logger";
 import { KernelHost } from '../kernelHost';
 import { KernelInfo } from '../contracts';
 import { KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
+import { createUuid } from '../uuid';
 
 type KernelMessagingApi = {
     onDidReceiveKernelMessage: (arg: any) => any;
     postKernelMessage: (data: unknown) => void;
 };
-
-let _fallbackId = 1;
-function createUuid(): string {
-    const value = globalThis.crypto?.randomUUID?.();
-    if (value) {
-        return value;
-    }
-
-    return `fallback_${Date.now().toString(16)}_${_fallbackId++}`;
-}
 
 export function activate(context: KernelMessagingApi) {
     configure(window, context);

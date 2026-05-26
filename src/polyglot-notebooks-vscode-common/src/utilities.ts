@@ -9,18 +9,9 @@ import { InstallInteractiveArgs, ProcessStart } from "./interfaces";
 import { NotebookCellOutput, NotebookCellOutputItem, ReportChannel, Uri } from './interfaces/vscode-like';
 import * as commandsAndEvents from './polyglot-notebooks/commandsAndEvents';
 import * as connection from './polyglot-notebooks/connection';
+import { createUuid } from './polyglot-notebooks/uuid';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 import { Logger } from './polyglot-notebooks';
-
-let _fallbackId = 1;
-function createUuid(): string {
-    const value = globalThis.crypto?.randomUUID?.();
-    if (value) {
-        return value;
-    }
-
-    return `fallback_${Date.now().toString(16)}_${_fallbackId++}`;
-}
 
 export function executeSafe(command: string, args: Array<string>, workingDirectory?: string | undefined): Promise<{ code: number, output: string, error: string }> {
     return new Promise<{ code: number, output: string, error: string }>(resolve => {
