@@ -12,16 +12,6 @@ import * as connection from './polyglot-notebooks/connection';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 import { Logger } from './polyglot-notebooks';
 
-let _fallbackId = 1;
-function createUuid(): string {
-    const value = globalThis.crypto?.randomUUID?.();
-    if (value) {
-        return value;
-    }
-
-    return `fallback_${Date.now().toString(16)}_${_fallbackId++}`;
-}
-
 export function executeSafe(command: string, args: Array<string>, workingDirectory?: string | undefined): Promise<{ code: number, output: string, error: string }> {
     return new Promise<{ code: number, output: string, error: string }>(resolve => {
         try {
@@ -84,7 +74,7 @@ export function toolManifestExists(globalStoragePath: string): boolean {
 
 export function createOutput(outputItems: Array<NotebookCellOutputItem>, outputId?: string): NotebookCellOutput {
     if (!outputId) {
-        outputId = createUuid();
+        outputId = commandsAndEvents.createUuid();
     }
 
     const output: NotebookCellOutput = {
