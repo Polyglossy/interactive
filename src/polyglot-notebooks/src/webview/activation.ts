@@ -8,7 +8,7 @@ import { Logger } from "../logger";
 import { KernelHost } from '../kernelHost';
 import { v4 as uuid } from 'uuid';
 import { KernelInfo } from '../contracts';
-import { KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
+import { createUuid, KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
 
 type KernelMessagingApi = {
     onDidReceiveKernelMessage: (arg: any) => any;

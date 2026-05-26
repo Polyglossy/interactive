@@ -4,7 +4,6 @@
 import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
 export * from "./contracts";
-import * as uuid from "uuid";
 
 export interface DocumentKernelInfoCollection {
     defaultKernelName: string;
@@ -33,13 +32,26 @@ export interface KernelCommandEnvelopeHandler {
     (eventEnvelope: KernelCommandEnvelope): Promise<void>;
 }
 
-function toBase64String(value: Uint8Array): string {
-    const wnd = globalThis.window;
-    if (wnd) {
-        return wnd.btoa(String.fromCharCode(...value));
-    } else {
-        return Buffer.from(value).toString('base64');
+function formatUuid(randomValues: Uint8Array): string {
+    const hex = Array.from(randomValues, value => value.toString(16).padStart(2, '0'));
+    return `${hex.slice(0, 4).join('')}-${hex.slice(4, 6).join('')}-${hex.slice(6, 8).join('')}-${hex.slice(8, 10).join('')}-${hex.slice(10, 16).join('')}`;
+}
+
+export function createUuid(): string {
+    const value = globalThis.crypto?.randomUUID?.();
+    if (value) {
+        return value;
     }
+
+    const randomValues = globalThis.crypto?.getRandomValues?.(new Uint8Array(16));
+    if (!randomValues) {
+        throw new Error('Unable to create a UUID because no secure random source is available.');
+    }
+
+    randomValues[6] = (randomValues[6] & 0x0f) | 0x40;
+    randomValues[8] = (randomValues[8] & 0x3f) | 0x80;
+
+    return formatUuid(randomValues);
 }
 export class KernelCommandEnvelope {
 
@@ -129,9 +141,7 @@ export class KernelCommandEnvelope {
             return this._token;
         }
 
-        const guidBytes = uuid.parse(uuid.v4());
-        const data = new Uint8Array(guidBytes);
-        this._token = toBase64String(data);
+        this._token = createUuid();
 
         // this._token = `${KernelCommandEnvelope._counter++}`;
 
