@@ -2,10 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import { expect } from 'chai';
+import * as fs from 'fs';
+import * as path from 'path';
 import { DisplayElement, ErrorElement, TextElement } from '../../src/vscode-common/polyglot-notebooks/contracts';
 import { isDisplayOutput, isErrorOutput, isTextOutput, reshapeOutputValueForVsCode } from '../../src/vscode-common/interfaces/utilities';
-import { createUri, debounce, executeSafe, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify } from '../../src/vscode-common/utilities';
-import { decodeToString } from './utilities';
+import { createUri, debounce, executeSafe, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
+import { decodeToString, withFakeGlobalStorageLocation } from './utilities';
 
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
 import { areEquivalentObjects, sortInPlace } from '../../src/vscode-common/metadataUtilities';
@@ -71,6 +73,24 @@ describe('Miscellaneous tests', () => {
         ];
         const workingDir = getWorkingDirectoryForNotebook(notebookUri, workspaceFolderUris, 'fallback-is-used');
         expect(workingDir).to.equal('fallback-is-used');
+    });
+
+    it('tool manifest existence check detects manifests in the .config directory', async () => {
+        await withFakeGlobalStorageLocation(true, async globalStoragePath => {
+            const manifestDir = path.join(globalStoragePath, '.config');
+            fs.mkdirSync(manifestDir, { recursive: true });
+            fs.writeFileSync(path.join(manifestDir, 'dotnet-tools.json'), '{}');
+
+            expect(toolManifestExists(globalStoragePath)).to.be.true;
+        });
+    });
+
+    it('tool manifest existence check detects manifests in the storage root', async () => {
+        await withFakeGlobalStorageLocation(true, async globalStoragePath => {
+            fs.writeFileSync(path.join(globalStoragePath, 'dotnet-tools.json'), '{}');
+
+            expect(toolManifestExists(globalStoragePath)).to.be.true;
+        });
     });
 
     it('debounce test', async () => {

@@ -6,8 +6,12 @@ import { describe } from "mocha";
 import * as commandsAndEvents from "../src/commandsAndEvents";
 import { JavascriptKernel } from "../src/javascriptKernel";
 import { Logger } from "../src/logger";
-import * as uuid from "uuid";
 import { ErrorProduced } from "../src/commandsAndEvents";
+
+function createValueName(): string {
+    const value = globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(16)}_${Math.random().toString(16).slice(2)}`;
+    return `value_${value.replace(/-/g, "_")}`;
+}
 
 describe("javascriptKernel", () => {
 
@@ -95,7 +99,7 @@ return command.toJson();`
         const events: commandsAndEvents.KernelEventEnvelope[] = [];
         const kernel = new JavascriptKernel();
         kernel.subscribeToKernelEvents((e) => events.push(e));
-        const valueName = `value_${uuid.v4().replace(/-/g, "_")}`; //?
+        const valueName = createValueName();
 
         const submitCode = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.SubmitCodeType, { code: `${valueName} = 42;` } as commandsAndEvents.SubmitCode);
         const requestValueInfos = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.RequestValueInfosType, {} as commandsAndEvents.RequestValueInfos);
@@ -121,7 +125,7 @@ return command.toJson();`
         const events: commandsAndEvents.KernelEventEnvelope[] = [];
         const kernel = new JavascriptKernel();
         kernel.subscribeToKernelEvents((e) => events.push(e));
-        const valueName = `value_${uuid.v4().replace(/-/g, "_")}`; //?
+        const valueName = createValueName();
 
         const submitCode = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.SubmitCodeType, { code: `${valueName} = [42,43];` } as commandsAndEvents.SubmitCode);
         const requestValueInfos = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.RequestValueInfosType, {} as commandsAndEvents.RequestValueInfos);
@@ -147,7 +151,7 @@ return command.toJson();`
         const events: commandsAndEvents.KernelEventEnvelope[] = [];
         const kernel = new JavascriptKernel();
         kernel.subscribeToKernelEvents((e) => events.push(e));
-        const valueName = `value_${uuid.v4().replace(/-/g, "_")}`; //?
+        const valueName = createValueName();
 
         const submitCode = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.SubmitCodeType, { code: `${valueName}1 = NaN; ${valueName}2 = Infinity; ${valueName}3 = -Infinity;` } as commandsAndEvents.SubmitCode);
         const requestValueInfos = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.RequestValueInfosType, {} as commandsAndEvents.RequestValueInfos);
@@ -194,7 +198,7 @@ return command.toJson();`
         const events: commandsAndEvents.KernelEventEnvelope[] = [];
         const kernel = new JavascriptKernel();
         kernel.subscribeToKernelEvents((e) => events.push(e));
-        const valueName = `value_${uuid.v4().replace(/-/g, "_")}`; //?
+        const valueName = createValueName();
 
         const submitCode = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.SubmitCodeType, { code: `${valueName} = 42;` } as commandsAndEvents.SubmitCode);
         const requestValue = new commandsAndEvents.KernelCommandEnvelope(commandsAndEvents.RequestValueType, { name: `${valueName}` } as commandsAndEvents.RequestValue);

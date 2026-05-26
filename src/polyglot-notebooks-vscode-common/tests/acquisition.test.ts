@@ -34,7 +34,7 @@ describe('Acquisition tests', () => {
     function createEmptyToolManifest(dotnetPath: string, globalStoragePath: string): Promise<void> {
         return new Promise((resolve, reject) => {
             const manifestDir = path.join(globalStoragePath, '.config');
-            fs.mkdirSync(manifestDir);
+            fs.mkdirSync(manifestDir, { recursive: true });
             const manifestPath = path.join(manifestDir, 'dotnet-tools.json');
             const manfiestContent = {
                 version: 1,
@@ -42,6 +42,18 @@ describe('Acquisition tests', () => {
                 tools: {}
             };
             fs.writeFile(manifestPath, JSON.stringify(manfiestContent), () => resolve());
+        });
+    }
+
+    function createRootToolManifest(globalStoragePath: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            const manifestPath = path.join(globalStoragePath, 'dotnet-tools.json');
+            const manifestContent = {
+                version: 1,
+                isRoot: true,
+                tools: {}
+            };
+            fs.writeFile(manifestPath, JSON.stringify(manifestContent), err => err ? reject(err) : resolve());
         });
     }
 
@@ -192,6 +204,32 @@ describe('Acquisition tests', () => {
                     }
                 }
             });
+        });
+    });
+
+    it("simulate global storage and root tool manifest exist; acquisition should not recreate it", async () => {
+        await withFakeGlobalStorageLocation(true, async globalStoragePath => {
+            const args = {
+                dotnetPath: 'dotnet',
+                toolVersion: undefined
+            };
+
+            await createRootToolManifest(globalStoragePath);
+
+            const launchOptions = await acquireDotnetInteractive(
+                args,
+                '42.42.42',
+                globalStoragePath,
+                getInteractiveVersionThatReturnsNoVersionFound,
+                createToolManifestThatThrows,
+                report,
+                installInteractiveToolWithSpecificVersion('42.42.42'),
+                report);
+
+            expect(launchOptions).to.deep.equal({
+                workingDirectory: globalStoragePath
+            });
+            expect(path.join(globalStoragePath, 'dotnet-tools.json')).to.be.file().with.json;
         });
     });
 

@@ -20,12 +20,16 @@ export async function acquireDotnetInteractive(
 ): Promise<InteractiveLaunchOptions> {
     // Ensure `globalStoragePath` exists.  This prevents a bunch of issues with spawned processes and working directories.
     if (!fs.existsSync(globalStoragePath)) {
-        fs.mkdirSync(globalStoragePath);
+        fs.mkdirSync(globalStoragePath, { recursive: true });
     }
 
     // create tool manifest if necessary
-    const toolManifestFile = path.join(globalStoragePath, '.config', 'dotnet-tools.json');
-    if (!fs.existsSync(toolManifestFile)) {
+    const toolManifestFiles = [
+        path.join(globalStoragePath, '.config', 'dotnet-tools.json'),
+        path.join(globalStoragePath, 'dotnet-tools.json')
+    ];
+
+    if (!toolManifestFiles.some(file => fs.existsSync(file))) {
         await createToolManifest(args.dotnetPath, globalStoragePath);
     }
 
