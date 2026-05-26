@@ -3,7 +3,9 @@
 
 import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
+import { createUuid } from "./uuid";
 export * from "./contracts";
+export { createUuid };
 
 export interface DocumentKernelInfoCollection {
     defaultKernelName: string;
@@ -32,27 +34,6 @@ export interface KernelCommandEnvelopeHandler {
     (eventEnvelope: KernelCommandEnvelope): Promise<void>;
 }
 
-function formatUuid(randomValues: Uint8Array): string {
-    const hex = Array.from(randomValues, value => value.toString(16).padStart(2, '0'));
-    return `${hex.slice(0, 4).join('')}-${hex.slice(4, 6).join('')}-${hex.slice(6, 8).join('')}-${hex.slice(8, 10).join('')}-${hex.slice(10, 16).join('')}`;
-}
-
-export function createUuid(): string {
-    const value = globalThis.crypto?.randomUUID?.();
-    if (value) {
-        return value;
-    }
-
-    const randomValues = globalThis.crypto?.getRandomValues?.(new Uint8Array(16));
-    if (!randomValues) {
-        throw new Error('Unable to create a UUID because no secure random source is available.');
-    }
-
-    randomValues[6] = (randomValues[6] & 0x0f) | 0x40;
-    randomValues[8] = (randomValues[8] & 0x3f) | 0x80;
-
-    return formatUuid(randomValues);
-}
 export class KernelCommandEnvelope {
 
     private _childCommandCounter: number = 1;
