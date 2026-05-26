@@ -9,6 +9,7 @@ import { InstallInteractiveArgs, ProcessStart } from "./interfaces";
 import { NotebookCellOutput, NotebookCellOutputItem, ReportChannel, Uri } from './interfaces/vscode-like';
 import * as commandsAndEvents from './polyglot-notebooks/commandsAndEvents';
 import * as connection from './polyglot-notebooks/connection';
+import { createUuid } from './polyglot-notebooks/uuid';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 import { Logger } from './polyglot-notebooks';
 
