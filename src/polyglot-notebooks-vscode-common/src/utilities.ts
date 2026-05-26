@@ -75,7 +75,7 @@ export function toolManifestExists(globalStoragePath: string): boolean {
 
 export function createOutput(outputItems: Array<NotebookCellOutputItem>, outputId?: string): NotebookCellOutput {
     if (!outputId) {
-        outputId = createUuid();
+        outputId = commandsAndEvents.createUuid();
     }
 
     const output: NotebookCellOutput = {

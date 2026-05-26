@@ -5,6 +5,7 @@ import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
 import { createUuid } from "./uuid";
 export * from "./contracts";
+export { createUuid };
 
 export interface DocumentKernelInfoCollection {
     defaultKernelName: string;
