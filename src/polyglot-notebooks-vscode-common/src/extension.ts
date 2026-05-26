@@ -313,7 +313,7 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
     ////////////////////////////////////////////////////////////////////////////////
     const launchOptions = await getInteractiveLaunchOptions();
     if (!launchOptions) {
-        throw new Error(`Unable to get interactive launch options.  Please see the '${diagnosticsChannel.getName()}' output window for details.`);
+        throw new Error(`Unable to get interactive launch options. Please see the '${diagnosticsChannel.getName()}' output window for details.`);
     }
     const serializerCommand = dotnetConfig.get('notebookParserArgs') as string[] || [];
     const serializerCommandProcessStart = processArguments({ args: serializerCommand, workingDirectory: launchOptions.workingDirectory }, '.', DotNetPathManager.getDotNetPath(), context.globalStorageUri.fsPath);
