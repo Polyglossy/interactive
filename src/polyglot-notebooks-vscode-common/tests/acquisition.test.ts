@@ -63,8 +63,19 @@ describe('Acquisition tests', () => {
 
     function installInteractiveTool(args: InstallInteractiveArgs, globalStoragePath: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            const manifestPath = path.join(globalStoragePath, '.config', 'dotnet-tools.json');
+            const manifestPath = [
+                path.join(globalStoragePath, '.config', 'dotnet-tools.json'),
+                path.join(globalStoragePath, 'dotnet-tools.json')
+            ].find(fs.existsSync);
+            if (!manifestPath) {
+                reject(new Error('Tool manifest does not exist.'));
+                return;
+            }
             fs.readFile(manifestPath, (err, data) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
                 let manifestContent = JSON.parse(data.toString());
                 manifestContent.tools['microsoft.dotnet-interactive'] = {
                     version: args!.toolVersion,
@@ -72,7 +83,7 @@ describe('Acquisition tests', () => {
                         'dotnet-interactive'
                     ]
                 };
-                fs.writeFile(manifestPath, JSON.stringify(manifestContent), () => resolve());
+                fs.writeFile(manifestPath, JSON.stringify(manifestContent), err => err ? reject(err) : resolve());
             });
         });
     }
