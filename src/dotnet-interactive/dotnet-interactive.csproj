@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>Microsoft.dotnet-interactive</PackageId>
-    <ToolCommandName>dotnet-interactive</ToolCommandName>
+    <PackageId>polyglossy.interactive.tool</PackageId>
+    <ToolCommandName>polyglossy-interactive</ToolCommandName>
     <IsPackable>true</IsPackable>
     <PackageDescription>NOTE: THIS PACKAGE WILL BE DEPRECATED APRIL 24, 2026. Formerly: Command line tool for interactive programming with C#, F#, PowerShell, and more. Powered Polyglot Notebooks and provided .NET support for Jupyter.</PackageDescription>
     <PackageTags>polyglot notebook dotnet interactive Jupyter csharp fsharp PowerShell</PackageTags>

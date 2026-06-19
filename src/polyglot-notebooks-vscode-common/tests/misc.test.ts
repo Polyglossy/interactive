@@ -36,7 +36,7 @@ describe('Miscellaneous tests', () => {
                 '{dotnet_path}',
                 'tool',
                 'run',
-                'dotnet-interactive',
+                'polyglossy-interactive',
                 '--',
                 'stdio',
                 '--working-dir',
@@ -50,7 +50,7 @@ describe('Miscellaneous tests', () => {
             args: [
                 'tool',
                 'run',
-                'dotnet-interactive',
+                'polyglossy-interactive',
                 '--',
                 'stdio',
                 '--working-dir',

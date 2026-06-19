@@ -77,10 +77,10 @@ describe('Acquisition tests', () => {
                     return;
                 }
                 let manifestContent = JSON.parse(data.toString());
-                manifestContent.tools['microsoft.dotnet-interactive'] = {
+                manifestContent.tools['polyglossy.interactive.tool'] = {
                     version: args!.toolVersion,
                     commands: [
-                        'dotnet-interactive'
+                        'polyglossy-interactive'
                     ]
                 };
                 fs.writeFile(manifestPath, JSON.stringify(manifestContent), err => err ? reject(err) : resolve());
@@ -133,10 +133,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -169,10 +169,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -207,10 +207,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -271,10 +271,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -309,10 +309,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -349,10 +349,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -389,10 +389,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42', // 43.43.43 was downgraded to 42.42.42
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }

@@ -73,7 +73,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
         let uninstallArgs = [
             'tool',
             'uninstall',
-            'Microsoft.dotnet-interactive'
+            'polyglossy.interactive.tool'
         ];
         await executeSafeAndLog(diagnosticChannel, 'tool-uninstall', args.dotnetPath, uninstallArgs, globalStoragePath);
 
@@ -83,7 +83,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
             '--add-source',
             interactiveToolSource!,
             '--ignore-failed-sources',
-            'Microsoft.dotnet-interactive'
+            'polyglossy.interactive.tool'
         ];
         if (args.toolVersion) {
             toolArgs.push('--version', args.toolVersion);
@@ -466,7 +466,7 @@ export async function selectDotNetInteractiveKernelForJupyter(): Promise<void> {
 // callbacks used to install interactive tool
 
 async function getInteractiveVersion(dotnetPath: string, globalStoragePath: string): Promise<string | undefined> {
-    const result = await executeSafe(dotnetPath, ['tool', 'run', 'dotnet-interactive', '--', '--version'], globalStoragePath);
+    const result = await executeSafe(dotnetPath, ['tool', 'run', 'polyglossy-interactive', '--', '--version'], globalStoragePath);
     if (result.code === 0) {
         const versionString = getVersionNumber(result.output);
         return versionString;

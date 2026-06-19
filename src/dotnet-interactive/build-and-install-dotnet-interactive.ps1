@@ -5,11 +5,11 @@ $thisDir = Split-Path -Parent $PSCommandPath
 $toolLocation = ""
 $toolVersion = ""
 
-dotnet run --project (Join-Path -Path $thisDir ".." "interface-generator") --out-file (Join-Path $thisDir ".." "polyglot-notebooks" "src" "contracts.ts")
+dotnet run --project (Join-Path -Path $thisDir -ChildPath "..\interface-generator") --out-file (Join-Path -Path (Join-Path -Path $thisDir -ChildPath "..\polyglot-notebooks\src") -ChildPath "contracts.ts")
 
 if (Test-Path 'env:DisableArcade') {
-     dotnet pack (Join-Path $thisDir "dotnet-interactive.csproj") /p:Version=1.0.0
-    $script:toolLocation = Join-Path $thisDir "bin" "debug"
+     dotnet pack (Join-Path -Path $thisDir -ChildPath "dotnet-interactive.csproj") /p:Version=1.0.0
+    $script:toolLocation = Join-Path -Path $thisDir -ChildPath "bin\Release"
     $script:toolVersion = "1.0.0"
 } else {
     if ($IsLinux -or $IsMacOS) {
@@ -18,11 +18,11 @@ if (Test-Path 'env:DisableArcade') {
         & "$thisDir\..\..\build.cmd" -pack
     }
 
-    $script:toolLocation = Join-Path $thisDir ".." ".." "artifacts" "packages" "Debug" "Shipping"
+    $script:toolLocation = Join-Path -Path (Join-Path -Path (Join-Path -Path $thisDir -ChildPath "..\..") -ChildPath "artifacts\packages\Debug") -ChildPath "Shipping"
     $script:toolVersion = "1.0.0-dev"
 }
 
-if (Get-Command dotnet-interactive -ErrorAction SilentlyContinue) {
-    dotnet tool uninstall -g Microsoft.dotnet-interactive 
+if (Get-Command polyglossy-interactive -ErrorAction SilentlyContinue) {
+    dotnet tool uninstall -g polyglossy.interactive.tool
 }
-dotnet tool install -g --add-source "$toolLocation" --version $toolVersion Microsoft.dotnet-interactive
+dotnet tool install -g --ignore-failed-sources --add-source "$toolLocation" --version $toolVersion polyglossy.interactive.tool

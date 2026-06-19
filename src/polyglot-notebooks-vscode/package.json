@@ -182,7 +182,7 @@
             "{dotnet_path}",
             "tool",
             "run",
-            "dotnet-interactive",
+            "polyglossy-interactive",
             "--",
             "[vscode]",
             "stdio",
@@ -197,7 +197,7 @@
             "{dotnet_path}",
             "tool",
             "run",
-            "dotnet-interactive",
+            "polyglossy-interactive",
             "--",
             "notebook-parser"
           ]
@@ -209,7 +209,7 @@
         },
         "dotnet-interactive.interactiveToolSource": {
           "type": "string",
-          "default": "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json",
+          "default": "https://api.nuget.org/v3/index.json",
           "description": "%description.interactiveToolSource%"
         },
         "dotnet-interactive.minimumDotNetSdkVersion": {
