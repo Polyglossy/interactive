@@ -4,9 +4,10 @@
 import { expect } from 'chai';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { DisplayElement, ErrorElement, TextElement } from '../../src/vscode-common/polyglot-notebooks/contracts';
 import { isDisplayOutput, isErrorOutput, isTextOutput, reshapeOutputValueForVsCode } from '../../src/vscode-common/interfaces/utilities';
-import { createOutput, createUri, debounce, executeSafe, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
+import { createOutput, createUri, debounce, executeSafe, getConfigurationValue, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
 import { decodeToString, withFakeGlobalStorageLocation } from './utilities';
 
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
@@ -107,6 +108,29 @@ describe('Miscellaneous tests', () => {
 
             expect(toolManifestExists(globalStoragePath)).to.be.true;
         });
+    });
+
+    it('configuration lookup prefers the new section and falls back to the legacy section', () => {
+        const originalGetConfiguration = (vscode.workspace as typeof vscode.workspace & { getConfiguration: typeof vscode.workspace.getConfiguration }).getConfiguration;
+        const configMap = new Map<string, Record<string, unknown>>();
+        (vscode.workspace as typeof vscode.workspace & { getConfiguration: typeof vscode.workspace.getConfiguration }).getConfiguration = ((section?: string) => ({
+            get<T>(key: string): T | undefined {
+                return (configMap.get(section ?? '')?.[key] as T | undefined) ?? undefined;
+            }
+        })) as typeof vscode.workspace.getConfiguration;
+
+        try {
+            configMap.set('polyglossy-interactive', { requiredInteractiveToolVersion: '2.0' });
+            configMap.set('dotnet-interactive', { requiredInteractiveToolVersion: '1.0' });
+            expect(getConfigurationValue('requiredInteractiveToolVersion', 'polyglossy-interactive', 'dotnet-interactive')).to.equal('2.0');
+
+            configMap.set('polyglossy-interactive', {});
+            expect(getConfigurationValue('requiredInteractiveToolVersion', 'polyglossy-interactive', 'dotnet-interactive')).to.equal('1.0');
+
+            expect(getConfigurationValue('missingKey', 'polyglossy-interactive', 'dotnet-interactive')).to.equal(undefined);
+        } finally {
+            (vscode.workspace as typeof vscode.workspace & { getConfiguration: typeof vscode.workspace.getConfiguration }).getConfiguration = originalGetConfiguration;
+        }
     });
 
     it('cell output ids use crypto.getRandomValues when randomUUID is unavailable', () => {

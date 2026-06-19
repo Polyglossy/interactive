@@ -33,6 +33,7 @@ export class DotNetNotebookKernel {
 
     private trackedOutputIds: Map<vscode.Uri, Set<string>> = new Map(); // tracks notebookUri => [trackedOutputId]
     private disposables: { dispose(): void }[] = [];
+    private controllers: Map<string, vscode.NotebookController> = new Map();
 
     constructor(readonly config: DotNetNotebookKernelConfiguration, readonly tokensProvider: semanticTokens.DocumentSemanticTokensProvider) {
         // ensure the tracked output ids are always fresh
@@ -50,6 +51,17 @@ export class DotNetNotebookKernel {
             preloads
         );
         this.commonControllerInit(dibController);
+        this.controllers.set(constants.NotebookControllerId, dibController);
+
+        const polyglossyDibController = vscode.notebooks.createNotebookController(
+            constants.PolyglossyNotebookControllerId,
+            constants.PolyglossyNotebookViewType,
+            '.NET Interactive',
+            this.executeHandler.bind(this),
+            preloads
+        );
+        this.commonControllerInit(polyglossyDibController);
+        this.controllers.set(constants.PolyglossyNotebookControllerId, polyglossyDibController);
 
         // .ipynb execution via Jupyter extension (optional)
         const jupyterController = vscode.notebooks.createNotebookController(
@@ -66,6 +78,7 @@ export class DotNetNotebookKernel {
             }
         });
         this.commonControllerInit(jupyterController);
+        this.controllers.set(constants.JupyterNotebookControllerId, jupyterController);
 
         this.disposables.push(vscode.workspace.onDidOpenNotebookDocument(async notebook => {
             await this.onNotebookOpen(notebook, config.clientMapper, jupyterController);
@@ -115,6 +128,11 @@ export class DotNetNotebookKernel {
             if (notebook.notebookType === constants.JupyterViewType) {
                 jupyterController.updateNotebookAffinity(notebook, vscode.NotebookControllerAffinity.Preferred);
                 await selectDotNetInteractiveKernelForJupyter();
+            }
+
+            if (notebook.notebookType === constants.PolyglossyNotebookViewType) {
+                const polyglossyController = this.controllers.get(constants.PolyglossyNotebookControllerId);
+                polyglossyController?.updateNotebookAffinity(notebook, vscode.NotebookControllerAffinity.Preferred);
             }
 
             await updateNotebookMetadata(notebook, this.config.clientMapper);

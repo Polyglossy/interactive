@@ -20,7 +20,7 @@ import { registerAcquisitionCommands, registerKernelCommands, registerFileComman
 import { languageToCellKind } from './interactiveNotebook';
 import { InteractiveLaunchOptions, InstallInteractiveArgs } from './interfaces';
 
-import { createOutput, debounce, getDotNetVersionOrThrow, getWorkingDirectoryForNotebook, isVersionGreaterOrEqual, processArguments } from './utilities';
+import { createOutput, debounce, getConfigurationValue, getDotNetVersionOrThrow, getWorkingDirectoryForNotebook, isVersionGreaterOrEqual, processArguments } from './utilities';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 
 import * as notebookControllers from './notebookControllers';
@@ -75,8 +75,7 @@ export async function activate(context: vscode.ExtensionContext) {
     DotNetPathManager.setOutputChannelAdapter(diagnosticsChannel);
 
     Logger.configure('extension host', logEntry => {
-        const polyglotConfig = vscode.workspace.getConfiguration('polyglot-notebook');
-        const loggerLevelString = polyglotConfig.get<string>('logLevel') || LogLevel[LogLevel.Error];
+        const loggerLevelString = getConfigurationValue<string>('logLevel', constants.PolyglotConfigurationSectionName, constants.LegacyPolyglotConfigurationSectionName) || LogLevel[LogLevel.Error];
         const loggerLevelKey = loggerLevelString as keyof typeof LogLevel;
         const logLevel = LogLevel[loggerLevelKey];
         if (logEntry.logLevel >= logLevel) {
@@ -95,8 +94,16 @@ export async function activate(context: vscode.ExtensionContext) {
 }
 
 async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel: OutputChannelAdapter) {
-    const dotnetConfig = vscode.workspace.getConfiguration(constants.DotnetConfigurationSectionName);
-    const polyglotConfig = vscode.workspace.getConfiguration(constants.PolyglotConfigurationSectionName);
+    const dotnetConfig = {
+        get<T>(key: string) {
+            return getConfigurationValue<T>(key, constants.DotnetConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
+        }
+    };
+    const polyglotConfig = {
+        get<T>(key: string) {
+            return getConfigurationValue<T>(key, constants.PolyglotConfigurationSectionName, constants.LegacyPolyglotConfigurationSectionName);
+        }
+    };
     const minDotNetSdkVersion = '10.0';
 
     await waitForSdkPackExtension();
@@ -139,8 +146,6 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
     context.subscriptions.push(vscode.languages.registerDocumentSemanticTokensProvider(semanticTokens.selector, tokensProvider, tokensProvider.semanticTokensLegend));
 
     async function kernelChannelCreator(notebookUri: vscodeLike.Uri): Promise<{ channel: KernelCommandAndEventChannel, kernelReady: commandsAndEvents.KernelReady }> {
-        const dotnetConfig = vscode.workspace.getConfiguration(constants.DotnetConfigurationSectionName);
-        const polyglotConfig = vscode.workspace.getConfiguration(constants.PolyglotConfigurationSectionName);
         const launchOptions = await getInteractiveLaunchOptions();
         if (!launchOptions) {
             throw new Error(`Unable to get interactive launch options.  Please see the '${diagnosticsChannel.getName()}' output window for details.`);

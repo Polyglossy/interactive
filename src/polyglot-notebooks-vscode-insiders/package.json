@@ -1,10 +1,10 @@
 {
-  "name": "dotnet-interactive-vscode",
-  "displayName": "Polyglot Notebooks",
+  "name": "polyglossy-interactive-vscode",
+  "displayName": "Polyglossy Notebooks",
   "description": "%description.package%",
   "icon": "images/icon.png",
-  "publisher": "ms-dotnettools",
-  "author": "Microsoft Corporation",
+  "publisher": "polyglossy-tools",
+  "author": "Polyglossy Tools",
   "license": "MIT",
   "enabledApiProposals": [
     "notebookMessaging"
@@ -16,10 +16,10 @@
     "vscode": "^1.87.0"
   },
   "bugs": {
-    "url": "https://github.com/dotnet/interactive/issues"
+    "url": "https://github.com/Polyglossy/interactive/issues"
   },
   "repository": {
-    "url": "https://github.com/dotnet/interactive"
+    "url": "https://github.com/Polyglossy/interactive"
   },
   "categories": [
     "Data Science",
@@ -43,11 +43,14 @@
     "onUri",
     "onNotebook:dotnet-interactive",
     "onNotebook:dotnet-interactive-window",
+    "onNotebook:polyglossy-interactive",
+    "onNotebook:polyglossy-interactive-window",
     "onNotebook:jupyter-notebook",
     "onNotebook:polyglot-notebook",
     "onNotebook:polyglot-notebook-window",
     "onNotebook:jupyter-notebook",
     "onCommand:dotnet-interactive.acquire",
+    "onCommand:polyglossy-interactive.acquire",
     "onCommand:polyglot-notebook.fileNew",
     "onCommand:polyglot-notebook.newNotebook",
     "onCommand:polyglot-notebook.openNotebook",
@@ -78,8 +81,22 @@
         ]
       },
       {
+        "type": "polyglossy-interactive",
+        "displayName": "Polyglossy Notebook",
+        "selector": [
+          {
+            "filenamePattern": "*.dib"
+          }
+        ]
+      },
+      {
         "type": "polyglot-notebook-window",
         "displayName": "Polyglot Notebook",
+        "selector": []
+      },
+      {
+        "type": "polyglossy-interactive-window",
+        "displayName": "Polyglossy Notebook",
         "selector": []
       }
     ],
@@ -187,7 +204,33 @@
           ],
           "description": "%description.kernelTransportArgs%"
         },
+        "polyglossy-interactive.kernelTransportArgs": {
+          "type": "array",
+          "default": [
+            "{dotnet_path}",
+            "tool",
+            "run",
+            "polyglossy-interactive",
+            "--",
+            "[vscode]",
+            "stdio",
+            "--working-dir",
+            "{working_dir}"
+          ],
+          "description": "%description.kernelTransportArgs%"
+        },
         "dotnet-interactive.notebookParserArgs": {
+          "type": "array",
+          "default": [
+            "{dotnet_path}",
+            "tool",
+            "run",
+            "polyglossy-interactive",
+            "--",
+            "notebook-parser"
+          ]
+        },
+        "polyglossy-interactive.notebookParserArgs": {
           "type": "array",
           "default": [
             "{dotnet_path}",
@@ -203,12 +246,37 @@
           "default": "{global_storage_path}",
           "description": "%description.kernelTransportWorkingDirectory%"
         },
+        "polyglossy-interactive.kernelTransportWorkingDirectory": {
+          "type": "string",
+          "default": "{global_storage_path}",
+          "description": "%description.kernelTransportWorkingDirectory%"
+        },
         "dotnet-interactive.interactiveToolSource": {
           "type": "string",
           "default": "https://api.nuget.org/v3/index.json",
           "description": "%description.interactiveToolSource%"
         },
+        "polyglossy-interactive.interactiveToolSource": {
+          "type": "string",
+          "default": "https://api.nuget.org/v3/index.json",
+          "description": "%description.interactiveToolSource%"
+        },
+        "dotnet-interactive.minimumDotNetSdkVersion": {
+          "type": "string",
+          "default": "9.0",
+          "description": "%description.minimumDotNetSdkVersion%"
+        },
+        "polyglossy-interactive.minimumDotNetSdkVersion": {
+          "type": "string",
+          "default": "9.0",
+          "description": "%description.minimumDotNetSdkVersion%"
+        },
         "dotnet-interactive.requiredInteractiveToolVersion": {
+          "type": "string",
+          "default": "1.0.0",
+          "description": "%description.requiredInteractiveToolVersion%"
+        },
+        "polyglossy-interactive.requiredInteractiveToolVersion": {
           "type": "string",
           "default": "1.0.0",
           "description": "%description.requiredInteractiveToolVersion%"
@@ -237,6 +305,10 @@
     "commands": [
       {
         "command": "dotnet-interactive.acquire",
+        "title": "%command.acquire%"
+      },
+      {
+        "command": "polyglossy-interactive.acquire",
         "title": "%command.acquire%"
       },
       {

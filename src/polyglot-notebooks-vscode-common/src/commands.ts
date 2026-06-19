@@ -8,7 +8,7 @@ import { InstallInteractiveArgs, InteractiveLaunchOptions } from './interfaces';
 import { ClientMapper } from './clientMapper';
 import { getEol, toNotebookDocument } from './vscodeUtilities';
 import { DotNetPathManager } from './extension';
-import { computeToolInstallArguments, executeSafe, executeSafeAndLog, extensionToDocumentType, getVersionNumber, toolManifestExists } from './utilities';
+import { computeToolInstallArguments, executeSafe, executeSafeAndLog, extensionToDocumentType, getConfigurationValue, getVersionNumber, toolManifestExists } from './utilities';
 
 import * as notebookControllers from './notebookControllers';
 import * as metadataUtilities from './metadataUtilities';
@@ -19,9 +19,8 @@ import { PromiseCompletionSource } from './polyglot-notebooks/promiseCompletionS
 import * as constants from './constants';
 
 export async function registerAcquisitionCommands(context: vscode.ExtensionContext, diagnosticChannel: ReportChannel): Promise<void> {
-    const dotnetConfig = vscode.workspace.getConfiguration(constants.DotnetConfigurationSectionName);
-    const requiredDotNetInteractiveVersion = dotnetConfig.get<string>('requiredInteractiveToolVersion');
-    const interactiveToolSource = dotnetConfig.get<string>('interactiveToolSource');
+    const requiredDotNetInteractiveVersion = getConfigurationValue<string>('requiredInteractiveToolVersion', constants.DotnetConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
+    const interactiveToolSource = getConfigurationValue<string>('interactiveToolSource', constants.DotnetConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
 
     if (!requiredDotNetInteractiveVersion) {
         const errorTitle = 'Polyglot Notebooks extension will not work.';
@@ -32,7 +31,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
 
     let acquirePromise: Promise<InteractiveLaunchOptions> | undefined = undefined;
 
-    context.subscriptions.push(vscode.commands.registerCommand('dotnet-interactive.acquire', async (args?: InstallInteractiveArgs | string | undefined): Promise<InteractiveLaunchOptions | undefined> => {
+    const acquireHandler = async (args?: InstallInteractiveArgs | string | undefined): Promise<InteractiveLaunchOptions | undefined> => {
         try {
             const installArgs = computeToolInstallArguments(args);
             DotNetPathManager.setDotNetPath(installArgs.dotnetPath);
@@ -59,7 +58,10 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
             acquirePromise = undefined;
             diagnosticChannel.appendLine(`Error acquiring dotnet-interactive tool: ${err}`);
         }
-    }));
+    };
+
+    context.subscriptions.push(vscode.commands.registerCommand('dotnet-interactive.acquire', acquireHandler));
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-interactive.acquire', acquireHandler));
 
     async function createToolManifest(dotnetPath: string, globalStoragePath: string): Promise<void> {
         const result = await executeSafeAndLog(diagnosticChannel, 'create-tool-manifest', dotnetPath, ['new', 'tool-manifest'], globalStoragePath);
@@ -216,6 +218,20 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
 
     const eol = getEol();
 
+    const polyglotConfig = {
+        get<T>(key: string) {
+            return getConfigurationValue<T>(key, constants.PolyglotConfigurationSectionName, constants.LegacyPolyglotConfigurationSectionName);
+        },
+        async update(key: string, value: unknown, target: vscode.ConfigurationTarget) {
+            const config = vscode.workspace.getConfiguration(constants.PolyglotConfigurationSectionName);
+            await config.update(key, value, target);
+            const legacyConfig = vscode.workspace.getConfiguration(constants.LegacyPolyglotConfigurationSectionName);
+            if (legacyConfig.get(key) !== undefined) {
+                await legacyConfig.update(key, value, target);
+            }
+        }
+    };
+
     const notebookFileFilters = {
         'Polyglot Notebook Script': ['dib'],
         'Jupyter Notebook': ['ipynb'],
@@ -242,10 +258,9 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
     }
 
     async function promptToSaveDefaults(extension: string, language: string): Promise<void> {
-        const polyglotConfig = vscode.workspace.getConfiguration(constants.PolyglotConfigurationSectionName);
+        const suppressPromptToSaveDefaults = getConfigurationValue<boolean>('suppressPromptToSaveDefaults', constants.PolyglotConfigurationSectionName, constants.LegacyPolyglotConfigurationSectionName);
 
         // check to see if the user doesn't want to see this
-        const suppressPromptToSaveDefaults = polyglotConfig.get<boolean>('suppressPromptToSaveDefaults');
         if (suppressPromptToSaveDefaults) {
             return;
         }

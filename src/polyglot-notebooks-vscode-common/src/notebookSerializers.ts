@@ -92,6 +92,7 @@ export function createAndRegisterNotebookSerializers(context: vscode.ExtensionCo
 
     const serializers = new Map<string, vscode.NotebookSerializer>();
     serializers.set(constants.NotebookViewType, createAndRegisterSerializer(commandsAndEvents.DocumentSerializationType.Dib, constants.NotebookViewType));
+    serializers.set(constants.PolyglossyNotebookViewType, createAndRegisterSerializer(commandsAndEvents.DocumentSerializationType.Dib, constants.PolyglossyNotebookViewType));
     serializers.set(constants.JupyterViewType, createAndRegisterSerializer(commandsAndEvents.DocumentSerializationType.Ipynb, constants.JupyterNotebookViewType));
     return serializers;
 }
@@ -112,6 +113,8 @@ export function createAndRegisterFallbackNotebookSerializers(context: vscode.Ext
     };
     const notebookSerializer = vscode.workspace.registerNotebookSerializer(constants.NotebookViewType, serializer);
     context.subscriptions.push(notebookSerializer);
+    const polyglossyNotebookSerializer = vscode.workspace.registerNotebookSerializer(constants.PolyglossyNotebookViewType, serializer);
+    context.subscriptions.push(polyglossyNotebookSerializer);
 }
 
 function toVsCodeNotebookCellData(cell: commandsAndEvents.InteractiveDocumentElement): vscode.NotebookCellData {

@@ -1,7 +1,7 @@
 {
-  "name": "microsoft.dotnet.interactive.js",
+  "name": "polyglossy.interactive.js",
   "version": "1.0.0",
-  "description": "Javascript api Microsoft.DotNet.Interactive",
+  "description": "JavaScript API for Polyglossy Interactive",
   "files": [
     "dist"
   ],
@@ -10,24 +10,24 @@
     "compile-ci": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "test": "mocha tests/**/*.test.ts",
     "ciTest": "node ../ensure-testresults-directory.js && npm test -- --reporter mocha-multi-reporters --reporter-options configFile=testConfig.json",
-    "rollup": "npm run compile-ci -- -i dist/index.js -o dist/dotnet-interactive.js",
+    "rollup": "npm run compile-ci -- -i dist/index.js -o dist/polyglossy-interactive.js",
     "watch": "tsc -watch -p ./"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dotnet/interactive.git"
+    "url": "git+https://github.com/Polyglossy/interactive.git"
   },
   "keywords": [
     "dotnet",
     "interactive",
     "javascript"
   ],
-  "author": "Microsoft",
+  "author": "Polyglossy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dotnet/interactive/issues"
+    "url": "https://github.com/Polyglossy/interactive/issues"
   },
-  "homepage": "https://github.com/dotnet/interactive#readme",
+  "homepage": "https://github.com/Polyglossy/interactive#readme",
   "dependencies": {
     "@microsoft/signalr": "7.0.7",
     "rxjs": "7.5.6",
