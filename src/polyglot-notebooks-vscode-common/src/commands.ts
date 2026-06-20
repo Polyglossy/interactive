@@ -112,16 +112,28 @@ function getCurrentNotebookDocument(): vscode.NotebookDocument | undefined {
 
 export function registerKernelCommands(context: vscode.ExtensionContext, clientMapper: ClientMapper) {
 
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.notebookEditor.restartKernel', async (_notebookEditor) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.restartCurrentNotebookKernel');
+    }));
+
     context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.notebookEditor.restartKernel', async (_notebookEditor) => {
-        await vscode.commands.executeCommand('polyglot-notebook.restartCurrentNotebookKernel');
+        await vscode.commands.executeCommand('polyglossy-notebook.notebookEditor.restartKernel');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.notebookEditor.openValueViewer', async () => {
+        // vscode creates a command named `<viewId>.focus` for all contributed views, so we need to match the new view id first
+        try {
+            await vscode.commands.executeCommand('polyglossy-notebook-panel-values.focus');
+        } catch {
+            await vscode.commands.executeCommand('polyglot-notebook-panel-values.focus');
+        }
     }));
 
     context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.notebookEditor.openValueViewer', async () => {
-        // vscode creates a command named `<viewId>.focus` for all contributed views, so we need to match the id
-        await vscode.commands.executeCommand('polyglot-notebook-panel-values.focus');
+        await vscode.commands.executeCommand('polyglossy-notebook.notebookEditor.openValueViewer');
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.notebookEditor.connectSubkernel', async (notebook?: vscode.NotebookDocument) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.notebookEditor.connectSubkernel', async (notebook?: vscode.NotebookDocument) => {
         notebook = notebook || getCurrentNotebookDocument();
 
         if (!notebook) {
@@ -172,7 +184,7 @@ export function registerKernelCommands(context: vscode.ExtensionContext, clientM
         }
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.restartCurrentNotebookKernel', async (notebook?: vscode.NotebookDocument | undefined) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.restartCurrentNotebookKernel', async (notebook?: vscode.NotebookDocument | undefined) => {
         notebook = notebook || getCurrentNotebookDocument();
         if (notebook) {
             // notifty the client that the kernel is about to restart
@@ -182,8 +194,8 @@ export function registerKernelCommands(context: vscode.ExtensionContext, clientM
                 title: 'Restarting kernel...'
             },
                 (_progress, _token) => restartCompletionSource.promise);
-            await vscode.commands.executeCommand('polyglot-notebook.stopCurrentNotebookKernel', notebook);
-            await vscode.commands.executeCommand('polyglot-notebook.resetNotebookKernelCollection', notebook);
+            await vscode.commands.executeCommand('polyglossy-notebook.stopCurrentNotebookKernel', notebook);
+            await vscode.commands.executeCommand('polyglossy-notebook.resetNotebookKernelCollection', notebook);
             const _client = await clientMapper.getOrAddClient(notebook.uri);
             restartCompletionSource.resolve();
             await vscode.commands.executeCommand('workbench.notebook.layout.webview.reset', notebook.uri);
@@ -191,7 +203,11 @@ export function registerKernelCommands(context: vscode.ExtensionContext, clientM
         }
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.stopCurrentNotebookKernel', async (notebook?: vscode.NotebookDocument | undefined) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.restartCurrentNotebookKernel', async (notebook?: vscode.NotebookDocument | undefined) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.restartCurrentNotebookKernel', notebook);
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.stopCurrentNotebookKernel', async (notebook?: vscode.NotebookDocument | undefined) => {
         notebook = notebook || getCurrentNotebookDocument();
         if (notebook) {
             for (const cell of notebook.getCells()) {
@@ -207,10 +223,18 @@ export function registerKernelCommands(context: vscode.ExtensionContext, clientM
         }
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.stopAllNotebookKernels', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.stopCurrentNotebookKernel', async (notebook?: vscode.NotebookDocument | undefined) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.stopCurrentNotebookKernel', notebook);
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.stopAllNotebookKernels', async () => {
         vscode.workspace.notebookDocuments
-            .filter(document => clientMapper.isDotNetClient(document.uri))
-            .forEach(async document => await vscode.commands.executeCommand('polyglot-notebook.stopCurrentNotebookKernel', document));
+            .filter((document: vscode.NotebookDocument) => clientMapper.isDotNetClient(document.uri))
+            .forEach(async (document: vscode.NotebookDocument) => await vscode.commands.executeCommand('polyglossy-notebook.stopCurrentNotebookKernel', document));
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.stopAllNotebookKernels', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.stopAllNotebookKernels');
     }));
 }
 
@@ -352,11 +376,7 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
     }
 
     async function newNotebookWithLanguage(extension: string, kernelName: string): Promise<void> {
-        const extensionViewTypeMap: { [key: string]: string } = {
-            '.dib': constants.NotebookViewType,
-            '.ipynb': constants.JupyterViewType,
-        };
-        const viewType = extensionViewTypeMap[extension];
+        const viewType = constants.getNotebookViewTypeForFormat(extension.slice(1));
         const isMarkdown = kernelName.toLowerCase() === 'markdown';
 
         // the metadata needs an actual kernel name, not the special-cased 'markdown'
@@ -393,32 +413,55 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
         }
     }
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.setNewNotebookDefaults', async () => {
-        await vscode.commands.executeCommand('workbench.action.openGlobalSettings', { query: 'polyglot-notebook.defaultNotebook' });
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.setNewNotebookDefaults', async () => {
+        await vscode.commands.executeCommand('workbench.action.openGlobalSettings', { query: 'polyglossy-notebook.defaultNotebook' });
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebook', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.setNewNotebookDefaults', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.setNewNotebookDefaults');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.newNotebook', async () => {
         await newNotebookCommandHandler(true);
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebookNoDefaults', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebook', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.newNotebook');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.newNotebookNoDefaults', async () => {
         await newNotebookCommandHandler(false);
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.fileNew', async () => {
-        // this command exists purely to forward to the polyglot-notebook.newNotebook command, but we need a separate `title`/`shortTitle` for the command palette
-        await vscode.commands.executeCommand('polyglot-notebook.newNotebook');
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebookNoDefaults', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.newNotebookNoDefaults');
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebookDib', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.fileNew', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.newNotebook');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.fileNew', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.fileNew');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.newNotebookDib', async () => {
         await newNotebookFromExtension('.dib');
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebookIpynb', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebookDib', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.newNotebookDib');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.newNotebookIpynb', async () => {
         await newNotebookFromExtension('.ipynb');
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.openNotebook', async (notebookUri: vscode.Uri | undefined) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.newNotebookIpynb', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.newNotebookIpynb');
+    }));
+
+    async function openNotebookCommandHandler(notebookUri: vscode.Uri | undefined): Promise<void> {
         // ensure we have a notebook uri
         if (!notebookUri) {
             const uris = await vscode.window.showOpenDialog({
@@ -436,17 +479,23 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
         }
 
         await openNotebook(notebookUri);
+    }
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.openNotebook', async (notebookUri: vscode.Uri | undefined) => {
+        await openNotebookCommandHandler(notebookUri);
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.openNotebook', async (notebookUri: vscode.Uri | undefined) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.openNotebook', notebookUri);
     }));
 
     async function openNotebook(uri: vscode.Uri): Promise<void> {
         const extension = path.extname(uri.toString());
-        const viewType = extension === '.dib'
-            ? constants.NotebookViewType
-            : constants.JupyterViewType;
+        const viewType = constants.getNotebookViewTypeForFormat(extension.slice(1));
         await vscode.commands.executeCommand('vscode.openWith', uri, viewType);
     }
 
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.saveAsNotebook', async () => {
+    async function saveAsNotebookCommandHandler(): Promise<void> {
         if (vscode.window.activeNotebookEditor) {
             const uri = await vscode.window.showSaveDialog({
                 filters: notebookFileFilters
@@ -465,17 +514,36 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
             await vscode.workspace.fs.writeFile(uri, buffer);
             switch (path.extname(uriPath)) {
                 case '.dib':
-                    await vscode.commands.executeCommand('polyglot-notebook.openNotebook', uri);
+                    await vscode.commands.executeCommand('polyglossy-notebook.openNotebook', uri);
                     break;
             }
         }
+    }
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.saveAsNotebook', async () => {
+        await saveAsNotebookCommandHandler();
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.saveAsNotebook', async () => {
+        await vscode.commands.executeCommand('polyglossy-notebook.saveAsNotebook');
     }));
 }
 
 export async function selectDotNetInteractiveKernelForJupyter(): Promise<void> {
-    const extension = 'ms-dotnettools.dotnet-interactive-vscode';
     const id = constants.JupyterKernelId;
-    await vscode.commands.executeCommand('notebook.selectKernel', { extension, id });
+    const extensionIds = [
+        'polyglossy-tools.polyglossy-interactive-vscode',
+        'ms-dotnettools.dotnet-interactive-vscode',
+    ];
+
+    for (const extension of extensionIds) {
+        try {
+            await vscode.commands.executeCommand('notebook.selectKernel', { extension, id });
+            return;
+        } catch {
+            // Fall back to the legacy extension identifier if the newer one is unavailable.
+        }
+    }
 }
 
 // callbacks used to install interactive tool

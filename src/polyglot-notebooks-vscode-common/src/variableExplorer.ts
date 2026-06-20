@@ -18,7 +18,7 @@ function debounce(callback: () => void) {
 }
 
 export function registerVariableExplorer(context: vscode.ExtensionContext, clientMapper: ClientMapper) {
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.shareValueWith', async (variableInfo: VariableInfo | undefined) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.shareValueWith', async (variableInfo: VariableInfo | undefined) => {
         const activeNotebookEditor = vscode.window.activeNotebookEditor;
         if (variableInfo && activeNotebookEditor) {
             const notebookDocument = activeNotebookEditor.notebook;
@@ -49,7 +49,12 @@ export function registerVariableExplorer(context: vscode.ExtensionContext, clien
         }
     }));
 
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.shareValueWith', async (variableInfo: VariableInfo | undefined) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.shareValueWith', variableInfo);
+    }));
+
     const webViewProvider = new WatchWindowTableViewProvider(clientMapper, context.extensionPath);
+    context.subscriptions.push(vscode.window.registerWebviewViewProvider('polyglossy-notebook-panel-values', webViewProvider, { webviewOptions: { retainContextWhenHidden: true } }));
     context.subscriptions.push(vscode.window.registerWebviewViewProvider('polyglot-notebook-panel-values', webViewProvider, { webviewOptions: { retainContextWhenHidden: true } }));
 
     vscode.window.onDidChangeActiveNotebookEditor(async editor => {
@@ -131,7 +136,7 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
         this.webview.onDidReceiveMessage(message => {
             const x = message;
             if (message.command === 'shareValueWith') {
-                vscode.commands.executeCommand('polyglot-notebook.shareValueWith', message.variableInfo);
+                vscode.commands.executeCommand('polyglossy-notebook.shareValueWith', message.variableInfo);
             }
         });
 

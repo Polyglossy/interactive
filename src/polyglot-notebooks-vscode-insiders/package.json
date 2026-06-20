@@ -65,6 +65,7 @@
     "onCommand:polyglossy-notebook.stopCurrentNotebookKernel",
     "onCommand:polyglossy-notebook.stopAllNotebookKernels",
     "onCommand:polyglossy-notebook.shareValueWith",
+    "onView:polyglossy-notebook-panel-values",
     "onView:polyglot-notebook-panel-values"
   ],
   "main": "./out/src/vscode-common/extension.js",
@@ -350,6 +351,12 @@
     },
     "views": {
       "polyglot-notebook-panel": [
+        {
+          "type": "webview",
+          "id": "polyglossy-notebook-panel-values",
+          "name": "Variables",
+          "icon": "resources/icons/notebook.svg"
+        },
         {
           "type": "webview",
           "id": "polyglot-notebook-panel-values",

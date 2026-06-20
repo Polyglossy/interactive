@@ -160,6 +160,21 @@ describe('Miscellaneous tests', () => {
         }
     });
 
+    it('extension manifests advertise the polyglossy webview view identity', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const activationEvents = manifest.activationEvents ?? [];
+
+            expect(activationEvents, `${manifestPath} should activate for the polyglossy webview view`).to.include('onView:polyglossy-notebook-panel-values');
+        }
+    });
+
     it('notebook working directory comes from fallback if notebook is remote', () => {
         const notebookUri = createUri('path/to/notebook.dib', 'remote');
         const workspaceFolderUris = [

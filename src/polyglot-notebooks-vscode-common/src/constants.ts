@@ -18,6 +18,17 @@ export const PolyglossyNotebookViewType = 'polyglossy-notebook';
 export const JupyterNotebookViewType = 'polyglot-notebook-jupyter';
 export const JupyterViewType = 'jupyter-notebook';
 
+export function getNotebookViewTypeForFormat(notebookFormat: string): string {
+    switch (notebookFormat.toLowerCase()) {
+        case 'dib':
+            return PolyglossyNotebookViewType;
+        case 'ipynb':
+            return JupyterViewType;
+        default:
+            return NotebookViewType;
+    }
+}
+
 // other
 export const DotnetConfigurationSectionName = 'polyglossy-interactive';
 export const LegacyDotnetConfigurationSectionName = 'dotnet-interactive';
