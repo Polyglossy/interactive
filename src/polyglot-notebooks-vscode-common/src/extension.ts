@@ -369,27 +369,27 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
             switch (uri.path) {
                 case '/newNotebook':
                     // Examples:
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/newNotebook?as=dib
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/newNotebook?as=ipynb
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/newNotebook?as=dib
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/newNotebook?as=ipynb
                     const asType = params.get('as');
-                    vscode.commands.executeCommand('dotnet-interactive.acquire').then(() => {
+                    vscode.commands.executeCommand('polyglossy-interactive.acquire').then(() => {
                         const commandName = asType === 'ipynb'
-                            ? 'polyglot-notebook.newNotebookIpynb'
-                            : 'polyglot-notebook.newNotebookDib';
+                            ? 'polyglossy-notebook.newNotebookIpynb'
+                            : 'polyglossy-notebook.newNotebookDib';
                         vscode.commands.executeCommand(commandName).then(() => { });
                     });
                     break;
                 case '/openNotebook':
                     // Open a local notebook
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/openNotebook?path=C%3A%5Cpath%5Cto%5Cnotebook.dib
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/openNotebook?path=C%3A%5Cpath%5Cto%5Cnotebook.dib
                     // New untitled notebook from remote source
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/openNotebook?url=http%3A%2F%2Fexample.com%2Fnotebook.dib
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/openNotebook?url=http%3A%2F%2Fexample.com%2Fnotebook.dib
                     const notebookPath = params.get('path');
                     const url = params.get('url');
                     const notebookFormat = params.get('notebookFormat');
                     if (notebookPath) {
-                        vscode.commands.executeCommand('dotnet-interactive.acquire').then(() => {
-                            vscode.commands.executeCommand('polyglot-notebook.openNotebook', vscode.Uri.file(notebookPath)).then(() => { });
+                        vscode.commands.executeCommand('polyglossy-interactive.acquire').then(() => {
+                            vscode.commands.executeCommand('polyglossy-notebook.openNotebook', vscode.Uri.file(notebookPath)).then(() => { });
                         });
                     } else if (url) {
                         openNotebookFromUrl(url, notebookFormat, serializerMap, diagnosticsChannel).then(() => { });
@@ -450,7 +450,7 @@ function registerWithVsCode(context: vscode.ExtensionContext, clientMapper: Clie
 }
 
 async function openNotebookFromUrl(notebookUrl: string, notebookFormat: string | null, serializerMap: Map<string, vscode.NotebookSerializer>, diagnosticsChannel: OutputChannelAdapter): Promise<void> {
-    await vscode.commands.executeCommand('dotnet-interactive.acquire');
+    await vscode.commands.executeCommand('polyglossy-interactive.acquire');
 
     try {
         Logger.default.info(`Opening notebook from URL: ${notebookUrl}`);
@@ -489,10 +489,8 @@ async function openNotebookFromUrl(notebookUrl: string, notebookFormat: string |
         let viewType: string | undefined = undefined;
         switch (notebookFormat) {
             case 'dib':
-                viewType = constants.NotebookViewType;
-                break;
             case 'ipynb':
-                viewType = constants.JupyterViewType;
+                viewType = constants.getNotebookViewTypeForFormat(notebookFormat);
                 break;
             default:
                 throw new Error(`Unsupported notebook format: ${notebookFormat}`);
@@ -536,6 +534,6 @@ async function getInteractiveLaunchOptions(): Promise<InteractiveLaunchOptions |
     const installArgs: InstallInteractiveArgs = {
         dotnetPath: DotNetPathManager.getDotNetPath(),
     };
-    const launchOptions = await vscode.commands.executeCommand<InteractiveLaunchOptions>('dotnet-interactive.acquire', installArgs);
+    const launchOptions = await vscode.commands.executeCommand<InteractiveLaunchOptions>('polyglossy-interactive.acquire', installArgs);
     return launchOptions;
 }

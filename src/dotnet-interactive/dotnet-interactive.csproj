@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Microsoft.DotNet.Interactive.App</RootNamespace>
-    <AssemblyName>Microsoft.DotNet.Interactive.App</AssemblyName>
+    <AssemblyName>Polyglossy.Interactive.App</AssemblyName>
     <LangVersion>Latest</LangVersion>
     <AssetTargetFallback>$(AssetTargetFallback);dotnet5.4;portable-net45+win8</AssetTargetFallback>
   </PropertyGroup>

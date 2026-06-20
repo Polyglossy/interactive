@@ -44,10 +44,12 @@ public class FrontendEnvironmentHandlingTests
             .Which
             .Should()
             .BeEquivalentToPreferringRuntimeMemberTypes(new FormattedValue("text/html", @"<script type=""text/javascript"">
-if (typeof window.createDotnetInteractiveClient === typeof Function) {
-    window.createDotnetInteractiveClient('http://12.12.12.12:4242/').then(async function (interactive) {
+const createClient = window.createPolyglossyInteractiveClient ?? window.createDotnetInteractiveClient;
+const getScope = window.getPolyglossyInteractiveScope ?? window.getDotnetInteractiveScope;
+if (typeof createClient === typeof Function && typeof getScope === typeof Function) {
+    createClient('http://12.12.12.12:4242/').then(async function (interactive) {
         const console = interactive.getConsole('token-abcd');
-        const notebookScope = getDotnetInteractiveScope('http://12.12.12.12:4242/');
+        const notebookScope = getScope('http://12.12.12.12:4242/');
         try {
 
 await Object.getPrototypeOf(async function() {}).constructor(

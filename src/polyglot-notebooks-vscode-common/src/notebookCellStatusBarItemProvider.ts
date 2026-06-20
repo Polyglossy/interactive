@@ -12,7 +12,7 @@ import * as constants from './constants';
 import * as vscodeUtilities from './vscodeUtilities';
 import { ServiceCollection } from './serviceCollection';
 
-const selectKernelCommandName = 'polyglot-notebook.selectCellKernel';
+const selectKernelCommandName = 'polyglossy-notebook.selectCellKernel';
 
 class KernelSelectorItem implements vscode.QuickPickItem {
     constructor(label: string) {
@@ -37,8 +37,9 @@ export function registerNotbookCellStatusBarItemProvider(context: vscode.Extensi
         });
     });
     context.subscriptions.push(vscode.notebooks.registerNotebookCellStatusBarItemProvider(constants.NotebookViewType, cellItemProvider));
+    context.subscriptions.push(vscode.notebooks.registerNotebookCellStatusBarItemProvider(constants.PolyglossyNotebookViewType, cellItemProvider));
     context.subscriptions.push(vscode.notebooks.registerNotebookCellStatusBarItemProvider(constants.JupyterViewType, cellItemProvider));
-    context.subscriptions.push(vscode.commands.registerCommand(selectKernelCommandName, async (cell?: vscode.NotebookCell) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.selectCellKernel', async (cell?: vscode.NotebookCell) => {
         if (cell) {
             const client = await clientMapper.tryGetClient(cell.notebook.uri);
             if (client) {
@@ -93,6 +94,10 @@ export function registerNotbookCellStatusBarItemProvider(context: vscode.Extensi
                 }
             }
         }
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.selectCellKernel', async (cell?: vscode.NotebookCell) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.selectCellKernel', cell);
     }));
 }
 

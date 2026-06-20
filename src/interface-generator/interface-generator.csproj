@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Microsoft.DotNet.Interactive.InterfaceGen.App</RootNamespace>
-    <AssemblyName>Microsoft.DotNet.Interactive.InterfaceGen.App</AssemblyName>
+    <AssemblyName>Polyglossy.Interactive.InterfaceGen.App</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

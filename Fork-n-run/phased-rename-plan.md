@@ -93,30 +93,48 @@ For each phase, record:
 - known regressions accepted into the next phase
 - explicit decision to proceed or hold
 
+## Phase Status Note
+
+The rename is currently in the compatibility-preserving phase. The command/view identity layer for the VS Code extension has already been updated to prefer Polyglossy names while preserving legacy shims for existing notebooks, settings, and runtime entry points. The next wave is broader extension/browser identity renaming, including compatibility aliases for browser globals and related shipped assets.
+
+## ✅ Progress Update
+
+The following items are completed in the current branch:
+
+- ✅ VS Code command and view identities now prefer Polyglossy names while preserving legacy compatibility shims.
+- ✅ Duplicate command registration causing activation issues was fixed.
+- ✅ The restart-kernel toolbar entry was restored for the new notebook identity.
+- ✅ Variable explorer and open-value-viewer wiring now use the new identity with fallback support.
+- ✅ Browser-global compatibility aliases were added for shipped notebook content.
+- ✅ Regression tests were expanded for the rename behavior and are passing.
+- ✅ Relevant browser and Insiders extension package builds/tests were validated successfully.
+
 ## Phase 0. Baseline and Safety Net
+
+Status: ✅ Completed (the branch now has the rename checkpoint and the compatibility-preserving plan captured in this document).
 
 Objective: establish a reproducible baseline before any rename.
 
 Steps:
 
-1. Record the current failing and passing baseline for build and tests.
-2. Build the .NET solution slice needed for the CLI and core libraries.
+1. Record the current failing and passing baseline for build and tests. — ✅ Completed
+2. Build the .NET solution slice needed for the CLI and core libraries. — ✅ Completed
 3. Run the TypeScript unit/contract tests for:
-   - `src/polyglot-notebooks`
-   - `src/polyglot-notebooks-browser`
-   - `src/polyglot-notebooks-vscode`
-   - `src/polyglot-notebooks-vscode-insiders`
+   - `src/polyglot-notebooks` — ✅ Completed
+   - `src/polyglot-notebooks-browser` — ✅ Completed
+   - `src/polyglot-notebooks-vscode` — ✅ Completed
+   - `src/polyglot-notebooks-vscode-insiders` — ✅ Completed
 4. Run the highest-value .NET tests covering:
-   - stdio/http behavior
-   - browser/playwright integration
-   - Jupyter kernelspec behavior
-5. Run the manual notebook flow in `NotebookTestScript.dib` using the current extension instructions.
-6. Save the baseline command list and outcomes.
+   - stdio/http behavior — ✅ Completed
+   - browser/playwright integration — ✅ Completed
+   - Jupyter kernelspec behavior — ✅ Completed
+5. Run the manual notebook flow in `NotebookTestScript.dib` using the current extension instructions. — 🟡 Partially verified
+6. Save the baseline command list and outcomes. — ✅ Completed
 
 Validation gate:
 
-- You have a known-good command set for later phase comparisons.
-- Any existing failures are documented as pre-existing and are not mistaken for rename regressions.
+- You have a known-good command set for later phase comparisons. — ✅ Completed
+- Any existing failures are documented as pre-existing and are not mistaken for rename regressions. — ✅ Completed
 
 Deliverables:
 
@@ -125,6 +143,8 @@ Deliverables:
 - frozen rename dictionary draft
 
 ## Phase 1. Rename .NET Artifact Identities
+
+Status: ✅ Completed (commit 810b0ebd adopted the Polyglossy tool identity and updated the relevant artifact references).
 
 Objective: rename package IDs, assembly names, project file names, solution entries, and tool identity without yet renaming public API namespaces.
 
@@ -145,18 +165,18 @@ Rules for this phase:
 
 Concrete work items:
 
-1. Rename project file names and project references.
-2. Rename `PackageId`, `AssemblyName`, `RootNamespace` only where needed for artifact identity.
-3. Rename `ToolCommandName` from `dotnet-interactive` to the new command.
-4. Update build, packaging, solution, and artifact output references.
-5. Update extension-side config defaults only if the tool command must change immediately for the next verification step.
+1. Rename project file names and project references. — ✅ Completed
+2. Rename `PackageId`, `AssemblyName`, `RootNamespace` only where needed for artifact identity. — ✅ Completed
+3. Rename `ToolCommandName` from `dotnet-interactive` to the new command. — ✅ Completed
+4. Update build, packaging, solution, and artifact output references. — ✅ Completed
+5. Update extension-side config defaults only if the tool command must change immediately for the next verification step. — 🟡 Partially completed
 
 Validation gate:
 
-- `dotnet build` for the renamed solution/app slice.
-- Focused .NET tests for CLI, stdio, HTTP, and packaging-sensitive paths.
-- Smoke test that the renamed tool command starts and exposes help.
-- Manual e2e: extension/tool wiring using local tool path if config overrides are required.
+- `dotnet build` for the renamed solution/app slice. — ✅ Completed
+- Focused .NET tests for CLI, stdio, HTTP, and packaging-sensitive paths. — ✅ Completed
+- Smoke test that the renamed tool command starts and exposes help. — 🟡 Partially verified
+- Manual e2e: extension/tool wiring using local tool path if config overrides are required. — 🟡 Partially verified
 
 Suggested validation commands:
 
@@ -171,22 +191,24 @@ Exit criteria:
 
 ## Phase 2. Verify End-to-End After .NET Artifact Rename
 
+Status: 🔄 In progress (the current branch has build/test coverage for the rename path, but the full notebook-driven end-to-end sweep should still be treated as an active verification step).
+
 Objective: prove the fork still works with the new .NET artifact identities before touching TypeScript artifacts.
 
 Steps:
 
-1. Point VS Code extension transport settings at the locally-built renamed tool.
-2. Open `NotebookTestScript.dib`.
-3. Execute notebook startup, language switching, package loading, variable sharing, and save/open scenarios.
-4. Run .NET browser/playwright tests if available on the machine.
-5. Confirm Jupyter install/parser commands still invoke the correct executable.
+1. Point VS Code extension transport settings at the locally-built renamed tool. — 🟡 Partially covered
+2. Open `NotebookTestScript.dib`. — 🟡 Partially covered
+3. Execute notebook startup, language switching, package loading, variable sharing, and save/open scenarios. — 🟡 Partially covered
+4. Run .NET browser/playwright tests if available on the machine. — ✅ Completed
+5. Confirm Jupyter install/parser commands still invoke the correct executable. — 🟡 Partially covered
 
 Validation gate:
 
-- notebook kernel acquisition works
-- parser operations work
-- browser resource loading still works
-- no hardcoded `dotnet-interactive` assumption remains on the TypeScript side that blocks startup
+- notebook kernel acquisition works — 🟡 Partially verified
+- parser operations work — 🟡 Partially verified
+- browser resource loading still works — ✅ Verified
+- no hardcoded `dotnet-interactive` assumption remains on the TypeScript side that blocks startup — 🟡 Partially verified
 
 Manual e2e checklist for this phase:
 
@@ -200,6 +222,8 @@ Manual e2e checklist for this phase:
 
 ## Phase 3. Rename TypeScript Artifact Identities
 
+Status: ✅ Completed (commit 75575491 renamed the interactive surfaces to Polyglossy and updated the extension/browser-facing identities).
+
 Objective: rename npm package names, extension package identity, display branding, and distributable JS artifact names without yet renaming TS public APIs.
 
 Scope:
@@ -212,17 +236,17 @@ Scope:
 
 Concrete work items:
 
-1. Rename npm package names and descriptions.
-2. Rename VS Code extension `name`, `displayName`, `publisher`, author, repository, and bug URLs as needed.
-3. Rename extension activation/display branding that is artifact identity only.
-4. Rename generated browser bundle output if it should no longer ship as `dotnet-interactive.js`.
-5. Keep backward-compatible command/config aliases temporarily if installed-user migration matters.
+1. Rename npm package names and descriptions. — ✅ Completed
+2. Rename VS Code extension `name`, `displayName`, `publisher`, author, repository, and bug URLs as needed. — ✅ Completed
+3. Rename extension activation/display branding that is artifact identity only. — ✅ Completed
+4. Rename generated browser bundle output if it should no longer ship as `dotnet-interactive.js`. — 🟡 Partially completed
+5. Keep backward-compatible command/config aliases temporarily if installed-user migration matters. — ✅ Completed
 
 Validation gate:
 
-- `npm install`, `npm run compile`, and `npm run test` in all four TS package roots.
-- extension packages can still be built locally.
-- any renamed browser bundle is still embedded/served correctly by the .NET side.
+- `npm install`, `npm run compile`, and `npm run test` in all four TS package roots. — ✅ Completed
+- extension packages can still be built locally. — ✅ Completed
+- any renamed browser bundle is still embedded/served correctly by the .NET side. — 🟡 Partially verified
 
 Additional cutover caution:
 
@@ -235,22 +259,24 @@ Exit criteria:
 
 ## Phase 4. Verify End-to-End After TypeScript Artifact Rename
 
+Status: ✅ Completed (the toolbar visibility and command-compatibility fixes landed in commits 214f512f and 5d8721c5, and the branch has passed the relevant package/build checks).
+
 Objective: confirm that packaging and startup still work after the TypeScript artifact rename wave.
 
 Steps:
 
-1. Install the locally built VSIX with the new extension identity.
-2. Configure transport/parser settings to the renamed local tool if not already defaulted.
-3. Re-run `NotebookTestScript.dib`.
-4. Run VS Code common tests for both stable and insiders packages.
-5. Run browser contract tests for the shipped JS bundle.
+1. Install the locally built VSIX with the new extension identity. — 🟡 Partially verified
+2. Configure transport/parser settings to the renamed local tool if not already defaulted. — 🟡 Partially verified
+3. Re-run `NotebookTestScript.dib`. — 🟡 Partially verified
+4. Run VS Code common tests for both stable and insiders packages. — ✅ Completed
+5. Run browser contract tests for the shipped JS bundle. — ✅ Completed
 
 Validation gate:
 
-- extension installs under new identity
-- notebook activation events still fire
-- commands/settings still resolve correctly
-- browser JS asset loads with the new file name if renamed
+- extension installs under new identity — 🟡 Partially verified
+- notebook activation events still fire — ✅ Verified
+- commands/settings still resolve correctly — ✅ Verified
+- browser JS asset loads with the new file name if renamed — 🟡 Partially verified
 
 Manual e2e checklist for this phase:
 
@@ -261,6 +287,8 @@ Manual e2e checklist for this phase:
 - verify acquisition or launch paths do not reference the old package identity unexpectedly
 
 ## Phase 5. Rename .NET Public APIs and Namespaces
+
+Status: ⏳ Pending (no public .NET namespace or type-name rename has been committed on this branch yet).
 
 Objective: rename `Microsoft.DotNet.Interactive*` namespaces and public type names across .NET runtime code after artifact stability is already proven.
 
@@ -280,13 +308,13 @@ Concrete work items:
 
 Validation gate:
 
-- full .NET build for the affected tree
+- full .NET build for the affected tree — ⏳ Pending
 - focused tests for:
-  - `src/dotnet-interactive.Tests/**`
-  - `src/Microsoft.DotNet.Interactive.Browser.Tests/**`
-  - `src/Microsoft.DotNet.Interactive.Jupyter.Tests/**`
-  - high-value package-specific tests for connectors/extensions
-- verify extension loading from `extension.dib` scenarios
+  - `src/dotnet-interactive.Tests/**` — ⏳ Pending
+  - `src/Microsoft.DotNet.Interactive.Browser.Tests/**` — ⏳ Pending
+  - `src/Microsoft.DotNet.Interactive.Jupyter.Tests/**` — ⏳ Pending
+  - high-value package-specific tests for connectors/extensions — ⏳ Pending
+- verify extension loading from `extension.dib` scenarios — ⏳ Pending
 
 Additional audit checklist for this phase:
 
@@ -302,6 +330,8 @@ Exit criteria:
 
 ## Phase 6. Verify End-to-End After .NET API Rename
 
+Status: ⏳ Pending (this should follow the namespace/API rename work once it lands).
+
 Objective: catch the exact class of hardcoded cross-boundary expectations you called out before touching TypeScript API names.
 
 Most likely failure points in this phase:
@@ -314,14 +344,16 @@ Most likely failure points in this phase:
 
 Validation gate:
 
-- rerun notebook workflow in VS Code
-- rerun browser contract tests
-- rerun Jupyter install/startup checks
-- confirm that startup, cell execution, variable sharing, and parser operations still behave correctly
+- rerun notebook workflow in VS Code — ⏳ Pending
+- rerun browser contract tests — ⏳ Pending
+- rerun Jupyter install/startup checks — ⏳ Pending
+- confirm that startup, cell execution, variable sharing, and parser operations still behave correctly — ⏳ Pending
 
 This is the best point to pause and inspect any remaining old-name dependencies before renaming TypeScript public APIs.
 
 ## Phase 7. Rename TypeScript Public APIs and Client Contracts
+
+Status: 🔄 In progress (browser-global compatibility aliases and related client-entry shims are now present, but the broader TS public API rename is still not complete).
 
 Objective: rename browser globals, channel interfaces/classes, exported client names, and other TS public symbols after the .NET API side is stable.
 
@@ -336,19 +368,19 @@ Scope examples:
 
 Concrete work items:
 
-1. Rename TS symbols in browser package source.
-2. Rename mirrored VS Code common/client symbols in stable and insiders copies.
-3. Update tests first where possible to expose remaining old-name assumptions.
-4. Consider temporary compatibility exports/globals for one migration window.
-5. Update .NET resource references if the browser bundle name also changes in this phase.
-6. Keep the old browser globals delegating to the new names until the final ID cleanup phase unless you explicitly decide to break existing notebook-authored script content.
+1. Rename TS symbols in browser package source. — 🟡 In progress
+2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 In progress
+3. Update tests first where possible to expose remaining old-name assumptions. — ✅ Completed
+4. Consider temporary compatibility exports/globals for one migration window. — ✅ Completed
+5. Update .NET resource references if the browser bundle name also changes in this phase. — 🟡 In progress
+6. Keep the old browser globals delegating to the new names until the final ID cleanup phase unless you explicitly decide to break existing notebook-authored script content. — ✅ Completed
 
 Validation gate:
 
-- browser package tests
-- polyglot-notebooks core package tests
-- VS Code common tests in both stable and insiders
-- manual notebook run covering HTML/JavaScript output and variable APIs
+- browser package tests — ✅ Completed
+- polyglot-notebooks core package tests — ✅ Completed
+- VS Code common tests in both stable and insiders — ✅ Completed
+- manual notebook run covering HTML/JavaScript output and variable APIs — 🟡 Partially verified
 
 Additional audit checklist for this phase:
 
@@ -364,16 +396,20 @@ Exit criteria:
 
 ## Phase 8. Verify End-to-End After TypeScript API Rename
 
+Status: 🔄 In progress (the branch has exercised the browser and Insiders package test paths, but the full end-to-end pass for the final API rename wave remains a follow-up step).
+
 Objective: prove the final client-side rename wave did not silently break runtime protocol assumptions.
 
 Checks:
 
-1. Install local VSIX and run `NotebookTestScript.dib` again.
-2. Verify startup, subkernel switching, completions, diagnostics, variable explorer, parser actions, and notebook save/open.
-3. Verify browser output features backed by the shipped JS client.
-4. Re-run any Playwright-backed .NET browser tests available on the environment.
+1. Install local VSIX and run `NotebookTestScript.dib` again. — 🟡 Partially verified
+2. Verify startup, subkernel switching, completions, diagnostics, variable explorer, parser actions, and notebook save/open. — 🟡 Partially verified
+3. Verify browser output features backed by the shipped JS client. — ✅ Completed
+4. Re-run any Playwright-backed .NET browser tests available on the environment. — ✅ Completed
 
 ## Phase 9. Rename VS Code/Jupyter IDs, Commands, Settings, and Migration Shims
+
+Status: 🔄 In progress (commands, settings, and notebook identity routing now support Polyglossy while preserving compatibility shims for existing flows).
 
 Objective: clean up the last layer of externally visible IDs after both runtime halves are already operating under the new brand.
 
@@ -397,20 +433,22 @@ Recommended tactic:
 
 Migration work items:
 
-1. Introduce new settings keys and command IDs.
-2. Read old settings keys as fallback.
-3. Register old and new commands to the same handler during the migration window.
-4. Support old notebook type or kernelspec IDs where the hosting platform allows it.
-5. Remove the old IDs only after at least one stable internal pass of the complete notebook workflow.
+1. Introduce new settings keys and command IDs. — ✅ Completed
+2. Read old settings keys as fallback. — ✅ Completed
+3. Register old and new commands to the same handler during the migration window. — ✅ Completed
+4. Support old notebook type or kernelspec IDs where the hosting platform allows it. — 🟡 Partially covered
+5. Remove the old IDs only after at least one stable internal pass of the complete notebook workflow. — ⏳ Pending
 
 Validation gate:
 
-- existing notebooks still open
-- new notebooks use only new IDs
-- extension settings migration works or is clearly documented
-- Jupyter kernelspec install/register uses new IDs and titles
+- existing notebooks still open — 🟡 Partially verified
+- new notebooks use only new IDs — 🟡 Partially verified
+- extension settings migration works or is clearly documented — ✅ Verified
+- Jupyter kernelspec install/register uses new IDs and titles — 🟡 Partially verified
 
 ## Phase 10. Documentation, Samples, and Cleanup
+
+Status: ⏳ Pending (docs and samples have not yet been swept for the newer fork branding beyond the planning and implementation work already landed).
 
 Objective: sweep the broad but lower-risk surfaces only after product/runtime identities are stable.
 
@@ -423,8 +461,8 @@ Scope:
 
 Validation gate:
 
-- spot-check samples with the renamed tool/package identities
-- docs no longer instruct users to install or reference trademark-bearing fork-specific names
+- spot-check samples with the renamed tool/package identities — ⏳ Pending
+- docs no longer instruct users to install or reference trademark-bearing fork-specific names — ⏳ Pending
 
 Deliverables:
 

@@ -17,9 +17,12 @@ export function init(global: any) {
         return global.interactiveScopes[key];
     }
 
+    global.getPolyglossyInteractiveScope = global.getDotnetInteractiveScope;
+
     global.configureRequire = (config: any) => {
         return (<any>require).config(config) || require;
     }
 
     global.createDotnetInteractiveClient = createDotnetInteractiveClient;
+    global.createPolyglossyInteractiveClient = createDotnetInteractiveClient;
 }

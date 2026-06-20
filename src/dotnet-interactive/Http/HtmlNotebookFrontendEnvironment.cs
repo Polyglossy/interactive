@@ -55,10 +55,12 @@ public class HtmlNotebookFrontendEnvironment : BrowserFrontendEnvironment
 
         var apiUri = apiUriTask.Result;
         var codePrelude = $@"
-if (typeof window.createDotnetInteractiveClient === typeof Function) {{
-    window.createDotnetInteractiveClient('{apiUri.AbsoluteUri}').then(async function (interactive) {{
+const createClient = window.createPolyglossyInteractiveClient ?? window.createDotnetInteractiveClient;
+const getScope = window.getPolyglossyInteractiveScope ?? window.getDotnetInteractiveScope;
+if (typeof createClient === typeof Function && typeof getScope === typeof Function) {{
+    createClient('{apiUri.AbsoluteUri}').then(async function (interactive) {{
         const console = interactive.getConsole('{commandToken}');
-        const notebookScope = getDotnetInteractiveScope('{apiUri.AbsoluteUri}');
+        const notebookScope = getScope('{apiUri.AbsoluteUri}');
         try {{
 
 await Object.getPrototypeOf(async function() {{}}).constructor(
