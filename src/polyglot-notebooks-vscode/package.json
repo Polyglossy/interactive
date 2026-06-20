@@ -45,6 +45,8 @@
     "onNotebook:dotnet-interactive-window",
     "onNotebook:polyglossy-interactive",
     "onNotebook:polyglossy-interactive-window",
+    "onNotebook:polyglossy-notebook",
+    "onNotebook:polyglossy-notebook-window",
     "onNotebook:jupyter-notebook",
     "onNotebook:polyglot-notebook",
     "onNotebook:polyglot-notebook-window",
@@ -55,6 +57,14 @@
     "onCommand:polyglot-notebook.newNotebook",
     "onCommand:polyglot-notebook.openNotebook",
     "onCommand:polyglot-notebook.saveAsNotebook",
+    "onCommand:polyglossy-notebook.fileNew",
+    "onCommand:polyglossy-notebook.newNotebook",
+    "onCommand:polyglossy-notebook.openNotebook",
+    "onCommand:polyglossy-notebook.saveAsNotebook",
+    "onCommand:polyglossy-notebook.restartCurrentNotebookKernel",
+    "onCommand:polyglossy-notebook.stopCurrentNotebookKernel",
+    "onCommand:polyglossy-notebook.stopAllNotebookKernels",
+    "onCommand:polyglossy-notebook.shareValueWith",
     "onView:polyglot-notebook-panel-values"
   ],
   "main": "./out/src/vscode-common/extension.js",
@@ -81,7 +91,7 @@
         ]
       },
       {
-        "type": "polyglossy-interactive",
+        "type": "polyglossy-notebook",
         "displayName": "Polyglossy Notebook",
         "selector": [
           {
@@ -95,7 +105,7 @@
         "selector": []
       },
       {
-        "type": "polyglossy-interactive-window",
+        "type": "polyglossy-notebook-window",
         "displayName": "Polyglossy Notebook",
         "selector": []
       }
@@ -122,6 +132,11 @@
           "default": false,
           "description": "%description.suppressPromptToSaveDefaults%"
         },
+        "polyglossy-notebook.suppressPromptToSaveDefaults": {
+          "type": "boolean",
+          "default": false,
+          "description": "%description.suppressPromptToSaveDefaults%"
+        },
         "polyglot-notebook.defaultNotebookExtension": {
           "type": [
             "string",
@@ -137,7 +152,52 @@
             "%description.configuration.useIpynb%"
           ]
         },
+        "polyglossy-notebook.defaultNotebookExtension": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "enum": [
+            ".dib",
+            ".ipynb"
+          ],
+          "enumDescriptions": [
+            "%description.configuration.useDib%",
+            "%description.configuration.useIpynb%"
+          ]
+        },
         "polyglot-notebook.defaultNotebookLanguage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "%description.defaultNotebookLanguage%",
+          "enum": [
+            "csharp",
+            "fsharp",
+            "html",
+            "javascript",
+            "kql",
+            "markdown",
+            "mermaid",
+            "pwsh",
+            "sql"
+          ],
+          "enumDescriptions": [
+            "C#",
+            "F#",
+            "HTML",
+            "JavaScript",
+            "KQL",
+            "Markdown",
+            "Mermaid",
+            "PowerShell",
+            "SQL"
+          ]
+        },
+        "polyglossy-notebook.defaultNotebookLanguage": {
           "type": [
             "string",
             "null"
@@ -320,7 +380,15 @@
         "title": "%command.openNotebook%"
       },
       {
+        "command": "polyglossy-notebook.openNotebook",
+        "title": "%command.openNotebook%"
+      },
+      {
         "command": "polyglot-notebook.saveAsNotebook",
+        "title": "%command.saveAsNotebook%"
+      },
+      {
+        "command": "polyglossy-notebook.saveAsNotebook",
         "title": "%command.saveAsNotebook%"
       },
       {
@@ -330,7 +398,17 @@
         "shortTitle": "Polyglot Notebook"
       },
       {
+        "command": "polyglossy-notebook.fileNew",
+        "enablement": "false",
+        "title": "%command.fileNew%",
+        "shortTitle": "Polyglot Notebook"
+      },
+      {
         "command": "polyglot-notebook.newNotebook",
+        "title": "%command.newNotebook%"
+      },
+      {
+        "command": "polyglossy-notebook.newNotebook",
         "title": "%command.newNotebook%"
       },
       {
@@ -338,7 +416,15 @@
         "title": "%command.newNotebookNoDefaults%"
       },
       {
+        "command": "polyglossy-notebook.newNotebookNoDefaults",
+        "title": "%command.newNotebookNoDefaults%"
+      },
+      {
         "command": "polyglot-notebook.setNewNotebookDefaults",
+        "title": "%command.setNewNotebookDefaults%"
+      },
+      {
+        "command": "polyglossy-notebook.setNewNotebookDefaults",
         "title": "%command.setNewNotebookDefaults%"
       },
       {
@@ -346,7 +432,15 @@
         "title": "%command.restartCurrentNotebookKernel%"
       },
       {
+        "command": "polyglossy-notebook.restartCurrentNotebookKernel",
+        "title": "%command.restartCurrentNotebookKernel%"
+      },
+      {
         "command": "polyglot-notebook.stopCurrentNotebookKernel",
+        "title": "%command.stopCurrentNotebookKernel%"
+      },
+      {
+        "command": "polyglossy-notebook.stopCurrentNotebookKernel",
         "title": "%command.stopCurrentNotebookKernel%"
       },
       {
@@ -354,7 +448,15 @@
         "title": "%command.stopAllNotebookKernels%"
       },
       {
+        "command": "polyglossy-notebook.stopAllNotebookKernels",
+        "title": "%command.stopAllNotebookKernels%"
+      },
+      {
         "command": "polyglot-notebook.shareValueWith",
+        "title": "%command.shareValueWith%"
+      },
+      {
+        "command": "polyglossy-notebook.shareValueWith",
         "title": "%command.shareValueWith%"
       },
       {
@@ -366,14 +468,32 @@
         }
       },
       {
+        "command": "polyglossy-notebook.notebookEditor.restartKernel",
+        "title": "%command.restartKernel%",
+        "icon": {
+          "light": "resources/light/restart-kernel.svg",
+          "dark": "resources/dark/restart-kernel.svg"
+        }
+      },
+      {
         "command": "polyglot-notebook.notebookEditor.openValueViewer",
         "title": "%command.openValueViewer%",
         "icon": "$(variable-group)"
+      },
+      {
+        "command": "polyglossy-notebook.notebookEditor.openValueViewer",
+        "title": "%command.openValueViewer%",
+        "icon": "$(variable-group)"
+      },
+      {
+        "command": "polyglossy-notebook.notebookEditor.connectSubkernel",
+        "title": "%command.connectSubkernel%",
+        "icon": "$(plug)"
       }
     ],
     "keybindings": [
       {
-        "command": "polyglot-notebook.newNotebook",
+        "command": "polyglossy-notebook.newNotebook",
         "key": "ctrl+alt+shift+n",
         "mac": "cmd+alt+shift+n"
       }
@@ -389,20 +509,20 @@
     "menus": {
       "file/newFile": [
         {
-          "command": "polyglot-notebook.fileNew",
+          "command": "polyglossy-notebook.fileNew",
           "group": "notebook"
         }
       ],
       "notebook/toolbar": [
         {
-          "command": "polyglot-notebook.notebookEditor.restartKernel",
+          "command": "polyglossy-notebook.notebookEditor.restartKernel",
           "group": "navigation/execute@1",
-          "when": "notebookKernel =~ /polyglot-notebook/ && isWorkspaceTrusted"
+          "when": "(notebookKernel =~ /polyglot-notebook/ || notebookKernel =~ /polyglossy-notebook/) && isWorkspaceTrusted"
         },
         {
-          "command": "polyglot-notebook.notebookEditor.openValueViewer",
+          "command": "polyglossy-notebook.notebookEditor.openValueViewer",
           "group": "navigation@1",
-          "when": "notebookKernel =~ /polyglot-notebook/ && isWorkspaceTrusted"
+          "when": "(notebookKernel =~ /polyglot-notebook/ || notebookKernel =~ /polyglossy-notebook/) && isWorkspaceTrusted"
         }
       ]
     },

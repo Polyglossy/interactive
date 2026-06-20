@@ -10,6 +10,7 @@ import { isDisplayOutput, isErrorOutput, isTextOutput, reshapeOutputValueForVsCo
 import { createOutput, createUri, debounce, executeSafe, getConfigurationValue, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
 import { decodeToString, withFakeGlobalStorageLocation } from './utilities';
 
+import * as constants from '../../src/vscode-common/constants';
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
 import { areEquivalentObjects, sortInPlace } from '../../src/vscode-common/metadataUtilities';
 
@@ -80,6 +81,83 @@ describe('Miscellaneous tests', () => {
         ];
         const workingDir = getWorkingDirectoryForNotebook(notebookUri, workspaceFolderUris, 'fallback-not-used');
         expect(workingDir).to.equal('this/is/local/and/used');
+    });
+
+    it('dib notebooks prefer the polyglossy view type', () => {
+        expect(constants.getNotebookViewTypeForFormat('dib')).to.equal(constants.PolyglossyNotebookViewType);
+    });
+
+    it('extension manifests advertise the polyglossy notebook identity for .dib files', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const activationEvents = manifest.activationEvents ?? [];
+            const notebookContributions = manifest.contributes?.notebooks ?? [];
+
+            expect(activationEvents, `${manifestPath} should activate for polyglossy notebook view types`).to.include('onNotebook:polyglossy-notebook');
+            expect(notebookContributions.some((contribution: { type: string; selector?: Array<{ filenamePattern?: string }> }) => contribution.type === 'polyglossy-notebook' && contribution.selector?.some(({ filenamePattern }) => filenamePattern === '*.dib')), `${manifestPath} should contribute a .dib notebook type for the polyglossy notebook identity`).to.be.true;
+        }
+    });
+
+    it('extension manifests advertise the polyglossy command and settings identities', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        const expectedCommands = [
+            'polyglossy-notebook.openNotebook',
+            'polyglossy-notebook.saveAsNotebook',
+            'polyglossy-notebook.fileNew',
+            'polyglossy-notebook.newNotebook',
+            'polyglossy-notebook.newNotebookNoDefaults',
+            'polyglossy-notebook.setNewNotebookDefaults',
+            'polyglossy-notebook.restartCurrentNotebookKernel',
+            'polyglossy-notebook.stopCurrentNotebookKernel',
+            'polyglossy-notebook.stopAllNotebookKernels',
+            'polyglossy-notebook.shareValueWith',
+            'polyglossy-notebook.notebookEditor.restartKernel',
+            'polyglossy-notebook.notebookEditor.openValueViewer',
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const activationEvents = manifest.activationEvents ?? [];
+            const commands = manifest.contributes?.commands ?? [];
+            const configurationProperties = manifest.contributes?.configuration?.properties ?? {};
+
+            expect(activationEvents, `${manifestPath} should activate for the polyglossy new-notebook command`).to.include('onCommand:polyglossy-notebook.newNotebook');
+            for (const commandId of expectedCommands) {
+                expect(commands.some((command: { command: string }) => command.command === commandId), `${manifestPath} should contribute ${commandId}`).to.be.true;
+            }
+            expect(configurationProperties['polyglossy-notebook.defaultNotebookExtension'], `${manifestPath} should contribute the polyglossy default notebook extension setting`).to.exist;
+        }
+    });
+
+    it('notebook toolbar menu entries support the polyglossy notebook identity', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const toolbarEntries = manifest.contributes?.menus?.['notebook/toolbar'] ?? [];
+            const restartEntry = toolbarEntries.find((entry: { command: string }) => entry.command === 'polyglossy-notebook.notebookEditor.restartKernel');
+            const valueViewerEntry = toolbarEntries.find((entry: { command: string }) => entry.command === 'polyglossy-notebook.notebookEditor.openValueViewer');
+
+            expect(restartEntry, `${manifestPath} should contribute the Polyglossy restart-kernel toolbar entry`).to.exist;
+            expect(restartEntry.when, `${manifestPath} should expose the restart-kernel toolbar entry for the polyglossy notebook identity`).to.include('polyglossy-notebook');
+            expect(valueViewerEntry, `${manifestPath} should contribute the Polyglossy value-viewer toolbar entry`).to.exist;
+            expect(valueViewerEntry.when, `${manifestPath} should expose the value-viewer toolbar entry for the polyglossy notebook identity`).to.include('polyglossy-notebook');
+        }
     });
 
     it('notebook working directory comes from fallback if notebook is remote', () => {
