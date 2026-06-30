@@ -8,7 +8,7 @@ import * as vscodeLike from './interfaces/vscode-like';
 import * as diagnostics from './diagnostics';
 import * as vscodeUtilities from './vscodeUtilities';
 import { reshapeOutputValueForVsCode } from './interfaces/utilities';
-import { selectDotNetInteractiveKernelForJupyter } from './commands';
+import { selectPolyglossyInteractiveKernelForJupyter } from './commands';
 import { ErrorOutputCreator, InteractiveClient } from './interactiveClient';
 import { LogEntry, Logger } from './polyglot-notebooks/logger';
 import { isKernelCommandEnvelopeModel, isKernelEventEnvelope, isKernelEventEnvelopeModel, KernelCommandOrEventEnvelope } from './polyglot-notebooks/connection';
@@ -127,7 +127,7 @@ export class DotNetNotebookKernel {
 
             if (notebook.notebookType === constants.JupyterViewType) {
                 jupyterController.updateNotebookAffinity(notebook, vscode.NotebookControllerAffinity.Preferred);
-                await selectDotNetInteractiveKernelForJupyter();
+                await selectPolyglossyInteractiveKernelForJupyter();
             }
 
             if (notebook.notebookType === constants.PolyglossyNotebookViewType) {

@@ -409,7 +409,7 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
         const _editor = await vscode.window.showNotebookDocument(notebook);
 
         if (createForIpynb) {
-            await selectDotNetInteractiveKernelForJupyter();
+            await selectPolyglossyInteractiveKernelForJupyter();
         }
     }
 
@@ -529,7 +529,7 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
     }));
 }
 
-export async function selectDotNetInteractiveKernelForJupyter(): Promise<void> {
+export async function selectPolyglossyInteractiveKernelForJupyter(): Promise<void> {
     const id = constants.JupyterKernelId;
     const extensionIds = [
         'polyglossy-tools.polyglossy-interactive-vscode',
@@ -545,6 +545,8 @@ export async function selectDotNetInteractiveKernelForJupyter(): Promise<void> {
         }
     }
 }
+
+export const selectDotNetInteractiveKernelForJupyter = selectPolyglossyInteractiveKernelForJupyter;
 
 // callbacks used to install interactive tool
 
