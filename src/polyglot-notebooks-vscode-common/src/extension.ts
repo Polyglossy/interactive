@@ -12,7 +12,7 @@ import * as vscodeLike from './interfaces/vscode-like';
 import { ClientMapper } from './clientMapper';
 import { MessageClient } from './messageClient';
 
-import { PolyglossyStdioInteractiveChannel } from './stdioDotnetInteractiveChannel';
+import { PolyglossyStdioInteractiveChannel } from './stdioPolyglossyInteractiveChannel';
 import { registerLanguageProviders } from './languageProvider';
 import { registerNotbookCellStatusBarItemProvider } from './notebookCellStatusBarItemProvider';
 import { registerAcquisitionCommands, registerKernelCommands, registerFileCommands } from './commands';
@@ -35,7 +35,7 @@ import { Logger, LogLevel } from './polyglot-notebooks/logger';
 import { ChildProcessLineAdapter } from './childProcessLineAdapter';
 import { NotebookParserServer } from './notebookParserServer';
 import { registerVariableExplorer } from './variableExplorer';
-import { KernelCommandAndEventChannel } from './DotnetInteractiveChannel';
+import { KernelCommandAndEventChannel } from './PolyglossyInteractiveChannel';
 import { ActiveNotebookTracker } from './activeNotebookTracker';
 import * as metadataUtilities from './metadataUtilities';
 import * as constants from './constants';
@@ -537,3 +537,4 @@ async function getInteractiveLaunchOptions(): Promise<InteractiveLaunchOptions |
     const launchOptions = await vscode.commands.executeCommand<InteractiveLaunchOptions>('polyglossy-interactive.acquire', installArgs);
     return launchOptions;
 }
+

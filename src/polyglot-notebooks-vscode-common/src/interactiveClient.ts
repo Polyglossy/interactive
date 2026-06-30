@@ -64,7 +64,7 @@ import { clearDebounce, createOutput } from './utilities';
 import * as vscodeLike from './interfaces/vscode-like';
 import { CompositeKernel } from './polyglot-notebooks/compositeKernel';
 import { KernelHost } from './polyglot-notebooks/kernelHost';
-import { KernelCommandAndEventChannel } from './DotnetInteractiveChannel';
+import { KernelCommandAndEventChannel } from './PolyglossyInteractiveChannel';
 import * as connection from './polyglot-notebooks/connection';
 import { DisposableSubscription } from './polyglot-notebooks/disposables';
 import { Logger } from './polyglot-notebooks';
@@ -607,3 +607,4 @@ export class InteractiveClient {
         return (this.nextOutputId++).toString();
     }
 }
+
