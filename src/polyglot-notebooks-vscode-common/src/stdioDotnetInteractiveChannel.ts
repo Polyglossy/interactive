@@ -16,7 +16,7 @@ import { ProcessStart } from './interfaces';
 import { ReportChannel } from './interfaces/vscode-like';
 import { LineReader } from './lineReader';
 import { isNotNull, parse, stringify } from './utilities';
-import { DotnetInteractiveChannel } from './DotnetInteractiveChannel';
+import { PolyglossyInteractiveChannel } from './DotnetInteractiveChannel';
 import {
     IKernelCommandAndEventReceiver,
     IKernelCommandAndEventSender,
@@ -33,7 +33,7 @@ import { DisposableSubscription } from './polyglot-notebooks/disposables';
 import { Subject } from 'rxjs';
 import { Logger } from './polyglot-notebooks/logger';
 
-export class StdioDotnetInteractiveChannel implements DotnetInteractiveChannel {
+export class PolyglossyStdioInteractiveChannel implements PolyglossyInteractiveChannel {
     private childProcess: cp.ChildProcessWithoutNullStreams | null;
     private lineReader: LineReader;
     private notifyOnExit: boolean = true;
@@ -210,3 +210,5 @@ export class StdioDotnetInteractiveChannel implements DotnetInteractiveChannel {
         this.childProcess = null;
     }
 }
+
+export const StdioDotnetInteractiveChannel = PolyglossyStdioInteractiveChannel;

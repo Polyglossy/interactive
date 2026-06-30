@@ -12,7 +12,7 @@ import * as vscodeLike from './interfaces/vscode-like';
 import { ClientMapper } from './clientMapper';
 import { MessageClient } from './messageClient';
 
-import { StdioDotnetInteractiveChannel } from './stdioDotnetInteractiveChannel';
+import { PolyglossyStdioInteractiveChannel } from './stdioDotnetInteractiveChannel';
 import { registerLanguageProviders } from './languageProvider';
 import { registerNotbookCellStatusBarItemProvider } from './notebookCellStatusBarItemProvider';
 import { registerAcquisitionCommands, registerKernelCommands, registerFileCommands } from './commands';
@@ -169,7 +169,7 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
 
         const processStart = processArguments(argsTemplate, workingDirectory, DotNetPathManager.getDotNetPath(), launchOptions!.workingDirectory, environmentVariables);
 
-        const channel = new StdioDotnetInteractiveChannel(notebookUri.toString(), processStart, diagnosticsChannel, (pid, code, signal) => {
+        const channel = new PolyglossyStdioInteractiveChannel(notebookUri.toString(), processStart, diagnosticsChannel, (pid, code, signal) => {
             clientMapper.closeClient(notebookUri, false);
         });
 

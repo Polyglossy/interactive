@@ -107,6 +107,7 @@ The following items are completed in the current branch:
 - ✅ Variable explorer and open-value-viewer wiring now use the new identity with fallback support.
 - ✅ Browser-global compatibility aliases were added for shipped notebook content.
 - ✅ Browser package exports now include Polyglossy-first client/type aliases while preserving Dotnet compatibility names.
+- ✅ VS Code channel startup now uses `PolyglossyStdioInteractiveChannel` with legacy `StdioDotnetInteractiveChannel` alias retained.
 - ✅ Regression tests were expanded for the rename behavior and are passing.
 - ✅ Relevant browser and Insiders extension package builds/tests were validated successfully.
 - ✅ The Insiders dev-host launch path was revalidated after reinstalling the renamed global tool with the existing install script.
@@ -371,7 +372,7 @@ Scope examples:
 Concrete work items:
 
 1. Rename TS symbols in browser package source. — ✅ Browser API alias layer completed (`createPolyglossyInteractiveClient`, `PolyglossyInteractiveClient`, `PolyglossyInteractiveScope*`) with legacy Dotnet aliases preserved
-2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 In progress
+2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 Channel symbols completed (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`) with legacy aliases retained; remaining client symbol sweep still in progress
 3. Update tests first where possible to expose remaining old-name assumptions. — ✅ Completed
 4. Consider temporary compatibility exports/globals for one migration window. — ✅ Completed
 5. Update .NET resource references if the browser bundle name also changes in this phase. — 🟡 In progress

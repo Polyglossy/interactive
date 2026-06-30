@@ -9,6 +9,8 @@ export interface KernelCommandAndEventChannel extends Disposable {
     sender: IKernelCommandAndEventSender,
     receiver: IKernelCommandAndEventReceiver
 }
-export interface DotnetInteractiveChannel extends KernelCommandAndEventChannel {
+export interface PolyglossyInteractiveChannel extends KernelCommandAndEventChannel {
     waitForReady(): Promise<KernelReady>;
 }
+
+export type DotnetInteractiveChannel = PolyglossyInteractiveChannel;
