@@ -372,7 +372,7 @@ Scope examples:
 Concrete work items:
 
 1. Rename TS symbols in browser package source. — ✅ Browser API alias layer completed (`createPolyglossyInteractiveClient`, `PolyglossyInteractiveClient`, `PolyglossyInteractiveScope*`) with legacy Dotnet aliases preserved
-2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 Channel symbols completed (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`), acquisition symbols completed (`acquirePolyglossyInteractive`), and Jupyter selector symbols completed (`selectPolyglossyInteractiveKernelForJupyter`) with legacy aliases retained; remaining client symbol sweep still in progress
+2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 Channel symbols completed (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`), acquisition symbols completed (`acquirePolyglossyInteractive`), Jupyter selector symbols completed (`selectPolyglossyInteractiveKernelForJupyter`), and notebook kernel symbols completed (`PolyglossyNotebookKernel*`) with legacy aliases retained; remaining client symbol sweep still in progress
 3. Update tests first where possible to expose remaining old-name assumptions. — ✅ Completed
 4. Consider temporary compatibility exports/globals for one migration window. — ✅ Completed
 5. Update .NET resource references if the browser bundle name also changes in this phase. — 🟡 In progress

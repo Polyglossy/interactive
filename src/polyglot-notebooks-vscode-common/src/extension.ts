@@ -445,7 +445,7 @@ function registerWithVsCode(context: vscode.ExtensionContext, clientMapper: Clie
         preloadUris,
         createErrorOutput,
     };
-    context.subscriptions.push(new notebookControllers.DotNetNotebookKernel(config, tokensProvider));
+    context.subscriptions.push(new notebookControllers.PolyglossyNotebookKernel(config, tokensProvider));
     return notebookSerializers.createAndRegisterNotebookSerializers(context, parserServer);
 }
 

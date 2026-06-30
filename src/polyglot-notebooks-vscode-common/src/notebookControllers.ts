@@ -23,19 +23,21 @@ const executionTasks: Map<string, vscode.NotebookCellExecution> = new Map();
 const standardOutputMimeType = 'application/vnd.code.notebook.stdout';
 const standardErrorMimeType = 'application/vnd.code.notebook.stderr';
 
-export interface DotNetNotebookKernelConfiguration {
+export interface PolyglossyNotebookKernelConfiguration {
     clientMapper: ClientMapper,
     preloadUris: vscode.Uri[],
     createErrorOutput: ErrorOutputCreator,
 }
 
-export class DotNetNotebookKernel {
+export type DotNetNotebookKernelConfiguration = PolyglossyNotebookKernelConfiguration;
+
+export class PolyglossyNotebookKernel {
 
     private trackedOutputIds: Map<vscode.Uri, Set<string>> = new Map(); // tracks notebookUri => [trackedOutputId]
     private disposables: { dispose(): void }[] = [];
     private controllers: Map<string, vscode.NotebookController> = new Map();
 
-    constructor(readonly config: DotNetNotebookKernelConfiguration, readonly tokensProvider: semanticTokens.DocumentSemanticTokensProvider) {
+    constructor(readonly config: PolyglossyNotebookKernelConfiguration, readonly tokensProvider: semanticTokens.DocumentSemanticTokensProvider) {
         // ensure the tracked output ids are always fresh
         ServiceCollection.Instance.NotebookWatcher.onNotebookDocumentOpened((notebook, _client) => this.trackedOutputIds.delete(notebook.uri));
         ServiceCollection.Instance.NotebookWatcher.onNotebookDocumentClosed((notebook, _client) => this.trackedOutputIds.delete(notebook.uri));
@@ -302,6 +304,8 @@ export class DotNetNotebookKernel {
         }
     }
 }
+
+export const DotNetNotebookKernel = PolyglossyNotebookKernel;
 
 // When a new notebook cell is discovered via `onDidOpenTextDocument` and if the cell metadata doesn't have a kernel name,
 // we need to know what value to use.  If we've never seen the notebook before, then the user opened a new one and the correct
