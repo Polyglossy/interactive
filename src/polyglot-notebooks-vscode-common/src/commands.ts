@@ -3,7 +3,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { acquireDotnetInteractive } from './acquisition';
+import { acquirePolyglossyInteractive } from './acquisition';
 import { InstallInteractiveArgs, InteractiveLaunchOptions } from './interfaces';
 import { ClientMapper } from './clientMapper';
 import { getEol, toNotebookDocument } from './vscodeUtilities';
@@ -38,7 +38,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
 
             if (!acquirePromise) {
                 const installationPromiseCompletionSource = new PromiseCompletionSource<void>();
-                acquirePromise = acquireDotnetInteractive(
+                acquirePromise = acquirePolyglossyInteractive(
                     installArgs,
                     requiredDotNetInteractiveVersion,
                     context.globalStorageUri.fsPath,

@@ -7,7 +7,7 @@ import { InstallInteractiveTool, InstallInteractiveArgs, CreateToolManifest, Get
 import { isVersionExactlyEqual, toolManifestExists } from './utilities';
 
 // The acquisition function.  Uses predefined callbacks for external command invocations to make testing easier.
-export async function acquireDotnetInteractive(
+export async function acquirePolyglossyInteractive(
     args: InstallInteractiveArgs,
     requiredDotNetInteractiveVersion: string,
     globalStoragePath: string,
@@ -50,3 +50,5 @@ export async function acquireDotnetInteractive(
 
     return launchOptions;
 }
+
+export const acquireDotnetInteractive = acquirePolyglossyInteractive;

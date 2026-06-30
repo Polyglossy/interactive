@@ -194,15 +194,15 @@ Exit criteria:
 
 ## Phase 2. Verify End-to-End After .NET Artifact Rename
 
-Status: 🔄 In progress (the current branch has build/test coverage for the rename path, but the full notebook-driven end-to-end sweep should still be treated as an active verification step).
+Status: ✅ Completed (manual end-to-end notebook validation succeeded in the latest round, and automated parser/browser checks remain green on this branch).
 
 Objective: prove the fork still works with the new .NET artifact identities before touching TypeScript artifacts.
 
 Steps:
 
 1. Point VS Code extension transport settings at the locally-built renamed tool. — ✅ Completed
-2. Open `NotebookTestScript.dib`. — 🟡 Partially covered
-3. Execute notebook startup, language switching, package loading, variable sharing, and save/open scenarios. — 🟡 Partially covered
+2. Open `NotebookTestScript.dib`. — ✅ Completed
+3. Execute notebook startup, language switching, package loading, variable sharing, and save/open scenarios. — ✅ Completed
 4. Run .NET browser/playwright tests if available on the machine. — ✅ Completed
 5. Confirm Jupyter install/parser commands still invoke the correct executable. — ✅ Completed
 
@@ -372,7 +372,7 @@ Scope examples:
 Concrete work items:
 
 1. Rename TS symbols in browser package source. — ✅ Browser API alias layer completed (`createPolyglossyInteractiveClient`, `PolyglossyInteractiveClient`, `PolyglossyInteractiveScope*`) with legacy Dotnet aliases preserved
-2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 Channel symbols completed (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`) with legacy aliases retained; remaining client symbol sweep still in progress
+2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 Channel symbols completed (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`) and acquisition symbols completed (`acquirePolyglossyInteractive`) with legacy aliases retained; remaining client symbol sweep still in progress
 3. Update tests first where possible to expose remaining old-name assumptions. — ✅ Completed
 4. Consider temporary compatibility exports/globals for one migration window. — ✅ Completed
 5. Update .NET resource references if the browser bundle name also changes in this phase. — 🟡 In progress

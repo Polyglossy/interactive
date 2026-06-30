@@ -10,12 +10,16 @@ import * as path from 'path';
 
 chai.use(require('chai-fs'));
 
-import { acquireDotnetInteractive } from '../../src/vscode-common/acquisition';
+import { acquireDotnetInteractive, acquirePolyglossyInteractive } from '../../src/vscode-common/acquisition';
 import { InstallInteractiveArgs } from '../../src/vscode-common/interfaces';
 import { computeToolInstallArguments } from '../../src/vscode-common/utilities';
 import { withFakeGlobalStorageLocation } from './utilities';
 
 describe('Acquisition tests', () => {
+
+    it('keeps acquisition alias compatibility', () => {
+        expect(acquireDotnetInteractive).to.equal(acquirePolyglossyInteractive);
+    });
 
     function getInteractiveVersionThatReturnsNoVersionFound(dotnetPath: string, globalStoragePath: string): Promise<string | undefined> {
         return new Promise<string | undefined>((resolve, reject) => {
