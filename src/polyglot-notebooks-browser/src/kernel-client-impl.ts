@@ -107,7 +107,7 @@ class InteractiveConsoleWrapper {
     }
 }
 
-export class KernelClientImpl implements dotnetInteractiveInterfaces.DotnetInteractiveClient {
+export class KernelClientImpl implements dotnetInteractiveInterfaces.PolyglossyInteractiveClient {
 
     private _clientFetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
     private _rootUrl: string;
@@ -278,7 +278,7 @@ export class KernelClientImpl implements dotnetInteractiveInterfaces.DotnetInter
     }
 }
 
-export type DotnetInteractiveClientConfiguration = {
+export type PolyglossyInteractiveClientConfiguration = {
     address: string,
     clientFetch?: dotnetInteractiveInterfaces.ClientFetch,
     channelFactory?: (rootUrl: string) => Promise<{
@@ -291,11 +291,14 @@ export type DotnetInteractiveClientConfiguration = {
     }) => Promise<Kernel>
 };
 
-function isConfiguration(config: any): config is DotnetInteractiveClientConfiguration {
+// Legacy alias for backward compatibility.
+export type DotnetInteractiveClientConfiguration = PolyglossyInteractiveClientConfiguration;
+
+function isConfiguration(config: any): config is PolyglossyInteractiveClientConfiguration {
     return typeof config !== "string";
 }
 
-export async function createDotnetInteractiveClient(configuration: string | DotnetInteractiveClientConfiguration): Promise<dotnetInteractiveInterfaces.DotnetInteractiveClient> {
+export async function createPolyglossyInteractiveClient(configuration: string | PolyglossyInteractiveClientConfiguration): Promise<dotnetInteractiveInterfaces.PolyglossyInteractiveClient> {
     let rootUrl = "";
     let clientFetch: dotnetInteractiveInterfaces.ClientFetch | undefined;
     let channelFactory: ((rootUrl: string) => Promise<{
@@ -348,3 +351,6 @@ export async function createDotnetInteractiveClient(configuration: string | Dotn
 
     return client;
 }
+
+// Legacy alias for backward compatibility.
+export const createDotnetInteractiveClient = createPolyglossyInteractiveClient;

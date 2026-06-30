@@ -35,6 +35,14 @@ describe("dotnet-interactive", () => {
             expect(typeof (global.createPolyglossyInteractiveClient))
                 .to
                 .equal('function');
+
+            expect(global.getPolyglossyInteractiveScope)
+                .to
+                .equal(global.getDotnetInteractiveScope);
+
+            expect(global.createPolyglossyInteractiveClient)
+                .to
+                .equal(global.createDotnetInteractiveClient);
         });
     });
 

@@ -106,8 +106,10 @@ The following items are completed in the current branch:
 - ✅ The restart-kernel toolbar entry was restored for the new notebook identity.
 - ✅ Variable explorer and open-value-viewer wiring now use the new identity with fallback support.
 - ✅ Browser-global compatibility aliases were added for shipped notebook content.
+- ✅ Browser package exports now include Polyglossy-first client/type aliases while preserving Dotnet compatibility names.
 - ✅ Regression tests were expanded for the rename behavior and are passing.
 - ✅ Relevant browser and Insiders extension package builds/tests were validated successfully.
+- ✅ The Insiders dev-host launch path was revalidated after reinstalling the renamed global tool with the existing install script.
 
 ## Phase 0. Baseline and Safety Net
 
@@ -197,18 +199,18 @@ Objective: prove the fork still works with the new .NET artifact identities befo
 
 Steps:
 
-1. Point VS Code extension transport settings at the locally-built renamed tool. — 🟡 Partially covered
+1. Point VS Code extension transport settings at the locally-built renamed tool. — ✅ Completed
 2. Open `NotebookTestScript.dib`. — 🟡 Partially covered
 3. Execute notebook startup, language switching, package loading, variable sharing, and save/open scenarios. — 🟡 Partially covered
 4. Run .NET browser/playwright tests if available on the machine. — ✅ Completed
-5. Confirm Jupyter install/parser commands still invoke the correct executable. — 🟡 Partially covered
+5. Confirm Jupyter install/parser commands still invoke the correct executable. — ✅ Completed
 
 Validation gate:
 
-- notebook kernel acquisition works — 🟡 Partially verified
-- parser operations work — 🟡 Partially verified
+- notebook kernel acquisition works — ✅ Revalidated in Insiders launch path
+- parser operations work — ✅ Verified via focused document/parser tests and renamed CLI command surface
 - browser resource loading still works — ✅ Verified
-- no hardcoded `dotnet-interactive` assumption remains on the TypeScript side that blocks startup — 🟡 Partially verified
+- no hardcoded `dotnet-interactive` assumption remains on the TypeScript side that blocks startup — ✅ Verified in targeted Insiders extension tests
 
 Manual e2e checklist for this phase:
 
@@ -218,7 +220,7 @@ Manual e2e checklist for this phase:
 - execute at least one C#, F#, PowerShell, and JavaScript cell
 - verify variable sharing across at least two languages
 - verify notebook save and reopen behavior
-- verify parser-backed open/save path for `.dib` and `.ipynb`
+- verify parser-backed open/save path for `.dib` and `.ipynb` (automated parser/open-save coverage is passing; keep manual notebook save/reopen check)
 
 ## Phase 3. Rename TypeScript Artifact Identities
 
@@ -368,7 +370,7 @@ Scope examples:
 
 Concrete work items:
 
-1. Rename TS symbols in browser package source. — 🟡 In progress
+1. Rename TS symbols in browser package source. — ✅ Browser API alias layer completed (`createPolyglossyInteractiveClient`, `PolyglossyInteractiveClient`, `PolyglossyInteractiveScope*`) with legacy Dotnet aliases preserved
 2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 In progress
 3. Update tests first where possible to expose remaining old-name assumptions. — ✅ Completed
 4. Consider temporary compatibility exports/globals for one migration window. — ✅ Completed
@@ -377,7 +379,7 @@ Concrete work items:
 
 Validation gate:
 
-- browser package tests — ✅ Completed
+- browser package tests — ✅ Compile and integration paths completed; direct package mocha entry currently fails in this environment due to Node ESM/CJS runtime mismatch
 - polyglot-notebooks core package tests — ✅ Completed
 - VS Code common tests in both stable and insiders — ✅ Completed
 - manual notebook run covering HTML/JavaScript output and variable APIs — 🟡 Partially verified
