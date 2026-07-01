@@ -7,8 +7,8 @@ chai.use(chai_as_promised);
 const expect = chai.expect;
 
 import { ClientMapper } from '../../src/vscode-common/clientMapper';
-import { TestDotnetInteractiveChannel } from './testDotnetInteractiveChannel';
-import { CallbackTestTestDotnetInteractiveChannel } from './callbackTestTestDotnetInteractiveChannel';
+import { TestPolyglossyInteractiveChannel } from './testPolyglossyInteractiveChannel';
+import { CallbackTestPolyglossyInteractiveChannel } from './callbackTestPolyglossyInteractiveChannel';
 import { CodeSubmissionReceivedType, CompleteCodeSubmissionReceivedType, CommandSucceededType, DisplayedValueProducedType, ReturnValueProducedType, DisplayedValueUpdatedType, CommandFailedType, ErrorProducedType } from '../../src/vscode-common/polyglot-notebooks/contracts';
 import { createUri, debounce, wait } from '../../src/vscode-common/utilities';
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
@@ -18,7 +18,7 @@ describe('InteractiveClient tests', () => {
 
     it('command execution returns deferred events', async () => {
         const code = '1 + 1';
-        const config = createChannelConfig(async (notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     // deferred event; unassociated with the original submission; has its own token
@@ -94,7 +94,7 @@ describe('InteractiveClient tests', () => {
 
     it('display events with multiple mimeTypes', async () => {
         const code = '1 + 1';
-        const config = createChannelConfig(async (notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode#1': [
                 {
                     eventType: DisplayedValueProducedType,
@@ -143,7 +143,7 @@ describe('InteractiveClient tests', () => {
     });
 
     it('ErrorProduced resolve the execution promise reporting failuer', async () => {
-        const config = createChannelConfig(async (notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     eventType: ErrorProducedType,
@@ -162,7 +162,7 @@ describe('InteractiveClient tests', () => {
     });
 
     it('CommandFailedEvent rejects the execution promise', (done) => {
-        const config = createChannelConfig(async (notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     eventType: CommandFailedType,
@@ -188,7 +188,7 @@ describe('InteractiveClient tests', () => {
             }
 
             channelCreated = true;
-            return new TestDotnetInteractiveChannel({});
+            return new TestPolyglossyInteractiveChannel({});
         });
         const clientMapper = new ClientMapper(config);
         clientMapper.getOrAddClient(createUri('test-path.dib')).then(_client => {
@@ -207,7 +207,7 @@ describe('InteractiveClient tests', () => {
             }
 
             channelCreated = true;
-            return new TestDotnetInteractiveChannel({});
+            return new TestPolyglossyInteractiveChannel({});
         });
         const clientMapper = new ClientMapper(config);
         await clientMapper.getOrAddClient(createUri('test-path.dib'));
@@ -218,7 +218,7 @@ describe('InteractiveClient tests', () => {
     });
 
     it('execution prevents diagnostics request forwarding', async () => {
-        const config = createChannelConfig(async (notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
 
                 {
@@ -241,7 +241,7 @@ describe('InteractiveClient tests', () => {
 
     it('exception in submit code properly rejects all promises', async () => {
         const token = 'test-token';
-        const config = createChannelConfig(async (_notebookPath) => new CallbackTestTestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new CallbackTestPolyglossyInteractiveChannel({
             'SubmitCode': () => {
                 throw new Error('expected exception during submit');
             },
@@ -257,7 +257,7 @@ describe('InteractiveClient tests', () => {
 
     it('exception in submit code properly generates error outputs', done => {
         const token = 'test-token';
-        const config = createChannelConfig(async (_notebookPath) => new CallbackTestTestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new CallbackTestPolyglossyInteractiveChannel({
             'SubmitCode': () => {
                 throw new Error('expected exception during submit');
             },
