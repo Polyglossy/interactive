@@ -98,8 +98,8 @@ export class PolyglossyNotebookKernel {
         this.disposables.push(vscode.workspace.onDidOpenTextDocument(async textDocument => {
             const notebook = vscode.workspace.notebookDocuments.find(n => n.getCells().find(c => c.document === textDocument) !== undefined);
             if (notebook) {
-                const isDotNetNotebook = metadataUtilities.isDotNetNotebook(notebook);
-                if (isDotNetNotebook) {
+                const isPolyglossyNotebook = metadataUtilities.isPolyglossyNotebook(notebook);
+                if (isPolyglossyNotebook) {
                     // only look at the cell metadata if the notebook is fully open
                     const isOpenComplete = isNotebookOpenComplete(notebook);
                     if (isOpenComplete) {
@@ -118,7 +118,7 @@ export class PolyglossyNotebookKernel {
     }
 
     private async onNotebookOpen(notebook: vscode.NotebookDocument, clientMapper: ClientMapper, jupyterController: vscode.NotebookController): Promise<void> {
-        if (metadataUtilities.isDotNetNotebook(notebook)) {
+        if (metadataUtilities.isPolyglossyNotebook(notebook)) {
             // prepare initial grammar
             const kernelInfos = metadataUtilities.getKernelInfosFromNotebookDocument(notebook);
             this.tokensProvider.dynamicTokenProvider.rebuildNotebookGrammar(notebook.uri, kernelInfos);

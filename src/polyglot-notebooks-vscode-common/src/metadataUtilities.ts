@@ -23,7 +23,7 @@ export function isIpynbNotebook(notebookDocument: vscodeLike.NotebookDocument) {
     return notebookDocument.uri.fsPath.toLowerCase().endsWith('.ipynb');
 }
 
-export function isDotNetNotebook(notebook: vscodeLike.NotebookDocument): boolean {
+export function isPolyglossyNotebook(notebook: vscodeLike.NotebookDocument): boolean {
     const notebookUriString = notebook.uri.toString();
     if (notebookUriString.endsWith('.dib') || notebook.uri.fsPath.endsWith('.dib')) {
         return true;
@@ -37,6 +37,8 @@ export function isDotNetNotebook(notebook: vscodeLike.NotebookDocument): boolean
     // doesn't look like us
     return false;
 }
+
+export const isDotNetNotebook = isPolyglossyNotebook;
 
 export function getNotebookCellMetadataFromInteractiveDocumentElement(interactiveDocumentElement: commandsAndEvents.InteractiveDocumentElement): NotebookCellMetadata {
     const cellMetadata: NotebookCellMetadata = {};

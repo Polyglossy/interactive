@@ -131,9 +131,11 @@ export class ClientMapper {
         }
     }
 
-    isDotNetClient(uri: Uri): boolean {
+    isPolyglossyClient(uri: Uri): boolean {
         const key = ClientMapper.keyFromUri(uri);
         return this.clientMap.has(key);
     }
+
+    isDotNetClient = this.isPolyglossyClient;
 }
 

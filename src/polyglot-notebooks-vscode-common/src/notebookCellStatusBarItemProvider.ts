@@ -26,7 +26,7 @@ class KernelSelectorItem implements vscode.QuickPickItem {
 }
 
 export function registerNotbookCellStatusBarItemProvider(context: vscode.ExtensionContext, clientMapper: ClientMapper) {
-    const cellItemProvider = new DotNetNotebookCellStatusBarItemProvider(clientMapper);
+    const cellItemProvider = new PolyglossyNotebookCellStatusBarItemProvider(clientMapper);
     clientMapper.onClientCreate((_uri, client) => {
         client.channel.receiver.subscribe({
             next: envelope => {
@@ -106,7 +106,7 @@ function getNotebookDcoumentFromCellDocument(cellDocument: vscode.TextDocument):
     return notebookDocument;
 }
 
-class DotNetNotebookCellStatusBarItemProvider {
+class PolyglossyNotebookCellStatusBarItemProvider {
     private _onDidChangeCellStatusBarItemsEmitter: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
 
     onDidChangeCellStatusBarItems: vscode.Event<void> = this._onDidChangeCellStatusBarItemsEmitter.event;
@@ -115,7 +115,7 @@ class DotNetNotebookCellStatusBarItemProvider {
     }
 
     async provideCellStatusBarItems(cell: vscode.NotebookCell, token: vscode.CancellationToken): Promise<vscode.NotebookCellStatusBarItem[]> {
-        if (!metadataUtilities.isDotNetNotebook(cell.notebook) || cell.document.languageId === 'markdown') {
+        if (!metadataUtilities.isPolyglossyNotebook(cell.notebook) || cell.document.languageId === 'markdown') {
             return [];
         }
 

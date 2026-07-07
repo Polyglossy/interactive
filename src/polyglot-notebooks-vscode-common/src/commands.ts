@@ -229,7 +229,7 @@ export function registerKernelCommands(context: vscode.ExtensionContext, clientM
 
     context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.stopAllNotebookKernels', async () => {
         vscode.workspace.notebookDocuments
-            .filter((document: vscode.NotebookDocument) => clientMapper.isDotNetClient(document.uri))
+            .filter((document: vscode.NotebookDocument) => clientMapper.isPolyglossyClient(document.uri))
             .forEach(async (document: vscode.NotebookDocument) => await vscode.commands.executeCommand('polyglossy-notebook.stopCurrentNotebookKernel', document));
     }));
 
