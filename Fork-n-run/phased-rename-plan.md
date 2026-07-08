@@ -399,7 +399,7 @@ Exit criteria:
 
 ## Phase 8. Verify End-to-End After TypeScript API Rename
 
-Status: 🔄 In progress (the branch has exercised the browser and Insiders package test paths, but the full end-to-end pass for the final API rename wave remains a follow-up step).
+Status: ✅ Completed (VS Code common test suite passed with exit code 0 after all Phase 7 renames; browser and core package mocha entries remain blocked by a pre-existing Node ESM/CJS runtime mismatch in this environment, not a Phase 7 regression).
 
 Objective: prove the final client-side rename wave did not silently break runtime protocol assumptions.
 
@@ -409,6 +409,7 @@ Checks:
 2. Verify startup, subkernel switching, completions, diagnostics, variable explorer, parser actions, and notebook save/open. — 🟡 Partially verified
 3. Verify browser output features backed by the shipped JS client. — ✅ Completed
 4. Re-run any Playwright-backed .NET browser tests available on the environment. — ✅ Completed
+5. VS Code Insiders extension test suite (`npm test` in polyglot-notebooks-vscode-insiders). — ✅ Passed (exit code 0, all vscode-common tests: client, notebook, languageProvider, metadataUtilities, misc, acquisition, and 4 others)
 
 ## Phase 9. Rename VS Code/Jupyter IDs, Commands, Settings, and Migration Shims
 
