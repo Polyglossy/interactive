@@ -19,6 +19,7 @@
   "description.kernelTransportWorkingDirectory": "The working directory in which the kernel transport process is started.",
   "description.interactiveToolSource": "The NuGet source to use when acquiring the .NET Interactive tool.",
   "description.requiredInteractiveToolVersion": "The required version of the .NET Interactive tool.",
+  "description.minimumDotNetSdkVersion": "The minimum required version of the .NET SDK.",
   "command.acquire": "Install .NET Interactive",
   "command.openNotebook": "Polyglot Notebook: Open notebook",
   "_command.openNotebook.comment": "{Locked='Polyglot Notebook'}",
