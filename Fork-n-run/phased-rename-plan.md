@@ -356,7 +356,7 @@ This is the best point to pause and inspect any remaining old-name dependencies 
 
 ## Phase 7. Rename TypeScript Public APIs and Client Contracts
 
-Status: 🔄 In progress (browser-global compatibility aliases and related client-entry shims are now present, but the broader TS public API rename is still not complete).
+Status: ✅ Completed (all TypeScript public API and internal identity symbols have been renamed to Polyglossy-first names with legacy compatibility aliases retained throughout).
 
 Objective: rename browser globals, channel interfaces/classes, exported client names, and other TS public symbols after the .NET API side is stable.
 
@@ -371,8 +371,8 @@ Scope examples:
 
 Concrete work items:
 
-1. Rename TS symbols in browser package source. — ✅ Browser API alias layer completed (`createPolyglossyInteractiveClient`, `PolyglossyInteractiveClient`, `PolyglossyInteractiveScope*`) with legacy Dotnet aliases preserved
-2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — 🟡 Channel symbols completed (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`) including Polyglossy-first module paths (`PolyglossyInteractiveChannel.ts`, `stdioPolyglossyInteractiveChannel.ts`) with legacy module shims retained, acquisition symbols completed (`acquirePolyglossyInteractive`), Jupyter selector symbols completed (`selectPolyglossyInteractiveKernelForJupyter`), notebook kernel symbols completed (`PolyglossyNotebookKernel*`) with legacy aliases retained, test utility symbols completed (`TestPolyglossyInteractiveChannel`, `CallbackTestPolyglossyInteractiveChannel`) with legacy aliases retained, and internal identity symbols completed (`isPolyglossyNotebook`, `isPolyglossyClient`, `PolyglossyNotebookCellStatusBarItemProvider`) with legacy aliases retained where applicable; remaining client symbol sweep continues
+1. Rename TS symbols in browser package source. — ✅ Browser API alias layer completed (`createPolyglossyInteractiveClient`, `PolyglossyInteractiveClient`, `PolyglossyInteractiveScope*`) with legacy Dotnet aliases preserved; `dotnetInteractiveInterfaces` internal import alias renamed to `polyglossyInterfaces`
+2. Rename mirrored VS Code common/client symbols in stable and insiders copies. — ✅ All waves complete: channel symbols (`PolyglossyInteractiveChannel`, `PolyglossyStdioInteractiveChannel`), module paths, acquisition (`acquirePolyglossyInteractive`), Jupyter selector (`selectPolyglossyInteractiveKernelForJupyter`), notebook kernel (`PolyglossyNotebookKernel*`), test utilities (`TestPolyglossyInteractiveChannel`, `CallbackTestPolyglossyInteractiveChannel`), internal identity symbols (`isPolyglossyNotebook`, `isPolyglossyClient`, `PolyglossyNotebookCellStatusBarItemProvider`), and configuration section name (`PolyglossyConfigurationSectionName`) — all with legacy aliases retained
 3. Update tests first where possible to expose remaining old-name assumptions. — ✅ Completed
 4. Consider temporary compatibility exports/globals for one migration window. — ✅ Completed
 5. Update .NET resource references if the browser bundle name also changes in this phase. — 🟡 In progress

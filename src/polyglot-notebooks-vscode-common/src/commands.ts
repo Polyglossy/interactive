@@ -19,12 +19,12 @@ import { PromiseCompletionSource } from './polyglot-notebooks/promiseCompletionS
 import * as constants from './constants';
 
 export async function registerAcquisitionCommands(context: vscode.ExtensionContext, diagnosticChannel: ReportChannel): Promise<void> {
-    const requiredDotNetInteractiveVersion = getConfigurationValue<string>('requiredInteractiveToolVersion', constants.DotnetConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
-    const interactiveToolSource = getConfigurationValue<string>('interactiveToolSource', constants.DotnetConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
+    const requiredDotNetInteractiveVersion = getConfigurationValue<string>('requiredInteractiveToolVersion', constants.PolyglossyConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
+    const interactiveToolSource = getConfigurationValue<string>('interactiveToolSource', constants.PolyglossyConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
 
     if (!requiredDotNetInteractiveVersion) {
         const errorTitle = 'Polyglot Notebooks extension will not work.';
-        const errorDetails = `Incorrect value for option "${constants.DotnetConfigurationSectionName}.requiredInteractiveToolVersion" in settings.json.  Please remove this value and restart VS Code.`;
+        const errorDetails = `Incorrect value for option "${constants.PolyglossyConfigurationSectionName}.requiredInteractiveToolVersion" in settings.json.  Please remove this value and restart VS Code.`;
         await vscode.window.showErrorMessage(errorTitle, { modal: true, detail: errorDetails });
         throw new Error(errorDetails);
     }

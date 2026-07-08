@@ -30,7 +30,8 @@ export function getNotebookViewTypeForFormat(notebookFormat: string): string {
 }
 
 // other
-export const DotnetConfigurationSectionName = 'polyglossy-interactive';
+export const PolyglossyConfigurationSectionName = 'polyglossy-interactive';
+export const DotnetConfigurationSectionName = PolyglossyConfigurationSectionName;
 export const LegacyDotnetConfigurationSectionName = 'dotnet-interactive';
 export const PolyglotConfigurationSectionName = 'polyglossy-notebook';
 export const LegacyPolyglotConfigurationSectionName = 'polyglot-notebook';

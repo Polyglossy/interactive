@@ -96,7 +96,7 @@ export async function activate(context: vscode.ExtensionContext) {
 async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel: OutputChannelAdapter) {
     const dotnetConfig = {
         get<T>(key: string) {
-            return getConfigurationValue<T>(key, constants.DotnetConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
+            return getConfigurationValue<T>(key, constants.PolyglossyConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
         }
     };
     const polyglotConfig = {
