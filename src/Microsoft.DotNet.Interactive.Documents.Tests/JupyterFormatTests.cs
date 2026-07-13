@@ -54,7 +54,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = $".NET ({shortLanguage})",
+                    display_name = $"Polyglossy ({shortLanguage})",
                     language = shortLanguage,
                     name = $".net-{language}"
                 },
@@ -169,7 +169,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -220,7 +220,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -332,7 +332,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -387,7 +387,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -481,7 +481,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -525,7 +525,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -569,7 +569,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -668,7 +668,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -1106,7 +1106,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },

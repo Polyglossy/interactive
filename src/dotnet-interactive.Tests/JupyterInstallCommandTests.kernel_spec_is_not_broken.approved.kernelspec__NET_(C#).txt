@@ -1,7 +1,7 @@
 {
   "argv": [
     "dotnet",
-    "interactive",
+    "polyglossy-interactive",
     "jupyter",
     "--default-kernel",
     "csharp",
@@ -9,12 +9,12 @@
     "--http-port-range",
     "100-400"
   ],
-  "display_name": ".NET (C#)",
+  "display_name": "Polyglossy (C#)",
   "language": "C#",
   "metadata": {
     "vscode": {
-      "extension_id": "ms-dotnettools.dotnet-interactive-vscode",
-      "kernel_id": "dotnet-interactive"
+      "extension_id": "polyglossy-tools.polyglossy-interactive-vscode",
+      "kernel_id": "polyglossy-interactive"
     }
   }
 }

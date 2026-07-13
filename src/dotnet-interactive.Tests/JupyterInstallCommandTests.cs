@@ -33,9 +33,9 @@ public class JupyterInstallCommandTests
     }
 
     [Theory]
-    [InlineData(".NET (C#)")]
-    [InlineData(".NET (F#)")]
-    [InlineData(".NET (PowerShell)")]
+    [InlineData("Polyglossy (C#)")]
+    [InlineData("Polyglossy (F#)")]
+    [InlineData("Polyglossy (PowerShell)")]
     [Trait("Category", "Contracts and serialization")]
     public async Task kernel_spec_is_not_broken(string displayName)
     {
@@ -65,9 +65,9 @@ public class JupyterInstallCommandTests
         await installCommand.InvokeAsync();
         var consoleError = error.ToString();
         using var scope = new AssertionScope();
-        consoleError.Should().Contain("Failed to install \".NET (F#)\" kernel.");
-        consoleError.Should().Contain("Failed to install \".NET (C#)\" kernel.");
-        consoleError.Should().Contain("Failed to install \".NET (PowerShell)\" kernel.");
+        consoleError.Should().Contain("Failed to install \"Polyglossy (F#)\" kernel.");
+        consoleError.Should().Contain("Failed to install \"Polyglossy (C#)\" kernel.");
+        consoleError.Should().Contain("Failed to install \"Polyglossy (PowerShell)\" kernel.");
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class JupyterInstallCommandTests
 
         using var scope = new AssertionScope();
 
-        consoleOut.Should().Contain("Installed \".NET (F#)\" kernel.");
-        consoleOut.Should().Contain("Installed \".NET (C#)\" kernel.");
+        consoleOut.Should().Contain("Installed \"Polyglossy (F#)\" kernel.");
+        consoleOut.Should().Contain("Installed \"Polyglossy (C#)\" kernel.");
     }
 }

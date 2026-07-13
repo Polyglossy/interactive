@@ -239,7 +239,7 @@ public partial class NotebookParserServerTests
                 {
                     kernelspec = new
                     {
-                        display_name = ".NET (C#)",
+                        display_name = "Polyglossy (C#)",
                         language = "C#",
                         name = ".net-csharp"
                     },
@@ -319,7 +319,7 @@ public partial class NotebookParserServerTests
                 {
                     kernelspec = new
                     {
-                        display_name = ".NET (C#)",
+                        display_name = "Polyglossy (C#)",
                         language = "C#",
                         name = ".net-csharp"
                     },

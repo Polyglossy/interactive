@@ -25,7 +25,7 @@ internal static class InteractiveDocumentExtensions
         document.Metadata.GetOrAdd("kernelspec", _ => new Dictionary<string, object>())
                 .MergeWith(new Dictionary<string, object>
                 {
-                    ["display_name"] = $".NET ({canonicalLanguageName})",
+                    ["display_name"] = $"Polyglossy ({canonicalLanguageName})",
                     ["language"] = canonicalLanguageName,
                     ["name"] = $".net-{kernelName}"
                 });

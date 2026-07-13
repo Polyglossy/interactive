@@ -5,7 +5,9 @@
     "jupyter",
     "--default-kernel",
     "fsharp",
-    "{connection_file}"
+    "{connection_file}",
+    "--http-port-range",
+    "100-400"
   ],
   "display_name": "Polyglossy (F#)",
   "language": "F#",

@@ -4,11 +4,13 @@
     "polyglossy-interactive",
     "jupyter",
     "--default-kernel",
-    "fsharp",
-    "{connection_file}"
+    "powershell",
+    "{connection_file}",
+    "--http-port-range",
+    "100-400"
   ],
-  "display_name": "Polyglossy (F#)",
-  "language": "F#",
+  "display_name": "Polyglossy (PowerShell)",
+  "language": "PowerShell",
   "metadata": {
     "vscode": {
       "extension_id": "polyglossy-tools.polyglossy-interactive-vscode",
