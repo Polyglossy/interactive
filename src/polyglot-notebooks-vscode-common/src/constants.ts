@@ -11,6 +11,8 @@ export const JupyterNotebookControllerId = 'polyglot-notebook-for-jupyter';
 
 // notebook kernel
 export const JupyterKernelId = 'polyglot-notebook-for-jupyter';
+export const PolyglossyInteractiveKernelId = 'polyglossy-interactive';
+export const LegacyDotNetInteractiveKernelId = 'dotnet-interactive';
 
 // view types
 export const NotebookViewType = 'polyglot-notebook';

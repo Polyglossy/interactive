@@ -257,20 +257,20 @@ export function getKernelspecMetadataFromNotebookDocumentMetadata(notebookDocume
     switch (notebookDocumentMetadata.kernelInfo.defaultKernelName) {
         case 'fsharp':
             return {
-                display_name: '.NET (F#)',
+                display_name: 'Polyglossy (F#)',
                 language: 'F#',
                 name: '.net-fsharp'
             };
         case 'pwsh':
             return {
-                display_name: '.NET (PowerShell)',
+                display_name: 'Polyglossy (PowerShell)',
                 language: 'PowerShell',
                 name: '.net-pwsh'
             };
         case 'csharp':
         default:
             return {
-                display_name: '.NET (C#)',
+                display_name: 'Polyglossy (C#)',
                 language: 'C#',
                 name: '.net-csharp'
             };

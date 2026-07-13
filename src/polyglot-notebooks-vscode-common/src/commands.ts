@@ -530,18 +530,24 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
 }
 
 export async function selectPolyglossyInteractiveKernelForJupyter(): Promise<void> {
-    const id = constants.JupyterKernelId;
+    const kernelIds = [
+        constants.JupyterKernelId,
+        constants.PolyglossyInteractiveKernelId,
+        constants.LegacyDotNetInteractiveKernelId,
+    ];
     const extensionIds = [
         'polyglossy-tools.polyglossy-interactive-vscode',
         'ms-dotnettools.dotnet-interactive-vscode',
     ];
 
     for (const extension of extensionIds) {
-        try {
-            await vscode.commands.executeCommand('notebook.selectKernel', { extension, id });
-            return;
-        } catch {
-            // Fall back to the legacy extension identifier if the newer one is unavailable.
+        for (const id of kernelIds) {
+            try {
+                await vscode.commands.executeCommand('notebook.selectKernel', { extension, id });
+                return;
+            } catch {
+                // Try compatibility combinations for extension and kernel identifiers.
+            }
         }
     }
 }

@@ -59,7 +59,15 @@ export function registerVariableExplorer(context: vscode.ExtensionContext, clien
 
     vscode.window.onDidChangeActiveNotebookEditor(async editor => {
         const notebookUri = editor?.notebook.uri;
-        debounce(() => webViewProvider.showNotebookVariables(notebookUri));
+        debounce(() => {
+            if (notebookUri) {
+                webViewProvider.refreshVariables(notebookUri).then(() => {
+                    webViewProvider.showNotebookVariables(notebookUri);
+                });
+            } else {
+                webViewProvider.showNotebookVariables(undefined);
+            }
+        });
     });
 }
 
@@ -151,6 +159,9 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
         this.webview.html = htmlContent;
 
         const currentNotebookUri = vscode.window.activeNotebookEditor?.notebook.uri;
+        if (currentNotebookUri) {
+            await this.refreshVariables(currentNotebookUri);
+        }
         this.showNotebookVariables(currentNotebookUri);
     }
 
@@ -196,9 +207,10 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
         const client = await this.clientMapper.tryGetClient(uri);
         if (client) {
             const allKernels = Array.from(client.kernel.childKernels.filter(k => k.kernelInfo.supportedKernelCommands.find(ci => ci.name === commandsAndEvents.RequestValueInfosType)));
-            const kernels = allKernels.filter(kernel => {
-                return this.completedNotebookKernels.get(uri)?.has(kernel.name) ?? false;
-            });
+            const completedKernels = this.completedNotebookKernels.get(uri);
+            const kernels = completedKernels && completedKernels.size > 0
+                ? allKernels.filter(kernel => completedKernels.has(kernel.name))
+                : allKernels;
             for (const kernel of kernels) {
                 try {
                     const valueInfos = await client.requestValueInfos(kernel.name);

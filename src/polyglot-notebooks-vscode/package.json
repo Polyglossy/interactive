@@ -113,15 +113,15 @@
     ],
     "jupyter.kernels": [
       {
-        "title": ".NET Interactive (C#)",
+        "title": "Polyglossy Interactive (C#)",
         "defaultlanguage": "polyglot-notebook"
       },
       {
-        "title": ".NET Interactive (F#)",
+        "title": "Polyglossy Interactive (F#)",
         "defaultlanguage": "polyglot-notebook"
       },
       {
-        "title": ".NET Interactive (PowerShell)",
+        "title": "Polyglossy Interactive (PowerShell)",
         "defaultlanguage": "polyglot-notebook"
       }
     ],
