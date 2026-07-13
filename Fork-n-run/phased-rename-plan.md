@@ -399,21 +399,21 @@ Exit criteria:
 
 ## Phase 8. Verify End-to-End After TypeScript API Rename
 
-Status: ✅ Completed (VS Code common test suite passed with exit code 0 after all Phase 7 renames; browser and core package mocha entries remain blocked by a pre-existing Node ESM/CJS runtime mismatch in this environment, not a Phase 7 regression).
+Status: ✅ Completed (VS Code common test suite passed with exit code 0 after all Phase 7 renames; local VSIX install and manual end-to-end notebook verification have now been completed; browser and core package mocha entries remain blocked by a pre-existing Node ESM/CJS runtime mismatch in this environment, not a Phase 7 regression).
 
 Objective: prove the final client-side rename wave did not silently break runtime protocol assumptions.
 
 Checks:
 
-1. Install local VSIX and run `NotebookTestScript.dib` again. — 🟡 Partially verified
-2. Verify startup, subkernel switching, completions, diagnostics, variable explorer, parser actions, and notebook save/open. — 🟡 Partially verified
+1. Install local VSIX and run `NotebookTestScript.dib` again. — ✅ Completed (required local VSIX install manual step)
+2. Verify startup, subkernel switching, completions, diagnostics, variable explorer, parser actions, and notebook save/open. — ✅ Completed
 3. Verify browser output features backed by the shipped JS client. — ✅ Completed
 4. Re-run any Playwright-backed .NET browser tests available on the environment. — ✅ Completed
 5. VS Code Insiders extension test suite (`npm test` in polyglot-notebooks-vscode-insiders). — ✅ Passed (exit code 0, all vscode-common tests: client, notebook, languageProvider, metadataUtilities, misc, acquisition, and 4 others)
 
 ## Phase 9. Rename VS Code/Jupyter IDs, Commands, Settings, and Migration Shims
 
-Status: 🔄 In progress (commands, settings, and notebook identity routing now support Polyglossy while preserving compatibility shims for existing flows).
+Status: 🔄 In progress (commands, settings, and notebook identity routing now support Polyglossy while preserving compatibility shims for existing flows; Jupyter titles and installed kernelspec metadata have been updated to Polyglossy-first values while retaining legacy `.net-*` kernelspec names for compatibility).
 
 Objective: clean up the last layer of externally visible IDs after both runtime halves are already operating under the new brand.
 
@@ -443,16 +443,26 @@ Migration work items:
 4. Support old notebook type or kernelspec IDs where the hosting platform allows it. — 🟡 Partially covered
 5. Remove the old IDs only after at least one stable internal pass of the complete notebook workflow. — ⏳ Pending
 
+Current validation findings:
+
+- `src/polyglot-notebooks-vscode/package.json` and `src/polyglot-notebooks-vscode-insiders/package.json` now contribute Jupyter kernel titles as `Polyglossy Interactive (C#|F#|PowerShell)`.
+- `src/dotnet-interactive/ContentFiles/kernels/.net-csharp/kernel.json` (and sibling kernelspec files) now emit VS Code metadata with `extension_id` = `polyglossy-tools.polyglossy-interactive-vscode`, `kernel_id` = `polyglossy-interactive`, and launch via `dotnet polyglossy-interactive jupyter`.
+- Jupyter kernel auto-selection now tries compatibility combinations of extension IDs (`polyglossy-tools.polyglossy-interactive-vscode`, `ms-dotnettools.dotnet-interactive-vscode`) and kernel IDs (`polyglot-notebook-for-jupyter`, `polyglossy-interactive`, `dotnet-interactive`) in common/stable/insiders command paths.
+- Docs/README marketplace links and non-runtime legacy extension-ID references were swept to Polyglossy-first values (including VSIX `.gitignore` patterns and non-runtime example comments).
+- `src/dotnet-interactive.Tests/CommandLine/CommandLineParserTests.cs` still verifies Jupyter install output directories as `.net-csharp`, `.net-fsharp`, and `.net-powershell`, which is currently intentional to preserve compatibility for persisted kernelspec names.
+- Focused .NET Jupyter validation passed after the update (`JupyterInstallCommandTests`, `CommandLineParserTests`, `JupyterFormatTests`, and `NotebookParserServerTests.Deserialization`: 101 passed).
+- Focused Insiders `metadataUtilities` tests passed after the update; the stable package's `npm test -- --grep "metadataUtilities"` path remains blocked by a pre-existing `Cannot find module 'vscode'` test-runner issue because that package still invokes Mocha directly over the compiled test tree.
+
 Validation gate:
 
 - existing notebooks still open — 🟡 Partially verified
 - new notebooks use only new IDs — 🟡 Partially verified
 - extension settings migration works or is clearly documented — ✅ Verified
-- Jupyter kernelspec install/register uses new IDs and titles — 🟡 Partially verified
+- Jupyter kernelspec install/register uses new IDs and titles — 🟡 Partially verified (source and focused .NET/Insiders tests now reflect the new titles and metadata IDs; compatibility-preserving `.net-*` kernelspec names remain by design, and stable-package focused test execution is still limited by a pre-existing Mocha/`vscode` runner issue)
 
 ## Phase 10. Documentation, Samples, and Cleanup
 
-Status: ⏳ Pending (docs and samples have not yet been swept for the newer fork branding beyond the planning and implementation work already landed).
+Status: 🔄 In progress (planning docs are being reconciled with implemented IDs and a broader docs terminology sweep is underway to replace old product branding in user-facing prose).
 
 Objective: sweep the broad but lower-risk surfaces only after product/runtime identities are stable.
 
@@ -467,6 +477,11 @@ Validation gate:
 
 - spot-check samples with the renamed tool/package identities — ⏳ Pending
 - docs no longer instruct users to install or reference trademark-bearing fork-specific names — ⏳ Pending
+
+Current progress notes:
+
+- Phase 9 planning docs mismatch fixed: `Fork-n-run/rename-dictionary.md` now uses `polyglossy-tools.polyglossy-interactive-vscode` as the replacement extension ID.
+- Phase 10 terminology sweep pass completed across major docs surfaces in `docs/**`, replacing legacy `Polyglot Notebooks` branding in user-facing prose with `Polyglossy Notebooks`.
 
 Deliverables:
 

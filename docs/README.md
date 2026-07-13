@@ -1,10 +1,10 @@
-# Polyglot Notebooks and .NET Interactive Documentation
+# Polyglossy Notebooks and .NET Interactive Documentation
 
 ## FAQ
 
 If you're just starting out here, you might want to start with the [FAQ](./FAQ.md).
 
-## Using Polyglot Notebooks
+## Using Polyglossy Notebooks
 
 * [Use "Magic commands"](./magic-commands.md)
 * [Share values between languages](variable-sharing.md)
