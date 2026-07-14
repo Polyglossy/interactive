@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.SqlServer;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.SqlServer;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Kql;
+namespace Polyglossy.Interactive.Kql;
 
 public class KqlKernelExtension
 {

@@ -6,7 +6,7 @@
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 [DebuggerStepThrough]
 internal class PolyglotSubmissionNode : SyntaxNode

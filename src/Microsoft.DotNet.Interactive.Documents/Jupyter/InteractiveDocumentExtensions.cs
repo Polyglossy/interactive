@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Documents.Jupyter;
+namespace Polyglossy.Interactive.Documents.Jupyter;
 
 internal static class InteractiveDocumentExtensions
 {

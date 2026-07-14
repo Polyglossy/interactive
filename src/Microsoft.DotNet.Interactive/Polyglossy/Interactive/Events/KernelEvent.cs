@@ -3,9 +3,9 @@
 
 #nullable enable
 
-namespace Polyglossy.Interactive.Events;
+namespace Microsoft.DotNet.Interactive.Events;
 
-public abstract class KernelEvent : Microsoft.DotNet.Interactive.Events.KernelEvent
+public abstract class KernelEvent : Polyglossy.Interactive.Events.KernelEvent
 {
     protected KernelEvent(Polyglossy.Interactive.Commands.KernelCommand command)
         : base(command)

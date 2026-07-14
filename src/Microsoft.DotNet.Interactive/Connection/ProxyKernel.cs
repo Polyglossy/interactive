@@ -7,10 +7,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
 
-namespace Microsoft.DotNet.Interactive.Connection;
+namespace Polyglossy.Interactive.Connection;
 
 public sealed class ProxyKernel : Kernel
 {

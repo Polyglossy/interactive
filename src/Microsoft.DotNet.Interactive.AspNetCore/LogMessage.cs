@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.DotNet.Interactive.AspNetCore;
+namespace Polyglossy.Interactive.AspNetCore;
 
 internal class LogMessage
 {

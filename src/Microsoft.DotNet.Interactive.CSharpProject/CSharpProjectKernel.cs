@@ -5,16 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.CSharpProject.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject.Events;
-using Microsoft.DotNet.Interactive.CSharpProject.Build;
-using Microsoft.DotNet.Interactive.CSharpProject.Servers.Roslyn;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.CSharpProject.Commands;
+using Polyglossy.Interactive.CSharpProject.Events;
+using Polyglossy.Interactive.CSharpProject.Build;
+using Polyglossy.Interactive.CSharpProject.Servers.Roslyn;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public class CSharpProjectKernel :
     Kernel,

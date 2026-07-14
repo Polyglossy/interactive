@@ -5,13 +5,13 @@ using System;
 using System.Linq;
 using System.Text;
 
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Messaging;
 
 using NetMQ;
 
 using Recipes;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+namespace Polyglossy.Interactive.Jupyter.ZMQ;
 
 public class MessageSender
 {

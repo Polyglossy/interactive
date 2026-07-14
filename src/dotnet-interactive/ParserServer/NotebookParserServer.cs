@@ -6,12 +6,12 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.Documents.Jupyter;
 using Pocket;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.App.ParserServer.NotebookParserServer>;
+using static Pocket.Logger<Polyglossy.Interactive.App.ParserServer.NotebookParserServer>;
 
-namespace Microsoft.DotNet.Interactive.App.ParserServer;
+namespace Polyglossy.Interactive.App.ParserServer;
 
 public class NotebookParserServer : IDisposable
 {

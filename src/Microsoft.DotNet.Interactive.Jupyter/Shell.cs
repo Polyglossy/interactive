@@ -7,16 +7,16 @@ using System.Reactive.Disposables;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.ZMQ;
 using Microsoft.Extensions.Hosting;
 using NetMQ.Sockets;
 using Pocket;
 using Recipes;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.Shell>;
-using ZeroMQMessage = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.Shell>;
+using ZeroMQMessage = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class Shell : IHostedService
 {

@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public interface IDirectoryAccessor
 {

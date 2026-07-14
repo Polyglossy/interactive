@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.SqlServer;
+using Polyglossy.Interactive.SqlServer;
 
-namespace Microsoft.DotNet.Interactive.Kql;
+namespace Polyglossy.Interactive.Kql;
 
 internal static class ToolsServiceClientExtensions
 {

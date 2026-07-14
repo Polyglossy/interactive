@@ -2,7 +2,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 /// <summary>
 /// Implements a few file name utilities that are needed by the compiler.

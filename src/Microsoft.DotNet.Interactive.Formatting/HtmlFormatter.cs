@@ -9,9 +9,9 @@ using System.Numerics;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.AspNetCore.Html;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 public static class HtmlFormatter
 {

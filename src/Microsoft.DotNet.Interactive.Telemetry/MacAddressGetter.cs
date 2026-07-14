@@ -10,7 +10,7 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
-namespace Microsoft.DotNet.Interactive.Telemetry;
+namespace Polyglossy.Interactive.Telemetry;
 
 internal static class MacAddressGetter
 {

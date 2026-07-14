@@ -4,10 +4,10 @@
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.Protocol;
 
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class JupyterRequestContextHandler 
 {

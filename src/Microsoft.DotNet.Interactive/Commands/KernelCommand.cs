@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 using System.Threading;
 
-namespace Microsoft.DotNet.Interactive.Commands;
+namespace Polyglossy.Interactive.Commands;
 
 [DebuggerStepThrough]
 public abstract class KernelCommand : IEquatable<KernelCommand>

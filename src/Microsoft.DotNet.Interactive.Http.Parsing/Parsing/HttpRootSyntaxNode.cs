@@ -4,12 +4,12 @@
 #nullable enable
 
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.DotNet.Interactive.Http.Parsing.Parsing;
+using Polyglossy.Interactive.Http.Parsing.Parsing;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Http.Parsing;
+namespace Polyglossy.Interactive.Http.Parsing;
 
 using Diagnostic = CodeAnalysis.Diagnostic;
 

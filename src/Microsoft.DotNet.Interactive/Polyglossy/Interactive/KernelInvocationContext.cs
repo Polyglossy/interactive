@@ -8,16 +8,16 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading;
 
-namespace Polyglossy.Interactive;
+namespace Microsoft.DotNet.Interactive;
 
 public class KernelInvocationContext
 {
-    private readonly Microsoft.DotNet.Interactive.KernelInvocationContext _inner;
+    private readonly Polyglossy.Interactive.KernelInvocationContext _inner;
 
     public KernelInvocationContext(Polyglossy.Interactive.Commands.KernelCommand command)
     {
-        _inner = (Microsoft.DotNet.Interactive.KernelInvocationContext)Activator.CreateInstance(
-            typeof(Microsoft.DotNet.Interactive.KernelInvocationContext),
+        _inner = (Polyglossy.Interactive.KernelInvocationContext)Activator.CreateInstance(
+            typeof(Polyglossy.Interactive.KernelInvocationContext),
             BindingFlags.Instance | BindingFlags.NonPublic,
             binder: null,
             args: [command],

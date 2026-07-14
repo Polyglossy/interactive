@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 public static partial class Formatter
 {

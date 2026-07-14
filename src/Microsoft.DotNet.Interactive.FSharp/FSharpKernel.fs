@@ -1,7 +1,7 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DotNet.Interactive.FSharp
+namespace Polyglossy.Interactive.FSharp
 
 open System
 open System.Collections.Generic
@@ -16,12 +16,12 @@ open System.Threading.Tasks
 
 open Microsoft.CodeAnalysis
 open Microsoft.CodeAnalysis.Tags
-open Microsoft.DotNet.Interactive
-open Microsoft.DotNet.Interactive.Formatting
-open Microsoft.DotNet.Interactive.Commands
-open Microsoft.DotNet.Interactive.Events
-open Microsoft.DotNet.Interactive.FSharp.ScriptHelpers
-open Microsoft.DotNet.Interactive.ValueSharing
+open Polyglossy.Interactive
+open Polyglossy.Interactive.Formatting
+open Polyglossy.Interactive.Commands
+open Polyglossy.Interactive.Events
+open Polyglossy.Interactive.FSharp.ScriptHelpers
+open Polyglossy.Interactive.ValueSharing
 
 open FSharp.Compiler.Diagnostics
 open FSharp.Compiler.EditorServices

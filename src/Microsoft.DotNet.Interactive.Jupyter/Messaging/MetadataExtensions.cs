@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Documents.Jupyter;
 
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Messaging;
+namespace Polyglossy.Interactive.Jupyter.Messaging;
 
 public static class MetadataExtensions
 {

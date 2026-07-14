@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public static class BufferExtensions
 {

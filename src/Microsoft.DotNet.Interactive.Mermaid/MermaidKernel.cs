@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.Mermaid;
+namespace Polyglossy.Interactive.Mermaid;
 
 public class MermaidKernel : Kernel,
                              IKernelCommandHandler<SubmitCode>

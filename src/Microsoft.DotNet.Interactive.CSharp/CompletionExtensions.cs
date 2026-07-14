@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Tags;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 using RoslynCompletionDescription = Microsoft.CodeAnalysis.Completion.CompletionDescription;
 using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 
-namespace Microsoft.DotNet.Interactive.CSharp;
+namespace Polyglossy.Interactive.CSharp;
 
 internal static class CompletionExtensions
 {

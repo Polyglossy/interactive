@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Build;
+namespace Polyglossy.Interactive.CSharpProject.Build;
 
 [DebuggerStepThrough]
 public class FileLock

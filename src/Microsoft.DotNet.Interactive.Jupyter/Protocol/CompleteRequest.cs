@@ -4,7 +4,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Protocol;
+namespace Polyglossy.Interactive.Jupyter.Protocol;
 
 [JupyterMessageType(JupyterMessageContentTypes.CompleteRequest)]
 public class CompleteRequest : RequestMessage

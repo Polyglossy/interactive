@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.DotNet.Interactive.Documents;
+namespace Polyglossy.Interactive.Documents;
 
 public class InputField
 {

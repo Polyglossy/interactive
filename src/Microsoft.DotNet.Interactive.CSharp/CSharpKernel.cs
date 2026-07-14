@@ -16,15 +16,15 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.QuickInfo;
 using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp.SignatureHelp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
-using CompletionItem = Microsoft.DotNet.Interactive.Events.CompletionItem;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp.SignatureHelp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Utility;
+using Polyglossy.Interactive.ValueSharing;
+using CompletionItem = Polyglossy.Interactive.Events.CompletionItem;
 
-namespace Microsoft.DotNet.Interactive.CSharp;
+namespace Polyglossy.Interactive.CSharp;
 
 public class CSharpKernel :
     Kernel,

@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using Microsoft.CodeAnalysis.Tags;
 using Microsoft.Data.Analysis;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.TabularData;
 using Microsoft.ML;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab
+namespace Polyglossy.Interactive.ExtensionLab
 {
     public class DataFrameKernelExtension
     {

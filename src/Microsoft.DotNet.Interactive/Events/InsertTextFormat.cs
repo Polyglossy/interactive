@@ -1,4 +1,4 @@
-﻿namespace Microsoft.DotNet.Interactive.Events;
+namespace Polyglossy.Interactive.Events;
 
 public enum InsertTextFormat
 {

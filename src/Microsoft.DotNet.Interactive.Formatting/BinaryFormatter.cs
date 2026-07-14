@@ -4,7 +4,7 @@
 using System;
 using System.IO;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 /// <summary>
 /// Provides formatting for binary data (byte arrays) with hexadecimal representation.

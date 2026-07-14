@@ -1,13 +1,13 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Http;
+using Polyglossy.Interactive.Http;
 using System;
 using System.CommandLine;
 using System.IO;
 using System.Net.NetworkInformation;
 
-namespace Microsoft.DotNet.Interactive.App.CommandLine;
+namespace Polyglossy.Interactive.App.CommandLine;
 
 public class StartupOptions
 {

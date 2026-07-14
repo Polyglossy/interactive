@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Build;
+namespace Polyglossy.Interactive.CSharpProject.Build;
 
 internal static class FileInfoExtensions
 {

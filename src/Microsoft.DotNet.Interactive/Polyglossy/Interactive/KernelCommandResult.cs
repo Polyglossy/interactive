@@ -3,9 +3,9 @@
 
 #nullable enable
 
-namespace Polyglossy.Interactive;
+namespace Microsoft.DotNet.Interactive;
 
-public class KernelCommandResult : Microsoft.DotNet.Interactive.KernelCommandResult
+public class KernelCommandResult : Polyglossy.Interactive.KernelCommandResult
 {
     public KernelCommandResult(Polyglossy.Interactive.Commands.KernelCommand command)
         : base(command)

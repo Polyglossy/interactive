@@ -7,9 +7,9 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Http.Parsing
+namespace Polyglossy.Interactive.Http.Parsing
 {
 #nullable enable
     internal static class DynamicExpressionUtilities

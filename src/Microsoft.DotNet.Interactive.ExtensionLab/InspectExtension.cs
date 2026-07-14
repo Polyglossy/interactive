@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Text.RegularExpressions;
@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Html;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.ExtensionLab.Inspector;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.ExtensionLab.Inspector;
+using Polyglossy.Interactive.Formatting;
 
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab;
+namespace Polyglossy.Interactive.ExtensionLab;
 
 public class InspectExtension
 {

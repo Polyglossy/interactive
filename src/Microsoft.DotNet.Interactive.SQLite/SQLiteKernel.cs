@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -8,11 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using Microsoft.Data.Sqlite;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Formatting.TabularData;
 using Enumerable = System.Linq.Enumerable;
 
-namespace Microsoft.DotNet.Interactive.SQLite;
+namespace Polyglossy.Interactive.SQLite;
 
 public class SQLiteKernel :
     Kernel,

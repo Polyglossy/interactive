@@ -12,7 +12,7 @@ using System.Text;
 
 // adapted from http://source.roslyn.io/#System.Reflection.Metadata/System/Reflection/Internal/Utilities/PathUtilities.cs,36b27d7696df4d1e
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 // Contains path parsing utilities.
 // We need our own because System.IO.Path is insufficient for our purposes

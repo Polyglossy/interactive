@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using Microsoft.DotNet.Interactive.Documents;
+using Polyglossy.Interactive.Documents;
 
-namespace Microsoft.DotNet.Interactive.App.ParserServer;
+namespace Polyglossy.Interactive.App.ParserServer;
 
 public sealed class NotebookParseResponse : NotebookParserServerResponse
 {

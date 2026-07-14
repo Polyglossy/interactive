@@ -1,9 +1,9 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -15,10 +15,10 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Pocket;
-using JupyterMessage = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.Http.JupyterHttpConnection>;
+using JupyterMessage = Polyglossy.Interactive.Jupyter.Messaging.Message;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.Http.JupyterHttpConnection>;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Http;
+namespace Polyglossy.Interactive.Jupyter.Http;
 
 internal class JupyterKernelHttpConnection : IJupyterKernelConnection, IMessageSender, IMessageReceiver
 {

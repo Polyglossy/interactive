@@ -7,14 +7,14 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DuckDB.NET.Data;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.ValueSharing;
 
-namespace Microsoft.DotNet.Interactive.DuckDB;
+namespace Polyglossy.Interactive.DuckDB;
 
 public class DuckDBKernel : Kernel, 
     IKernelCommandHandler<SubmitCode>,

@@ -14,20 +14,20 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Microsoft.CSharp.RuntimeBinder;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Parsing;
 using Pocket;
 
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Kernel>;
+using static Pocket.Logger<Polyglossy.Interactive.Kernel>;
 using CompositeDisposable = System.Reactive.Disposables.CompositeDisposable;
 using Disposable = System.Reactive.Disposables.Disposable;
-using Formatter = Microsoft.DotNet.Interactive.Formatting.Formatter;
+using Formatter = Polyglossy.Interactive.Formatting.Formatter;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 public abstract partial class Kernel :
     IKernelCommandHandler<RequestKernelInfo>,

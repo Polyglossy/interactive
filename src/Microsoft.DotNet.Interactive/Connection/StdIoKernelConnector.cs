@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -18,17 +18,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Utility;
 
 using Pocket;
 
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Connection.StdIoKernelConnector>;
+using static Pocket.Logger<Polyglossy.Interactive.Connection.StdIoKernelConnector>;
 
 using CompositeDisposable = Pocket.CompositeDisposable;
 
-namespace Microsoft.DotNet.Interactive.Connection;
+namespace Polyglossy.Interactive.Connection;
 
 public class StdIoKernelConnector : IDisposable
 {

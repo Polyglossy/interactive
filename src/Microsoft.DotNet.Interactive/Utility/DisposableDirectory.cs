@@ -6,7 +6,7 @@ using System.IO;
 
 #nullable enable
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 public class DisposableDirectory : IDisposable
 {

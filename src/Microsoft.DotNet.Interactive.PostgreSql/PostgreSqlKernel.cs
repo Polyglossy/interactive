@@ -7,12 +7,12 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Formatting.TabularData;
 using Npgsql;
 using Enumerable = System.Linq.Enumerable;
 
-namespace Microsoft.DotNet.Interactive.PostgreSql;
+namespace Polyglossy.Interactive.PostgreSql;
 
 public class PostgreSqlKernel :
     Kernel,

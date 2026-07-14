@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
 
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.DotNet.Interactive.Http.Parsing;
+using Polyglossy.Interactive.Http.Parsing;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -12,7 +12,7 @@ using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace Microsoft.DotNet.Interactive.Http;
+namespace Polyglossy.Interactive.Http;
 
 internal class HttpNamedRequest
 {

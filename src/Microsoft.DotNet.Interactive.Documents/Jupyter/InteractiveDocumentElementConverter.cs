@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Documents.Utility;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Documents.Utility;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Documents.Jupyter;
+namespace Polyglossy.Interactive.Documents.Jupyter;
 
 internal class InteractiveDocumentElementConverter : JsonConverter<InteractiveDocumentElement>
 {

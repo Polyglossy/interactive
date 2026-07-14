@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 using Microsoft.AspNetCore.Html;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 public static class Html
 {

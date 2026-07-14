@@ -4,7 +4,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Microsoft.DotNet.Interactive.Commands;
+namespace Polyglossy.Interactive.Commands;
 
 public class ImportDocument : KernelCommand
 {

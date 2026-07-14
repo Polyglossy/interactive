@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Microsoft.DotNet.Interactive.Telemetry;
+namespace Polyglossy.Interactive.Telemetry;
 
 internal static class Paths
 {

@@ -4,9 +4,9 @@
 #nullable enable
 
 using Microsoft.CodeAnalysis;
-using HttpDiagnosticInfo = Microsoft.DotNet.Interactive.Parsing.DiagnosticInfo;
+using HttpDiagnosticInfo = Polyglossy.Interactive.Parsing.DiagnosticInfo;
 
-namespace Microsoft.DotNet.Interactive.Http.Parsing;
+namespace Polyglossy.Interactive.Http.Parsing;
 
 internal static class HttpDiagnostics
 {

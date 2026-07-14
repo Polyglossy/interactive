@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2016-2017, Andrey Shchekin
 All rights reserved.
 
@@ -33,7 +33,7 @@ using ICSharpCode.Decompiler.DebugInfo;
 using Decompiler = ICSharpCode.Decompiler;
 
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector;
 
 internal sealed class PdbDebugInfoProvider : IDebugInfoProvider, IDisposable
 {

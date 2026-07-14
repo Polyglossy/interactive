@@ -3,9 +3,9 @@
 
 #nullable enable
 
-namespace Polyglossy.Interactive;
+namespace Microsoft.DotNet.Interactive;
 
-public class KernelInfo : Microsoft.DotNet.Interactive.KernelInfo
+public class KernelInfo : Polyglossy.Interactive.KernelInfo
 {
     public KernelInfo(
         string localName,

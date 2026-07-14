@@ -4,11 +4,11 @@
 using System;
 using System.Reactive;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Jupyter.ZMQ;
-using ZeroMQMessage = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.ZMQ;
+using ZeroMQMessage = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class JupyterRequestContext
 {

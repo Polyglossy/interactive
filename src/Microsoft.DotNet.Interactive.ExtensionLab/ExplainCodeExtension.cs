@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab;
+namespace Polyglossy.Interactive.ExtensionLab;
 
 public class ExplainCodeExtension
 {

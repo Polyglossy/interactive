@@ -6,7 +6,7 @@ using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 public partial class PSKernelHostUserInterface : PSHostUserInterface, IHostUISupportsMultipleChoiceSelection
 {

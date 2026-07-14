@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Protocol;
+namespace Polyglossy.Interactive.Jupyter.Protocol;
 
 [JsonConverter(typeof(CommCloseConverter))]
 [JupyterMessageType(JupyterMessageContentTypes.CommClose)]

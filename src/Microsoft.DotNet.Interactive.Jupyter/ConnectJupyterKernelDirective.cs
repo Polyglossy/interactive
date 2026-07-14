@@ -1,16 +1,16 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Jupyter.Connection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
 using Microsoft.CodeAnalysis.Tags;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class ConnectJupyterKernelDirective : ConnectKernelDirective<ConnectJupyterKernel>
 {

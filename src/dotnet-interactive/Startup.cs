@@ -1,17 +1,17 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.DotNet.Interactive.Http;
+using Polyglossy.Interactive.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.App;
+namespace Polyglossy.Interactive.App;
 
 internal class Startup
 {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,9 +7,9 @@ using System.IO;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.DotNet.Interactive.ExtensionLab.Inspector.Extensions;
+using Polyglossy.Interactive.ExtensionLab.Inspector.Extensions;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector.CSharpCompiler;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector.CSharpCompiler;
 
 internal static class CSharpCompiler
 {

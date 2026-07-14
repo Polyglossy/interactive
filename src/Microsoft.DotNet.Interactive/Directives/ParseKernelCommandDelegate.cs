@@ -3,10 +3,10 @@
 
 #nullable enable
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Directives;
+namespace Polyglossy.Interactive.Directives;
 
 internal delegate Task<KernelCommand> ParseKernelCommandDelegate(
     DirectiveNode node,

@@ -196,4 +196,15 @@
     <Message Text="##vso[task.setvariable variable=StableToolVersionNumber]$(Version)" Importance="high" />
   </Target>
 
+  <Target Name="CopyPackageManagementLegacyFileName" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)Polyglossy.Interactive.PackageManagement.dll"
+          DestinationFiles="$(TargetDir)Microsoft.DotNet.Interactive.PackageManagement.dll"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)Polyglossy.Interactive.PackageManagement.dll')" />
+    <Copy SourceFiles="$(TargetDir)Polyglossy.Interactive.PackageManagement.pdb"
+          DestinationFiles="$(TargetDir)Microsoft.DotNet.Interactive.PackageManagement.pdb"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)Polyglossy.Interactive.PackageManagement.pdb')" />
+  </Target>
+
 </Project>

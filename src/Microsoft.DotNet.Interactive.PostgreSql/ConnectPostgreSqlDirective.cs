@@ -3,10 +3,10 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Directives;
 
-namespace Microsoft.DotNet.Interactive.PostgreSql;
+namespace Polyglossy.Interactive.PostgreSql;
 
 public class ConnectPostgreSqlDirective : ConnectKernelDirective<ConnectPostgreSqlKernel>
 {

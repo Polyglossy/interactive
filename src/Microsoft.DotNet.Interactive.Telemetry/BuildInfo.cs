@@ -4,7 +4,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Microsoft.DotNet.Interactive.Telemetry;
+namespace Polyglossy.Interactive.Telemetry;
 
 public class BuildInfo
 {

@@ -16,10 +16,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.PowerShell.Host;
+using Polyglossy.Interactive.PowerShell.Host;
 using Timer = System.Timers.Timer;
 
-namespace Microsoft.DotNet.Interactive.PowerShell;
+namespace Polyglossy.Interactive.PowerShell;
 
 #region JsonTypes
 

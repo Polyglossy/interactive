@@ -3,9 +3,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive.Commands;
 
-namespace Microsoft.DotNet.Interactive.VSCode;
+namespace Polyglossy.Interactive.VSCode;
 
 public class VSCodeClientKernelExtension
 {

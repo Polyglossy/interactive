@@ -1,11 +1,11 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Messaging;
+namespace Polyglossy.Interactive.Jupyter.Messaging;
 
 internal class MessageConverter : JsonConverter<Message>
 {

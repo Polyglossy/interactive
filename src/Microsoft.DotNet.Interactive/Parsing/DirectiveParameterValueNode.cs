@@ -4,7 +4,7 @@
 #nullable enable
 using Microsoft.CodeAnalysis.Text;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 internal class DirectiveParameterValueNode : SyntaxNode
 {

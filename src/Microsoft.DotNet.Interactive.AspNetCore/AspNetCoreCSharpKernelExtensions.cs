@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Directives;
 using Microsoft.Extensions.Hosting;
 
-namespace Microsoft.DotNet.Interactive.AspNetCore;
+namespace Polyglossy.Interactive.AspNetCore;
 
 public static class AspNetCoreCSharpKernelExtensions
 {
@@ -27,7 +27,7 @@ public static class AspNetCoreCSharpKernelExtensions
         typeof(WebApplication).Assembly, // Microsoft.AspNetCore
         typeof(Controller).Assembly, // Microsoft.AspNetCore.Mvc.ViewFeatures
         typeof(DeveloperExceptionPageMiddleware).Assembly, // Microsoft.AspNetCore.Diagnostics
-        typeof(AspNetCoreCSharpKernelExtensions).Assembly, // Microsoft.DotNet.Interactive.AspNetCore
+        typeof(AspNetCoreCSharpKernelExtensions).Assembly, // Polyglossy.Interactive.AspNetCore
     };
 
     private static readonly string[] _namespaces =
@@ -35,7 +35,7 @@ public static class AspNetCoreCSharpKernelExtensions
         typeof(HttpContext).Namespace, // Microsoft.AspNetCore.Http
         typeof(IEndpointRouteBuilder).Namespace, // Microsoft.AspNetCore.Routing
         typeof(EndpointRouteBuilderExtensions).Namespace, // Microsoft.AspNetCore.Builder
-        typeof(InteractiveEndpointRouteBuilderExtensions).Namespace, // Microsoft.DotNet.Interactive.AspNetCore
+        typeof(InteractiveEndpointRouteBuilderExtensions).Namespace, // Polyglossy.Interactive.AspNetCore
         typeof(HttpClient).Namespace, // System.Net.Http
     };
 

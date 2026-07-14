@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.Documents.Json;
+namespace Polyglossy.Interactive.Documents.Json;
 
 internal class DataDictionaryConverter : JsonConverter<IDictionary<string, object?>>
 {

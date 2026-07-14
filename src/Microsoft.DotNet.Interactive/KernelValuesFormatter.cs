@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Linq;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.ValueSharing;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.ValueSharing;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 internal class KernelValuesFormatter : HtmlFormatter<KernelValues>
 {

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Microsoft.DotNet.Interactive.Http;
+namespace Polyglossy.Interactive.Http;
 
 /// <summary>
 /// Set of extension methods for Microsoft.AspNetCore.Http.HttpRequest.
@@ -14,9 +14,9 @@ internal static class HttpRequestExtensions
     /// <summary>
     /// Gets http request Uri from request object.
     /// </summary>
-    /// <param name="request">The <see cref="AspNetCore.Http.HttpRequest"/>.</param>
+    /// <param name="request">The <see cref="Microsoft.AspNetCore.Http.HttpRequest"/>.</param>
     /// <returns>A New Uri object representing request Uri.</returns>
-    public static Uri GetUri(this AspNetCore.Http.HttpRequest request)
+    public static Uri GetUri(this Microsoft.AspNetCore.Http.HttpRequest request)
     {
         if (request == null)
         {

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 using InvalidOperationException = System.InvalidOperationException;
 using Path = System.IO.Path;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 internal static class SourceTextExtensions
 {

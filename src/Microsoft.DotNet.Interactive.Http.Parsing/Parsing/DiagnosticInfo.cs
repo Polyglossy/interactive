@@ -4,7 +4,7 @@
 #nullable enable
 using Microsoft.CodeAnalysis;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 internal sealed class DiagnosticInfo
 {

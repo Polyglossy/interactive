@@ -1,4 +1,4 @@
-namespace Microsoft.DotNet.Interactive.SqlServer;
+namespace Polyglossy.Interactive.SqlServer;
  
 /// <summary>Provides information about the package versions depended on by the current project. This class was code-generated.</summary>
 internal static class DependencyVersions

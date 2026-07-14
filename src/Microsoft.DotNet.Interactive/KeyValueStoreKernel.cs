@@ -8,16 +8,16 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Parsing;
-using Microsoft.DotNet.Interactive.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
-using SyntaxNode = Microsoft.DotNet.Interactive.Parsing.SyntaxNode;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Parsing;
+using Polyglossy.Interactive.Utility;
+using Polyglossy.Interactive.ValueSharing;
+using SyntaxNode = Polyglossy.Interactive.Parsing.SyntaxNode;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 public class KeyValueStoreKernel :
     Kernel,

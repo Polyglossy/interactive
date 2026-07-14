@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TResult>
 {

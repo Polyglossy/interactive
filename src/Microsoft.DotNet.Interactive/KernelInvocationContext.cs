@@ -8,14 +8,14 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Parsing;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Parsing;
+using Polyglossy.Interactive.Utility;
 using Pocket;
 using CompositeDisposable = Pocket.CompositeDisposable;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 public class KernelInvocationContext : IDisposable
 {

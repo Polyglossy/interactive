@@ -6,12 +6,12 @@ using System.Collections.Immutable;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Tags;
-using Microsoft.DotNet.Interactive.CSharpProject.Models;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.CSharpProject.Models;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
 using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.LanguageServices;
+namespace Polyglossy.Interactive.CSharpProject.LanguageServices;
 
 internal static class CompletionExtensions
 {

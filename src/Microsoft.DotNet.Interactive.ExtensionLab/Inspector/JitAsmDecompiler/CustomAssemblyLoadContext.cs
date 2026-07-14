@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2016-2017, Andrey Shchekin
 All rights reserved.
 
@@ -28,7 +28,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
 
 internal sealed class CustomAssemblyLoadContext : AssemblyLoadContext, IDisposable
 {

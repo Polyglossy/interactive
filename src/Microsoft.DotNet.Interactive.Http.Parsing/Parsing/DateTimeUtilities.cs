@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Microsoft.DotNet.Interactive.Http
+namespace Polyglossy.Interactive.Http
 {
 
     internal static class DateTimeUtilities

@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Build;
+namespace Polyglossy.Interactive.CSharpProject.Build;
 
 internal static class RuntimeConfig
 {

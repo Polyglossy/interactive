@@ -1,17 +1,17 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-using Microsoft.DotNet.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
+using Polyglossy.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
 
 using Microsoft.Diagnostics.Runtime;
 
 using LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector;
 
 internal static class Defaults
 {

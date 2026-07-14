@@ -3,9 +3,9 @@
 
 #nullable enable
 
-namespace Polyglossy.Interactive.Parsing;
+namespace Microsoft.DotNet.Interactive.Parsing;
 
-public class SubmissionParser : Microsoft.DotNet.Interactive.Parsing.SubmissionParser
+public class SubmissionParser : Polyglossy.Interactive.Parsing.SubmissionParser
 {
     public SubmissionParser(Polyglossy.Interactive.Kernel kernel)
         : base(kernel)

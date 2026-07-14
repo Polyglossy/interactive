@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Servers.Roslyn;
+namespace Polyglossy.Interactive.CSharpProject.Servers.Roslyn;
 
 public static class WorkspaceUtilities
 {

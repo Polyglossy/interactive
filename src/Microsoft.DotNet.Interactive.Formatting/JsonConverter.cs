@@ -5,7 +5,7 @@
 using System;
 using System.Text.Json;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 internal abstract class JsonConverter<T> : System.Text.Json.Serialization.JsonConverter<T>
 {

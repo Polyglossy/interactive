@@ -10,9 +10,9 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Tags;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 
-namespace Microsoft.DotNet.Interactive.Directives;
+namespace Polyglossy.Interactive.Directives;
 
 public partial class KernelActionDirective : KernelDirective
 {

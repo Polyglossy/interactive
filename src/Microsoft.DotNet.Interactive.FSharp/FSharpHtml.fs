@@ -1,11 +1,11 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DotNet.Interactive.FSharp.FSharpKernelHelpers
+namespace Polyglossy.Interactive.FSharp.FSharpKernelHelpers
 
 open System
 open Microsoft.AspNetCore.Html
-open Microsoft.DotNet.Interactive.Formatting
+open Polyglossy.Interactive.Formatting
 
 module Html = 
 

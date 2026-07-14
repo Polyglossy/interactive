@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace Microsoft.DotNet.Interactive.CSharp.SignatureHelp;
+namespace Polyglossy.Interactive.CSharp.SignatureHelp;
 
 internal static class DocumentationConverter
 {

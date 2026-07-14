@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Messaging;
 using NetMQ;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+namespace Polyglossy.Interactive.Jupyter.ZMQ;
 
 public class MessageReceiver
 {

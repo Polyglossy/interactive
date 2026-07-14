@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Reactive.Disposables;
@@ -6,19 +6,19 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Utility;
+using Polyglossy.Interactive.ValueSharing;
 using Microsoft.Playwright;
 using Pocket;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Browser.PlaywrightKernelConnector>;
+using static Pocket.Logger<Polyglossy.Interactive.Browser.PlaywrightKernelConnector>;
 using CompositeDisposable = Pocket.CompositeDisposable;
 using Disposable = System.Reactive.Disposables.Disposable;
 
-namespace Microsoft.DotNet.Interactive.Browser;
+namespace Polyglossy.Interactive.Browser;
 
 public class PlaywrightKernelConnector
 {
@@ -33,7 +33,7 @@ public class PlaywrightKernelConnector
 
         _oneTimeBrowserSetup = new AsyncLazy<(IPage page, Subject<CommandOrEvent> commandsAndEvents)>(async () =>
         {
-            var playwright = await Playwright.Playwright.CreateAsync();
+            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
             var launch = await LaunchBrowserAsync(playwright, launchBrowserHeadless);
 
@@ -45,10 +45,17 @@ public class PlaywrightKernelConnector
 
             string jsSource;
 
-            var resourceName = "polyglot-notebooks.js";
             var type = typeof(PlaywrightKernelConnector);
-            using (var stream = type.Assembly.GetManifestResourceStream($"{type.Namespace}.{resourceName}"))
-            using (var reader = new StreamReader(stream ?? throw new InvalidOperationException($"Resource \"{resourceName}\" not found"), Encoding.UTF8))
+            var candidateSuffixes = new[] { ".polyglot-notebooks.js", ".polyglossy-interactive.js", ".dotnet-interactive.js" };
+            var manifestResourceName = type.Assembly
+                                           .GetManifestResourceNames()
+                                           .FirstOrDefault(name => candidateSuffixes.Any(suffix => name.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)));
+            var stream = manifestResourceName is null
+                ? null
+                : type.Assembly.GetManifestResourceStream(manifestResourceName);
+
+            using (stream)
+            using (var reader = new StreamReader(stream ?? throw new InvalidOperationException("No browser client resource found"), Encoding.UTF8))
             {
                 jsSource = await reader.ReadToEndAsync();
             }

@@ -1,9 +1,9 @@
-﻿// Copyright (c) Microsoft. All rights reserved. 
+// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Formatting;
+namespace Polyglossy.Interactive.Jupyter.Formatting;
 
 [Obsolete("This type will be removed in a future version. You can use LaTeXString instead.")]
 public class MathString

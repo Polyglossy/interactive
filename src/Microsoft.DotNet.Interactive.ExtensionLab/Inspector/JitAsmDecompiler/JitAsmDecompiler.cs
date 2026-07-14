@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2016-2017, Andrey Shchekin
 All rights reserved.
 
@@ -35,7 +35,7 @@ using Iced.Intel;
 
 using Microsoft.Diagnostics.Runtime;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
 
 internal sealed class JitAsmDecompiler
 {

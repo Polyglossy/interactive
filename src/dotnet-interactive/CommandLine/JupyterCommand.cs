@@ -3,7 +3,7 @@
 
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.App.CommandLine;
+namespace Polyglossy.Interactive.App.CommandLine;
 
 public static class JupyterCommand
 {

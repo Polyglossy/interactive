@@ -3,7 +3,7 @@
 
 using System.Linq;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 /// <summary>
 /// Provides formatting functionality for a specific type.

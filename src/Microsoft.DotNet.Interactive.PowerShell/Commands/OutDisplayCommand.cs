@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Management.Automation;
-using Microsoft.DotNet.Interactive.Formatting;
-using static Microsoft.DotNet.Interactive.Kernel;
+using Polyglossy.Interactive.Formatting;
+using static Polyglossy.Interactive.Kernel;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Commands;
+namespace Polyglossy.Interactive.PowerShell.Commands;
 
 /// <summary>
 /// Takes the the input and displays it on the client using .NET Interactive's formatters.

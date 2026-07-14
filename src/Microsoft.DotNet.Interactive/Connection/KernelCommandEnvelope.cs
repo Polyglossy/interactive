@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Web;
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive.Commands;
 using Pocket;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Connection.KernelCommandEnvelope>;
+using static Pocket.Logger<Polyglossy.Interactive.Connection.KernelCommandEnvelope>;
 
-namespace Microsoft.DotNet.Interactive.Connection;
+namespace Polyglossy.Interactive.Connection;
 
 public abstract class KernelCommandEnvelope : IKernelCommandEnvelope
 {

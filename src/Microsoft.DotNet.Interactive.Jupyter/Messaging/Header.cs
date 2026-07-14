@@ -4,7 +4,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Messaging;
+namespace Polyglossy.Interactive.Jupyter.Messaging;
 
 public class Header
 {
