@@ -48,7 +48,7 @@ export class PolyglossyNotebookKernel {
         const dibController = vscode.notebooks.createNotebookController(
             constants.NotebookControllerId,
             constants.NotebookViewType,
-            '.NET Interactive',
+            'Polyglossy Interactive',
             this.executeHandler.bind(this),
             preloads
         );
@@ -58,7 +58,7 @@ export class PolyglossyNotebookKernel {
         const polyglossyDibController = vscode.notebooks.createNotebookController(
             constants.PolyglossyNotebookControllerId,
             constants.PolyglossyNotebookViewType,
-            '.NET Interactive',
+            'Polyglossy Interactive',
             this.executeHandler.bind(this),
             preloads
         );
@@ -69,7 +69,7 @@ export class PolyglossyNotebookKernel {
         const jupyterController = vscode.notebooks.createNotebookController(
             constants.JupyterNotebookControllerId,
             constants.JupyterViewType,
-            '.NET Interactive',
+            'Polyglossy Interactive',
             this.executeHandler.bind(this),
             preloads
         );

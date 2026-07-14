@@ -84,7 +84,7 @@
     "notebooks": [
       {
         "type": "polyglot-notebook",
-        "displayName": "Polyglot Notebook",
+        "displayName": "Polyglossy Notebook",
         "selector": [
           {
             "filenamePattern": "*.dib"
@@ -102,7 +102,7 @@
       },
       {
         "type": "polyglot-notebook-window",
-        "displayName": "Polyglot Notebook",
+        "displayName": "Polyglossy Notebook",
         "selector": []
       },
       {
@@ -126,7 +126,7 @@
       }
     ],
     "configuration": {
-      "title": "Polyglot Notebook",
+      "title": "Polyglossy Notebook",
       "properties": {
         "polyglot-notebook.suppressPromptToSaveDefaults": {
           "type": "boolean",
@@ -352,7 +352,7 @@
       "panel": [
         {
           "id": "polyglot-notebook-panel",
-          "title": "Polyglot Notebook",
+          "title": "Polyglossy Notebook",
           "icon": "resources/icons/notebook.svg"
         }
       ]
@@ -402,13 +402,13 @@
         "command": "polyglot-notebook.fileNew",
         "enablement": "false",
         "title": "%command.fileNew%",
-        "shortTitle": "Polyglot Notebook"
+        "shortTitle": "Polyglossy Notebook"
       },
       {
         "command": "polyglossy-notebook.fileNew",
         "enablement": "false",
         "title": "%command.fileNew%",
-        "shortTitle": "Polyglot Notebook"
+        "shortTitle": "Polyglossy Notebook"
       },
       {
         "command": "polyglot-notebook.newNotebook",

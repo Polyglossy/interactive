@@ -23,7 +23,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
     const interactiveToolSource = getConfigurationValue<string>('interactiveToolSource', constants.PolyglossyConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
 
     if (!requiredDotNetInteractiveVersion) {
-        const errorTitle = 'Polyglot Notebooks extension will not work.';
+        const errorTitle = 'Polyglossy Notebooks extension will not work.';
         const errorDetails = `Incorrect value for option "${constants.PolyglossyConfigurationSectionName}.requiredInteractiveToolVersion" in settings.json.  Please remove this value and restart VS Code.`;
         await vscode.window.showErrorMessage(errorTitle, { modal: true, detail: errorDetails });
         throw new Error(errorDetails);
@@ -46,7 +46,7 @@ export async function registerAcquisitionCommands(context: vscode.ExtensionConte
                     createToolManifest,
                     (version: string) => {
                         vscode.window.withProgress(
-                            { location: vscode.ProgressLocation.Notification, title: `Installing .NET Interactive version ${version}...` },
+                            { location: vscode.ProgressLocation.Notification, title: `Installing Polyglossy Interactive version ${version}...` },
                             (_progress, _token) => installationPromiseCompletionSource.promise);
                     },
                     installInteractiveTool,
@@ -257,7 +257,7 @@ export function registerFileCommands(context: vscode.ExtensionContext, parserSer
     };
 
     const notebookFileFilters = {
-        'Polyglot Notebook Script': ['dib'],
+        'Polyglossy Notebook Script': ['dib'],
         'Jupyter Notebook': ['ipynb'],
     };
 

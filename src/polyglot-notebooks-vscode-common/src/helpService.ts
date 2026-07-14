@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 export const DotNetVersion = 'DotNetVersion';
-export const Deprecation = 'Polyglot Notebooks Deprecation';
+export const Deprecation = 'Polyglossy Notebooks Deprecation';
 
 export type HelpPage =
     typeof DotNetVersion |

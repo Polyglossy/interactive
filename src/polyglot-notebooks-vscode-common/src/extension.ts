@@ -70,8 +70,8 @@ const disposables: (() => void)[] = [];
 let surveryBanner: SurveyBanner;
 
 export async function activate(context: vscode.ExtensionContext) {
-    const diagnosticsChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglot Notebook : diagnostics'));
-    const loggerChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglot Notebook : logger'));
+    const diagnosticsChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglossy Notebook : diagnostics'));
+    const loggerChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglossy Notebook : logger'));
     DotNetPathManager.setOutputChannelAdapter(diagnosticsChannel);
 
     Logger.configure('extension host', logEntry => {

@@ -245,7 +245,7 @@ export class SurveyBanner implements Disposable {
             case BannerType.InsidersNotebookSurvey:
             case BannerType.ExperimentNotebookSurvey:
                 // TODO: LOCALIZE (message in banner for user)
-                return this.translate('survey.message', "We would love to hear your feedback on the notebooks experience! Please take a few minutes to give feedback on using Polyglot Notebooks");
+                return this.translate('survey.message', "We would love to hear your feedback on the notebooks experience! Please take a few minutes to give feedback on using Polyglossy Notebooks");
             default:
                 return '';
         }

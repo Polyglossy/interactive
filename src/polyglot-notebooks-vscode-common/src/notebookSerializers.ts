@@ -102,13 +102,13 @@ export function createAndRegisterFallbackNotebookSerializers(context: vscode.Ext
         deserializeNotebook(_content: Uint8Array, _token: vscode.CancellationToken): Promise<vscode.NotebookData> {
             const cellData = new vscode.NotebookCellData(
                 vscode.NotebookCellKind.Markup,
-                `## Polyglot Notebooks failed to activate\n\n${activationError}\n\nPlease check the **Polyglot Notebook : diagnostics** output channel for more details.`,
+                `## Polyglossy Notebooks failed to activate\n\n${activationError}\n\nPlease check the **Polyglossy Notebook : diagnostics** output channel for more details.`,
                 'markdown'
             );
             return Promise.resolve(new vscode.NotebookData([cellData]));
         },
         serializeNotebook(_data: vscode.NotebookData, _token: vscode.CancellationToken): Promise<Uint8Array> {
-            throw new Error('The Polyglot Notebooks extension failed to activate. Saving is disabled to prevent data loss.');
+            throw new Error('The Polyglossy Notebooks extension failed to activate. Saving is disabled to prevent data loss.');
         },
     };
     const notebookSerializer = vscode.workspace.registerNotebookSerializer(constants.NotebookViewType, serializer);
