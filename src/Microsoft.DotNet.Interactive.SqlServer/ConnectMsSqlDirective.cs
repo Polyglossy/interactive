@@ -8,7 +8,7 @@ using Polyglossy.Interactive.Commands;
 using Polyglossy.Interactive.Connection;
 using Polyglossy.Interactive.CSharp;
 using Polyglossy.Interactive.Directives;
-using static Polyglossy.Interactive.SqlServer.DependencyVersions;
+using static Microsoft.DotNet.Interactive.SqlServer.DependencyVersions;
 
 namespace Polyglossy.Interactive.SqlServer;
 
