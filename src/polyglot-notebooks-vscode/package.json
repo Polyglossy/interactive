@@ -2,7 +2,7 @@
   "name": "polyglossy-interactive-vscode",
   "displayName": "Polyglossy Notebooks",
   "description": "%description.package%",
-  "icon": "images/icon.png",
+  "icon": "images/polyglossy-notebook-128.png",
   "publisher": "polyglossy-tools",
   "author": "Polyglossy Tools",
   "license": "MIT",
