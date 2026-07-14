@@ -1,24 +1,24 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.Tests.JupyterKernelTestBase>;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.Tests.JupyterKernelTestBase>;
 using CompositeDisposable = Pocket.CompositeDisposable;
-using Message = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using Message = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 [Collection("Do not parallelize")]
 public abstract class JupyterKernelTestBase : IDisposable

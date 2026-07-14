@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class SendEditableCodeTests
 {
@@ -30,8 +30,8 @@ public class SendEditableCodeTests
 
         var submitCode = new SubmitCode(
             """
-            using Microsoft.DotNet.Interactive;
-            using Microsoft.DotNet.Interactive.Commands;
+            using Polyglossy.Interactive;
+            using Polyglossy.Interactive.Commands;
 
             await Kernel.Root.SendAsync(new SendEditableCode("csharp", "// new cell contents"));
             """);

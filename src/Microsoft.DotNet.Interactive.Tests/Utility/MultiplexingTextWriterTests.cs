@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,14 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 using Pocket;
 using Pocket.For.Xunit;
 using Xunit;
 using Xunit.Abstractions;
 using static System.Environment;
 
-namespace Microsoft.DotNet.Interactive.Tests.Utility;
+namespace Polyglossy.Interactive.Tests.Utility;
 
 [LogToPocketLogger(FileNameEnvironmentVariable = "POCKETLOGGER_LOG_PATH")]
 public class MultiplexingTextWriterTests : IDisposable

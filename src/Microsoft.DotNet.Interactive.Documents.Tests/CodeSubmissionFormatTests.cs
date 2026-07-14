@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 using Assent;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public class CodeSubmissionFormatTests : DocumentFormatTestsBase
 {

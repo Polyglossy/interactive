@@ -9,13 +9,13 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests.Connection;
+namespace Polyglossy.Interactive.Tests.Connection;
 
 public class ObservableCommandAndEventReceiverTests : IDisposable
 {

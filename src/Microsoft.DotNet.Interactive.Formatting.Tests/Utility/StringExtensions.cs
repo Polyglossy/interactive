@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+namespace Polyglossy.Interactive.Formatting.Tests.Utility;
 
 public static class StringExtensions
 {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.Csv;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.Csv;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.SqlServer.Tests;
+namespace Polyglossy.Interactive.SqlServer.Tests;
 
 [Trait("Databases", "Data query tests")]
 public class MsSqlConnectionTests : IDisposable
@@ -423,7 +423,7 @@ my_data_result");
         };
 
     [MsSqlTheory]
-    [InlineData("var testVar = new Microsoft.DotNet.Interactive.PasswordString(\"pwd\");", "pwd")] // password string
+    [InlineData("var testVar = new Polyglossy.Interactive.PasswordString(\"pwd\");", "pwd")] // password string
     [InlineData("var testVar = 2;", 2)] // var
     [InlineData("string testVar = \"hi!\";", "hi!")] // string
     [InlineData("string testVar = \"tricky'string\";", "tricky'string")] // string with '

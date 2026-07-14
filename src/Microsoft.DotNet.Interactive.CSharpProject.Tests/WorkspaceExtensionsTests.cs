@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.CSharpProject.Models.Execution;
+using Polyglossy.Interactive.CSharpProject.Models.Execution;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class WorkspaceExtensionsTests
 {

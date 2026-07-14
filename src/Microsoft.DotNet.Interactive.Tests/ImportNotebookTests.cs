@@ -7,20 +7,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class ImportNotebookTests
 {
@@ -231,7 +231,7 @@ public class ImportNotebookTests
         {
             new InteractiveDocumentElement
             {
-                Contents = "#r \"nuget: Microsoft.DotNet.Interactive.AIUtilities, 1.0.0-beta.23517.1\"",
+                Contents = "#r \"nuget: Polyglossy.Interactive.AIUtilities, 1.0.0-beta.23517.1\"",
                 KernelName = "csharp"
             }
         };

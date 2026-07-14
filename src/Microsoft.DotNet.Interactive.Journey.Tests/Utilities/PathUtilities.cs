@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
 using System.Reflection;
 
-namespace Microsoft.DotNet.Interactive.Journey.Tests.Utilities;
+namespace Polyglossy.Interactive.Journey.Tests.Utilities;
 
 public class PathUtilities
 {

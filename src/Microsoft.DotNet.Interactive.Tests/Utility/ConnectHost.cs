@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Connection;
+using Polyglossy.Interactive.Connection;
 
-namespace Microsoft.DotNet.Interactive.Tests.Utility;
+namespace Polyglossy.Interactive.Tests.Utility;
 
 public static class ConnectHost
 {

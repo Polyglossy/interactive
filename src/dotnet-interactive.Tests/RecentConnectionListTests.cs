@@ -1,15 +1,15 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Linq;
 using System.Text.Json;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Connection;
+using Polyglossy.Interactive.Connection;
 using Xunit;
-using static Microsoft.DotNet.Interactive.App.CodeExpansion;
+using static Polyglossy.Interactive.App.CodeExpansion;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class RecentConnectionListTests
 {

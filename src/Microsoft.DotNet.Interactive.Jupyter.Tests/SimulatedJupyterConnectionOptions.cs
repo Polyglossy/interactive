@@ -1,20 +1,20 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Tests.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Directives;
 using Pocket;
-using Message = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using Message = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 public sealed class SimulatedJupyterConnectionOptions :
     IJupyterKernelConnectionOptions,

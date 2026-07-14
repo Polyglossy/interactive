@@ -4,14 +4,14 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 using Xunit.Abstractions;
 
 #pragma warning disable 8509
-namespace Microsoft.DotNet.Interactive.Tests.LanguageServices;
+namespace Polyglossy.Interactive.Tests.LanguageServices;
 
 public class SignatureHelpTests : LanguageKernelTestBase
 {

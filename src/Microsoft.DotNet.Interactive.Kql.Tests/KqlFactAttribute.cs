@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Kql.Tests;
+namespace Polyglossy.Interactive.Kql.Tests;
 
 public sealed class KqlFactAttribute : FactAttribute
 {

@@ -1,17 +1,17 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.CSharp.Tests;
+namespace Polyglossy.Interactive.CSharp.Tests;
 
 public class CSharpKernelTests : LanguageKernelTestBase
 {
@@ -67,9 +67,9 @@ public class CSharpKernelTests : LanguageKernelTestBase
         var result1 = await kernel.SendAsync(
                           new SubmitCode(
                               """
-                              using Microsoft.DotNet.Interactive;
-                              using Microsoft.DotNet.Interactive.Commands;
-                              using Microsoft.DotNet.Interactive.Events;
+                              using Polyglossy.Interactive;
+                              using Polyglossy.Interactive.Commands;
+                              using Polyglossy.Interactive.Events;
 
                               Kernel.Root.GetType()
                               """));
@@ -82,9 +82,9 @@ public class CSharpKernelTests : LanguageKernelTestBase
         var result2 = await kernel.SendAsync(
                           new RequestDiagnostics(
                               """
-                              using Microsoft.DotNet.Interactive;
-                              using Microsoft.DotNet.Interactive.Commands;
-                              using Microsoft.DotNet.Interactive.Events;
+                              using Polyglossy.Interactive;
+                              using Polyglossy.Interactive.Commands;
+                              using Polyglossy.Interactive.Events;
 
                               
                               

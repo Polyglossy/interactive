@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 internal class PolyglotSubmissionSyntaxSpec : SyntaxSpecBase<PolyglotSubmissionNode>
 {

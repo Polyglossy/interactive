@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Documents.Jupyter;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public class ImportNotebookTests : DocumentFormatTestsBase
 {

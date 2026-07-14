@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Formatting;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 public class PolyglotParserConfigurationTests
 {

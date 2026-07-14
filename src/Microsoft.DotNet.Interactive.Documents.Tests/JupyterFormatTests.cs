@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,14 +11,14 @@ using Assent;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Json;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Documents.Utility;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Documents.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public class JupyterFormatTests : DocumentFormatTestsBase
 {

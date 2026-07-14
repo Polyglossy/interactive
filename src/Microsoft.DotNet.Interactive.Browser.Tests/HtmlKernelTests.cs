@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
 using Microsoft.Playwright;
 
 using Pocket;
 using Pocket.For.Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.Browser.Tests;
+namespace Polyglossy.Interactive.Browser.Tests;
 
 [LogToPocketLogger(FileNameEnvironmentVariable = "POCKETLOGGER_LOG_PATH")]
 public class HtmlKernelTests : IDisposable

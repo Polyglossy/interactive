@@ -4,9 +4,9 @@
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Tests.Utility;
+namespace Polyglossy.Interactive.Tests.Utility;
 
 public static class DirectoryUtility
 {

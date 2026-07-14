@@ -6,18 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.DotNet.Interactive.Tests.Utility.CustomCommandTypes;
+using static Polyglossy.Interactive.Tests.Utility.CustomCommandTypes;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class CompositeKernelTests : IDisposable
 {

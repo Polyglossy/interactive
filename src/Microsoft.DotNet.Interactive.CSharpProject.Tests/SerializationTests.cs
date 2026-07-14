@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,19 +9,19 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Assent;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject.Events;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharpProject.Commands;
+using Polyglossy.Interactive.CSharpProject.Events;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.ValueSharing;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
 using System.Text.Encodings.Web;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 [Trait("Category", "Contracts and serialization")]
 public class SerializationTests

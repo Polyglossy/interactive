@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Http.Parsing;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Http.Parsing;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Http.Tests;
+namespace Polyglossy.Interactive.Http.Tests;
 
 public partial class HttpParserTests
 {

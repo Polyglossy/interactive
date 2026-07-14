@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class JsonFormatterTests : FormatterTestBase
 {

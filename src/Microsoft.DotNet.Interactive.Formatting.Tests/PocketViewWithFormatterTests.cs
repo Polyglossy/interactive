@@ -3,12 +3,12 @@
 
 using System;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class PocketViewWithFormatterTests : FormatterTestBase
 {

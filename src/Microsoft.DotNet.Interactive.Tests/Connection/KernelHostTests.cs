@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.Tests.Connection;
+namespace Polyglossy.Interactive.Tests.Connection;
 
 public class KernelHostTests : IDisposable
 {

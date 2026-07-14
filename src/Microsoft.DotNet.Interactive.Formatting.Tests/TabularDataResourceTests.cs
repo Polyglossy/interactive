@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Formatting.TabularData;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class TabularDataResourceTests
 {

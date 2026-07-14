@@ -4,11 +4,11 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 public class ZMQProtocolTests
 {

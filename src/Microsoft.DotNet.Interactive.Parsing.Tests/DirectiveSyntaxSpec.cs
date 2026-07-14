@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 internal class DirectiveSyntaxSpec : SyntaxSpecBase<DirectiveNode>
 {

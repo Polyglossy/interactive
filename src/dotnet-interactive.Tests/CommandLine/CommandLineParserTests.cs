@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,20 +12,20 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.App.CommandLine;
-using Microsoft.DotNet.Interactive.App.Connection;
-using Microsoft.DotNet.Interactive.App.Tests.Extensions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Telemetry;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.App.CommandLine;
+using Polyglossy.Interactive.App.Connection;
+using Polyglossy.Interactive.App.Tests.Extensions;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Telemetry;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
-using CommandLineParser = Microsoft.DotNet.Interactive.App.CommandLine.CommandLineParser;
+using CommandLineParser = Polyglossy.Interactive.App.CommandLine.CommandLineParser;
 
-namespace Microsoft.DotNet.Interactive.App.Tests.CommandLine;
+namespace Polyglossy.Interactive.App.Tests.CommandLine;
 
 public class CommandLineParserTests : IDisposable
 {

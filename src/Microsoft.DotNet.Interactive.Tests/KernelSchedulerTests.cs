@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,16 +9,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Utility;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Tests.KernelSchedulerTests>;
+using static Pocket.Logger<Polyglossy.Interactive.Tests.KernelSchedulerTests>;
 #pragma warning disable CS1998
 #pragma warning disable CS0162
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class KernelSchedulerTests : IDisposable
 {

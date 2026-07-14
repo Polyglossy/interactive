@@ -5,7 +5,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public class KernelInfoCollectionTests
 {

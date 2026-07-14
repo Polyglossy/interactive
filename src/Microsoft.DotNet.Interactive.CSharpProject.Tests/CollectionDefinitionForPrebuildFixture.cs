@@ -3,7 +3,7 @@
 
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 [CollectionDefinition(nameof(PrebuildFixture), DisableParallelization = true)]
 public class CollectionDefinitionForPrebuildFixture : ICollectionFixture<PrebuildFixture>

@@ -4,12 +4,12 @@
 using System;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 public partial class PolyglotSyntaxParserTests
 {

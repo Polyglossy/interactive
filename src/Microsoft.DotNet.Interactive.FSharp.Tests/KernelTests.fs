@@ -1,15 +1,15 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DotNet.Interactive.FSharp.Tests
+namespace Polyglossy.Interactive.FSharp.Tests
 
 open System.Collections.Generic
 
 open FluentAssertions
-open Microsoft.DotNet.Interactive
-open Microsoft.DotNet.Interactive.FSharp
-open Microsoft.DotNet.Interactive.Commands
-open Microsoft.DotNet.Interactive.Events
+open Polyglossy.Interactive
+open Polyglossy.Interactive.FSharp
+open Polyglossy.Interactive.Commands
+open Polyglossy.Interactive.Events
 open Xunit
 
 type KernelTests() =

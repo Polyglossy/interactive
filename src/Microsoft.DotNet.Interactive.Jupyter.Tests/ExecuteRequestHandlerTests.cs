@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Extensions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Tests;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Tests;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
-using static Microsoft.DotNet.Interactive.Jupyter.Tests.RecordingJupyterMessageSender;
-using ZeroMQMessage = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
+using static Polyglossy.Interactive.Jupyter.Tests.RecordingJupyterMessageSender;
+using ZeroMQMessage = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 public class ExecuteRequestHandlerTests : JupyterRequestHandlerTestBase
 {
@@ -312,7 +312,7 @@ f();"));
     [Theory]
     [InlineData("input()", "", InputForUnspecifiedPrompt)]
     [InlineData($"input(\"{InputPromptForUser}\")", InputPromptForUser, InputForUser)]
-    [InlineData($"await Microsoft.DotNet.Interactive.Kernel.GetInputAsync(\"{InputPromptForUser}\")", InputPromptForUser, InputForUser)]
+    [InlineData($"await Polyglossy.Interactive.Kernel.GetInputAsync(\"{InputPromptForUser}\")", InputPromptForUser, InputForUser)]
     public async Task sends_InputRequest_message_when_submission_requests_user_input_in_csharp(string code, string prompt, string expectedDisplayValue)
     {
         var scheduler = CreateScheduler();

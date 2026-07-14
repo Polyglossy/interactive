@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.Linq;
-using Microsoft.DotNet.Interactive.App.Tests.Extensions;
+using Polyglossy.Interactive.App.Tests.Extensions;
 
-namespace Microsoft.DotNet.Interactive.App.Tests.CommandLine;
+namespace Polyglossy.Interactive.App.Tests.CommandLine;
 
 public static class CommandExtensions
 {

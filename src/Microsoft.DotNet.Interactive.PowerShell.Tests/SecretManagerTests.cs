@@ -6,11 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Tests;
+namespace Polyglossy.Interactive.PowerShell.Tests;
 
 public class SecretManagerTests
 {

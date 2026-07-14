@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Messaging;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 internal class MessageRecorder : IMessageTracker
 {

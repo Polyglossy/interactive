@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,7 +7,7 @@ using System.IO;
 using FluentAssertions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public sealed partial class FormatterTests
 {
@@ -135,7 +135,7 @@ public sealed partial class FormatterTests
 
         private static class ConventionBased
         {
-            // This class is here to allow this type not to conflict with the Microsoft.DotNet.Interactive.Formatting.TypeFormatterSourceAttribute
+            // This class is here to allow this type not to conflict with the Polyglossy.Interactive.Formatting.TypeFormatterSourceAttribute
 
             [AttributeUsage(AttributeTargets.Class)]
             internal class TypeFormatterSourceAttribute : Attribute

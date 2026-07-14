@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class PublicNamespaceRenameTests
 {

@@ -1,27 +1,27 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Jupyter;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Jupyter;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Pocket.For.Xunit;
 using Xunit;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Tests.LanguageKernelTestBase>;
+using static Pocket.Logger<Polyglossy.Interactive.Tests.LanguageKernelTestBase>;
 using Xunit.Abstractions;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 [LogToPocketLogger(FileNameEnvironmentVariable = "POCKETLOGGER_LOG_PATH")]
 public abstract class LanguageKernelTestBase : IDisposable
@@ -104,7 +104,7 @@ public abstract class LanguageKernelTestBase : IDisposable
             $"""
             open {typeof(Task).Namespace}
             open {typeof(System.Linq.Enumerable).Namespace}
-            open {typeof(AspNetCore.Html.IHtmlContent).Namespace}
+            open {typeof(Microsoft.AspNetCore.Html.IHtmlContent).Namespace}
             open {typeof(FSharp.FSharpKernelHelpers.Html).FullName}
             """;
 

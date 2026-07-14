@@ -8,10 +8,10 @@ using System.IO;
 using System.Linq;
 using Dummy;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public partial class HtmlFormatterTests
 {
@@ -49,7 +49,7 @@ public partial class HtmlFormatterTests
                                     <td>0</td>
                                     <td>
                                         <details open="open" class="dni-treeview">
-                                            <summary><span class="dni-code-hint"><code>Microsoft.DotNet.Interactive.Formatting.Tests.EntityId</code></span></summary>
+                                            <summary><span class="dni-code-hint"><code>Polyglossy.Interactive.Formatting.Tests.EntityId</code></span></summary>
                                             <div>
                                                 <table>
                                                     <thead>
@@ -82,7 +82,7 @@ public partial class HtmlFormatterTests
                                     <td>1</td>
                                     <td>
                                         <details open="open" class="dni-treeview">
-                                            <summary><span class="dni-code-hint"><code>Microsoft.DotNet.Interactive.Formatting.Tests.EntityId</code></span></summary>
+                                            <summary><span class="dni-code-hint"><code>Polyglossy.Interactive.Formatting.Tests.EntityId</code></span></summary>
                                             <div>
                                                 <table>
                                                     <thead>
@@ -181,7 +181,7 @@ public partial class HtmlFormatterTests
                                 <details open="open" class="dni-treeview">
                                   <summary>
                                     <span class="dni-code-hint">
-                                      <code>Microsoft.DotNet.Interactive.Formatting.Tests.EntityId</code>
+                                      <code>Polyglossy.Interactive.Formatting.Tests.EntityId</code>
                                     </span>
                                   </summary>
                                   <div>
@@ -222,7 +222,7 @@ public partial class HtmlFormatterTests
                                 <details open="open" class="dni-treeview">
                                   <summary>
                                     <span class="dni-code-hint">
-                                      <code>Microsoft.DotNet.Interactive.Formatting.Tests.EntityId</code>
+                                      <code>Polyglossy.Interactive.Formatting.Tests.EntityId</code>
                                     </span>
                                   </summary>
                                   <div>
@@ -298,7 +298,7 @@ public partial class HtmlFormatterTests
                                   <details open="open" class="dni-treeview">
                                     <summary>
                                       <span class="dni-code-hint">
-                                        <code>Microsoft.DotNet.Interactive.Formatting.Tests.EntityId</code>
+                                        <code>Polyglossy.Interactive.Formatting.Tests.EntityId</code>
                                       </span>
                                     </summary>
                                     <div>
@@ -339,7 +339,7 @@ public partial class HtmlFormatterTests
                                   <details open="open" class="dni-treeview">
                                     <summary>
                                       <span class="dni-code-hint">
-                                        <code>Microsoft.DotNet.Interactive.Formatting.Tests.EntityId</code>
+                                        <code>Polyglossy.Interactive.Formatting.Tests.EntityId</code>
                                       </span>
                                     </summary>
                                     <div>

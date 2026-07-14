@@ -10,10 +10,10 @@ using Dummy;
 using FluentAssertions;
 using FluentAssertions.Extensions;
 using Microsoft.CSharp.RuntimeBinder;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public partial class HtmlFormatterTests
 {

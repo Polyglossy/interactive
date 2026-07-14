@@ -9,7 +9,7 @@ using Microsoft.DotNet.PlatformAbstractions;
 using Xunit;
 using static Microsoft.DotNet.PlatformAbstractions.RuntimeEnvironment;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public abstract class DirectoryAccessorTests
 {
