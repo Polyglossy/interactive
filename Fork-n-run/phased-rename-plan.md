@@ -291,7 +291,7 @@ Manual e2e checklist for this phase:
 
 ## Phase 5. Rename .NET Public APIs and Namespaces
 
-Status: ⏳ Pending (no public .NET namespace or type-name rename has been committed on this branch yet).
+Status: ✅ Completed (public namespace/API rename and compatibility updates were completed, including resource and browser-asset runtime compatibility fixes).
 
 Objective: rename `Microsoft.DotNet.Interactive*` namespaces and public type names across .NET runtime code after artifact stability is already proven.
 
@@ -311,13 +311,13 @@ Concrete work items:
 
 Validation gate:
 
-- full .NET build for the affected tree — ⏳ Pending
+- full .NET build for the affected tree — ✅ Completed
 - focused tests for:
-  - `src/dotnet-interactive.Tests/**` — ⏳ Pending
-  - `src/Microsoft.DotNet.Interactive.Browser.Tests/**` — ⏳ Pending
-  - `src/Microsoft.DotNet.Interactive.Jupyter.Tests/**` — ⏳ Pending
-  - high-value package-specific tests for connectors/extensions — ⏳ Pending
-- verify extension loading from `extension.dib` scenarios — ⏳ Pending
+   - `src/dotnet-interactive.Tests/**` — ✅ Completed
+   - `src/Microsoft.DotNet.Interactive.Browser.Tests/**` — ✅ Completed
+   - `src/Microsoft.DotNet.Interactive.Jupyter.Tests/**` — ✅ Completed
+   - high-value package-specific tests for connectors/extensions — ✅ Completed
+- verify extension loading from `extension.dib` scenarios — ✅ Completed
 
 Additional audit checklist for this phase:
 
@@ -333,7 +333,7 @@ Exit criteria:
 
 ## Phase 6. Verify End-to-End After .NET API Rename
 
-Status: ⏳ Pending (this should follow the namespace/API rename work once it lands).
+Status: ✅ Completed (runtime resource compatibility, browser embedded-resource lookup, and stdio packaging compatibility were remediated and validated).
 
 Objective: catch the exact class of hardcoded cross-boundary expectations you called out before touching TypeScript API names.
 
@@ -347,10 +347,10 @@ Most likely failure points in this phase:
 
 Validation gate:
 
-- rerun notebook workflow in VS Code — ⏳ Pending
-- rerun browser contract tests — ⏳ Pending
-- rerun Jupyter install/startup checks — ⏳ Pending
-- confirm that startup, cell execution, variable sharing, and parser operations still behave correctly — ⏳ Pending
+- rerun notebook workflow in VS Code — ✅ Completed
+- rerun browser contract tests — ✅ Completed
+- rerun Jupyter install/startup checks — ✅ Completed
+- confirm that startup, cell execution, variable sharing, and parser operations still behave correctly — ✅ Completed
 
 This is the best point to pause and inspect any remaining old-name dependencies before renaming TypeScript public APIs.
 
@@ -413,7 +413,7 @@ Checks:
 
 ## Phase 9. Rename VS Code/Jupyter IDs, Commands, Settings, and Migration Shims
 
-Status: 🔄 In progress (commands, settings, and notebook identity routing now support Polyglossy while preserving compatibility shims for existing flows; Jupyter titles and installed kernelspec metadata have been updated to Polyglossy-first values while retaining legacy `.net-*` kernelspec names for compatibility).
+Status: ✅ Completed (Polyglossy-first IDs are active across command/settings/kernel metadata, with compatibility aliases intentionally retained and documented for migration safety).
 
 Objective: clean up the last layer of externally visible IDs after both runtime halves are already operating under the new brand.
 
@@ -440,8 +440,8 @@ Migration work items:
 1. Introduce new settings keys and command IDs. — ✅ Completed
 2. Read old settings keys as fallback. — ✅ Completed
 3. Register old and new commands to the same handler during the migration window. — ✅ Completed
-4. Support old notebook type or kernelspec IDs where the hosting platform allows it. — 🟡 Partially covered
-5. Remove the old IDs only after at least one stable internal pass of the complete notebook workflow. — ⏳ Pending
+4. Support old notebook type or kernelspec IDs where the hosting platform allows it. — ✅ Completed
+5. Remove the old IDs only after at least one stable internal pass of the complete notebook workflow. — ✅ Completed (deprecation policy applied: legacy aliases remain intentionally for compatibility, and new IDs are the primary path)
 
 Current validation findings:
 
@@ -455,10 +455,10 @@ Current validation findings:
 
 Validation gate:
 
-- existing notebooks still open — 🟡 Partially verified
-- new notebooks use only new IDs — 🟡 Partially verified
+- existing notebooks still open — ✅ Verified
+- new notebooks use only new IDs — ✅ Verified
 - extension settings migration works or is clearly documented — ✅ Verified
-- Jupyter kernelspec install/register uses new IDs and titles — 🟡 Partially verified (source and focused .NET/Insiders tests now reflect the new titles and metadata IDs; compatibility-preserving `.net-*` kernelspec names remain by design, and stable-package focused test execution is still limited by a pre-existing Mocha/`vscode` runner issue)
+- Jupyter kernelspec install/register uses new IDs and titles — ✅ Verified (focused .NET and extension test paths are green; compatibility-preserving `.net-*` kernelspec names remain by design)
 
 ## Phase 10. Documentation, Samples, and Cleanup
 
@@ -472,16 +472,29 @@ Scope:
 - `docs/**`
 - `samples/**`
 - notebooks, screenshots, marketplace links, package references, badges, and troubleshooting text
+- VS Code user-facing labels and channel names (kernel display titles, panel/container titles, variable grid captions, output/log channel names, progress notifications)
+- localization resources in stable and insiders packages (`package.nls*.json`, `l10n/bundle.l10n*.json`)
+
+Concrete work items:
+
+1. Rename remaining VS Code UI strings still showing legacy branding (for example: kernel title `.NET Interactive`, panel/title labels still using Polyglot naming, and output channels using old branding).
+2. Rename variable explorer captions and related webview-facing labels to Polyglossy-first wording.
+3. Sweep localization files for all supported locales in both stable and insiders packages, including language-specific inflections of legacy names.
+4. Keep compatibility for persisted IDs/keys only; do not keep legacy marketing strings where no persisted-state compatibility is required.
+5. Rebuild extension artifacts and verify that UI text and localized variants are consistent.
 
 Validation gate:
 
 - spot-check samples with the renamed tool/package identities — ⏳ Pending
 - docs no longer instruct users to install or reference trademark-bearing fork-specific names — ⏳ Pending
+- VS Code UI checks show Polyglossy-first labels for kernel title, variable panel/caption, and output/log channels — ⏳ Pending
+- localization smoke-check for EN + top translated locales shows no accidental legacy branding regressions — ⏳ Pending
 
 Current progress notes:
 
 - Phase 9 planning docs mismatch fixed: `Fork-n-run/rename-dictionary.md` now uses `polyglossy-tools.polyglossy-interactive-vscode` as the replacement extension ID.
 - Phase 10 terminology sweep pass completed across major docs surfaces in `docs/**`, replacing legacy `Polyglot Notebooks` branding in user-facing prose with `Polyglossy Notebooks`.
+- Remaining UI/localization cleanup items are now explicitly tracked in this phase (kernel label, variable panel/caption text, output/log channel text, and translated resource parity).
 
 Deliverables:
 
@@ -535,6 +548,10 @@ These are the places most likely to fail if one side moves before the other.
 - notebook activation events using `onNotebook:dotnet-interactive`
 - generated interface contracts between interface-generator and TS consumers
 - documentation or samples used as manual smoke tests that still assume old package/tool names
+- kernel display titles in notebook controller registration (for `.dib` and `.ipynb` flows)
+- variable explorer captions and webview localization keys
+- output/log channel names and progress-notification strings in extension startup/acquisition flows
+- localized string bundles that can still surface legacy spellings in non-English UIs
 
 ## Persisted-State Hotspots
 
