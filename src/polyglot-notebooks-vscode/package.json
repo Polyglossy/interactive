@@ -990,9 +990,9 @@
     "lint": "eslint src --ext ts",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile",
-    "test": "mocha out/tests/**/*.test.js",
+    "test": "node ./out/src/test/runTest.js",
     "ciTest": "node ../ensure-testresults-directory.js && npm test -- --reporter mocha-multi-reporters --reporter-options configFile=testConfig.json",
-    "testDebug": "mocha out/tests/**/*.test.js",
+    "testDebug": "node ./out/src/test/runTest.js",
     "tdd": "npm test -- --watch",
     "clearUserData": "del-cli \"./userData/**/*\" \"!.gitignore\""
   },
