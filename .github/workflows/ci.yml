@@ -1,0 +1,158 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+      - 'hotfix/**'
+      - 'release/**'
+    # NOTE: paths-ignore is duplicated under push and pull_request because
+    # GitHub Actions does not support YAML anchors. Keep both lists in sync.
+    paths-ignore:
+      - '**/*.md'
+      - '.config/**'
+      - '.devcontainer/**'
+      - '.vscode/**'
+      - 'assets/**'
+      - 'docs/**'
+      - 'images/**'
+      - '.editorconfig'
+      - '.gitignore'
+      - '*.txt'
+      - '*.github-issues'
+  pull_request:
+    branches:
+      - main
+      - 'feature/**'
+      - 'hotfix/**'
+      - 'release/**'
+    paths-ignore:
+      - '**/*.md'
+      - '.config/**'
+      - '.devcontainer/**'
+      - '.vscode/**'
+      - 'assets/**'
+      - 'docs/**'
+      - 'images/**'
+      - '.editorconfig'
+      - '.gitignore'
+      - '*.txt'
+      - '*.github-issues'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * Mon'
+    - cron: '0 8 * * Wed'
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+env:
+  NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
+  DOTNET_INTERACTIVE_FRONTEND_NAME: CI
+  DOTNET_INTERACTIVE_SIGN_TYPE: Test
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 200
+    permissions:
+      contents: read
+      checks: write   # required by dorny/test-reporter (inside composite action)
+    steps:
+      # core.symlinks must be configured before checkout so git materialises
+      # symlinks as real reparse points on Windows.  ensure-symlinks.ps1 also
+      # recreates them explicitly as a belt-and-suspenders measure.
+      - name: Configure git symlinks and long paths (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          git config --global core.symlinks true
+          git config --global core.longpaths true
+        shell: pwsh
+
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/build-and-test
+
+      - name: Extract package version (Windows)
+        if: runner.os == 'Windows'
+        id: version
+        shell: pwsh
+        run: |
+          $packagePattern = '^Microsoft\.dotnet-interactive\.(?<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)\.nupkg$'
+          $packages = @(Get-ChildItem artifacts\packages\Release\Shipping\Microsoft.dotnet-interactive.*.nupkg -File -ErrorAction SilentlyContinue |
+                       Where-Object { $_.Name -notlike '*.symbols.nupkg' -and $_.Name -match $packagePattern })
+          if ($packages.Count -eq 0) {
+            Write-Error "No bare Microsoft.dotnet-interactive package with a SemVer filename found"
+            exit 1
+          }
+          if ($packages.Count -gt 1) {
+            Write-Error "Multiple bare Microsoft.dotnet-interactive packages found: $($packages.Name -join ', ')"
+            exit 1
+          }
+          $match = [regex]::Match($packages[0].Name, $packagePattern)
+          if (-not $match.Success) {
+            Write-Error "Package filename '$($packages[0].Name)' did not match expected SemVer pattern"
+            exit 1
+          }
+          $ver = $match.Groups['version'].Value
+          Write-Host "Detected version: $ver"
+          echo "version=$ver" >> $env:GITHUB_OUTPUT
+
+      - name: Pack VSCode extensions (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ${{ github.workspace }}\eng\package\PackVSCodeExtension.ps1 `
+            -stableToolVersionNumber '${{ steps.version.outputs.version }}' `
+            -outDir '${{ runner.temp }}\staging\vscode'
+        working-directory: src
+
+      - name: Pack NPM package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ${{ github.workspace }}\eng\package\PackNpmPackage.ps1 `
+            -packageVersionNumber '${{ steps.version.outputs.version }}' `
+            -outDir '${{ runner.temp }}\staging\npm'
+        working-directory: src/polyglot-notebooks
+
+      - name: Upload packages (Windows)
+        uses: actions/upload-artifact@v7
+        if: always() && runner.os == 'Windows'
+        with:
+          name: Windows-packages
+          path: artifacts/packages/Release/Shipping
+          retention-days: 30
+
+      - name: Upload VSCode packages (Windows)
+        uses: actions/upload-artifact@v7
+        if: always() && runner.os == 'Windows'
+        with:
+          name: Windows-vscode
+          path: '${{ runner.temp }}\staging\vscode'
+          retention-days: 30
+
+      - name: Upload NPM package (Windows)
+        uses: actions/upload-artifact@v7
+        if: always() && runner.os == 'Windows'
+        with:
+          name: Windows-npm
+          path: '${{ runner.temp }}\staging\npm'
+          retention-days: 30
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ${{ runner.os }}-test-results
+          path: artifacts/TestResults/Release
+          retention-days: 30
