@@ -20,10 +20,22 @@ else
         )
 }
 
+function Write-Timestamped([string]$message) {
+    $ts = [DateTimeOffset]::UtcNow.ToString("u")
+    Write-Host "[$ts] $message"
+}
+
 function ExecuteTestDirectory([string]$testDirectory, [string]$extraArgs = "") {
-    $testCommand = "dotnet test $testDirectory/ $extraArgs -l trx --no-restore --no-build --blame-hang-timeout 10m --blame-hang-dump-type full --blame-crash -c $buildConfig --results-directory $repoRoot/artifacts/TestResults/$buildConfig"
+    $projectName = [System.IO.Path]::GetFileName($testDirectory.TrimEnd('/', '\'))
+    $blameArgs = "--blame-hang-timeout 10m --blame-hang-dump-type full --blame-crash"
+
+    $testCommand = "dotnet test `"$testDirectory`" $extraArgs -l trx --no-restore --no-build $blameArgs -c $buildConfig --results-directory `"$repoRoot/artifacts/TestResults/$buildConfig`""
+    $start = Get-Date
+    Write-Timestamped "Starting test command for $projectName"
     Write-Host "Executing $testCommand"
     Invoke-Expression $testCommand
+    $elapsed = [Math]::Round(((Get-Date) - $start).TotalSeconds, 2)
+    Write-Timestamped "Finished test command for $projectName in ${elapsed}s with exit code $LASTEXITCODE"
 }
 
 try {
@@ -39,15 +51,17 @@ try {
     foreach ($testAssemblyDirectory in $normalTestAssemblyDirectories) {
         $projectName = $testAssemblyDirectory.Name
         if($projectsToSkip.contains($projectName)){
-            Write-Host "Skipping test project $projectName"
+            Write-Timestamped "Skipping test project $projectName"
             continue
         }
         for ($i = 1; $i -le $retryCount; $i++) {
-            Write-Host "Testing project $projectName, attempt $i"
+            Write-Timestamped "Testing project $projectName, attempt $i"
             ExecuteTestDirectory -testDirectory $testAssemblyDirectory
             if ($LASTEXITCODE -eq 0) {
+                Write-Timestamped "Project $projectName succeeded on attempt $i"
                 break
             }
+            Write-Timestamped "Project $projectName failed on attempt $i with exit code $LASTEXITCODE"
         }
         if ($LASTEXITCODE -ne 0) {
             exit $LASTEXITCODE
@@ -62,11 +76,13 @@ try {
 
         foreach ($testClass in $distinctTestClasses) {
             for ($i = 1; $i -le $retryCount; $i++) {
-                Write-Host "Testing class $testClass, attempt $i"
+                Write-Timestamped "Testing class $testClass in $flakyTestAssemblyDirectory, attempt $i"
                 ExecuteTestDirectory -testDirectory "$repoRoot/src/$flakyTestAssemblyDirectory" -extraArgs "--filter `"FullyQualifiedName~$testClass&Category!=Skip`""
                 if ($LASTEXITCODE -eq 0) {
+                    Write-Timestamped "Class $testClass in $flakyTestAssemblyDirectory succeeded on attempt $i"
                     break
                 }
+                Write-Timestamped "Class $testClass in $flakyTestAssemblyDirectory failed on attempt $i with exit code $LASTEXITCODE"
             }
             if ($LASTEXITCODE -ne 0) {
                 exit $LASTEXITCODE
