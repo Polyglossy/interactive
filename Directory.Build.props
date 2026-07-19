@@ -4,6 +4,19 @@
   <Import Project="eng\targets\Settings.props" />
   <Import Project="eng\targets\NuGet.targets" />
 
+
+  <!-- When Arcade is disabled (e.g. during the test step in CI), replicate the output-path
+    layout that Arcade would establish so that `dotnet test \-\-no-build` can locate
+    assemblies that were compiled with Arcade active:
+      artifacts/bin/<ProjectName>/<Configuration> -->
+  
+  <PropertyGroup Condition="'$(DisableArcade)' == '1'">
+    <ArtifactsBinDir>$(MSBuildThisFileDirectory)artifacts\bin\</ArtifactsBinDir>
+    <BaseOutputPath>$(ArtifactsBinDir)$(MSBuildProjectName)\</BaseOutputPath>
+    <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+
   <PropertyGroup>
     <DotNetUseShippingVersions>true</DotNetUseShippingVersions>
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
