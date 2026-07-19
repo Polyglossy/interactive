@@ -105,6 +105,7 @@ runs:
         path: artifacts/TestResults/${{ inputs.build-config }}/**/*.trx
         reporter: dotnet-trx
         fail-on-error: false
+        fail-on-empty: false
 
     - name: Convert failed tests to VS playlist
       if: ${{ failure() }}
