@@ -74,7 +74,7 @@ jobs:
           git config --global core.longpaths true
         shell: pwsh
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       # For publish builds, OfficialBuildId drives deterministic versioning
       - name: Compute OfficialBuildId
@@ -151,26 +151,26 @@ jobs:
             -outDir '${{ runner.temp }}\staging\npm'
         working-directory: src/polyglot-notebooks
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
           name: packages
           path: artifacts/packages/Release/Shipping
           retention-days: 30
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
           name: vscode
           path: '${{ runner.temp }}\staging\vscode'
           retention-days: 30
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
           name: npm
           path: '${{ runner.temp }}\staging\npm'
           retention-days: 30
 
       - name: Upload test results
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         if: always()
         with:
           name: publish-build-test-results
@@ -188,12 +188,12 @@ jobs:
     timeout-minutes: 30
     environment: production
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
         with:
           name: packages
           path: packages
 
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 #v6
         with:
           dotnet-version: '10.0.x'
 
@@ -230,12 +230,12 @@ jobs:
     timeout-minutes: 15
     environment: production
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
         with:
           name: npm
           path: npm
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
@@ -278,17 +278,17 @@ jobs:
           git config --global core.longpaths true
         shell: pwsh
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 #v6
         with:
           global-json-file: global.json
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
         with:
           name: vscode
           # PackVSCodeExtension.ps1 writes stable/, stable-locked/, and insiders/
@@ -298,7 +298,7 @@ jobs:
 
       # PublishStableExtensionAndNuGetPackages scans this path for .nupkg files.
       # NuGet was already pushed by publish-nuget; --skip-duplicate makes re-push safe.
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
         with:
           name: packages
           path: '${{ runner.temp }}\artifacts\packages\Shipping'
@@ -342,7 +342,7 @@ jobs:
 
       - name: Login to Azure (OIDC)
         if: needs.prepare.outputs.simulate != 'true'
-        uses: azure/login@v3
+        uses: azure/login@f5d393ae46f8fde4be8b75f32e3fc50e654ad0ca #v3
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
