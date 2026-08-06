@@ -16,19 +16,19 @@ runs:
   using: composite
   steps:
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 #v6
       with:
         global-json-file: global.json
 
     - name: Setup Node.js
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7
       with:
         node-version: ${{ inputs.node-version }}
         cache: npm
         cache-dependency-path: src/**/package-lock.json
 
     - name: Cache NuGet packages
-      uses: actions/cache@v5
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 #v6.1.0
       with:
         # CI scripts use a repo-local NuGet cache to keep restore inputs deterministic.
         path: ${{ github.workspace }}/.packages
@@ -99,7 +99,7 @@ runs:
       # Fork PRs get a read-only GITHUB_TOKEN regardless of permissions declarations,
       # so dorny/test-reporter cannot create check runs for fork PRs.
       if: ${{ !cancelled() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
-      uses: dorny/test-reporter@v3
+      uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2 # v3
       with:
         name: ${{ runner.os }} Tests
         path: artifacts/TestResults/${{ inputs.build-config }}/**/*.trx
@@ -109,7 +109,7 @@ runs:
 
     - name: Convert failed tests to VS playlist
       if: ${{ failure() }}
-      uses: BenjaminMichaelis/trx-to-vsplaylist@v4
+      uses: BenjaminMichaelis/trx-to-vsplaylist@86a717b0e00d014347c0f16759127ae012154be7 # v4
       with:
         trx-file-path: artifacts/TestResults/${{ inputs.build-config }}/**/*.trx
         artifact-name: ${{ runner.os }}-failed-tests
