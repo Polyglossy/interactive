@@ -2,15 +2,33 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import { expect } from 'chai';
+import * as fs from 'fs';
+import * as path from 'path';
 import { DisplayElement, ErrorElement, TextElement } from '../../src/vscode-common/polyglot-notebooks/contracts';
 import { isDisplayOutput, isErrorOutput, isTextOutput, reshapeOutputValueForVsCode } from '../../src/vscode-common/interfaces/utilities';
-import { createUri, debounce, executeSafe, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify } from '../../src/vscode-common/utilities';
-import { decodeToString } from './utilities';
+import { createOutput, createUri, debounce, executeSafe, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
+import { decodeToString, withFakeGlobalStorageLocation } from './utilities';
 
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
 import { areEquivalentObjects, sortInPlace } from '../../src/vscode-common/metadataUtilities';
 
 describe('Miscellaneous tests', () => {
+    const originalCryptoDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'crypto');
+
+    function setCrypto(value: any) {
+        Object.defineProperty(globalThis, 'crypto', {
+            value,
+            configurable: true,
+        });
+    }
+
+    afterEach(() => {
+        if (originalCryptoDescriptor) {
+            Object.defineProperty(globalThis, 'crypto', originalCryptoDescriptor);
+        } else {
+            delete (globalThis as { crypto?: Crypto }).crypto;
+        }
+    });
 
     it(`verify command and argument replacement is as expected`, () => {
         let template = {
@@ -71,6 +89,41 @@ describe('Miscellaneous tests', () => {
         ];
         const workingDir = getWorkingDirectoryForNotebook(notebookUri, workspaceFolderUris, 'fallback-is-used');
         expect(workingDir).to.equal('fallback-is-used');
+    });
+
+    it('tool manifest existence check detects manifests in the .config directory', async () => {
+        await withFakeGlobalStorageLocation(true, async globalStoragePath => {
+            const manifestDir = path.join(globalStoragePath, '.config');
+            fs.mkdirSync(manifestDir, { recursive: true });
+            fs.writeFileSync(path.join(manifestDir, 'dotnet-tools.json'), '{}');
+
+            expect(toolManifestExists(globalStoragePath)).to.be.true;
+        });
+    });
+
+    it('tool manifest existence check detects manifests in the storage root', async () => {
+        await withFakeGlobalStorageLocation(true, async globalStoragePath => {
+            fs.writeFileSync(path.join(globalStoragePath, 'dotnet-tools.json'), '{}');
+
+            expect(toolManifestExists(globalStoragePath)).to.be.true;
+        });
+    });
+
+    it('cell output ids use crypto.getRandomValues when randomUUID is unavailable', () => {
+        setCrypto({
+            getRandomValues: (values: Uint8Array) => {
+                values.set([
+                    0xde, 0xad, 0xbe, 0xef,
+                    0xca, 0xfe, 0x0a, 0xbe,
+                    0x10, 0x20, 0x30, 0x40,
+                    0x50, 0x60, 0x70, 0x80,
+                ]);
+                return values;
+            },
+        });
+
+        const output = createOutput([]);
+        expect(output.id).to.equal('deadbeef-cafe-4abe-9020-304050607080');
     });
 
     it('debounce test', async () => {
