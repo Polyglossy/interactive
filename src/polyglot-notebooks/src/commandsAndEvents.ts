@@ -5,7 +5,6 @@ import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
 import { createUuid } from "./uuid";
 export * from "./contracts";
-export { createUuid };
 
 export interface DocumentKernelInfoCollection {
     defaultKernelName: string;
@@ -34,6 +33,14 @@ export interface KernelCommandEnvelopeHandler {
     (eventEnvelope: KernelCommandEnvelope): Promise<void>;
 }
 
+function createUuid(): string {
+    const value = globalThis.crypto?.randomUUID?.();
+    if (!value) {
+        throw new Error('crypto.randomUUID is not available.');
+    }
+
+    return value;
+}
 export class KernelCommandEnvelope {
 
     private _childCommandCounter: number = 1;

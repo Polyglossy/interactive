@@ -14,6 +14,15 @@ type KernelMessagingApi = {
     postKernelMessage: (data: unknown) => void;
 };
 
+function createUuid(): string {
+    const value = globalThis.crypto?.randomUUID?.();
+    if (!value) {
+        throw new Error('crypto.randomUUID is not available.');
+    }
+
+    return value;
+}
+
 export function activate(context: KernelMessagingApi) {
     configure(window, context);
     Logger.default.info(`set up 'webview' host module complete`);

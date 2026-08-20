@@ -9,7 +9,11 @@ import { Logger } from "../src/logger";
 import { ErrorProduced } from "../src/commandsAndEvents";
 
 function createValueName(): string {
-    const value = globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(16)}_${Math.random().toString(16).slice(2)}`;
+    const value = globalThis.crypto?.randomUUID?.();
+    if (!value) {
+        throw new Error("crypto.randomUUID is not available.");
+    }
+
     return `value_${value.replace(/-/g, "_")}`;
 }
 

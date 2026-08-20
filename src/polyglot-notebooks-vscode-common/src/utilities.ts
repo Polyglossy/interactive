@@ -13,6 +13,15 @@ import { createUuid } from './polyglot-notebooks/uuid';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 import { Logger } from './polyglot-notebooks';
 
+function createUuid(): string {
+    const value = globalThis.crypto?.randomUUID?.();
+    if (!value) {
+        throw new Error('crypto.randomUUID is not available.');
+    }
+
+    return value;
+}
+
 export function executeSafe(command: string, args: Array<string>, workingDirectory?: string | undefined): Promise<{ code: number, output: string, error: string }> {
     return new Promise<{ code: number, output: string, error: string }>(resolve => {
         try {
@@ -75,7 +84,7 @@ export function toolManifestExists(globalStoragePath: string): boolean {
 
 export function createOutput(outputItems: Array<NotebookCellOutputItem>, outputId?: string): NotebookCellOutput {
     if (!outputId) {
-        outputId = commandsAndEvents.createUuid();
+        outputId = createUuid();
     }
 
     const output: NotebookCellOutput = {
