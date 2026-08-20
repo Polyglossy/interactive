@@ -3,8 +3,9 @@
 
 import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
+import { createUuid } from "./uuid";
+export { createUuid };
 export * from "./contracts";
-import * as uuid from "uuid";
 
 export interface DocumentKernelInfoCollection {
     defaultKernelName: string;
@@ -33,14 +34,6 @@ export interface KernelCommandEnvelopeHandler {
     (eventEnvelope: KernelCommandEnvelope): Promise<void>;
 }
 
-function toBase64String(value: Uint8Array): string {
-    const wnd = globalThis.window;
-    if (wnd) {
-        return wnd.btoa(String.fromCharCode(...value));
-    } else {
-        return Buffer.from(value).toString('base64');
-    }
-}
 export class KernelCommandEnvelope {
 
     private _childCommandCounter: number = 1;
@@ -129,9 +122,7 @@ export class KernelCommandEnvelope {
             return this._token;
         }
 
-        const guidBytes = uuid.parse(uuid.v4());
-        const data = new Uint8Array(guidBytes);
-        this._token = toBase64String(data);
+        this._token = createUuid();
 
         // this._token = `${KernelCommandEnvelope._counter++}`;
 
