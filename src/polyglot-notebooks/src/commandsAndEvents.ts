@@ -3,6 +3,7 @@
 
 import * as contracts from "./contracts";
 import { CommandRoutingSlip, EventRoutingSlip } from "./routingslip";
+import { createUuid } from "./uuid";
 export * from "./contracts";
 
 export interface DocumentKernelInfoCollection {
