@@ -13,7 +13,7 @@ inputs:
     description: 'npm CLI version to install globally'
   prerelease-label:
     default: 'alpha'
-    description: 'Pre-release version label (e.g., alpha, beta, rc). Leave empty for release version.'
+    description: 'Pre-release label to use for package versioning'
 
 runs:
   using: composite
