@@ -6,9 +6,9 @@ import * as rxjs from "rxjs";
 import * as connection from "../connection";
 import { Logger } from "../logger";
 import { KernelHost } from '../kernelHost';
-import { v4 as uuid } from 'uuid';
 import { KernelInfo } from '../contracts';
 import { KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
+import { createUuid } from '../uuid';
 
 type KernelMessagingApi = {
     onDidReceiveKernelMessage: (arg: any) => any;
@@ -35,7 +35,7 @@ function configure(global: any, context: KernelMessagingApi) {
         }
     });
 
-    const webViewId = uuid();
+    const webViewId = createUuid();
     context.onDidReceiveKernelMessage((arg: any) => {
         if (arg.envelope && arg.webViewId === webViewId) {
             const envelope = arg.envelope as connection.KernelCommandOrEventEnvelopeModel;

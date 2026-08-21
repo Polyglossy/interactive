@@ -2,10 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import * as fs from 'fs';
-import * as path from 'path';
 import { InstallInteractiveTool, InstallInteractiveArgs, CreateToolManifest, GetCurrentInteractiveVersion, InteractiveLaunchOptions, ReportInstallationStarted, ReportInstallationFinished } from './interfaces';
 
-import { isVersionExactlyEqual } from './utilities';
+import { isVersionExactlyEqual, toolManifestExists } from './utilities';
 
 // The acquisition function.  Uses predefined callbacks for external command invocations to make testing easier.
 export async function acquireDotnetInteractive(
@@ -20,12 +19,11 @@ export async function acquireDotnetInteractive(
 ): Promise<InteractiveLaunchOptions> {
     // Ensure `globalStoragePath` exists.  This prevents a bunch of issues with spawned processes and working directories.
     if (!fs.existsSync(globalStoragePath)) {
-        fs.mkdirSync(globalStoragePath);
+        fs.mkdirSync(globalStoragePath, { recursive: true });
     }
 
     // create tool manifest if necessary
-    const toolManifestFile = path.join(globalStoragePath, '.config', 'dotnet-tools.json');
-    if (!fs.existsSync(toolManifestFile)) {
+    if (!toolManifestExists(globalStoragePath)) {
         await createToolManifest(args.dotnetPath, globalStoragePath);
     }
 
