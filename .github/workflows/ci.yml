@@ -40,6 +40,18 @@ on:
       - '*.txt'
       - '*.github-issues'
   workflow_dispatch:
+    inputs:
+      prerelease-label:
+        description: 'Pre-release version label (e.g., alpha, beta, rc). Leave empty for release version.'
+        required: false
+        default: 'alpha'
+        type: choice
+        options:
+          - alpha
+          - beta
+          - rc
+          - preview
+          - ''
   schedule:
     - cron: '0 8 * * Mon'
     - cron: '0 8 * * Wed'
@@ -81,6 +93,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - uses: ./.github/actions/build-and-test
+        with:
+          prerelease-label: ${{ github.event.inputs.prerelease-label }}
 
       - name: Extract package version (Windows)
         if: runner.os == 'Windows'
