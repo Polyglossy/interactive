@@ -8,7 +8,7 @@ using Pocket;
 using Recipes;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class RunResultTests
 {

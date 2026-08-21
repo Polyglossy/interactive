@@ -14,3 +14,5 @@ wallaby.js
 .eslintrc.json
 **/*.map
 **/*.ts
+DEPRECATED.md
+help/Polyglot Notebooks Deprecation.md

@@ -3,9 +3,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Build;
+namespace Polyglossy.Interactive.CSharpProject.Build;
 
 public static class PrebuildFinder
 {

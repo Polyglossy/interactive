@@ -3,14 +3,14 @@
 
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class MagicCommandTests
 {

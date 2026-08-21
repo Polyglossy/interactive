@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host.Progress;
+namespace Polyglossy.Interactive.PowerShell.Host.Progress;
 
 /// <summary>
 /// ProgressPane is a class that represents the "window" in which outstanding activities for which the host has received

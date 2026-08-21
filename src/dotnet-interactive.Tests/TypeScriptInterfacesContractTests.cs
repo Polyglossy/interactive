@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
 using System.Runtime.CompilerServices;
 using Assent;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.InterfaceGen.App;
+using Polyglossy.Interactive.InterfaceGen.App;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 [Trait("Category", "Contracts and serialization")]
 public class TypeScriptInterfacesContractTests

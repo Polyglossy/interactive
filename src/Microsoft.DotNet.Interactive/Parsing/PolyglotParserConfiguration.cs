@@ -5,9 +5,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Directives;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 internal class PolyglotParserConfiguration
 {

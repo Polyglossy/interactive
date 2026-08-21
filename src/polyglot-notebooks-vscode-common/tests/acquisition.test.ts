@@ -10,12 +10,16 @@ import * as path from 'path';
 
 chai.use(require('chai-fs'));
 
-import { acquireDotnetInteractive } from '../../src/vscode-common/acquisition';
+import { acquireDotnetInteractive, acquirePolyglossyInteractive } from '../../src/vscode-common/acquisition';
 import { InstallInteractiveArgs } from '../../src/vscode-common/interfaces';
 import { computeToolInstallArguments } from '../../src/vscode-common/utilities';
 import { withFakeGlobalStorageLocation } from './utilities';
 
 describe('Acquisition tests', () => {
+
+    it('keeps acquisition alias compatibility', () => {
+        expect(acquireDotnetInteractive).to.equal(acquirePolyglossyInteractive);
+    });
 
     function getInteractiveVersionThatReturnsNoVersionFound(dotnetPath: string, globalStoragePath: string): Promise<string | undefined> {
         return new Promise<string | undefined>((resolve, reject) => {
@@ -63,16 +67,27 @@ describe('Acquisition tests', () => {
 
     function installInteractiveTool(args: InstallInteractiveArgs, globalStoragePath: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            const manifestPath = path.join(globalStoragePath, '.config', 'dotnet-tools.json');
+            const manifestPath = [
+                path.join(globalStoragePath, '.config', 'dotnet-tools.json'),
+                path.join(globalStoragePath, 'dotnet-tools.json')
+            ].find(fs.existsSync);
+            if (!manifestPath) {
+                reject(new Error('Tool manifest does not exist.'));
+                return;
+            }
             fs.readFile(manifestPath, (err, data) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
                 let manifestContent = JSON.parse(data.toString());
-                manifestContent.tools['microsoft.dotnet-interactive'] = {
+                manifestContent.tools['polyglossy.interactive.tool'] = {
                     version: args!.toolVersion,
                     commands: [
-                        'dotnet-interactive'
+                        'polyglossy-interactive'
                     ]
                 };
-                fs.writeFile(manifestPath, JSON.stringify(manifestContent), () => resolve());
+                fs.writeFile(manifestPath, JSON.stringify(manifestContent), err => err ? reject(err) : resolve());
             });
         });
     }
@@ -122,10 +137,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -158,10 +173,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -196,10 +211,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -260,10 +275,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -298,10 +313,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -338,10 +353,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42',
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }
@@ -378,10 +393,10 @@ describe('Acquisition tests', () => {
                 version: 1,
                 isRoot: true,
                 tools: {
-                    'microsoft.dotnet-interactive': {
+                    'polyglossy.interactive.tool': {
                         version: '42.42.42', // 43.43.43 was downgraded to 42.42.42
                         commands: [
-                            'dotnet-interactive'
+                            'polyglossy-interactive'
                         ]
                     }
                 }

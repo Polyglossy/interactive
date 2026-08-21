@@ -6,11 +6,11 @@ using System.Linq;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 public partial class PolyglotSyntaxParserTests
 {

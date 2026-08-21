@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.Recommendations;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 using Recipes;
-using Microsoft.DotNet.Interactive.CSharpProject.Models.Execution;
-using Microsoft.DotNet.Interactive.CSharpProject.LanguageServices;
-using Microsoft.DotNet.Interactive.CSharpProject.Build;
+using Polyglossy.Interactive.CSharpProject.Models.Execution;
+using Polyglossy.Interactive.CSharpProject.LanguageServices;
+using Polyglossy.Interactive.CSharpProject.Build;
 using Pocket;
 using static Pocket.Logger;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Servers.Roslyn;
+namespace Polyglossy.Interactive.CSharpProject.Servers.Roslyn;
 
 public class WorkspaceServer : ILanguageService, ICodeRunner, ICodeCompiler
 {

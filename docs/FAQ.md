@@ -1,7 +1,7 @@
 # FAQ
 
 * [Definitions and concepts](#definitions-and-concepts)
-* [Using Polyglot Notebooks](#using-polyglot-notebooks)
+* [Using Polyglossy Notebooks](#using-polyglot-notebooks)
 * [Troubleshooting](#troubleshooting)
 
 ## _Definitions and concepts_
@@ -48,17 +48,17 @@ A Jupyter kernel is any kernel that implements the [Jupyter Message Protocol (JM
 
 The .NET Interactive kernel (i.e. the `dotnet-interactive` [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools)) is a Jupyter-compliant kernel that can be used with Project Jupyter just like any other kernel. Like other Jupyter kernels, .NET Interactive isn't opinionated about which frontend you use. 
 
-The Polyglot Notebooks extension for VS Code isn't required to use the .NET Interactive kernel, but it does provide access to some additional functionality that isn't typical of Jupyter frontends, such as the ability to switch languages (i.e. subkernels) on a per-cell basis.
+The Polyglossy Notebooks extension for VS Code isn't required to use the .NET Interactive kernel, but it does provide access to some additional functionality that isn't typical of Jupyter frontends, such as the ability to switch languages (i.e. subkernels) on a per-cell basis.
 
-### What is Polyglot Notebooks?
+### What is Polyglossy Notebooks?
 
-[Polyglot Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode) is an extension for Visual Studio Code that provides a notebook frontend and related tools for editing and running notebooks with the .NET Interactive kernel.
+[Polyglossy Notebooks](https://marketplace.visualstudio.com/items?itemName=polyglossy-tools.polyglossy-interactive-vscode) is an extension for Visual Studio Code that provides a notebook frontend and related tools for editing and running notebooks with the .NET Interactive kernel.
 
-### What is the difference between Polyglot Notebooks and .NET Interactive?
+### What is the difference between Polyglossy Notebooks and .NET Interactive?
 
-[Polyglot Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode) is a notebook frontend. It allows you read and write notebook files, run the code in the notebook, and visualize the results.
+[Polyglossy Notebooks](https://marketplace.visualstudio.com/items?itemName=polyglossy-tools.polyglossy-interactive-vscode) is a notebook frontend. It allows you read and write notebook files, run the code in the notebook, and visualize the results.
 
-[.NET Interactive](https://github.com/dotnet/interactive) is a kernel. It has an API but no user interface. When you press a cell's run button in a frontend such as Polyglot Notebooks, it sends a message to the kernel. The kernel processes the response and sends messages  back, including code execution results for the frontend to display.
+[.NET Interactive](https://github.com/dotnet/interactive) is a kernel. It has an API but no user interface. When you press a cell's run button in a frontend such as Polyglossy Notebooks, it sends a message to the kernel. The kernel processes the response and sends messages  back, including code execution results for the frontend to display.
 
 ### What is a subkernel?
 
@@ -68,7 +68,7 @@ A subkernel is a concept in .NET Interactive that describes one among many kerne
 
 A proxy kernel is a concept in .NET Interactive that describes a subkernel that proxies a remote kernel. A proxy kernel can be used locally just like any other subkernel. Proxy kernels allow you to create notebooks that combine kernels running in multiple different processes or on different machines. 
 
-One prominent example of a proxy kernel is the JavaScript kernel. The actual implementation is written in TypeScript and runs in a separate process from the .NET Interactive kernel. For example, in the Polyglot Notebooks extension, the JavaScript kernel runs within the same web view that renders the notebook's HTML output. But this kernel can be called programmatically in .NET using the same APIs used to call in-process kernels such as the C# kernel. The proxy kernel serves as the adapter that enables this.
+One prominent example of a proxy kernel is the JavaScript kernel. The actual implementation is written in TypeScript and runs in a separate process from the .NET Interactive kernel. For example, in the Polyglossy Notebooks extension, the JavaScript kernel runs within the same web view that renders the notebook's HTML output. But this kernel can be called programmatically in .NET using the same APIs used to call in-process kernels such as the C# kernel. The proxy kernel serves as the adapter that enables this.
 
 ```csharp
 using Microsoft.DotNet.Interactive;
@@ -86,7 +86,7 @@ await Kernel.Root.SendAsync(
 
 The `.ipynb` file extension is the standard Jupyter notebook format. Despite the name, it's no longer specific to IPython, and can be used for many different languages. It's a JSON-based format and it can store content and metadata for code cells, Markdown cells, and cell outputs, which store the results of code execution for display. Multiple outputs can be stored for each code cell, as long as they differ by MIME type. There are many tools available for diffing, converting, and displaying `.ipynb` files. In GitHub,`.ipynb` files are displayed using a notebook-style layout.
 
-The [Polyglot Notebooks extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode) can read and write the `.ipynb` format. It can also read and write a different format, `.dib`. Unlike `.ipynb`, which is a presentation-focused document format, `.dib` is a scripting format. It does not store outputs, and the raw code of a `.dib` can be pasted into a single Polyglot Notebook cell and run directly. This format can contain multiple languages delimited by kernel selector magic commands (e.g. `#!csharp`). The `.dib` format is also a plain text format, not JSON. It's easier to diff without the need for special tools and the contents don't need any special escaping.
+The [Polyglossy Notebooks extension](https://marketplace.visualstudio.com/items?itemName=polyglossy-tools.polyglossy-interactive-vscode) can read and write the `.ipynb` format. It can also read and write a different format, `.dib`. Unlike `.ipynb`, which is a presentation-focused document format, `.dib` is a scripting format. It does not store outputs, and the raw code of a `.dib` can be pasted into a single Polyglot Notebook cell and run directly. This format can contain multiple languages delimited by kernel selector magic commands (e.g. `#!csharp`). The `.dib` format is also a plain text format, not JSON. It's easier to diff without the need for special tools and the contents don't need any special escaping.
 
 ### What is a magic command?
 
@@ -102,7 +102,7 @@ A "read-eval-print loop", or [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93e
 
 ### What is .NET REPL?
 
-.NET Repl is a [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools) ([`dotnet-repl`](https://github.com/jonsequitur/dotnet-repl)) that uses the .NET Interactive engine to provide a terminal-based REPL supporting the same general features that you can find in Polyglot Notebooks, including support for combining multiple languages in one session and support for the `.ipynb` and `.dib` file formats. It also provides some additional features, including the ability to execute notebooks without a UI, allowing for testing notebook files or using them as automation scripts with built-in log capture.
+.NET Repl is a [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools) ([`dotnet-repl`](https://github.com/jonsequitur/dotnet-repl)) that uses the .NET Interactive engine to provide a terminal-based REPL supporting the same general features that you can find in Polyglossy Notebooks, including support for combining multiple languages in one session and support for the `.ipynb` and `.dib` file formats. It also provides some additional features, including the ability to execute notebooks without a UI, allowing for testing notebook files or using them as automation scripts with built-in log capture.
 
 [_This is an experimental feature that might be added to the core .NET Interactive product in the future._]
 
@@ -136,7 +136,7 @@ Try .NET is a web application that runs snippets of C# code and shows the result
 
 The upcoming version of Try .NET reimplements the core Try .NET functionality as a .NET Interactive kernel, bringing common C# to notebooks. This is still a work in progress.
 
-## _Using Polyglot Notebooks_
+## _Using Polyglossy Notebooks_
 
 ### How do I see what variables have been declared?
 
@@ -146,13 +146,13 @@ While in a Polyglot Notebook, open the VS Code command palette and select `Polyg
 
 From within a running notebook, it's currently not possible to directly access the outputs. The data used to populate them is transient and the frontend, not the kernel, is responsible for writing the file. They outputs are stored in the `.ipynb` file though and can be read from there if you have the path to the file. The .NET Interactive packages include a library for parsing and writing various file formats including `.ipynb` and `.dib`: [Microsoft.DotNet.Interactive.Documents](https://www.nuget.org/packages/Microsoft.DotNet.Interactive.Documents). 
 
-### Can I use Polyglot Notebooks in GitHub CodeSpaces?
+### Can I use Polyglossy Notebooks in GitHub CodeSpaces?
 
-Yes! In Codespaces, the Polyglot Notebooks extension can be loaded from the VS Code Marketplace.
+Yes! In Codespaces, the Polyglossy Notebooks extension can be loaded from the VS Code Marketplace.
 
-### Can I use Polyglot Notebooks in github.dev? 
+### Can I use Polyglossy Notebooks in github.dev? 
 
-While the Polyglot Notebooks extension can be loaded in github.dev, it can only be used to view notebooks. Code execution is not available currently in the browser-only environment.
+While the Polyglossy Notebooks extension can be loaded in github.dev, it can only be used to view notebooks. Code execution is not available currently in the browser-only environment.
 
 ### Can I use .NET Interactive with Jupyter Notebook or Jupyter Lab?
 
@@ -268,7 +268,7 @@ using Microsoft.DotNet.Interactive;
 var input = await Kernel.GetInputAsync("Pick a number.");
 ```
 
-When you run this code in Polyglot Notebooks (as shown in the screenshot below), a text input prompt appears at the top of the Visual Studio Code window.
+When you run this code in Polyglossy Notebooks (as shown in the screenshot below), a text input prompt appears at the top of the Visual Studio Code window.
 
 <img alt="image" src="https://user-images.githubusercontent.com/547415/210603522-8738fa01-105d-4d0f-93cd-976da0a73a6c.png" width="60%" >
 
@@ -284,7 +284,7 @@ using Microsoft.DotNet.Interactive;
 var input = await Kernel.GetPasswordAsync("Pick a number.");
 ```
 
-When you run this code in Polyglot Notebooks (as shown in the screenshot below), an input prompt appears at the top of the Visual Studio Code window. When the user types into this prompt, the text is masked.
+When you run this code in Polyglossy Notebooks (as shown in the screenshot below), an input prompt appears at the top of the Visual Studio Code window. When the user types into this prompt, the text is masked.
 
 <img alt="image" src="https://user-images.githubusercontent.com/547415/210673597-2603b6e5-ecba-4e4d-abc4-dbeba28df9c4.png" width="60%" >
 
@@ -340,7 +340,7 @@ Yes. The .NET Interactive [extensibility APIs](extending-dotnet-interactive.md) 
 
 ### Can I add cells to a notebook programmatically?
 
-Yes, in Polyglot Notebooks you can programmatically add a new cell by sending the `SendEditableCode` command.
+Yes, in Polyglossy Notebooks you can programmatically add a new cell by sending the `SendEditableCode` command.
 
 ```csharp
 using Microsoft.DotNet.Interactive;
@@ -365,11 +365,11 @@ This command is not currently supported in other notebook frontends such as Jupy
 
 It is common for a notebook's kernel to get into a stuck state. Maybe you tried to load too much data or accidentally ran code containing an infinite loop. This happens often enough that a way to restart the kernel is a feature of most notebook providers.
 
-In Polyglot Notebooks, you can restart the kernel by running the `Polyglot Notebook: Restart the current notebook's kernel` command from the Command Palette. Note that after you do this, you'll need to rerun the notebook's cells, including reloading packages using `#r`.
+In Polyglossy Notebooks, you can restart the kernel by running the `Polyglot Notebook: Restart the current notebook's kernel` command from the Command Palette. Note that after you do this, you'll need to rerun the notebook's cells, including reloading packages using `#r`.
 
 ### Nothing happens when running a cell
 
-Sometimes VS Code updates have been applied or are pending and the Polyglot Notebooks extension needs to be updated. If things aren't working, here are a few things to check.
+Sometimes VS Code updates have been applied or are pending and the Polyglossy Notebooks extension needs to be updated. If things aren't working, here are a few things to check.
 
 If you see the following badge on the settings icon in the lower left corner of VS Code, it means there might be an update pending:
 
@@ -379,7 +379,7 @@ When you click it and see a `Restart to Update` message in the menu, then VS Cod
 
 <img width="299" alt="image" src="https://user-images.githubusercontent.com/547415/224158995-0d5864cc-57b3-416a-95bb-3d18ea42c7bb.png">
 
-You might also see, including after a VS Code update has been applied, that the Polyglot Notebooks extension requires a reload.
+You might also see, including after a VS Code update has been applied, that the Polyglossy Notebooks extension requires a reload.
 
 <img width="360" alt="image" src="https://user-images.githubusercontent.com/547415/224161370-1c628967-ae0e-42b2-9c64-e3c1d7756f0b.png">
 
@@ -395,7 +395,7 @@ The error is shown because a formatted value from the .NET Interactive kernel ha
 
 ### `Unrecognized parameter name '--kernel-name'` when using `#!connect mssql`
 
-This error occurs when the version of `Microsoft.DotNet.Interactive.SqlServer` doesn't match the version of .NET Interactive you're running. When using a wildcard version specifier like `*-*`, you might load a version that's incompatible with your current Polyglot Notebooks extension.
+This error occurs when the version of `Microsoft.DotNet.Interactive.SqlServer` doesn't match the version of .NET Interactive you're running. When using a wildcard version specifier like `*-*`, you might load a version that's incompatible with your current Polyglossy Notebooks extension.
 
 To fix this:
 
@@ -424,11 +424,11 @@ Replace `1.0.0-beta.25177.1` with the Library version number you see in your `#!
 
 **Important:** The `#r nuget` directive and the `#!connect mssql` command must be in separate cells. The notebook validates syntax before running code, but the `#!connect mssql` command is only recognized after the package loads.
 
-**Note:** Pre-release versions of Polyglot Notebooks use different package versions than the stable release. Pre-release packages aren't available on nuget.org but can be loaded from the Azure DevOps feed: https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
+**Note:** Pre-release versions of Polyglossy Notebooks use different package versions than the stable release. Pre-release packages aren't available on nuget.org but can be loaded from the Azure DevOps feed: https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
 
 ### Diagnostic logs
 
-You can enable diagnostic logging by editing the Polyglot Notebooks extension's settings for `Kernel Transport Args` and adding the following command line arguments:
+You can enable diagnostic logging by editing the Polyglossy Notebooks extension's settings for `Kernel Transport Args` and adding the following command line arguments:
 
 ```diff
 "dotnet-interactive.kernelTransportArgs": [

@@ -9,9 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 /// <summary>
 /// Writes HTML using a C# DSL, bypassing the need for specialized parser and compiler infrastructure such as Razor.

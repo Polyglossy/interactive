@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 internal abstract partial class SyntaxNodeOrToken
 {

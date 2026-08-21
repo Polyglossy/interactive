@@ -10,9 +10,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Tests.Utility;
+namespace Polyglossy.Interactive.Tests.Utility;
 
 public record ExtensionPackage(string PackageLocation, string Name, string Version);
 
@@ -95,7 +95,7 @@ public static class KernelExtensionTestHelper
 
             #!csharp
             
-            using Microsoft.DotNet.Interactive;
+            using Polyglossy.Interactive;
             
             (Kernel.Root as CompositeKernel).AddConnectDirective(new ConnectMyKernelDirective());
             """;
@@ -106,10 +106,10 @@ public static class KernelExtensionTestHelper
             """
             using System.Threading.Tasks;
             using System.Collections.Generic;
-            using Microsoft.DotNet.Interactive;
-            using Microsoft.DotNet.Interactive.Commands;
-            using Microsoft.DotNet.Interactive.Connection;
-            using Microsoft.DotNet.Interactive.Directives;
+            using Polyglossy.Interactive;
+            using Polyglossy.Interactive.Commands;
+            using Polyglossy.Interactive.Connection;
+            using Polyglossy.Interactive.Directives;
             
             public class ConnectMyKernel(string connectedKernelName) : 
                 ConnectKernelCommand(connectedKernelName)
@@ -218,7 +218,7 @@ public static class KernelExtensionTestHelper
                    {embeddedResourcesXml}
                  
                    <ItemGroup>
-                     <Reference Include="Microsoft.DotNet.Interactive">
+                     <Reference Include="Polyglossy.Interactive">
                        <HintPath>{_microsoftDotNetInteractiveDllPath}</HintPath>
                      </Reference>
                    </ItemGroup>
@@ -346,7 +346,7 @@ public static class KernelExtensionTestHelper
                    </PropertyGroup>
 
                    <ItemGroup>
-                     <Reference Include="Microsoft.DotNet.Interactive">
+                     <Reference Include="Polyglossy.Interactive">
                        <HintPath>{_microsoftDotNetInteractiveDllPath}</HintPath>
                      </Reference>
                    </ItemGroup>
@@ -379,8 +379,8 @@ public static class KernelExtensionTestHelper
                      using System;
                      using System.Reflection;
                      using System.Threading.Tasks;
-                     using Microsoft.DotNet.Interactive;
-                     using Microsoft.DotNet.Interactive.Commands;
+                     using Polyglossy.Interactive;
+                     using Polyglossy.Interactive.Commands;
 
                      public class TestKernelExtension : IKernelExtension
                      {
@@ -401,8 +401,8 @@ public static class KernelExtensionTestHelper
                      using System;
                      using System.Reflection;
                      using System.Threading.Tasks;
-                     using Microsoft.DotNet.Interactive;
-                     using Microsoft.DotNet.Interactive.Commands;
+                     using Polyglossy.Interactive;
+                     using Polyglossy.Interactive.Commands;
 
                      public class TestKernelExtension : IKernelExtension, IStaticContentSource
                      {

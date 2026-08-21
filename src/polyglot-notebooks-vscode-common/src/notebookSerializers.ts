@@ -92,6 +92,7 @@ export function createAndRegisterNotebookSerializers(context: vscode.ExtensionCo
 
     const serializers = new Map<string, vscode.NotebookSerializer>();
     serializers.set(constants.NotebookViewType, createAndRegisterSerializer(commandsAndEvents.DocumentSerializationType.Dib, constants.NotebookViewType));
+    serializers.set(constants.PolyglossyNotebookViewType, createAndRegisterSerializer(commandsAndEvents.DocumentSerializationType.Dib, constants.PolyglossyNotebookViewType));
     serializers.set(constants.JupyterViewType, createAndRegisterSerializer(commandsAndEvents.DocumentSerializationType.Ipynb, constants.JupyterNotebookViewType));
     return serializers;
 }
@@ -101,17 +102,19 @@ export function createAndRegisterFallbackNotebookSerializers(context: vscode.Ext
         deserializeNotebook(_content: Uint8Array, _token: vscode.CancellationToken): Promise<vscode.NotebookData> {
             const cellData = new vscode.NotebookCellData(
                 vscode.NotebookCellKind.Markup,
-                `## Polyglot Notebooks failed to activate\n\n${activationError}\n\nPlease check the **Polyglot Notebook : diagnostics** output channel for more details.`,
+                `## Polyglossy Notebooks failed to activate\n\n${activationError}\n\nPlease check the **Polyglossy Notebook : diagnostics** output channel for more details.`,
                 'markdown'
             );
             return Promise.resolve(new vscode.NotebookData([cellData]));
         },
         serializeNotebook(_data: vscode.NotebookData, _token: vscode.CancellationToken): Promise<Uint8Array> {
-            throw new Error('The Polyglot Notebooks extension failed to activate. Saving is disabled to prevent data loss.');
+            throw new Error('The Polyglossy Notebooks extension failed to activate. Saving is disabled to prevent data loss.');
         },
     };
     const notebookSerializer = vscode.workspace.registerNotebookSerializer(constants.NotebookViewType, serializer);
     context.subscriptions.push(notebookSerializer);
+    const polyglossyNotebookSerializer = vscode.workspace.registerNotebookSerializer(constants.PolyglossyNotebookViewType, serializer);
+    context.subscriptions.push(polyglossyNotebookSerializer);
 }
 
 function toVsCodeNotebookCellData(cell: commandsAndEvents.InteractiveDocumentElement): vscode.NotebookCellData {

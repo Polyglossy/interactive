@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,11 +8,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.CSharp.SignatureHelp;
+namespace Polyglossy.Interactive.CSharp.SignatureHelp;
 
 internal static class SignatureHelpGenerator
 {

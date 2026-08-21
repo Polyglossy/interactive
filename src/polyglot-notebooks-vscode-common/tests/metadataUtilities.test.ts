@@ -238,7 +238,7 @@ describe(`metadata utility tests`, async () => {
             metadata: {
                 metadata: {
                     kernelspec: {
-                        display_name: ".NET (F#)",
+                        display_name: "Polyglossy (F#)",
                         language: "F#",
                         name: ".net-fsharp",
                     },
@@ -385,7 +385,7 @@ describe(`metadata utility tests`, async () => {
                 notebookDocumentMetadata
             );
         expect(kernelspecMetadata).to.deep.equal({
-            display_name: ".NET (C#)",
+            display_name: "Polyglossy (C#)",
             language: "C#",
             name: ".net-csharp",
         });
@@ -404,7 +404,7 @@ describe(`metadata utility tests`, async () => {
                 notebookDocumentMetadata
             );
         expect(kernelspecMetadata).to.deep.equal({
-            display_name: ".NET (F#)",
+            display_name: "Polyglossy (F#)",
             language: "F#",
             name: ".net-fsharp",
         });
@@ -423,7 +423,7 @@ describe(`metadata utility tests`, async () => {
                 notebookDocumentMetadata
             );
         expect(kernelspecMetadata).to.deep.equal({
-            display_name: ".NET (PowerShell)",
+            display_name: "Polyglossy (PowerShell)",
             language: "PowerShell",
             name: ".net-pwsh",
         });
@@ -559,7 +559,7 @@ describe(`metadata utility tests`, async () => {
         expect(rawNotebookDocumentMetadata).to.deep.equal({
             metadata: {
                 kernelspec: {
-                    display_name: ".NET (F#)",
+                    display_name: "Polyglossy (F#)",
                     language: "F#",
                     name: ".net-fsharp",
                 },
@@ -708,7 +708,7 @@ describe(`metadata utility tests`, async () => {
             custom: {
                 metadata: {
                     kernelspec: {
-                        display_name: ".NET (C#)",
+                        display_name: "Polyglossy (C#)",
                         language: "C#",
                         name: ".net-csharp",
                     },
@@ -780,7 +780,7 @@ describe(`metadata utility tests`, async () => {
             custom: {
                 metadata: {
                     kernelspec: {
-                        display_name: ".NET (C#)",
+                        display_name: "Polyglossy (C#)",
                         language: "C#",
                         name: ".net-csharp",
                     },
@@ -854,7 +854,7 @@ describe(`metadata utility tests`, async () => {
                 cells: [],
                 metadata: {
                     kernelspec: {
-                        display_name: ".NET (C#)",
+                        display_name: "Polyglossy (C#)",
                         language: "C#",
                         name: ".net-csharp",
                     },

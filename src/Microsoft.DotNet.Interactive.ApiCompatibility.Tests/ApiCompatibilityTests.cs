@@ -1,27 +1,27 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
 using Assent;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.CSharpProject;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.DuckDB;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Journey;
-using Microsoft.DotNet.Interactive.Jupyter;
-using Microsoft.DotNet.Interactive.Kql;
-using Microsoft.DotNet.Interactive.Mermaid;
-using Microsoft.DotNet.Interactive.PackageManagement;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.SQLite;
-using Microsoft.DotNet.Interactive.SqlServer;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.CSharpProject;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.DuckDB;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Journey;
+using Polyglossy.Interactive.Jupyter;
+using Polyglossy.Interactive.Kql;
+using Polyglossy.Interactive.Mermaid;
+using Polyglossy.Interactive.PackageManagement;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.SQLite;
+using Polyglossy.Interactive.SqlServer;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.ApiCompatibility.Tests;
+namespace Polyglossy.Interactive.ApiCompatibility.Tests;
 
 [Trait("Category", "Contracts and serialization")]
 public class ApiCompatibilityTests

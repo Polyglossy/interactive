@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 public class DisplayedValue
 {

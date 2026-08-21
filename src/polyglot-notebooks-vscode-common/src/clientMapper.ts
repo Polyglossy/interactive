@@ -4,7 +4,7 @@
 import { ErrorOutputCreator, InteractiveClient } from "./interactiveClient";
 import { ReportChannel, Uri } from "./interfaces/vscode-like";
 import { CompositeKernel } from './polyglot-notebooks/compositeKernel';
-import { KernelCommandAndEventChannel } from "./DotnetInteractiveChannel";
+import { KernelCommandAndEventChannel } from "./PolyglossyInteractiveChannel";
 import { KernelReady, Logger } from "./polyglot-notebooks";
 
 export interface ClientMapperConfiguration {
@@ -131,8 +131,11 @@ export class ClientMapper {
         }
     }
 
-    isDotNetClient(uri: Uri): boolean {
+    isPolyglossyClient(uri: Uri): boolean {
         const key = ClientMapper.keyFromUri(uri);
         return this.clientMap.has(key);
     }
+
+    isDotNetClient = this.isPolyglossyClient;
 }
+

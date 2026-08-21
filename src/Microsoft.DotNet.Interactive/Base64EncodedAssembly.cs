@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 public class Base64EncodedAssembly
 {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -6,13 +6,13 @@ using System.Reflection;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Events;
 using Pocket;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests
+namespace Polyglossy.Interactive.Tests
 {
     public class StdIoKernelConnectorTests : IDisposable
     {
@@ -38,22 +38,22 @@ namespace Microsoft.DotNet.Interactive.Tests
             var currentAssemblyProjectName = Path.GetFileNameWithoutExtension(currentAssemblyPath);
             var currentAssemblyName = Path.GetFileName(currentAssemblyPath);
 
-            // Go from current test assembly path to the location of Microsoft.DotNet.Interactive.App.dll.
+            // Go from current test assembly path to the location of Polyglossy.Interactive.App.dll.
             //
             // When arcade is disabled:
-            // D:\interactive\src\Microsoft.DotNet.Interactive.NetFramework.Tests\bin\Debug\net472\Microsoft.DotNet.Interactive.NetFramework.Tests.dll ->
-            //     D:\interactive\src\dotnet-interactive\bin\debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
-            // D:\interactive\src\Microsoft.DotNet.Interactive.Tests\bin\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.Tests.dll ->
-            //     D:\interactive\src\dotnet-interactive\bin\debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
+            // D:\interactive\src\Polyglossy.Interactive.NetFramework.Tests\bin\Debug\net472\Polyglossy.Interactive.NetFramework.Tests.dll ->
+            //     D:\interactive\src\dotnet-interactive\bin\debug\<TargetFramework>net10.0</TargetFramework>\Polyglossy.Interactive.App.dll.
+            // D:\interactive\src\Polyglossy.Interactive.Tests\bin\Debug\<TargetFramework>net10.0</TargetFramework>\Polyglossy.Interactive.Tests.dll ->
+            //     D:\interactive\src\dotnet-interactive\bin\debug\<TargetFramework>net10.0</TargetFramework>\Polyglossy.Interactive.App.dll.
             //
             // When arcade is enabled:
-            // D:\interactive2\artifacts\bin\Microsoft.DotNet.Interactive.NetFramework.Tests\Debug\net472\Microsoft.DotNet.Interactive.NetFramework.Tests.dll ->
-            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
-            // D:\interactive2\artifacts\bin\Microsoft.DotNet.Interactive.Tests\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.Tests.dll ->
-            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
+            // D:\interactive2\artifacts\bin\Polyglossy.Interactive.NetFramework.Tests\Debug\net472\Polyglossy.Interactive.NetFramework.Tests.dll ->
+            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\<TargetFramework>net10.0</TargetFramework>\Polyglossy.Interactive.App.dll.
+            // D:\interactive2\artifacts\bin\Polyglossy.Interactive.Tests\Debug\<TargetFramework>net10.0</TargetFramework>\Polyglossy.Interactive.Tests.dll ->
+            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\<TargetFramework>net10.0</TargetFramework>\Polyglossy.Interactive.App.dll.
 
             var toolAppDllPath =
-                currentAssemblyPath.Replace(currentAssemblyName, "Microsoft.DotNet.Interactive.App.dll");
+                currentAssemblyPath.Replace(currentAssemblyName, "Polyglossy.Interactive.App.dll");
             toolAppDllPath = toolAppDllPath.Replace(currentAssemblyProjectName, "dotnet-interactive");
             toolAppDllPath = toolAppDllPath.Replace("net472", "<TargetFramework>net10.0</TargetFramework>");
 

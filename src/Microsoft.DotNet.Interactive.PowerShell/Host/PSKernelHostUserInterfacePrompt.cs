@@ -12,7 +12,7 @@ using System.Management.Automation.Host;
 using System.Security;
 using System.Text;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 public partial class PSKernelHostUserInterface
 {

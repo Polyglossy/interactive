@@ -1,9 +1,9 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Text.RegularExpressions;
 
-namespace Microsoft.DotNet.Interactive.Mermaid.Tests;
+namespace Polyglossy.Interactive.Mermaid.Tests;
 
 internal static class StringExtensions
 {

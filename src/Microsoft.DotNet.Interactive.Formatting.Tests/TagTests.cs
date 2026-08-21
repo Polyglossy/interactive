@@ -4,7 +4,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class TagTests : FormatterTestBase
 {

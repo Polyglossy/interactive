@@ -21,7 +21,7 @@ try {
             # ...find latest tool version...
             $serviceDefinition = Invoke-RestMethod -Uri $toolFeed
             $queryUrl = ($serviceDefinition."resources" | Where-Object -Property "@type" -Match ".*SearchQueryService.*" | Select-Object -First 1)."@id"
-            $packageQuery = $queryUrl + "?q=Microsoft.dotnet-interactive"
+            $packageQuery = $queryUrl + "?q=polyglossy.interactive.tool"
             Write-Host "Using package query URL $packageQuery"
             $packageQueryResults = Invoke-RestMethod -Uri $packageQuery
             $newToolVersion = ($packageQueryResults."data" | Select-Object -First 1)."version"

@@ -12,7 +12,7 @@ import * as constants from './constants';
 import * as vscodeUtilities from './vscodeUtilities';
 import { ServiceCollection } from './serviceCollection';
 
-const selectKernelCommandName = 'polyglot-notebook.selectCellKernel';
+const selectKernelCommandName = 'polyglossy-notebook.selectCellKernel';
 
 class KernelSelectorItem implements vscode.QuickPickItem {
     constructor(label: string) {
@@ -26,7 +26,7 @@ class KernelSelectorItem implements vscode.QuickPickItem {
 }
 
 export function registerNotbookCellStatusBarItemProvider(context: vscode.ExtensionContext, clientMapper: ClientMapper) {
-    const cellItemProvider = new DotNetNotebookCellStatusBarItemProvider(clientMapper);
+    const cellItemProvider = new PolyglossyNotebookCellStatusBarItemProvider(clientMapper);
     clientMapper.onClientCreate((_uri, client) => {
         client.channel.receiver.subscribe({
             next: envelope => {
@@ -37,8 +37,9 @@ export function registerNotbookCellStatusBarItemProvider(context: vscode.Extensi
         });
     });
     context.subscriptions.push(vscode.notebooks.registerNotebookCellStatusBarItemProvider(constants.NotebookViewType, cellItemProvider));
+    context.subscriptions.push(vscode.notebooks.registerNotebookCellStatusBarItemProvider(constants.PolyglossyNotebookViewType, cellItemProvider));
     context.subscriptions.push(vscode.notebooks.registerNotebookCellStatusBarItemProvider(constants.JupyterViewType, cellItemProvider));
-    context.subscriptions.push(vscode.commands.registerCommand(selectKernelCommandName, async (cell?: vscode.NotebookCell) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.selectCellKernel', async (cell?: vscode.NotebookCell) => {
         if (cell) {
             const client = await clientMapper.tryGetClient(cell.notebook.uri);
             if (client) {
@@ -94,6 +95,10 @@ export function registerNotbookCellStatusBarItemProvider(context: vscode.Extensi
             }
         }
     }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.selectCellKernel', async (cell?: vscode.NotebookCell) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.selectCellKernel', cell);
+    }));
 }
 
 function getNotebookDcoumentFromCellDocument(cellDocument: vscode.TextDocument): vscode.NotebookDocument | undefined {
@@ -101,7 +106,7 @@ function getNotebookDcoumentFromCellDocument(cellDocument: vscode.TextDocument):
     return notebookDocument;
 }
 
-class DotNetNotebookCellStatusBarItemProvider {
+class PolyglossyNotebookCellStatusBarItemProvider {
     private _onDidChangeCellStatusBarItemsEmitter: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
 
     onDidChangeCellStatusBarItems: vscode.Event<void> = this._onDidChangeCellStatusBarItemsEmitter.event;
@@ -110,7 +115,7 @@ class DotNetNotebookCellStatusBarItemProvider {
     }
 
     async provideCellStatusBarItems(cell: vscode.NotebookCell, token: vscode.CancellationToken): Promise<vscode.NotebookCellStatusBarItem[]> {
-        if (!metadataUtilities.isDotNetNotebook(cell.notebook) || cell.document.languageId === 'markdown') {
+        if (!metadataUtilities.isPolyglossyNotebook(cell.notebook) || cell.document.languageId === 'markdown') {
             return [];
         }
 

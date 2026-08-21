@@ -7,7 +7,7 @@ using FluentAssertions.Primitives;
 using System.Linq;
 using System;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+namespace Polyglossy.Interactive.Formatting.Tests.Utility;
 
 public static class AssertionExtensions
 {

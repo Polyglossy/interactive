@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Kusto.Data;
 using Kusto.Data.Security;
-using Microsoft.DotNet.Interactive.SqlServer;
+using Polyglossy.Interactive.SqlServer;
 
-namespace Microsoft.DotNet.Interactive.Kql;
+namespace Polyglossy.Interactive.Kql;
 
 internal class KqlKernelConnector
 {

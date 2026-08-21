@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Parsing;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 internal static class KernelEventExtensions
 {

@@ -2,14 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Parsing;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.ValueSharing;
+namespace Polyglossy.Interactive.ValueSharing;
 
 internal class SetDirectiveCommand : KernelCommand
 {

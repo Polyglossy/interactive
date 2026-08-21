@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class WorkspaceServerExecutionTests : WorkspaceServerTestsCore
 {

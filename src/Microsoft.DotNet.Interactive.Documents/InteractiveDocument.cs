@@ -11,12 +11,12 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Documents.Json;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Documents.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Documents.Json;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Documents.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Documents;
+namespace Polyglossy.Interactive.Documents;
 
 public class InteractiveDocument : IEnumerable
 {

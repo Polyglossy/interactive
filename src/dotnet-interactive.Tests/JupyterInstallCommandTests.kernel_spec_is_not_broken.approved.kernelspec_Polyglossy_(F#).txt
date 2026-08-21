@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "dotnet",
+    "polyglossy-interactive",
+    "jupyter",
+    "--default-kernel",
+    "fsharp",
+    "{connection_file}",
+    "--http-port-range",
+    "100-400"
+  ],
+  "display_name": "Polyglossy (F#)",
+  "language": "F#",
+  "metadata": {
+    "vscode": {
+      "extension_id": "polyglossy-tools.polyglossy-interactive-vscode",
+      "kernel_id": "polyglossy-interactive"
+    }
+  }
+}

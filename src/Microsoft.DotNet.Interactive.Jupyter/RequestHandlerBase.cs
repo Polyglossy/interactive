@@ -7,12 +7,12 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public abstract class RequestHandlerBase<T> : IDisposable
     where T : RequestMessage

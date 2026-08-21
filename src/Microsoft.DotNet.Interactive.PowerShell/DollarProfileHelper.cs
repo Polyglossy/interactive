@@ -3,7 +3,7 @@
 
 using System.IO;
 
-namespace Microsoft.DotNet.Interactive.PowerShell;
+namespace Polyglossy.Interactive.PowerShell;
 
 using System.Management.Automation;
 using System.Reflection;

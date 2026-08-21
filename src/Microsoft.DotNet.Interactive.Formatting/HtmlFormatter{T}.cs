@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Utility;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using Polyglossy.Interactive.Utility;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 public class HtmlFormatter<T> : TypeFormatter<T>
 {

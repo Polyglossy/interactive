@@ -1,20 +1,21 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reflection;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
-namespace Microsoft.DotNet.Interactive.Http;
+namespace Polyglossy.Interactive.Http;
 
 public class FileProvider : IFileProvider, IDisposable
 {
-    private readonly EmbeddedFileProvider _root;
+    private readonly IReadOnlyList<EmbeddedFileProvider> _rootProviders;
     private readonly IDisposable _eventSubscription;
     private readonly ConcurrentDictionary<string, EmbeddedFileProvider> _providers = new();
 
@@ -22,7 +23,13 @@ public class FileProvider : IFileProvider, IDisposable
     {
         if (kernel is null) throw new ArgumentNullException(nameof(kernel));
 
-        _root = new EmbeddedFileProvider(rootProviderAssembly ?? typeof(FileProvider).Assembly);
+        var rootAssembly = rootProviderAssembly ?? typeof(FileProvider).Assembly;
+        _rootProviders = new[]
+        {
+            new EmbeddedFileProvider(rootAssembly),
+            new EmbeddedFileProvider(rootAssembly, "Microsoft.DotNet.Interactive.App")
+        };
+
         _eventSubscription = kernel.KernelEvents
             .OfType<KernelExtensionLoaded>()
             .Subscribe(@event => RegisterExtension(@event.KernelExtension));
@@ -40,12 +47,24 @@ public class FileProvider : IFileProvider, IDisposable
     public IFileInfo GetFileInfo(string subpath)
     {
         var (provider, path) = GetProviderAndPath(subpath);
+        if (provider is EmbeddedFileProvider)
+        {
+            foreach (var rootProvider in _rootProviders)
+            {
+                var fileInfo = rootProvider.GetFileInfo(path);
+                if (fileInfo.Exists)
+                {
+                    return fileInfo;
+                }
+            }
+        }
+
         return provider.GetFileInfo(path);
     }
 
     private (IFileProvider provider, string path) GetProviderAndPath(string subpath)
     {
-        IFileProvider provider = _root;
+        IFileProvider provider = _rootProviders[0];
         var path = subpath;
         var parts = subpath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
         if (parts[0] == "extensions")

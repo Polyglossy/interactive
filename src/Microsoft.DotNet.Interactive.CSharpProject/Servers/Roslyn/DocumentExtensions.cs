@@ -4,7 +4,7 @@
 using System;
 using Microsoft.CodeAnalysis;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Servers.Roslyn;
+namespace Polyglossy.Interactive.CSharpProject.Servers.Roslyn;
 
 internal static class DocumentExtensions
 {

@@ -14,27 +14,27 @@ using FluentAssertions;
 using FluentAssertions.Equivalency;
 using Microsoft.AspNetCore.Html;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.App.Commands;
-using Microsoft.DotNet.Interactive.App.Connection;
-using Microsoft.DotNet.Interactive.App.Events;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.App.Commands;
+using Polyglossy.Interactive.App.Connection;
+using Polyglossy.Interactive.App.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.ValueSharing;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
-using CommandLineParser = Microsoft.DotNet.Interactive.App.CommandLine.CommandLineParser;
+using CommandLineParser = Polyglossy.Interactive.App.CommandLine.CommandLineParser;
 
-namespace Microsoft.DotNet.Interactive.Tests.Connection;
+namespace Polyglossy.Interactive.Tests.Connection;
 
 [Trait("Category", "Contracts and serialization")]
 public class SerializationTests
@@ -193,7 +193,7 @@ public class SerializationTests
 
         IEnumerable<KernelCommand> commands()
         {
-            yield return new AddPackage("Microsoft.DotNet.Interactive", "*-*");
+            yield return new AddPackage("Polyglossy.Interactive", "*-*");
 
             yield return new AddPackageSource("https://api.nuget.org/v3/index.json");
 

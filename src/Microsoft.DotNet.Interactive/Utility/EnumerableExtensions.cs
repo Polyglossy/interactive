@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 internal static class EnumerableExtensions
 {

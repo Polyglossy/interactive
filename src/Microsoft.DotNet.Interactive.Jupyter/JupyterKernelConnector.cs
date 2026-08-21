@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.CommandEvents;
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging.Comms;
+using Polyglossy.Interactive.Jupyter.CommandEvents;
+using Polyglossy.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Jupyter.Messaging.Comms;
 using System;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 internal class JupyterKernelConnector
 {

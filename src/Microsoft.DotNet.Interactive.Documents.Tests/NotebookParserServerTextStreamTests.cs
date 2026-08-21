@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.App.ParserServer;
+using Polyglossy.Interactive.App.ParserServer;
 using Nerdbank.Streams;
 using Pocket;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public class NotebookParserServerTextStreamTests : IDisposable
 {

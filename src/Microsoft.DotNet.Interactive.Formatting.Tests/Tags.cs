@@ -3,7 +3,7 @@
 
 using System.IO;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public static class Tags
 {

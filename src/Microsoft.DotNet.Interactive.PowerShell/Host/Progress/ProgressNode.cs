@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host.Progress;
+namespace Polyglossy.Interactive.PowerShell.Host.Progress;
 
 /// <summary>
 /// Indicates the various layouts for rendering a particular node.  Each style is progressively less terse.

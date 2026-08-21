@@ -11,19 +11,19 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.PowerShell.Host;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.PowerShell.Host;
+using Polyglossy.Interactive.ValueSharing;
 using Microsoft.PowerShell;
 using Microsoft.PowerShell.Commands;
 
-namespace Microsoft.DotNet.Interactive.PowerShell;
+namespace Polyglossy.Interactive.PowerShell;
 
 using System.Management.Automation;
 
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
 public class PowerShellKernel :
     Kernel,

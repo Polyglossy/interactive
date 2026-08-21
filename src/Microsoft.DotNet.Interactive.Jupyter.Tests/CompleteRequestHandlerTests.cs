@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 using FluentAssertions.Extensions;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Tests.Utility;
 
 using Xunit;
 using Xunit.Abstractions;
 
-using ZeroMQMessage = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using ZeroMQMessage = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 public class CompleteRequestHandlerTests : JupyterRequestHandlerTestBase
 {

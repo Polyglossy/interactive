@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Extensions;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Utility;
 
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 #pragma warning disable xUnit1000
 
 public class CancelCommandTests : LanguageKernelTestBase
@@ -34,7 +34,7 @@ public class CancelCommandTests : LanguageKernelTestBase
         var cancelCommand = new Cancel();
 
         var commandToCancel = new SubmitCode(@"
-using Microsoft.DotNet.Interactive;
+using Polyglossy.Interactive;
 
 while(!KernelInvocationContext.Current.CancellationToken.IsCancellationRequested){ await Task.Delay(10); }", targetKernelName: "csharp");
 
@@ -59,7 +59,7 @@ while(!KernelInvocationContext.Current.CancellationToken.IsCancellationRequested
             await kernel.SubmitCodeAsync(" ");
 
             var commandToCancel = new SubmitCode("""
-                using Microsoft.DotNet.Interactive;
+                using Polyglossy.Interactive;
                 await Task.Delay(10);
                 while(!KernelInvocationContext.Current.CancellationToken.IsCancellationRequested)
                 { 
@@ -111,7 +111,7 @@ while(!KernelInvocationContext.Current.CancellationToken.IsCancellationRequested
             var cancelCommand = new Cancel();
 
             var commandToCancel = new SubmitCode(@"
-using Microsoft.DotNet.Interactive;
+using Polyglossy.Interactive;
 var cancellationToken = KernelInvocationContext.Current.CancellationToken;
 while(!cancellationToken.IsCancellationRequested){ 
     await Task.Delay(10); 
@@ -153,7 +153,7 @@ while(!cancellationToken.IsCancellationRequested){
 
             var commandToCancel = new SubmitCode(@"
 #!csharp 
-using Microsoft.DotNet.Interactive;
+using Polyglossy.Interactive;
 var cancellationToken = KernelInvocationContext.Current.CancellationToken;
 while(!cancellationToken.IsCancellationRequested){ 
     await Task.Delay(10); 

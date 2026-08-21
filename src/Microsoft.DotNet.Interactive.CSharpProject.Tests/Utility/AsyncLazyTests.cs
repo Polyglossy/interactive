@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class AsyncLazyTests
 {

@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
 using Xunit;
 using System.Globalization;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.App.Tests
+namespace Polyglossy.Interactive.App.Tests
 {
     public class LocalizationTests
     {
@@ -18,7 +18,7 @@ namespace Microsoft.DotNet.Interactive.App.Tests
         {
             Environment.SetEnvironmentVariable("DOTNET_CLI_CULTURE", "es-ES");
 
-            Microsoft.DotNet.Interactive.App.Program.SetCultureFromEnvironmentVariables();
+            Polyglossy.Interactive.App.Program.SetCultureFromEnvironmentVariables();
 
             var culture = new CultureInfo("es-ES");
             CultureInfo.CurrentCulture.Name.Should().Be(culture.Name);
@@ -29,7 +29,7 @@ namespace Microsoft.DotNet.Interactive.App.Tests
         {
             Environment.SetEnvironmentVariable("DOTNET_CLI_UI_LANGUAGE", "es-ES");
 
-            Microsoft.DotNet.Interactive.App.Program.SetCultureFromEnvironmentVariables();
+            Polyglossy.Interactive.App.Program.SetCultureFromEnvironmentVariables();
 
             var culture = new CultureInfo("es-ES");
             CultureInfo.CurrentUICulture.Name.Should().Be(culture.Name);

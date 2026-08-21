@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Html;
 
-namespace Microsoft.DotNet.Interactive.DuckDB;
+namespace Polyglossy.Interactive.DuckDB;
 
 public class KernelExtension
 {

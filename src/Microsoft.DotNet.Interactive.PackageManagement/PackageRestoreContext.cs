@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,9 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using FSharp.Compiler.DependencyManager;
 using Pocket;
-using static Pocket.Logger;
 
-namespace Microsoft.DotNet.Interactive.PackageManagement;
+namespace Polyglossy.Interactive.PackageManagement;
 
 public class PackageRestoreContext : IDisposable
 {
@@ -163,8 +162,7 @@ public class PackageRestoreContext : IDisposable
             }
             catch (Exception ex)
             {
-                Log.Error("Exception while trying to get package name and version {exception} for {packageName} and {packageVersion}",
-                    ex, packageName, packageVersion);
+                _ = ex;
             }
         }
 
@@ -219,7 +217,7 @@ public class PackageRestoreContext : IDisposable
             return;
         }
 
-        Log.Info("OnAssemblyLoad: {location}", args.LoadedAssembly.Location);
+        // Assembly load notifications are intentionally silent during restore.
     }
 
     private IResolveDependenciesResult Resolve(

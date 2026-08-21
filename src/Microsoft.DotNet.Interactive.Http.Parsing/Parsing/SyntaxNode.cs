@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 using Diagnostic = CodeAnalysis.Diagnostic;
 

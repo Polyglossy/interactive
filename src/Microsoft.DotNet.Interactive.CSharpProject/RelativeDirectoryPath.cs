@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public class RelativeDirectoryPath :
     RelativePath,

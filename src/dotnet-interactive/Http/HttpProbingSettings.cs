@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace Microsoft.DotNet.Interactive.Http;
+namespace Polyglossy.Interactive.Http;
 
 public class HttpProbingSettings
 {

@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Data.SqlClient.Server;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Directives;
 using System;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.SqlServer;
+namespace Polyglossy.Interactive.SqlServer;
 
 internal class MsSqlKernel : ToolsServiceKernel
 {

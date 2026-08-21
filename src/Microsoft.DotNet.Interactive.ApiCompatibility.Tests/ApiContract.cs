@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Microsoft.DotNet.Interactive.ApiCompatibility.Tests;
+namespace Polyglossy.Interactive.ApiCompatibility.Tests;
 
 internal static class ApiContract
 {

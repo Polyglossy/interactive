@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests
+namespace Polyglossy.Interactive.Formatting.Tests
 {
     public class Widget
     {

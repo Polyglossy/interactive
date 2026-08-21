@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.DotNet.Interactive.SqlServer;
+namespace Polyglossy.Interactive.SqlServer;
 
 public enum CompletionTriggerKind {
     /**

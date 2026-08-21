@@ -4,10 +4,10 @@
 #nullable enable
 using System;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.Connection;
+namespace Polyglossy.Interactive.Connection;
 
 internal class KernelDirectiveConverter : JsonConverter<KernelDirective>
 {

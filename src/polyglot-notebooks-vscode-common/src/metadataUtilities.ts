@@ -23,7 +23,7 @@ export function isIpynbNotebook(notebookDocument: vscodeLike.NotebookDocument) {
     return notebookDocument.uri.fsPath.toLowerCase().endsWith('.ipynb');
 }
 
-export function isDotNetNotebook(notebook: vscodeLike.NotebookDocument): boolean {
+export function isPolyglossyNotebook(notebook: vscodeLike.NotebookDocument): boolean {
     const notebookUriString = notebook.uri.toString();
     if (notebookUriString.endsWith('.dib') || notebook.uri.fsPath.endsWith('.dib')) {
         return true;
@@ -37,6 +37,8 @@ export function isDotNetNotebook(notebook: vscodeLike.NotebookDocument): boolean
     // doesn't look like us
     return false;
 }
+
+export const isDotNetNotebook = isPolyglossyNotebook;
 
 export function getNotebookCellMetadataFromInteractiveDocumentElement(interactiveDocumentElement: commandsAndEvents.InteractiveDocumentElement): NotebookCellMetadata {
     const cellMetadata: NotebookCellMetadata = {};
@@ -255,20 +257,20 @@ export function getKernelspecMetadataFromNotebookDocumentMetadata(notebookDocume
     switch (notebookDocumentMetadata.kernelInfo.defaultKernelName) {
         case 'fsharp':
             return {
-                display_name: '.NET (F#)',
+                display_name: 'Polyglossy (F#)',
                 language: 'F#',
                 name: '.net-fsharp'
             };
         case 'pwsh':
             return {
-                display_name: '.NET (PowerShell)',
+                display_name: 'Polyglossy (PowerShell)',
                 language: 'PowerShell',
                 name: '.net-pwsh'
             };
         case 'csharp':
         default:
             return {
-                display_name: '.NET (C#)',
+                display_name: 'Polyglossy (C#)',
                 language: 'C#',
                 name: '.net-csharp'
             };

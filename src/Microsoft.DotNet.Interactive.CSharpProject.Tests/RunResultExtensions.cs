@@ -6,7 +6,7 @@ using System.Linq;
 using FluentAssertions;
 using FluentAssertions.Execution;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public static class RunResultExtensions
 {

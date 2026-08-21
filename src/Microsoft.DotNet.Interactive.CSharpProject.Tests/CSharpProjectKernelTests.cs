@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -6,18 +6,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject.Events;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharpProject.Commands;
+using Polyglossy.Interactive.CSharpProject.Events;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Pocket.For.Xunit;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 [Collection(nameof(PrebuildFixture))]
 [LogToPocketLogger]

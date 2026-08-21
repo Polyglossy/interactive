@@ -3,7 +3,7 @@
 
 using Newtonsoft.Json;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public class RequestDescriptors
 {

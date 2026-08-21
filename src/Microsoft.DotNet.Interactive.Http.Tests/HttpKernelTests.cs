@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
-using Microsoft.DotNet.Interactive.Http.Tests.Utility;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Http.Tests.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,9 +19,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Formatter = Microsoft.DotNet.Interactive.Formatting.Formatter;
+using Formatter = Polyglossy.Interactive.Formatting.Formatter;
 
-namespace Microsoft.DotNet.Interactive.Http.Tests;
+namespace Polyglossy.Interactive.Http.Tests;
 
 public partial class HttpKernelTests
 {

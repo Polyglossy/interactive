@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Protocol;
+namespace Polyglossy.Interactive.Jupyter.Protocol;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
 sealed class JupyterMessageTypeAttribute : Attribute

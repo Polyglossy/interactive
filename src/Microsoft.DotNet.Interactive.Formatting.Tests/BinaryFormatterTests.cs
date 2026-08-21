@@ -4,10 +4,10 @@
 using System;
 using System.IO;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class BinaryFormatterTests : FormatterTestBase
 {

@@ -8,8 +8,8 @@ namespace Recipes;
 internal static class JsonSerializationExtensions
 {
     public static string ToJson(this object source) =>
-        JsonSerializer.Serialize(source, Microsoft.DotNet.Interactive.Connection.Serializer.JsonSerializerOptions);
+        JsonSerializer.Serialize(source, Polyglossy.Interactive.Connection.Serializer.JsonSerializerOptions);
 
     public static T FromJsonTo<T>(this string json) =>
-        JsonSerializer.Deserialize<T>(json, Microsoft.DotNet.Interactive.Connection.Serializer.JsonSerializerOptions);
+        JsonSerializer.Deserialize<T>(json, Polyglossy.Interactive.Connection.Serializer.JsonSerializerOptions);
 }

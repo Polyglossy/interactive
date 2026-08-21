@@ -1,15 +1,15 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 internal partial class JupyterKernel : Kernel
 {

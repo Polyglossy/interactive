@@ -7,7 +7,7 @@ using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Management.Automation.Runspaces;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 public class PSKernelHost : PSHost, IHostSupportsInteractiveSession
 {

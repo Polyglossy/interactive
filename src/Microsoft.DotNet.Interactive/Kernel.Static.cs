@@ -8,12 +8,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 public partial class Kernel
 {

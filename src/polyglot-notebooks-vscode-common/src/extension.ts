@@ -12,7 +12,7 @@ import * as vscodeLike from './interfaces/vscode-like';
 import { ClientMapper } from './clientMapper';
 import { MessageClient } from './messageClient';
 
-import { StdioDotnetInteractiveChannel } from './stdioDotnetInteractiveChannel';
+import { PolyglossyStdioInteractiveChannel } from './stdioPolyglossyInteractiveChannel';
 import { registerLanguageProviders } from './languageProvider';
 import { registerNotbookCellStatusBarItemProvider } from './notebookCellStatusBarItemProvider';
 import { registerAcquisitionCommands, registerKernelCommands, registerFileCommands } from './commands';
@@ -20,7 +20,7 @@ import { registerAcquisitionCommands, registerKernelCommands, registerFileComman
 import { languageToCellKind } from './interactiveNotebook';
 import { InteractiveLaunchOptions, InstallInteractiveArgs } from './interfaces';
 
-import { createOutput, debounce, getDotNetVersionOrThrow, getWorkingDirectoryForNotebook, isVersionGreaterOrEqual, processArguments } from './utilities';
+import { createOutput, debounce, getConfigurationValue, getDotNetVersionOrThrow, getWorkingDirectoryForNotebook, isVersionGreaterOrEqual, processArguments } from './utilities';
 import { OutputChannelAdapter } from './OutputChannelAdapter';
 
 import * as notebookControllers from './notebookControllers';
@@ -35,7 +35,7 @@ import { Logger, LogLevel } from './polyglot-notebooks/logger';
 import { ChildProcessLineAdapter } from './childProcessLineAdapter';
 import { NotebookParserServer } from './notebookParserServer';
 import { registerVariableExplorer } from './variableExplorer';
-import { KernelCommandAndEventChannel } from './DotnetInteractiveChannel';
+import { KernelCommandAndEventChannel } from './PolyglossyInteractiveChannel';
 import { ActiveNotebookTracker } from './activeNotebookTracker';
 import * as metadataUtilities from './metadataUtilities';
 import * as constants from './constants';
@@ -70,13 +70,12 @@ const disposables: (() => void)[] = [];
 let surveryBanner: SurveyBanner;
 
 export async function activate(context: vscode.ExtensionContext) {
-    const diagnosticsChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglot Notebook : diagnostics'));
-    const loggerChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglot Notebook : logger'));
+    const diagnosticsChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglossy Notebook : diagnostics'));
+    const loggerChannel = new OutputChannelAdapter(vscode.window.createOutputChannel('Polyglossy Notebook : logger'));
     DotNetPathManager.setOutputChannelAdapter(diagnosticsChannel);
 
     Logger.configure('extension host', logEntry => {
-        const polyglotConfig = vscode.workspace.getConfiguration('polyglot-notebook');
-        const loggerLevelString = polyglotConfig.get<string>('logLevel') || LogLevel[LogLevel.Error];
+        const loggerLevelString = getConfigurationValue<string>('logLevel', constants.PolyglotConfigurationSectionName, constants.LegacyPolyglotConfigurationSectionName) || LogLevel[LogLevel.Error];
         const loggerLevelKey = loggerLevelString as keyof typeof LogLevel;
         const logLevel = LogLevel[loggerLevelKey];
         if (logEntry.logLevel >= logLevel) {
@@ -95,20 +94,19 @@ export async function activate(context: vscode.ExtensionContext) {
 }
 
 async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel: OutputChannelAdapter) {
-    const dotnetConfig = vscode.workspace.getConfiguration(constants.DotnetConfigurationSectionName);
-    const polyglotConfig = vscode.workspace.getConfiguration(constants.PolyglotConfigurationSectionName);
+    const dotnetConfig = {
+        get<T>(key: string) {
+            return getConfigurationValue<T>(key, constants.PolyglossyConfigurationSectionName, constants.LegacyDotnetConfigurationSectionName);
+        }
+    };
+    const polyglotConfig = {
+        get<T>(key: string) {
+            return getConfigurationValue<T>(key, constants.PolyglotConfigurationSectionName, constants.LegacyPolyglotConfigurationSectionName);
+        }
+    };
     const minDotNetSdkVersion = '10.0';
 
     await waitForSdkPackExtension();
-
-    // show deprecation notice on first activation
-    const deprecationShownKey = 'polyglotNotebooks.deprecationNoticeShown';
-    const hasShownDeprecation = context.globalState.get<boolean>(deprecationShownKey, false);
-    if (!hasShownDeprecation) {
-        const helpServiceInstance = new helpService.HelpService(context);
-        await helpServiceInstance.showHelpPage(helpService.Deprecation);
-        await context.globalState.update(deprecationShownKey, true);
-    }
 
     // this must happen early, because some following functions use the acquisition command
     await registerAcquisitionCommands(context, diagnosticsChannel);
@@ -128,7 +126,7 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
         vscode.window.showErrorMessage(`Please install the .NET SDK version ${minDotNetSdkVersion} from https://dotnet.microsoft.com/en-us/download/dotnet/${minDotNetSdkVersion}`);
     }
 
-    if (showHelpPage && hasShownDeprecation) {
+    if (showHelpPage) {
         const helpServiceInstance = new helpService.HelpService(context);
         await helpServiceInstance.showHelpPageAndThrow(helpService.DotNetVersion);
     }
@@ -139,8 +137,6 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
     context.subscriptions.push(vscode.languages.registerDocumentSemanticTokensProvider(semanticTokens.selector, tokensProvider, tokensProvider.semanticTokensLegend));
 
     async function kernelChannelCreator(notebookUri: vscodeLike.Uri): Promise<{ channel: KernelCommandAndEventChannel, kernelReady: commandsAndEvents.KernelReady }> {
-        const dotnetConfig = vscode.workspace.getConfiguration(constants.DotnetConfigurationSectionName);
-        const polyglotConfig = vscode.workspace.getConfiguration(constants.PolyglotConfigurationSectionName);
         const launchOptions = await getInteractiveLaunchOptions();
         if (!launchOptions) {
             throw new Error(`Unable to get interactive launch options.  Please see the '${diagnosticsChannel.getName()}' output window for details.`);
@@ -164,7 +160,7 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
 
         const processStart = processArguments(argsTemplate, workingDirectory, DotNetPathManager.getDotNetPath(), launchOptions!.workingDirectory, environmentVariables);
 
-        const channel = new StdioDotnetInteractiveChannel(notebookUri.toString(), processStart, diagnosticsChannel, (pid, code, signal) => {
+        const channel = new PolyglossyStdioInteractiveChannel(notebookUri.toString(), processStart, diagnosticsChannel, (pid, code, signal) => {
             clientMapper.closeClient(notebookUri, false);
         });
 
@@ -364,27 +360,27 @@ async function activateCore(context: vscode.ExtensionContext, diagnosticsChannel
             switch (uri.path) {
                 case '/newNotebook':
                     // Examples:
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/newNotebook?as=dib
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/newNotebook?as=ipynb
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/newNotebook?as=dib
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/newNotebook?as=ipynb
                     const asType = params.get('as');
-                    vscode.commands.executeCommand('dotnet-interactive.acquire').then(() => {
+                    vscode.commands.executeCommand('polyglossy-interactive.acquire').then(() => {
                         const commandName = asType === 'ipynb'
-                            ? 'polyglot-notebook.newNotebookIpynb'
-                            : 'polyglot-notebook.newNotebookDib';
+                            ? 'polyglossy-notebook.newNotebookIpynb'
+                            : 'polyglossy-notebook.newNotebookDib';
                         vscode.commands.executeCommand(commandName).then(() => { });
                     });
                     break;
                 case '/openNotebook':
                     // Open a local notebook
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/openNotebook?path=C%3A%5Cpath%5Cto%5Cnotebook.dib
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/openNotebook?path=C%3A%5Cpath%5Cto%5Cnotebook.dib
                     // New untitled notebook from remote source
-                    //   vscode://ms-dotnettools.dotnet-interactive-vscode/openNotebook?url=http%3A%2F%2Fexample.com%2Fnotebook.dib
+                    //   vscode://polyglossy-tools.polyglossy-interactive-vscode/openNotebook?url=http%3A%2F%2Fexample.com%2Fnotebook.dib
                     const notebookPath = params.get('path');
                     const url = params.get('url');
                     const notebookFormat = params.get('notebookFormat');
                     if (notebookPath) {
-                        vscode.commands.executeCommand('dotnet-interactive.acquire').then(() => {
-                            vscode.commands.executeCommand('polyglot-notebook.openNotebook', vscode.Uri.file(notebookPath)).then(() => { });
+                        vscode.commands.executeCommand('polyglossy-interactive.acquire').then(() => {
+                            vscode.commands.executeCommand('polyglossy-notebook.openNotebook', vscode.Uri.file(notebookPath)).then(() => { });
                         });
                     } else if (url) {
                         openNotebookFromUrl(url, notebookFormat, serializerMap, diagnosticsChannel).then(() => { });
@@ -440,12 +436,12 @@ function registerWithVsCode(context: vscode.ExtensionContext, clientMapper: Clie
         preloadUris,
         createErrorOutput,
     };
-    context.subscriptions.push(new notebookControllers.DotNetNotebookKernel(config, tokensProvider));
+    context.subscriptions.push(new notebookControllers.PolyglossyNotebookKernel(config, tokensProvider));
     return notebookSerializers.createAndRegisterNotebookSerializers(context, parserServer);
 }
 
 async function openNotebookFromUrl(notebookUrl: string, notebookFormat: string | null, serializerMap: Map<string, vscode.NotebookSerializer>, diagnosticsChannel: OutputChannelAdapter): Promise<void> {
-    await vscode.commands.executeCommand('dotnet-interactive.acquire');
+    await vscode.commands.executeCommand('polyglossy-interactive.acquire');
 
     try {
         Logger.default.info(`Opening notebook from URL: ${notebookUrl}`);
@@ -484,10 +480,8 @@ async function openNotebookFromUrl(notebookUrl: string, notebookFormat: string |
         let viewType: string | undefined = undefined;
         switch (notebookFormat) {
             case 'dib':
-                viewType = constants.NotebookViewType;
-                break;
             case 'ipynb':
-                viewType = constants.JupyterViewType;
+                viewType = constants.getNotebookViewTypeForFormat(notebookFormat);
                 break;
             default:
                 throw new Error(`Unsupported notebook format: ${notebookFormat}`);
@@ -531,6 +525,7 @@ async function getInteractiveLaunchOptions(): Promise<InteractiveLaunchOptions |
     const installArgs: InstallInteractiveArgs = {
         dotnetPath: DotNetPathManager.getDotNetPath(),
     };
-    const launchOptions = await vscode.commands.executeCommand<InteractiveLaunchOptions>('dotnet-interactive.acquire', installArgs);
+    const launchOptions = await vscode.commands.executeCommand<InteractiveLaunchOptions>('polyglossy-interactive.acquire', installArgs);
     return launchOptions;
 }
+

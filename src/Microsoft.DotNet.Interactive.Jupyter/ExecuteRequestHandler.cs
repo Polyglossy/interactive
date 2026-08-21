@@ -8,14 +8,14 @@ using System.Reactive.Concurrency;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using Recipes;
-using ZeroMQMessage = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using ZeroMQMessage = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class ExecuteRequestHandler : RequestHandlerBase<ExecuteRequest>
 {

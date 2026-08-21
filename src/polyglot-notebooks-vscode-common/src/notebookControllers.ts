@@ -8,7 +8,7 @@ import * as vscodeLike from './interfaces/vscode-like';
 import * as diagnostics from './diagnostics';
 import * as vscodeUtilities from './vscodeUtilities';
 import { reshapeOutputValueForVsCode } from './interfaces/utilities';
-import { selectDotNetInteractiveKernelForJupyter } from './commands';
+import { selectPolyglossyInteractiveKernelForJupyter } from './commands';
 import { ErrorOutputCreator, InteractiveClient } from './interactiveClient';
 import { LogEntry, Logger } from './polyglot-notebooks/logger';
 import { isKernelCommandEnvelopeModel, isKernelEventEnvelope, isKernelEventEnvelopeModel, KernelCommandOrEventEnvelope } from './polyglot-notebooks/connection';
@@ -23,18 +23,21 @@ const executionTasks: Map<string, vscode.NotebookCellExecution> = new Map();
 const standardOutputMimeType = 'application/vnd.code.notebook.stdout';
 const standardErrorMimeType = 'application/vnd.code.notebook.stderr';
 
-export interface DotNetNotebookKernelConfiguration {
+export interface PolyglossyNotebookKernelConfiguration {
     clientMapper: ClientMapper,
     preloadUris: vscode.Uri[],
     createErrorOutput: ErrorOutputCreator,
 }
 
-export class DotNetNotebookKernel {
+export type DotNetNotebookKernelConfiguration = PolyglossyNotebookKernelConfiguration;
+
+export class PolyglossyNotebookKernel {
 
     private trackedOutputIds: Map<vscode.Uri, Set<string>> = new Map(); // tracks notebookUri => [trackedOutputId]
     private disposables: { dispose(): void }[] = [];
+    private controllers: Map<string, vscode.NotebookController> = new Map();
 
-    constructor(readonly config: DotNetNotebookKernelConfiguration, readonly tokensProvider: semanticTokens.DocumentSemanticTokensProvider) {
+    constructor(readonly config: PolyglossyNotebookKernelConfiguration, readonly tokensProvider: semanticTokens.DocumentSemanticTokensProvider) {
         // ensure the tracked output ids are always fresh
         ServiceCollection.Instance.NotebookWatcher.onNotebookDocumentOpened((notebook, _client) => this.trackedOutputIds.delete(notebook.uri));
         ServiceCollection.Instance.NotebookWatcher.onNotebookDocumentClosed((notebook, _client) => this.trackedOutputIds.delete(notebook.uri));
@@ -45,17 +48,28 @@ export class DotNetNotebookKernel {
         const dibController = vscode.notebooks.createNotebookController(
             constants.NotebookControllerId,
             constants.NotebookViewType,
-            '.NET Interactive',
+            'Polyglossy Interactive',
             this.executeHandler.bind(this),
             preloads
         );
         this.commonControllerInit(dibController);
+        this.controllers.set(constants.NotebookControllerId, dibController);
+
+        const polyglossyDibController = vscode.notebooks.createNotebookController(
+            constants.PolyglossyNotebookControllerId,
+            constants.PolyglossyNotebookViewType,
+            'Polyglossy Interactive',
+            this.executeHandler.bind(this),
+            preloads
+        );
+        this.commonControllerInit(polyglossyDibController);
+        this.controllers.set(constants.PolyglossyNotebookControllerId, polyglossyDibController);
 
         // .ipynb execution via Jupyter extension (optional)
         const jupyterController = vscode.notebooks.createNotebookController(
             constants.JupyterNotebookControllerId,
             constants.JupyterViewType,
-            '.NET Interactive',
+            'Polyglossy Interactive',
             this.executeHandler.bind(this),
             preloads
         );
@@ -66,6 +80,7 @@ export class DotNetNotebookKernel {
             }
         });
         this.commonControllerInit(jupyterController);
+        this.controllers.set(constants.JupyterNotebookControllerId, jupyterController);
 
         this.disposables.push(vscode.workspace.onDidOpenNotebookDocument(async notebook => {
             await this.onNotebookOpen(notebook, config.clientMapper, jupyterController);
@@ -83,8 +98,8 @@ export class DotNetNotebookKernel {
         this.disposables.push(vscode.workspace.onDidOpenTextDocument(async textDocument => {
             const notebook = vscode.workspace.notebookDocuments.find(n => n.getCells().find(c => c.document === textDocument) !== undefined);
             if (notebook) {
-                const isDotNetNotebook = metadataUtilities.isDotNetNotebook(notebook);
-                if (isDotNetNotebook) {
+                const isPolyglossyNotebook = metadataUtilities.isPolyglossyNotebook(notebook);
+                if (isPolyglossyNotebook) {
                     // only look at the cell metadata if the notebook is fully open
                     const isOpenComplete = isNotebookOpenComplete(notebook);
                     if (isOpenComplete) {
@@ -103,7 +118,7 @@ export class DotNetNotebookKernel {
     }
 
     private async onNotebookOpen(notebook: vscode.NotebookDocument, clientMapper: ClientMapper, jupyterController: vscode.NotebookController): Promise<void> {
-        if (metadataUtilities.isDotNetNotebook(notebook)) {
+        if (metadataUtilities.isPolyglossyNotebook(notebook)) {
             // prepare initial grammar
             const kernelInfos = metadataUtilities.getKernelInfosFromNotebookDocument(notebook);
             this.tokensProvider.dynamicTokenProvider.rebuildNotebookGrammar(notebook.uri, kernelInfos);
@@ -114,7 +129,12 @@ export class DotNetNotebookKernel {
 
             if (notebook.notebookType === constants.JupyterViewType) {
                 jupyterController.updateNotebookAffinity(notebook, vscode.NotebookControllerAffinity.Preferred);
-                await selectDotNetInteractiveKernelForJupyter();
+                await selectPolyglossyInteractiveKernelForJupyter();
+            }
+
+            if (notebook.notebookType === constants.PolyglossyNotebookViewType) {
+                const polyglossyController = this.controllers.get(constants.PolyglossyNotebookControllerId);
+                polyglossyController?.updateNotebookAffinity(notebook, vscode.NotebookControllerAffinity.Preferred);
             }
 
             await updateNotebookMetadata(notebook, this.config.clientMapper);
@@ -284,6 +304,8 @@ export class DotNetNotebookKernel {
         }
     }
 }
+
+export const DotNetNotebookKernel = PolyglossyNotebookKernel;
 
 // When a new notebook cell is discovered via `onDidOpenTextDocument` and if the cell metadata doesn't have a kernel name,
 // we need to know what value to use.  If we've never seen the notebook before, then the user opened a new one and the correct

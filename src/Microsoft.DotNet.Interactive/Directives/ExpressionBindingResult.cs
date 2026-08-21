@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
 using System.Collections.Generic;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Directives;
+namespace Polyglossy.Interactive.Directives;
 
 internal class ExpressionBindingResult
 {

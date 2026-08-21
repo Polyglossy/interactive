@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 public class CommandLineInvocationException : Exception
 {

@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.Protocol;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Messaging;
+namespace Polyglossy.Interactive.Jupyter.Messaging;
 
 public class Message
 {

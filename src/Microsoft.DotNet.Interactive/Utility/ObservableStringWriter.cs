@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 public class ObservableStringWriter : StringWriter, IObservable<string>
 {

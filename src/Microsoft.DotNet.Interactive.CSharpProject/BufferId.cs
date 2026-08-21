@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 [JsonConverter(typeof(BufferIdConverter))]
 public class BufferId

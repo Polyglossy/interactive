@@ -16,7 +16,7 @@ To start using the notebook experiences you can use Visual Studio Code or Jupyte
 ## Installing Visual Studio Code Insiders Notebook Experience
 
 Install [Visual Studio Code Insiders](https://code.visualstudio.com/insiders/) on your device. 
-Next, get the [.NET Interactive Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode) extension.
+Next, get the [Polyglossy Notebooks](https://marketplace.visualstudio.com/items?itemName=polyglossy-tools.polyglossy-interactive-vscode) extension.
 
 ## Installing and configuring Jupyter on a Raspberry Pi
 

@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 using Newtonsoft.Json;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public class CompletionResult
 {

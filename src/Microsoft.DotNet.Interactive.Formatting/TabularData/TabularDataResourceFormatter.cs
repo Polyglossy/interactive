@@ -8,7 +8,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Microsoft.DotNet.Interactive.Formatting.TabularData;
+namespace Polyglossy.Interactive.Formatting.TabularData;
 
 public static class TabularDataResourceFormatter
 {

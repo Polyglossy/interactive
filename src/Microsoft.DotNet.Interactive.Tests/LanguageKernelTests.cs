@@ -12,21 +12,21 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Extensions;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket.For.Xunit;
 using Xunit;
 using Xunit.Abstractions;
-using DiagnosticsProduced = Microsoft.DotNet.Interactive.Events.DiagnosticsProduced;
+using DiagnosticsProduced = Polyglossy.Interactive.Events.DiagnosticsProduced;
 
 #pragma warning disable 8509
 #pragma warning disable 8524
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 [LogToPocketLogger(FileNameEnvironmentVariable = "POCKETLOGGER_LOG_PATH")]
 public sealed class LanguageKernelTests : LanguageKernelTestBase
@@ -869,20 +869,20 @@ $${languageSpecificCode}
 
     [Theory]
     [InlineData(Language.CSharp, """
-                                 using Microsoft.DotNet.Interactive.Formatting; 
+                                 using Polyglossy.Interactive.Formatting; 
                                  FormattedValue.CreateSingleFromObject(1)
                                  """)]
     [InlineData(Language.FSharp, """
-                                 open Microsoft.DotNet.Interactive.Formatting
+                                 open Polyglossy.Interactive.Formatting
                                  FormattedValue.CreateSingleFromObject(1)
                                  """)]
                                 
     [InlineData(Language.CSharp, """
-                                 using Microsoft.DotNet.Interactive.Formatting; 
+                                 using Polyglossy.Interactive.Formatting; 
                                  FormattedValue.CreateManyFromObject(1, "text/plain","application/json")
                                  """)]
     [InlineData(Language.FSharp, """
-                                 open Microsoft.DotNet.Interactive.Formatting
+                                 open Polyglossy.Interactive.Formatting
                                  FormattedValue.CreateManyFromObject(1, "text/plain","application/json")
                                  """)]
                                  

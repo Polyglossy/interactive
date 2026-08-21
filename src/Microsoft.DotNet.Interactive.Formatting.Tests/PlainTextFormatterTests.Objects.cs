@@ -12,7 +12,7 @@ using FluentAssertions;
 using FluentAssertions.Extensions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public partial class PlainTextFormatterTests
 {
@@ -149,9 +149,9 @@ Parts: <null>".ReplaceLineEndings());
                 SomePropertyThrows
                       Fine: Fine
                       NotOk: System.Exception: not ok
-                      at Microsoft.DotNet.Interactive.Formatting.Tests.SomePropertyThrows.get_NotOk()*
+                      at Polyglossy.Interactive.Formatting.Tests.SomePropertyThrows.get_NotOk()*
                       at lambda_method*(Closure, SomePropertyThrows)
-                      at Microsoft.DotNet.Interactive.Formatting.MemberAccessor`1.GetValueOrException(T instance)*
+                      at Polyglossy.Interactive.Formatting.MemberAccessor`1.GetValueOrException(T instance)*
                       Ok: ok
                       PerfectlyFine: PerfectlyFine
                 """.ReplaceLineEndings());
@@ -162,18 +162,18 @@ Xunit.Sdk.XunitException: Expected log to match "
 SomePropertyThrows
     Fine: Fine
     NotOk: System.Exception: not ok
-    at Microsoft.DotNet.Interactive.Formatting.Tests.SomePropertyThrows.get_NotOk()*
+    at Polyglossy.Interactive.Formatting.Tests.SomePropertyThrows.get_NotOk()*
     at lambda_method*(Closure, SomePropertyThrows)
-    at Microsoft.DotNet.Interactive.Formatting.MemberAccessor`1.GetValueOrException(T instance)*
+    at Polyglossy.Interactive.Formatting.MemberAccessor`1.GetValueOrException(T instance)*
     Ok: ok
     PerfectlyFine: PerfectlyFine", but "
     
     SomePropertyThrows
       Fine: Fine
       NotOk: System.Exception: not ok
-      at Microsoft.DotNet.Interactive.Formatting.Tests.SomePropertyThrows.get_NotOk() in C:\dev\interactive\src\Microsoft.DotNet.Interactive.Formatting.Tests\TestClasses.cs:line 41
+      at Polyglossy.Interactive.Formatting.Tests.SomePropertyThrows.get_NotOk() in C:\dev\interactive\src\Polyglossy.Interactive.Formatting.Tests\TestClasses.cs:line 41
       at lambda_method3(Closure, SomePropertyThrows)
-      at Microsoft.DotNet.Interactive.Formatting.MemberAccessor`1.GetValueOrException(T instance) in C:\dev\interactive\src\Microsoft.DotNet.Interactive.Formatting\MemberAccessor{T}.cs:line 57
+      at Polyglossy.Interactive.Formatting.MemberAccessor`1.GetValueOrException(T instance) in C:\dev\interactive\src\Polyglossy.Interactive.Formatting\MemberAccessor{T}.cs:line 57
       Ok: ok
       PerfectlyFine: PerfectlyFine" does not.
    at FluentAssertions.Execution.XUnit2TestFramework.Throw(String message) in /_/Src/FluentAssertions/Execution/XUnit2TestFramework.cs:line 35
@@ -185,7 +185,7 @@ SomePropertyThrows
    at FluentAssertions.Primitives.StringWildcardMatchingValidator.ValidateAgainstMismatch() in /_/Src/FluentAssertions/Primitives/StringWildcardMatchingValidator.cs:line 22
    at FluentAssertions.Primitives.StringValidator.Validate() in /_/Src/FluentAssertions/Primitives/StringValidator.cs:line 46
    at FluentAssertions.Primitives.StringAssertions`1.Match(String wildcardPattern, String because, Object[] becauseArgs) in /_/Src/FluentAssertions/Primitives/StringAssertions.cs:line 220
-   at Microsoft.DotNet.Interactive.Formatting.Tests.PlainTextFormatterTests.Objects.When_a_property_throws_then_then_exception_is_written_in_place_of_the_property_and_indented() in C:\dev\interactive\src\Microsoft.DotNet.Interactive.Formatting.Tests\PlainTextFormatterTests.cs:line 209
+   at Polyglossy.Interactive.Formatting.Tests.PlainTextFormatterTests.Objects.When_a_property_throws_then_then_exception_is_written_in_place_of_the_property_and_indented() in C:\dev\interactive\src\Polyglossy.Interactive.Formatting.Tests\PlainTextFormatterTests.cs:line 209
    at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
    at System.Reflection.MethodInvoker.Invoke(Object obj, IntPtr* args, BindingFlags invokeAttr)
 

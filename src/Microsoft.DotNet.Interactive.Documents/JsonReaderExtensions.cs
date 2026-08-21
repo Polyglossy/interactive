@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Microsoft.DotNet.Interactive.Documents;
+namespace Polyglossy.Interactive.Documents;
 
 internal static class JsonReaderExtensions
 {

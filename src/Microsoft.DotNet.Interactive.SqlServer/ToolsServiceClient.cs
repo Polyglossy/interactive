@@ -9,11 +9,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
 using StreamJsonRpc;
 
-namespace Microsoft.DotNet.Interactive.SqlServer;
+namespace Polyglossy.Interactive.SqlServer;
 
 public class ToolsServiceClient : IDisposable
 {

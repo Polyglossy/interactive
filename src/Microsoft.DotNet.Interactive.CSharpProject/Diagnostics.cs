@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public class Diagnostics : ReadOnlyCollection<SerializableDiagnostic>, IRunResultFeature
 {

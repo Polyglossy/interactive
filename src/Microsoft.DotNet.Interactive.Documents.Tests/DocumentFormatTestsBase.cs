@@ -3,10 +3,10 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Parsing;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public abstract class DocumentFormatTestsBase : IDisposable
 {

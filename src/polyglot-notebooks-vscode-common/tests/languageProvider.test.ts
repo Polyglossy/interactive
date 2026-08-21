@@ -4,7 +4,7 @@
 import { expect } from 'chai';
 
 import { ClientMapper } from '../../src/vscode-common/clientMapper';
-import { TestDotnetInteractiveChannel } from './testDotnetInteractiveChannel';
+import { TestPolyglossyInteractiveChannel } from './testPolyglossyInteractiveChannel';
 import { provideCompletion } from './../../src/vscode-common/languageServices/completion';
 import { provideHover } from './../../src/vscode-common/languageServices/hover';
 import { provideSignatureHelp } from '../../src/vscode-common/languageServices/signatureHelp';
@@ -15,7 +15,7 @@ import { createChannelConfig } from './utilities';
 describe('LanguageProvider tests', () => {
 
     it('CompletionProvider', async () => {
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'RequestCompletions': [
                 {
                     eventType: CompletionsProducedType,
@@ -67,7 +67,7 @@ describe('LanguageProvider tests', () => {
     });
 
     it('HoverProvider', async () => {
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'RequestHoverText': [
                 {
                     eventType: HoverTextProducedType,
@@ -126,7 +126,7 @@ describe('LanguageProvider tests', () => {
     });
 
     it('SignatureHelpProvider', async () => {
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'RequestSignatureHelp': [
                 {
                     eventType: SignatureHelpProducedType,

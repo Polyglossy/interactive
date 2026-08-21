@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.PowerShell;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.PowerShell;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class JupyterClientKernelExtension
 {

@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Models;
+namespace Polyglossy.Interactive.CSharpProject.Models;
 
 public static class DocumentationConverter
 {

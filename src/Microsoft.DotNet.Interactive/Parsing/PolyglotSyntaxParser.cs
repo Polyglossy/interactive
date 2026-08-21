@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 internal class PolyglotSyntaxParser
 {

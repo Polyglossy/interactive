@@ -6,11 +6,11 @@ using FluentAssertions;
 using System.Linq;
 using Microsoft.AspNetCore.Html;
 using Xunit;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class PocketViewTests : FormatterTestBase
 {

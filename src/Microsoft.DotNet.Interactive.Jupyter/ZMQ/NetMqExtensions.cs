@@ -1,13 +1,13 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Messaging;
 using NetMQ;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+namespace Polyglossy.Interactive.Jupyter.ZMQ;
 
 public static class NetMQExtensions
 {

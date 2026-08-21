@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using Assent;
 
 using Microsoft.Data.Analysis;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.TabularData;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Tests;
+namespace Polyglossy.Interactive.ExtensionLab.Tests;
 
 public class DataFrameKernelExtensionTests : IDisposable
 {

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive.Commands;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 internal class KernelCommandPipeline
 {

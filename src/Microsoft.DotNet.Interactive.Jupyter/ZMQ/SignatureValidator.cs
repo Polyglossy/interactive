@@ -5,7 +5,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+namespace Polyglossy.Interactive.Jupyter.ZMQ;
 
 public class SignatureValidator
 {

@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Messaging.Comms;
+namespace Polyglossy.Interactive.Jupyter.Messaging.Comms;
 
 internal class CommAgent : IDisposable
 {

@@ -1,4 +1,4 @@
-﻿// #if NETSTANDARD2_0
+// #if NETSTANDARD2_0
 
 #nullable enable
 
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 internal class IOExtensions
 {

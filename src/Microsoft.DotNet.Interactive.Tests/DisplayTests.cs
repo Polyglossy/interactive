@@ -5,10 +5,10 @@ using System;
 using System.Text;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class DisplayTests
 {

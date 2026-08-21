@@ -6,7 +6,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Models.SignatureHelp;
+namespace Polyglossy.Interactive.CSharpProject.Models.SignatureHelp;
 
 public class InvocationContext
 {

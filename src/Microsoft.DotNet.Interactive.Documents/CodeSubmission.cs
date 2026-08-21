@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,10 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Documents.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Documents.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Documents;
+namespace Polyglossy.Interactive.Documents;
 
 /// <summary>
 /// This format is used by the .dib file format as well as for multi-kernel code submissions.

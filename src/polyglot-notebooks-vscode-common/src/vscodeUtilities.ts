@@ -117,7 +117,7 @@ export async function ensureCellIsCodeCell(cell: vscode.NotebookCell): Promise<v
 }
 
 export async function ensureCellLanguageId(cell: vscode.NotebookCell): Promise<void> {
-    // The NotebookCellData.languageId is needed to associate the various cell languages with Polyglot Notebooks. If this isn't set, the cell can't be run.
+    // The NotebookCellData.languageId is needed to associate the various cell languages with Polyglossy Notebooks. If this isn't set, the cell can't be run.
     // Since the field is immutable, any cells that don't have it set have to replaced, which will mark the notebook as dirty, but once saved, it should open clean afterwards.
     if (cell.kind === vscode.NotebookCellKind.Code) {
         if (cell.document.languageId !== constants.CellLanguageIdentifier) {

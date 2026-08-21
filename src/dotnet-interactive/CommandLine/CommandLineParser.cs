@@ -10,18 +10,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.DotNet.Interactive.App.ParserServer;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Jupyter;
-using Microsoft.DotNet.Interactive.Telemetry;
-using Microsoft.DotNet.Interactive.VSCode;
+using Polyglossy.Interactive.App.ParserServer;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Jupyter;
+using Polyglossy.Interactive.Telemetry;
+using Polyglossy.Interactive.VSCode;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pocket;
 using static Pocket.Logger;
 
-namespace Microsoft.DotNet.Interactive.App.CommandLine;
+namespace Polyglossy.Interactive.App.CommandLine;
 
 public static class CommandLineParser
 {

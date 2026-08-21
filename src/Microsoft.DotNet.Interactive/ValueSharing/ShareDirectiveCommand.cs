@@ -5,10 +5,10 @@ using System;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
 
-namespace Microsoft.DotNet.Interactive.ValueSharing;
+namespace Polyglossy.Interactive.ValueSharing;
 
 internal class ShareDirectiveCommand : KernelCommand
 {

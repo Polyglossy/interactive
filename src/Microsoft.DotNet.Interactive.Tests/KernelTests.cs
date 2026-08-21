@@ -7,18 +7,18 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Extensions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
 #if !NETFRAMEWORK
 using System;
-using Microsoft.DotNet.Interactive.CSharp;
+using Polyglossy.Interactive.CSharp;
 #endif
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public partial class KernelTests
 {
@@ -196,10 +196,10 @@ public partial class KernelTests
         };
 
         await kernel.SendAsync(new SubmitCode("""
-            using Microsoft.DotNet.Interactive;
-            using Microsoft.DotNet.Interactive.Commands;
-            using Microsoft.DotNet.Interactive.Events;
-            using Microsoft.DotNet.Interactive.CSharp;
+            using Polyglossy.Interactive;
+            using Polyglossy.Interactive.Commands;
+            using Polyglossy.Interactive.Events;
+            using Polyglossy.Interactive.CSharp;
 
             var csharp2 = new CSharpKernel();
             """));
@@ -224,10 +224,10 @@ public partial class KernelTests
         };
 
         await kernel.SendAsync(new SubmitCode("""
-            using Microsoft.DotNet.Interactive;
-            using Microsoft.DotNet.Interactive.Commands;
-            using Microsoft.DotNet.Interactive.Events;
-            using Microsoft.DotNet.Interactive.CSharp;
+            using Polyglossy.Interactive;
+            using Polyglossy.Interactive.Commands;
+            using Polyglossy.Interactive.Events;
+            using Polyglossy.Interactive.CSharp;
 
             var csharp2 = new CSharpKernel();
             var csharp2Events = new List<KernelEvent>();
@@ -302,10 +302,10 @@ public partial class KernelTests
         using var kernel = new CSharpKernel();
 
         var code = """
-                   using Microsoft.DotNet.Interactive;
-                   using Microsoft.DotNet.Interactive.Commands;
-                   using Microsoft.DotNet.Interactive.Events;
-                   using Microsoft.DotNet.Interactive.Formatting;
+                   using Polyglossy.Interactive;
+                   using Polyglossy.Interactive.Commands;
+                   using Polyglossy.Interactive.Events;
+                   using Polyglossy.Interactive.Formatting;
                    
                    public class MyCommand : KernelCommand
                    {

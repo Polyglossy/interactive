@@ -5,10 +5,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Commands;
+namespace Polyglossy.Interactive.Commands;
 
 public class AddPackage : KernelCommand
 {

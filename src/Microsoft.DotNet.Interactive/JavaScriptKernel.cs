@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.ValueSharing;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 /// <summary>
 /// The JavaScript kernel used for frontends where the JavaScript-based kernel is not available.

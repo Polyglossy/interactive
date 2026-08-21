@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Tests;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Tests;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class FileProviderTests : LanguageKernelTestBase
 {

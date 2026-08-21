@@ -1,16 +1,16 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Linq;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 using Pocket;
 using Xunit;
-using Formatter = Microsoft.DotNet.Interactive.Formatting.Formatter;
+using Formatter = Polyglossy.Interactive.Formatting.Formatter;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class FormatterConfigurationTests : IDisposable
 {

@@ -4,12 +4,12 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Http.Parsing;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Http.Parsing;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Http.Tests;
+namespace Polyglossy.Interactive.Http.Tests;
 
 public partial class HttpParserTests
 {

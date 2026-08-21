@@ -5,15 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Assent;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Jupyter.ZMQ;
 using Xunit;
 
-using Message = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using Message = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 [Trait("Category", "Contracts and serialization")]
 public class JupyterMessageContractTests

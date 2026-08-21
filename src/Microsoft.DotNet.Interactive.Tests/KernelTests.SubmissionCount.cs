@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -6,14 +6,14 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Connection;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Connection;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public partial class KernelTests
 {
@@ -82,8 +82,8 @@ public partial class KernelTests
             };
 
             var result = await kernel.SendAsync(new SubmitCode(@"
-using Microsoft.DotNet.Interactive;
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive;
+using Polyglossy.Interactive.Commands;
 
 await Kernel.Root.SendAsync(new SubmitCode(""123"", ""fake""));
 await Kernel.Root.SendAsync(new SubmitCode(""456"", ""fake""));

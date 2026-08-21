@@ -3,12 +3,12 @@
 
 using System.Text.Json;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public partial class HtmlFormatterTests : FormatterTestBase
 {

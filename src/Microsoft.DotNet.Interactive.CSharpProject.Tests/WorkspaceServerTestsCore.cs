@@ -3,13 +3,13 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.CSharpProject.Build;
-using Microsoft.DotNet.Interactive.CSharpProject.Servers.Roslyn;
+using Polyglossy.Interactive.CSharpProject.Build;
+using Polyglossy.Interactive.CSharpProject.Servers.Roslyn;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 [Collection(nameof(PrebuildFixture))]
 public abstract class WorkspaceServerTestsCore : IDisposable

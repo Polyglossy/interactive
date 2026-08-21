@@ -3,7 +3,7 @@
 
 using Microsoft.AspNetCore.Html;
 
-namespace Microsoft.DotNet.Interactive.PostgreSql.Tests;
+namespace Polyglossy.Interactive.PostgreSql.Tests;
 
 public class PostgreSqlKernelExtension
 {

@@ -1,6 +1,6 @@
 # The `dotnet-interactive` Command Line Interface
 
-Polyglot Notebooks and .NET support for Jupyter are powered by the [`dotnet-interactive`](https://www.nuget.org/packages/Microsoft.dotnet-interactive) .NET tool. Once installed, you can get help by running:
+Polyglossy Notebooks and .NET support for Jupyter are powered by the [`dotnet-interactive`](https://www.nuget.org/packages/Microsoft.dotnet-interactive) .NET tool. Once installed, you can get help by running:
 
 ```console
 dotnet interactive --help
@@ -12,7 +12,7 @@ Here is a brief overview of the available commands.
 
 This command starts `dotnet-interactive` as a server in standard I/O mode. In this mode, JSON-serialized commands and events are sent in both directions over both stdin and stout. 
 
-This mode is used by the Polyglot Notebooks extension for VS Code, as well as other editors.
+This mode is used by the Polyglossy Notebooks extension for VS Code, as well as other editors.
 
 ## `dotnet interactive jupyter` 
 
@@ -32,4 +32,4 @@ dotnet interactive jupyter install --path /location/to/install
 
 This command starts `dotnet-interactive` in parser server mode, which can be used to read and write notebook files, including the `.ipynb` and `.dib` formats.
 
-The notebook parser server is used by the Polyglot Notebooks extension for VS Code, as well as other editors.
+The notebook parser server is used by the Polyglossy Notebooks extension for VS Code, as well as other editors.

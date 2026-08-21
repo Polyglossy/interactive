@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using System.Linq;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public static class StringAssertionExtensions
 {

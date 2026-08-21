@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
@@ -7,9 +7,9 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using Microsoft.DotNet.Interactive.Documents.Json;
+using Polyglossy.Interactive.Documents.Json;
 
-namespace Microsoft.DotNet.Interactive.Documents.Jupyter;
+namespace Polyglossy.Interactive.Documents.Jupyter;
 
 public static class Notebook
 {

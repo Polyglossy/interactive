@@ -1,8 +1,8 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,9 +10,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Pocket;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.JupyterKernelSpecModule>;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.JupyterKernelSpecModule>;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class JupyterKernelSpecModule : IJupyterKernelSpecModule
 {

@@ -8,9 +8,9 @@ using Microsoft.Extensions.Hosting;
 using NetMQ;
 using NetMQ.Sockets;
 using Pocket;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.Heartbeat>;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.Heartbeat>;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class Heartbeat : IHostedService
 {

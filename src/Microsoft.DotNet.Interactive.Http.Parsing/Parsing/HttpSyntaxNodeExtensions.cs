@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Microsoft.DotNet.Interactive.Http.Parsing;
+namespace Polyglossy.Interactive.Http.Parsing;
 
 internal static class HttpSyntaxNodeExtensions
 {

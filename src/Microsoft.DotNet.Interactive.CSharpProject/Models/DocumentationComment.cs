@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Models;
+namespace Polyglossy.Interactive.CSharpProject.Models;
 
 // Adapted from https://github.com/OmniSharp/omnisharp-roslyn/blob/6836fadb9c35a88d4695276d14302336a460b841/src/OmniSharp.Abstractions/Models/v1/TypeLookup/DocumentationComment.cs
 public class DocumentationComment

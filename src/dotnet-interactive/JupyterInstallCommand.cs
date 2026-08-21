@@ -7,10 +7,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.App;
+namespace Polyglossy.Interactive.App;
 
 public class JupyterInstallCommand
 {

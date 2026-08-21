@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using System.Text.Json;
 
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.Csv;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.Csv;
+using Polyglossy.Interactive.Formatting.TabularData;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 internal class DataExplorerFormatterSource : ITypeFormatterSource
 {

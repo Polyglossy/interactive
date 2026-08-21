@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as tmp from 'tmp';
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
 import { createOutput } from '../../src/vscode-common/utilities';
-import { DotnetInteractiveChannel } from '../../src/vscode-common/DotnetInteractiveChannel';
+import { PolyglossyInteractiveChannel } from '../../src/vscode-common/PolyglossyInteractiveChannel';
 import { ClientMapperConfiguration } from '../../src/vscode-common/clientMapper';
 
 export function withFakeGlobalStorageLocation(createLocation: boolean, callback: { (globalStoragePath: string): Promise<void> }) {
@@ -31,8 +31,8 @@ export function withFakeGlobalStorageLocation(createLocation: boolean, callback:
     });
 }
 
-export function createChannelConfig(channelCreator: (notebookUri: vscodeLike.Uri) => Promise<DotnetInteractiveChannel>): ClientMapperConfiguration {
-    function defaultChannelCreator(notebookUri: vscodeLike.Uri): Promise<DotnetInteractiveChannel> {
+export function createChannelConfig(channelCreator: (notebookUri: vscodeLike.Uri) => Promise<PolyglossyInteractiveChannel>): ClientMapperConfiguration {
+    function defaultChannelCreator(notebookUri: vscodeLike.Uri): Promise<PolyglossyInteractiveChannel> {
         throw new Error('Each test needs to override this.');
     }
 

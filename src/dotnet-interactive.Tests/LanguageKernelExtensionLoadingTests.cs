@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Tests;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Tests;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class LanguageKernelExtensionLoadingTests : LanguageKernelTestBase
 {

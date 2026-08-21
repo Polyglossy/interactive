@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Text.Json.Serialization;
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive.Commands;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab;
+namespace Polyglossy.Interactive.ExtensionLab;
 
 public class StartCommandTranscription : KernelCommand
 {

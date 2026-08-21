@@ -3,8 +3,8 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.CSharpProject.Servers.Roslyn;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.CSharpProject.Servers.Roslyn;
+using Polyglossy.Interactive.Utility;
 using Pocket;
 using System;
 using System.Collections.Concurrent;
@@ -18,10 +18,10 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.CSharpProject.Build.Prebuild>;
+using static Pocket.Logger<Polyglossy.Interactive.CSharpProject.Build.Prebuild>;
 using Disposable = System.Reactive.Disposables.Disposable;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Build;
+namespace Polyglossy.Interactive.CSharpProject.Build;
 
 public class Prebuild 
 {

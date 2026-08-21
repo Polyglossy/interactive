@@ -10,15 +10,15 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Http.Parsing;
-using Microsoft.DotNet.Interactive.ValueSharing;
-using Microsoft.DotNet.Interactive.Http.Parsing.Parsing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Http.Parsing;
+using Polyglossy.Interactive.ValueSharing;
+using Polyglossy.Interactive.Http.Parsing.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Http;
+namespace Polyglossy.Interactive.Http;
 
 using Diagnostic = CodeAnalysis.Diagnostic;
 

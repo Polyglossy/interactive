@@ -7,7 +7,7 @@ using Xunit;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 [Collection("Do not parallelize")]
 public abstract class FormatterTestBase : IDisposable

@@ -1,18 +1,18 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Data.Sqlite;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.SQLite.Tests;
+namespace Polyglossy.Interactive.SQLite.Tests;
 
 [Trait("Databases", "Data query tests")]
 public class SQLiteConnectionTests

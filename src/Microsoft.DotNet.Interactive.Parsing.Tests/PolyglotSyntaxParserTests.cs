@@ -5,7 +5,7 @@ using System;
 using FluentAssertions;
 using FluentAssertions.Execution;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 public partial class PolyglotSyntaxParserTests : IDisposable
 {

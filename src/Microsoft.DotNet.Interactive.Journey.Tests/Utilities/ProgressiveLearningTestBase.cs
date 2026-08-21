@@ -1,16 +1,16 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.Journey.Tests.Utilities;
+namespace Polyglossy.Interactive.Journey.Tests.Utilities;
 
 public abstract class ProgressiveLearningTestBase
 {

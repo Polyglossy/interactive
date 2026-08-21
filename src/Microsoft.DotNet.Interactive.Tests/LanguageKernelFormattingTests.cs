@@ -4,18 +4,18 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
 
 #pragma warning disable 8509
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class LanguageKernelFormattingTests : LanguageKernelTestBase
 {
@@ -515,7 +515,7 @@ f();"
         var kernel = CreateKernel(Language.CSharp);
 
         var result = await kernel.SendAsync(new SubmitCode("""
-              using Microsoft.DotNet.Interactive.Formatting;
+              using Polyglossy.Interactive.Formatting;
 
               PocketViewTags.h2("hello?").Display();
               """));

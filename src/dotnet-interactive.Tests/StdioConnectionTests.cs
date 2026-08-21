@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,18 +9,18 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.App.Connection;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.App.Connection;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Utility;
 using Pocket.For.Xunit;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 [LogToPocketLogger(FileNameEnvironmentVariable = "POCKETLOGGER_LOG_PATH")]
 public class StdioConnectionTests : ProxyKernelConnectionTestsBase

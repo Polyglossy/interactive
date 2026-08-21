@@ -1,8 +1,8 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Jupyter.Connection;
 using Pocket;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+namespace Polyglossy.Interactive.Jupyter.ZMQ;
 
 internal class JupyterConnection : IJupyterConnection
 {

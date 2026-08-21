@@ -1,17 +1,17 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.CommandLine;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Telemetry;
+using Polyglossy.Interactive.Telemetry;
 using Microsoft.Extensions.DependencyInjection;
 using Pocket;
 using Xunit;
-using CommandLineParser = Microsoft.DotNet.Interactive.App.CommandLine.CommandLineParser;
+using CommandLineParser = Polyglossy.Interactive.App.CommandLine.CommandLineParser;
 
-namespace Microsoft.DotNet.Interactive.App.Tests.CommandLine;
+namespace Polyglossy.Interactive.App.Tests.CommandLine;
 
 public class FirstTimeUseSentinelTests : IDisposable
 {

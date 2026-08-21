@@ -7,12 +7,12 @@ using System.Diagnostics;
 using System.Text.Json;
 using Assent;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public class TabularDataResourceFormatterTests : IDisposable
 {

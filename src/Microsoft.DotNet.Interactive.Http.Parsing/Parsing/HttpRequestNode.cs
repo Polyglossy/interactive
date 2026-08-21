@@ -11,9 +11,9 @@ using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.DotNet.Interactive.Http.Parsing.Parsing;
+using Polyglossy.Interactive.Http.Parsing.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Http.Parsing;
+namespace Polyglossy.Interactive.Http.Parsing;
 
 using Diagnostic = CodeAnalysis.Diagnostic;
 using MediaTypeHeaderValue = System.Net.Http.Headers.MediaTypeHeaderValue;

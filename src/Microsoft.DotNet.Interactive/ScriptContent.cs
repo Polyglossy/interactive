@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 [TypeFormatterSource(typeof(ScriptContentFormatterSource))]
 public class ScriptContent : IHtmlContent

@@ -4,10 +4,10 @@
 using System.IO;
 using System.Numerics;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Formatting.Tests;
+namespace Polyglossy.Interactive.Formatting.Tests;
 
 public partial class HtmlFormatterTests
 {

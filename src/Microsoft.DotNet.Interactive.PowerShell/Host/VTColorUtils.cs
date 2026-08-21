@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 internal static class VTColorUtils
 {

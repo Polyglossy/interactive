@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Microsoft.DotNet.Interactive.CSharp.SignatureHelp;
+namespace Polyglossy.Interactive.CSharp.SignatureHelp;
 
 // Remove this class once a public API for Signature Help from Roslyn is available
 internal static class CheckForStaticExtension

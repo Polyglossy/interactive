@@ -38,7 +38,7 @@ sequenceDiagram
 
 ## Nested Kernels
 
-In the standard configuration, .NET Interactive uses multiple, nested kernels. These kernels share a common set of interfaces which allow them to be composed into different kinds of pipelines. This is the basis for supporting multiple languages, among other features. A user of a .NET Interactive-backed notebook can specify the language for a code submission by prefixing a block of code with a [magic command](magic-commands.md) such as `#!csharp`, `#!fsharp`, or `#!pwsh`, or by using the cell kernel selector in the lower right corner of a Polyglot Notebooks notebook cell.
+In the standard configuration, .NET Interactive uses multiple, nested kernels. These kernels share a common set of interfaces which allow them to be composed into different kinds of pipelines. This is the basis for supporting multiple languages, among other features. A user of a .NET Interactive-backed notebook can specify the language for a code submission by prefixing a block of code with a [magic command](magic-commands.md) such as `#!csharp`, `#!fsharp`, or `#!pwsh`, or by using the cell kernel selector in the lower right corner of a Polyglossy Notebooks notebook cell.
 
 <img src="https://user-images.githubusercontent.com/547415/111684048-737f9880-87e3-11eb-9b02-67b4bf926bca.png" width="40%">
 
@@ -57,4 +57,4 @@ The work of routing these commands is done by the `CompositeKernel` class, which
 
 ![image](https://user-images.githubusercontent.com/547415/85328679-ff97a600-b485-11ea-839c-ebc65b0f6472.png)
 
-Note that while the composite configuration is the default when using the `dotnet-interactive` tool via Polyglot Notebooks or Jupyter, the .NET Interactive [NuGet packages](https://www.nuget.org/packages?q=microsoft.dotnet.interactive) let you create other configurations. For example, you might provide a single-language embedded scripting experience using the C# kernel by itself, or you might provide multiple F# kernels each preconfigured to run code on a different processor.
+Note that while the composite configuration is the default when using the `dotnet-interactive` tool via Polyglossy Notebooks or Jupyter, the .NET Interactive [NuGet packages](https://www.nuget.org/packages?q=microsoft.dotnet.interactive) let you create other configurations. For example, you might provide a single-language embedded scripting experience using the C# kernel by itself, or you might provide multiple F# kernels each preconfigured to run code on a different processor.

@@ -1,11 +1,11 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
 using Microsoft.AspNetCore.Html;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class DataExplorerTests
 {

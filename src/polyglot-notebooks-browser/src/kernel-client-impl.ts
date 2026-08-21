@@ -1,7 +1,7 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-import * as dotnetInteractiveInterfaces from "./polyglot-notebooks-interfaces";
+import * as polyglossyInterfaces from "./polyglot-notebooks-interfaces";
 import { Kernel, IKernelCommandHandler } from "./polyglot-notebooks/kernel";
 import { signalTransportFactory } from "./signalr-client";
 import * as commandsAndEvents from "./polyglot-notebooks/commandsAndEvents";
@@ -23,7 +23,7 @@ export interface KernelClientImplParameteres {
 class ClientEventQueueManager {
     private static eventPromiseQueues: Map<string, Array<Promise<void>>> = new Map();
 
-    static addEventToClientQueue(clientFetch: dotnetInteractiveInterfaces.ClientFetch, commandToken: string, eventEnvelope: commandsAndEvents.KernelEventEnvelope) {
+    static addEventToClientQueue(clientFetch: polyglossyInterfaces.ClientFetch, commandToken: string, eventEnvelope: commandsAndEvents.KernelEventEnvelope) {
         let promiseQueue = this.eventPromiseQueues.get(commandToken);
         if (!promiseQueue) {
             promiseQueue = [];
@@ -55,7 +55,7 @@ class ClientEventQueueManager {
 class InteractiveConsoleWrapper {
     private globalConsole: Console;
 
-    constructor(private clientFetch: dotnetInteractiveInterfaces.ClientFetch, private commandToken: string) {
+    constructor(private clientFetch: polyglossyInterfaces.ClientFetch, private commandToken: string) {
         this.globalConsole = console;
     }
 
@@ -107,7 +107,7 @@ class InteractiveConsoleWrapper {
     }
 }
 
-export class KernelClientImpl implements dotnetInteractiveInterfaces.DotnetInteractiveClient {
+export class KernelClientImpl implements polyglossyInterfaces.PolyglossyInteractiveClient {
 
     private _clientFetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
     private _rootUrl: string;
@@ -157,7 +157,7 @@ export class KernelClientImpl implements dotnetInteractiveInterfaces.DotnetInter
         return variable;
     }
 
-    public async getVariables(variableRequest: dotnetInteractiveInterfaces.VariableRequest): Promise<dotnetInteractiveInterfaces.VariableResponse> {
+    public async getVariables(variableRequest: polyglossyInterfaces.VariableRequest): Promise<polyglossyInterfaces.VariableResponse> {
         let response = await this._clientFetch("variables", {
             method: 'POST',
             cache: 'no-cache',
@@ -200,7 +200,7 @@ export class KernelClientImpl implements dotnetInteractiveInterfaces.DotnetInter
         if (Array.isArray(kernelNames)) {
             for (let i = 0; i < kernelNames.length; i++) {
                 let kernelName: string = kernelNames[i];
-                let kernelClient: dotnetInteractiveInterfaces.KernelClient = {
+                let kernelClient: polyglossyInterfaces.KernelClient = {
                     getVariable: (variableName: string): Promise<any> => {
                         return this.getVariable(kernelName, variableName);
                     },
@@ -278,9 +278,9 @@ export class KernelClientImpl implements dotnetInteractiveInterfaces.DotnetInter
     }
 }
 
-export type DotnetInteractiveClientConfiguration = {
+export type PolyglossyInteractiveClientConfiguration = {
     address: string,
-    clientFetch?: dotnetInteractiveInterfaces.ClientFetch,
+    clientFetch?: polyglossyInterfaces.ClientFetch,
     channelFactory?: (rootUrl: string) => Promise<{
         sender: IKernelCommandAndEventSender,
         receiver: IKernelCommandAndEventReceiver;
@@ -291,13 +291,16 @@ export type DotnetInteractiveClientConfiguration = {
     }) => Promise<Kernel>
 };
 
-function isConfiguration(config: any): config is DotnetInteractiveClientConfiguration {
+// Legacy alias for backward compatibility.
+export type DotnetInteractiveClientConfiguration = PolyglossyInteractiveClientConfiguration;
+
+function isConfiguration(config: any): config is PolyglossyInteractiveClientConfiguration {
     return typeof config !== "string";
 }
 
-export async function createDotnetInteractiveClient(configuration: string | DotnetInteractiveClientConfiguration): Promise<dotnetInteractiveInterfaces.DotnetInteractiveClient> {
+export async function createPolyglossyInteractiveClient(configuration: string | PolyglossyInteractiveClientConfiguration): Promise<polyglossyInterfaces.PolyglossyInteractiveClient> {
     let rootUrl = "";
-    let clientFetch: dotnetInteractiveInterfaces.ClientFetch | undefined;
+    let clientFetch: polyglossyInterfaces.ClientFetch | undefined;
     let channelFactory: ((rootUrl: string) => Promise<{
         sender: IKernelCommandAndEventSender,
         receiver: IKernelCommandAndEventReceiver;
@@ -348,3 +351,6 @@ export async function createDotnetInteractiveClient(configuration: string | Dotn
 
     return client;
 }
+
+// Legacy alias for backward compatibility.
+export const createDotnetInteractiveClient = createPolyglossyInteractiveClient;

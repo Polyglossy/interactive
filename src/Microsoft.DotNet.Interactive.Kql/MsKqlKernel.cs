@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Kusto.Data.Common;
-using Microsoft.DotNet.Interactive.SqlServer;
+using Polyglossy.Interactive.SqlServer;
 using System;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Directives;
 
-namespace Microsoft.DotNet.Interactive.Kql;
+namespace Polyglossy.Interactive.Kql;
 
 internal class MsKqlKernel : ToolsServiceKernel
 {

@@ -1,14 +1,14 @@
 {
-  "name": "@microsoft/polyglot-notebooks",
-  "displayName": "Polyglot Notebooks",
-  "description": "Polyglot Notebook APIs for NodeJS.",
+  "name": "@polyglossy/polyglossy-notebooks",
+  "displayName": "Polyglossy Notebooks",
+  "description": "Polyglossy notebook APIs for Node.js.",
   "license": "MIT",
   "//version": "The version '42.42.42' is auto-set during CI package creation.",
   "version": "42.42.42",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
-    "url": "https://github.com/dotnet/interactive"
+    "url": "https://github.com/Polyglossy/interactive"
   },
   "scripts": {
     "compile-es-module": "rollup -c rollup.es.config.js -i ./dist/webview/activation.js -o ./dist/activation.js",

@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,20 +8,20 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.App.Commands;
-using Microsoft.DotNet.Interactive.App.Events;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Jupyter;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Tests;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.App.Commands;
+using Polyglossy.Interactive.App.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Jupyter;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Tests;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Utility;
 using Xunit;
-using static Microsoft.DotNet.Interactive.App.CodeExpansion;
+using static Polyglossy.Interactive.App.CodeExpansion;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 public class CodeExpansionTests
 {

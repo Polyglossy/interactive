@@ -4,12 +4,12 @@
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class CompleteRequestHandler : RequestHandlerBase<CompleteRequest>
 {

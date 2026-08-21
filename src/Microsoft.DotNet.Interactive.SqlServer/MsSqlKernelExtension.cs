@@ -4,9 +4,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 
-namespace Microsoft.DotNet.Interactive.SqlServer;
+namespace Polyglossy.Interactive.SqlServer;
 
 public class MsSqlKernelExtension
 {

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.Utility;
+namespace Polyglossy.Interactive.Utility;
 
 public static class CommandLine
 {

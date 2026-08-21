@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,14 +9,14 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
 using Pocket;
 using static Pocket.Logger;
 using CompositeDisposable = System.Reactive.Disposables.CompositeDisposable;
 using Disposable = System.Reactive.Disposables.Disposable;
 
-namespace Microsoft.DotNet.Interactive.Connection;
+namespace Polyglossy.Interactive.Connection;
 
 public class KernelCommandAndEventReceiver : IKernelCommandAndEventReceiver, IDisposable
 {

@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests.Utility;
+namespace Polyglossy.Interactive.Tests.Utility;
 
 public class UtilityTests
 {

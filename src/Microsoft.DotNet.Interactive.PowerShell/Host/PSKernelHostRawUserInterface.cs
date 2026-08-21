@@ -4,7 +4,7 @@
 using System;
 using System.Management.Automation.Host;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 public class PSKernelHostRawUserInterface : PSHostRawUserInterface
 {

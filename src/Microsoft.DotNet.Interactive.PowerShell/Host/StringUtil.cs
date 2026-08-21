@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Management.Automation.Host;
 using System.Threading;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 internal static class StringUtil
 {

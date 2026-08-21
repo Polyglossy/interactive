@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,12 +7,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.DotNet.Interactive.Connection;
+using Polyglossy.Interactive.Connection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CommandLineParser = Microsoft.DotNet.Interactive.App.CommandLine.CommandLineParser;
+using CommandLineParser = Polyglossy.Interactive.App.CommandLine.CommandLineParser;
 
-namespace Microsoft.DotNet.Interactive.App.Tests;
+namespace Polyglossy.Interactive.App.Tests;
 
 internal class InProcessTestServer : IDisposable
 {

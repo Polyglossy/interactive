@@ -5,7 +5,7 @@ using System.Linq;
 using FluentAssertions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class BufferExtractorTests
 {

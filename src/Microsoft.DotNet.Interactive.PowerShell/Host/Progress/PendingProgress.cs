@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host.Progress;
+namespace Polyglossy.Interactive.PowerShell.Host.Progress;
 
 /// <summary>
 /// Represents all of the outstanding progress activities received by the host, and includes methods to update that state

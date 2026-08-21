@@ -1,24 +1,24 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.ValueSharing;
 using Pocket.For.Xunit;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-using Message = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using Message = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 // FIX: (JupyterKernelVariableSharingTests) re-enable these tests
 [Trait("Category", "Skip")]

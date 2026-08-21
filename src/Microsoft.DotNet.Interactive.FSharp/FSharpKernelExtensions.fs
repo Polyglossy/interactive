@@ -1,15 +1,15 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DotNet.Interactive.FSharp
+namespace Polyglossy.Interactive.FSharp
 
 open System
 open System.Runtime.CompilerServices
 open Microsoft.AspNetCore.Html
-open Microsoft.DotNet.Interactive
-open Microsoft.DotNet.Interactive.Commands
-open Microsoft.DotNet.Interactive.FSharp
-open Microsoft.DotNet.Interactive.Formatting
+open Polyglossy.Interactive
+open Polyglossy.Interactive.Commands
+open Polyglossy.Interactive.FSharp
+open Polyglossy.Interactive.Formatting
 
 [<AbstractClass; Extension; Sealed>]
 type FSharpKernelExtensions private () =
@@ -42,7 +42,7 @@ type FSharpKernelExtensions private () =
             [
                 referenceAssemblyContaining typeof<FSharpKernelHelpers.IMarker>
                 
-                // opens Microsoft.DotNet.Interactive.FSharp.FSharpKernelHelpers
+                // opens Polyglossy.Interactive.FSharp.FSharpKernelHelpers
                 //    note this has some AutoOpen content inside
                 openNamespaceContaining typeof<FSharpKernelHelpers.IMarker>
                

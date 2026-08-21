@@ -45,7 +45,7 @@ Each subkernel in .NET Interactive, including subkernels added dynamically at ru
 | `#!sql`                               | Provides information on how to add connection-specific SQL kernels to your interactive session.
 | `#!value`                             | Stores a value (from entered text, a file, or a URL), which can be accessed using `#!share`.
 
-Note that in the Polyglot Notebooks extension for VS Code, you can also click on the kernel name in the lower right-hand corner of each cell to choose a kernel, so it's not necessary to use these magics. But in Jupyter and other frontends that don't have UI to allow you to choose a kernel, these magics give you access to the same capabilities.
+Note that in the Polyglossy Notebooks extension for VS Code, you can also click on the kernel name in the lower right-hand corner of each cell to choose a kernel, so it's not necessary to use these magics. But in Jupyter and other frontends that don't have UI to allow you to choose a kernel, these magics give you access to the same capabilities.
 
 ## C# Kernel
 

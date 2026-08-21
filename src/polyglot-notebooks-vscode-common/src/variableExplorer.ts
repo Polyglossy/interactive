@@ -18,7 +18,7 @@ function debounce(callback: () => void) {
 }
 
 export function registerVariableExplorer(context: vscode.ExtensionContext, clientMapper: ClientMapper) {
-    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.shareValueWith', async (variableInfo: VariableInfo | undefined) => {
+    context.subscriptions.push(vscode.commands.registerCommand('polyglossy-notebook.shareValueWith', async (variableInfo: VariableInfo | undefined) => {
         const activeNotebookEditor = vscode.window.activeNotebookEditor;
         if (variableInfo && activeNotebookEditor) {
             const notebookDocument = activeNotebookEditor.notebook;
@@ -49,12 +49,25 @@ export function registerVariableExplorer(context: vscode.ExtensionContext, clien
         }
     }));
 
+    context.subscriptions.push(vscode.commands.registerCommand('polyglot-notebook.shareValueWith', async (variableInfo: VariableInfo | undefined) => {
+        await vscode.commands.executeCommand('polyglossy-notebook.shareValueWith', variableInfo);
+    }));
+
     const webViewProvider = new WatchWindowTableViewProvider(clientMapper, context.extensionPath);
+    context.subscriptions.push(vscode.window.registerWebviewViewProvider('polyglossy-notebook-panel-values', webViewProvider, { webviewOptions: { retainContextWhenHidden: true } }));
     context.subscriptions.push(vscode.window.registerWebviewViewProvider('polyglot-notebook-panel-values', webViewProvider, { webviewOptions: { retainContextWhenHidden: true } }));
 
     vscode.window.onDidChangeActiveNotebookEditor(async editor => {
         const notebookUri = editor?.notebook.uri;
-        debounce(() => webViewProvider.showNotebookVariables(notebookUri));
+        debounce(() => {
+            if (notebookUri) {
+                webViewProvider.refreshVariables(notebookUri).then(() => {
+                    webViewProvider.showNotebookVariables(notebookUri);
+                });
+            } else {
+                webViewProvider.showNotebookVariables(undefined);
+            }
+        });
     });
 }
 
@@ -131,7 +144,7 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
         this.webview.onDidReceiveMessage(message => {
             const x = message;
             if (message.command === 'shareValueWith') {
-                vscode.commands.executeCommand('polyglot-notebook.shareValueWith', message.variableInfo);
+                vscode.commands.executeCommand('polyglossy-notebook.shareValueWith', message.variableInfo);
             }
         });
 
@@ -146,6 +159,9 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
         this.webview.html = htmlContent;
 
         const currentNotebookUri = vscode.window.activeNotebookEditor?.notebook.uri;
+        if (currentNotebookUri) {
+            await this.refreshVariables(currentNotebookUri);
+        }
         this.showNotebookVariables(currentNotebookUri);
     }
 
@@ -159,7 +175,7 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
                 typeColumnHeader: this.translate('VariableGridColumnType', 'Type'),
                 kernelNameColumnHeader: this.translate('VariableGridColumnKernel', 'Kernel'),
                 shareTemplate: this.translate('VariableGridshareTemplate', 'Share value "{value-name}" from kernel "{kernel-name}"'),
-                gridCaption: this.translate('VariableGridCaption', 'Polyglot Notebook variables')
+                gridCaption: this.translate('VariableGridCaption', 'Polyglossy Notebook variables')
             };
 
             const jsonRows = JSON.parse(connection.Serialize(rows));
@@ -191,9 +207,10 @@ class WatchWindowTableViewProvider implements vscode.WebviewViewProvider {
         const client = await this.clientMapper.tryGetClient(uri);
         if (client) {
             const allKernels = Array.from(client.kernel.childKernels.filter(k => k.kernelInfo.supportedKernelCommands.find(ci => ci.name === commandsAndEvents.RequestValueInfosType)));
-            const kernels = allKernels.filter(kernel => {
-                return this.completedNotebookKernels.get(uri)?.has(kernel.name) ?? false;
-            });
+            const completedKernels = this.completedNotebookKernels.get(uri);
+            const kernels = completedKernels && completedKernels.size > 0
+                ? allKernels.filter(kernel => completedKernels.has(kernel.name))
+                : allKernels;
             for (const kernel of kernels) {
                 try {
                     const valueInfos = await client.requestValueInfos(kernel.name);

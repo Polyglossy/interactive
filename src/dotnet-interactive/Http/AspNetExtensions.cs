@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.DotNet.Interactive.Http;
+namespace Polyglossy.Interactive.Http;
 
 internal static class AspNetExtensions
 {

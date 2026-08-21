@@ -7,7 +7,7 @@ using ICSharpCode.Decompiler.CSharp.OutputVisitor;
 using ICSharpCode.Decompiler.DebugInfo;
 using ICSharpCode.Decompiler.Metadata;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector.CSharpDecompiler;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector.CSharpDecompiler;
 
 internal static class CSharpDecompiler
 {

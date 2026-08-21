@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,14 +11,14 @@ using Assent;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Json;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
-using Microsoft.DotNet.Interactive.Documents.Utility;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Documents.Utility;
+using Polyglossy.Interactive.Tests.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public class JupyterFormatTests : DocumentFormatTestsBase
 {
@@ -54,7 +54,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = $".NET ({shortLanguage})",
+                    display_name = $"Polyglossy ({shortLanguage})",
                     language = shortLanguage,
                     name = $".net-{language}"
                 },
@@ -169,7 +169,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -220,7 +220,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -332,7 +332,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -387,7 +387,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -481,7 +481,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -525,7 +525,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -569,7 +569,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -668,7 +668,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },
@@ -1106,7 +1106,7 @@ public class JupyterFormatTests : DocumentFormatTestsBase
             {
                 kernelspec = new
                 {
-                    display_name = ".NET (C#)",
+                    display_name = "Polyglossy (C#)",
                     language = "C#",
                     name = ".net-csharp"
                 },

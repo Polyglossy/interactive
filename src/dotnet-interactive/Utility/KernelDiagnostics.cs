@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive;
+namespace Polyglossy.Interactive;
 
 internal static class KernelDiagnostics
 {

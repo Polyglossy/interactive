@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 internal static class CommandRoutingSlipExtensions
 {
     public static void FullStamp(this CommandRoutingSlip routingSlip, Uri kernelUri)

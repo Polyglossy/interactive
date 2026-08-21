@@ -11,20 +11,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.DotNet.Interactive.App.CommandLine;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Jupyter;
-using Microsoft.DotNet.Interactive.PowerShell;
+using Polyglossy.Interactive.App.CommandLine;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Jupyter;
+using Polyglossy.Interactive.PowerShell;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pocket;
 using Serilog.Sinks.RollingFileAlternate;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.App.Program>;
+using static Pocket.Logger<Polyglossy.Interactive.App.Program>;
 using SerilogLoggerConfiguration = Serilog.LoggerConfiguration;
-using CommandLineParser = Microsoft.DotNet.Interactive.App.CommandLine.CommandLineParser;
+using CommandLineParser = Polyglossy.Interactive.App.CommandLine.CommandLineParser;
 
-namespace Microsoft.DotNet.Interactive.App;
+namespace Polyglossy.Interactive.App;
 
 public class Program
 {
@@ -59,10 +59,10 @@ public class Program
     private static readonly Assembly[] _assembliesEmittingPocketLoggerLogs =
     {
         typeof(Startup).Assembly, // dotnet-interactive.dll
-        typeof(Kernel).Assembly, // Microsoft.DotNet.Interactive.dll
-        typeof(JupyterRequestContext).Assembly, // Microsoft.DotNet.Interactive.Jupyter.dll
-        typeof(PowerShellKernel).Assembly, // Microsoft.DotNet.Interactive.PowerShell.dll
-        typeof(InteractiveDocument).Assembly, // Microsoft.DotNet.Interactive.Documents.dll
+        typeof(Kernel).Assembly, // Polyglossy.Interactive.dll
+        typeof(JupyterRequestContext).Assembly, // Polyglossy.Interactive.Jupyter.dll
+        typeof(PowerShellKernel).Assembly, // Polyglossy.Interactive.PowerShell.dll
+        typeof(InteractiveDocument).Assembly, // Polyglossy.Interactive.Documents.dll
     };
 
     internal static IDisposable StartToolLogging(DirectoryInfo logPath = null)

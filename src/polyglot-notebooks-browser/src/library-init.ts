@@ -1,25 +1,28 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-import { DotnetInteractiveScopeContainer, DotnetInteractiveScope } from "./polyglot-notebooks-interfaces";
-import { createDotnetInteractiveClient } from "./kernel-client-impl";
+import { PolyglossyInteractiveScopeContainer, PolyglossyInteractiveScope } from "./polyglot-notebooks-interfaces";
+import { createPolyglossyInteractiveClient } from "./kernel-client-impl";
 
 export function init(global: any) {
-    global.getDotnetInteractiveScope = (key: string) => {
+    global.getPolyglossyInteractiveScope = (key: string) => {
         if (!global.interactiveScopes) {
-            global.interactiveScopes = new DotnetInteractiveScopeContainer();
+            global.interactiveScopes = new PolyglossyInteractiveScopeContainer();
         }
 
         if (!global.interactiveScopes[key]) {
-            global.interactiveScopes[key] = new DotnetInteractiveScope();
+            global.interactiveScopes[key] = new PolyglossyInteractiveScope();
         }
 
         return global.interactiveScopes[key];
     }
 
+    global.getDotnetInteractiveScope = global.getPolyglossyInteractiveScope;
+
     global.configureRequire = (config: any) => {
         return (<any>require).config(config) || require;
     }
 
-    global.createDotnetInteractiveClient = createDotnetInteractiveClient;
+    global.createPolyglossyInteractiveClient = createPolyglossyInteractiveClient;
+    global.createDotnetInteractiveClient = createPolyglossyInteractiveClient;
 }

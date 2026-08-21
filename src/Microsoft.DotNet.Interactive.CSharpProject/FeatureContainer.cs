@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public abstract class FeatureContainer : IDisposable
 {

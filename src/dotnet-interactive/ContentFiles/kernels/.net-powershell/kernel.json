@@ -1,18 +1,18 @@
 {
   "argv": [
     "dotnet",
-    "interactive",
+    "polyglossy-interactive",
     "jupyter",
     "--default-kernel",
     "powershell",
     "{connection_file}"
   ],
-  "display_name": ".NET (PowerShell)",
+  "display_name": "Polyglossy (PowerShell)",
   "language": "PowerShell",
   "metadata": {
     "vscode": {
-      "extension_id": "ms-dotnettools.dotnet-interactive-vscode",
-      "kernel_id": "dotnet-interactive"
+      "extension_id": "polyglossy-tools.polyglossy-interactive-vscode",
+      "kernel_id": "polyglossy-interactive"
     }
   }
 }

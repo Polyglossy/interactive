@@ -1,19 +1,19 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Tests;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Tests;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 [Collection("Do not parallelize")]
 public abstract class JupyterRequestHandlerTestBase : IDisposable

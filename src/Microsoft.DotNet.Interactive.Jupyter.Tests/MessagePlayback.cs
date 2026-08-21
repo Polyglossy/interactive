@@ -9,14 +9,14 @@ using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions.Extensions;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.Tests.MessagePlayback>;
-using Message = Microsoft.DotNet.Interactive.Jupyter.Messaging.Message;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.Tests.MessagePlayback>;
+using Message = Polyglossy.Interactive.Jupyter.Messaging.Message;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 internal class MessagePlayback : IMessageTracker
 {

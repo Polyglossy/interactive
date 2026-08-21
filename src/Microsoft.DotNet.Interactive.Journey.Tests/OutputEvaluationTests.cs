@@ -1,15 +1,15 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Journey.Tests.Utilities;
+using Polyglossy.Interactive.Journey.Tests.Utilities;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Journey.Tests;
+namespace Polyglossy.Interactive.Journey.Tests;
 
 public class OutputEvaluationTests : ProgressiveLearningTestBase
 {

@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.DotNet.Interactive.Parsing;
+using Polyglossy.Interactive.Parsing;
 
-namespace Microsoft.DotNet.Interactive.Commands;
+namespace Polyglossy.Interactive.Commands;
 
 public class SubmitCode : KernelCommand
 {

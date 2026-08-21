@@ -1,11 +1,11 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging;
-using Microsoft.DotNet.Interactive.Jupyter.Messaging.Comms;
-using Microsoft.DotNet.Interactive.Jupyter.Protocol;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Jupyter.Messaging;
+using Polyglossy.Interactive.Jupyter.Messaging.Comms;
+using Polyglossy.Interactive.Jupyter.Protocol;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Stream = System.IO.Stream;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.CommandEvents;
+namespace Polyglossy.Interactive.Jupyter.CommandEvents;
 
 internal class CommCommandEventChannelConfiguration : IJupyterKernelConfiguration
 {

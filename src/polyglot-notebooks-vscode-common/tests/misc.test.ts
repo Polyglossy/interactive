@@ -4,11 +4,13 @@
 import { expect } from 'chai';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { DisplayElement, ErrorElement, TextElement } from '../../src/vscode-common/polyglot-notebooks/contracts';
 import { isDisplayOutput, isErrorOutput, isTextOutput, reshapeOutputValueForVsCode } from '../../src/vscode-common/interfaces/utilities';
-import { createOutput, createUri, debounce, executeSafe, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
+import { createOutput, createUri, debounce, executeSafe, getConfigurationValue, getVersionNumber, getWorkingDirectoryForNotebook, parse, processArguments, stringify, toolManifestExists } from '../../src/vscode-common/utilities';
 import { decodeToString, withFakeGlobalStorageLocation } from './utilities';
 
+import * as constants from '../../src/vscode-common/constants';
 import * as vscodeLike from '../../src/vscode-common/interfaces/vscode-like';
 import { areEquivalentObjects, sortInPlace } from '../../src/vscode-common/metadataUtilities';
 
@@ -36,7 +38,7 @@ describe('Miscellaneous tests', () => {
                 '{dotnet_path}',
                 'tool',
                 'run',
-                'dotnet-interactive',
+                'polyglossy-interactive',
                 '--',
                 'stdio',
                 '--working-dir',
@@ -50,7 +52,7 @@ describe('Miscellaneous tests', () => {
             args: [
                 'tool',
                 'run',
-                'dotnet-interactive',
+                'polyglossy-interactive',
                 '--',
                 'stdio',
                 '--working-dir',
@@ -81,6 +83,98 @@ describe('Miscellaneous tests', () => {
         expect(workingDir).to.equal('this/is/local/and/used');
     });
 
+    it('dib notebooks prefer the polyglossy view type', () => {
+        expect(constants.getNotebookViewTypeForFormat('dib')).to.equal(constants.PolyglossyNotebookViewType);
+    });
+
+    it('extension manifests advertise the polyglossy notebook identity for .dib files', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const activationEvents = manifest.activationEvents ?? [];
+            const notebookContributions = manifest.contributes?.notebooks ?? [];
+
+            expect(activationEvents, `${manifestPath} should activate for polyglossy notebook view types`).to.include('onNotebook:polyglossy-notebook');
+            expect(notebookContributions.some((contribution: { type: string; selector?: Array<{ filenamePattern?: string }> }) => contribution.type === 'polyglossy-notebook' && contribution.selector?.some(({ filenamePattern }) => filenamePattern === '*.dib')), `${manifestPath} should contribute a .dib notebook type for the polyglossy notebook identity`).to.be.true;
+        }
+    });
+
+    it('extension manifests advertise the polyglossy command and settings identities', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        const expectedCommands = [
+            'polyglossy-notebook.openNotebook',
+            'polyglossy-notebook.saveAsNotebook',
+            'polyglossy-notebook.fileNew',
+            'polyglossy-notebook.newNotebook',
+            'polyglossy-notebook.newNotebookNoDefaults',
+            'polyglossy-notebook.setNewNotebookDefaults',
+            'polyglossy-notebook.restartCurrentNotebookKernel',
+            'polyglossy-notebook.stopCurrentNotebookKernel',
+            'polyglossy-notebook.stopAllNotebookKernels',
+            'polyglossy-notebook.shareValueWith',
+            'polyglossy-notebook.notebookEditor.restartKernel',
+            'polyglossy-notebook.notebookEditor.openValueViewer',
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const activationEvents = manifest.activationEvents ?? [];
+            const commands = manifest.contributes?.commands ?? [];
+            const configurationProperties = manifest.contributes?.configuration?.properties ?? {};
+
+            expect(activationEvents, `${manifestPath} should activate for the polyglossy new-notebook command`).to.include('onCommand:polyglossy-notebook.newNotebook');
+            for (const commandId of expectedCommands) {
+                expect(commands.some((command: { command: string }) => command.command === commandId), `${manifestPath} should contribute ${commandId}`).to.be.true;
+            }
+            expect(configurationProperties['polyglossy-notebook.defaultNotebookExtension'], `${manifestPath} should contribute the polyglossy default notebook extension setting`).to.exist;
+        }
+    });
+
+    it('notebook toolbar menu entries support the polyglossy notebook identity', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const toolbarEntries = manifest.contributes?.menus?.['notebook/toolbar'] ?? [];
+            const restartEntry = toolbarEntries.find((entry: { command: string }) => entry.command === 'polyglossy-notebook.notebookEditor.restartKernel');
+            const valueViewerEntry = toolbarEntries.find((entry: { command: string }) => entry.command === 'polyglossy-notebook.notebookEditor.openValueViewer');
+
+            expect(restartEntry, `${manifestPath} should contribute the Polyglossy restart-kernel toolbar entry`).to.exist;
+            expect(restartEntry.when, `${manifestPath} should expose the restart-kernel toolbar entry for the polyglossy notebook identity`).to.include('polyglossy-notebook');
+            expect(valueViewerEntry, `${manifestPath} should contribute the Polyglossy value-viewer toolbar entry`).to.exist;
+            expect(valueViewerEntry.when, `${manifestPath} should expose the value-viewer toolbar entry for the polyglossy notebook identity`).to.include('polyglossy-notebook');
+        }
+    });
+
+    it('extension manifests advertise the polyglossy webview view identity', () => {
+        const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
+        const manifestPaths = [
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode', 'package.json'),
+            path.join(workspaceRoot, 'src', 'polyglot-notebooks-vscode-insiders', 'package.json')
+        ];
+
+        for (const manifestPath of manifestPaths) {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const activationEvents = manifest.activationEvents ?? [];
+
+            expect(activationEvents, `${manifestPath} should activate for the polyglossy webview view`).to.include('onView:polyglossy-notebook-panel-values');
+        }
+    });
+
     it('notebook working directory comes from fallback if notebook is remote', () => {
         const notebookUri = createUri('path/to/notebook.dib', 'remote');
         const workspaceFolderUris = [
@@ -107,6 +201,29 @@ describe('Miscellaneous tests', () => {
 
             expect(toolManifestExists(globalStoragePath)).to.be.true;
         });
+    });
+
+    it('configuration lookup prefers the new section and falls back to the legacy section', () => {
+        const originalGetConfiguration = (vscode.workspace as typeof vscode.workspace & { getConfiguration: typeof vscode.workspace.getConfiguration }).getConfiguration;
+        const configMap = new Map<string, Record<string, unknown>>();
+        (vscode.workspace as typeof vscode.workspace & { getConfiguration: typeof vscode.workspace.getConfiguration }).getConfiguration = ((section?: string) => ({
+            get<T>(key: string): T | undefined {
+                return (configMap.get(section ?? '')?.[key] as T | undefined) ?? undefined;
+            }
+        })) as typeof vscode.workspace.getConfiguration;
+
+        try {
+            configMap.set('polyglossy-interactive', { requiredInteractiveToolVersion: '2.0' });
+            configMap.set('dotnet-interactive', { requiredInteractiveToolVersion: '1.0' });
+            expect(getConfigurationValue('requiredInteractiveToolVersion', 'polyglossy-interactive', 'dotnet-interactive')).to.equal('2.0');
+
+            configMap.set('polyglossy-interactive', {});
+            expect(getConfigurationValue('requiredInteractiveToolVersion', 'polyglossy-interactive', 'dotnet-interactive')).to.equal('1.0');
+
+            expect(getConfigurationValue('missingKey', 'polyglossy-interactive', 'dotnet-interactive')).to.equal(undefined);
+        } finally {
+            (vscode.workspace as typeof vscode.workspace & { getConfiguration: typeof vscode.workspace.getConfiguration }).getConfiguration = originalGetConfiguration;
+        }
     });
 
     it('cell output ids use crypto.getRandomValues when randomUUID is unavailable', () => {

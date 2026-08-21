@@ -1,20 +1,20 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading.Tasks;
 using System.Linq;
 using System;
-using Microsoft.DotNet.Interactive.Tests.Utility;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.Formatting.Csv;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.App;
+using Polyglossy.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Formatting.Csv;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.App;
 using FluentAssertions;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.PostgreSql.Tests;
+namespace Polyglossy.Interactive.PostgreSql.Tests;
 
 [Trait("Databases", "Data query tests")]
 public class PostgreSqlConnectionTests : IDisposable

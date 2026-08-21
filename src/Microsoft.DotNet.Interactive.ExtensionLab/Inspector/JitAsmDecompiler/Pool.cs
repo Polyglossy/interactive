@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2016-2017, Andrey Shchekin
 All rights reserved.
 
@@ -26,7 +26,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using System;
 using System.Collections.Concurrent;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
+namespace Polyglossy.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
 
 public class Pool<T>
 {

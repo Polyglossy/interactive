@@ -4,9 +4,9 @@
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-using Microsoft.DotNet.Interactive.Commands;
+using Polyglossy.Interactive.Commands;
 
-namespace Microsoft.DotNet.Interactive.Tests.Utility;
+namespace Polyglossy.Interactive.Tests.Utility;
 
 public class FakeKernel :
     Kernel,

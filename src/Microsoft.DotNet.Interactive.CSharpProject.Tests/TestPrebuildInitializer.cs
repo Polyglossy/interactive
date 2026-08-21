@@ -4,9 +4,9 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.CSharpProject.Build;
+using Polyglossy.Interactive.CSharpProject.Build;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class TestPrebuildInitializer : PrebuildInitializer
 {

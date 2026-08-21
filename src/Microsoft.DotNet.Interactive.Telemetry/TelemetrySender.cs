@@ -13,7 +13,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.DotNet.PlatformAbstractions;
 using Pocket;
 
-namespace Microsoft.DotNet.Interactive.Telemetry;
+namespace Polyglossy.Interactive.Telemetry;
 
 public class TelemetrySender
 {

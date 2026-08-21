@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Management.Automation;
 using System.Threading;
-using Microsoft.DotNet.Interactive.PowerShell.Host.Progress;
+using Polyglossy.Interactive.PowerShell.Host.Progress;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Host;
+namespace Polyglossy.Interactive.PowerShell.Host;
 
 public partial class PSKernelHostUserInterface
 {

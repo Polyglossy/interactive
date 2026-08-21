@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using RuntimeEnvironment = Microsoft.DotNet.PlatformAbstractions.RuntimeEnvironment;
 
-namespace Microsoft.DotNet.Interactive.Telemetry;
+namespace Polyglossy.Interactive.Telemetry;
 
 public class TelemetryCommonProperties
 {

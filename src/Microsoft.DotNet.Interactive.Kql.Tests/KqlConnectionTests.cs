@@ -6,19 +6,19 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.Csv;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.SqlServer;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.Csv;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.SqlServer;
+using Polyglossy.Interactive.Tests.Utility;
 
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Kql.Tests;
+namespace Polyglossy.Interactive.Kql.Tests;
 
 [Trait("Databases", "Data query tests")]
 public class KqlConnectionTests
@@ -313,7 +313,7 @@ StormEvents | take 0
     }
 
     [KqlTheory]
-    [InlineData("var testVar = new Microsoft.DotNet.Interactive.PasswordString(\"pwd\");", "pwd")] // password string
+    [InlineData("var testVar = new Polyglossy.Interactive.PasswordString(\"pwd\");", "pwd")] // password string
     [InlineData("var testVar = 2;", (long)2)] // var
     [InlineData("var testVar = \"hi!\";", "hi!")] // var string
     [InlineData("string testVar = \"hi!\";", "hi!")] // string

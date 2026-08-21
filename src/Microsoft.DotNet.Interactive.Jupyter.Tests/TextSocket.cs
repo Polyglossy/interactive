@@ -6,7 +6,7 @@ using System.Text;
 
 using NetMQ;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 internal class TextSocket : IOutgoingSocket
 {

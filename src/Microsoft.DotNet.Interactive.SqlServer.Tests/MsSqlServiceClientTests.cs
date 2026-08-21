@@ -5,7 +5,7 @@ using System;
 using Xunit;
 using FluentAssertions;
 
-namespace Microsoft.DotNet.Interactive.SqlServer.Tests;
+namespace Polyglossy.Interactive.SqlServer.Tests;
 
 public class MsSqlServiceClientTests
 {

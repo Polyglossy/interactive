@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Models.Execution;
+namespace Polyglossy.Interactive.CSharpProject.Models.Execution;
 
 public static class WorkspaceExtensions
 {

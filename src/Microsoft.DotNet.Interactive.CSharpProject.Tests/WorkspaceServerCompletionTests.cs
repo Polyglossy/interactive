@@ -5,11 +5,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.CSharpProject.Build;
+using Polyglossy.Interactive.CSharpProject.Build;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class WorkspaceServerCompletionTests : WorkspaceServerTestsCore
 {

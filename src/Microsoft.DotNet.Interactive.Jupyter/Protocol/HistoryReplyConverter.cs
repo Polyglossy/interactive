@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Protocol;
+namespace Polyglossy.Interactive.Jupyter.Protocol;
 
 internal class HistoryReplyConverter : JsonConverter<HistoryReply>
 {

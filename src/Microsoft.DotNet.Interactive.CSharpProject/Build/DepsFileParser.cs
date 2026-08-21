@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Build;
+namespace Polyglossy.Interactive.CSharpProject.Build;
 
 internal static class DepsFileParser
 {

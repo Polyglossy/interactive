@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,17 +8,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
-using Microsoft.DotNet.Interactive.App.Commands;
-using Microsoft.DotNet.Interactive.App.ParserServer;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject;
-using Microsoft.DotNet.Interactive.CSharpProject.Commands;
-using Microsoft.DotNet.Interactive.CSharpProject.Events;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.VSCode;
+using Polyglossy.Interactive.App.Commands;
+using Polyglossy.Interactive.App.ParserServer;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharpProject;
+using Polyglossy.Interactive.CSharpProject.Commands;
+using Polyglossy.Interactive.CSharpProject.Events;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.VSCode;
 
-namespace Microsoft.DotNet.Interactive.InterfaceGen.App;
+namespace Polyglossy.Interactive.InterfaceGen.App;
 
 public class InterfaceGenerator
 {

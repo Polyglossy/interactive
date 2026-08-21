@@ -1,7 +1,7 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Utility;
+using Polyglossy.Interactive.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,10 +11,10 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Pocket;
 using static System.Environment;
-using static Pocket.Logger<Microsoft.DotNet.Interactive.Jupyter.CondaEnvironment>;
-using CommandLine = Microsoft.DotNet.Interactive.Utility.CommandLine;
+using static Pocket.Logger<Polyglossy.Interactive.Jupyter.CondaEnvironment>;
+using CommandLine = Polyglossy.Interactive.Utility.CommandLine;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public class CondaEnvironment : IJupyterEnvironment
 {

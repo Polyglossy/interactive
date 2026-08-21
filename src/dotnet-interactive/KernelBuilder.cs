@@ -3,23 +3,23 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Microsoft.DotNet.Interactive.App.CommandLine;
-using Microsoft.DotNet.Interactive.App.Connection;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.Http;
-using Microsoft.DotNet.Interactive.Jupyter;
-using Microsoft.DotNet.Interactive.Mermaid;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Telemetry;
+using Polyglossy.Interactive.App.CommandLine;
+using Polyglossy.Interactive.App.Connection;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.Http;
+using Polyglossy.Interactive.Jupyter;
+using Polyglossy.Interactive.Mermaid;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Telemetry;
 using Pocket;
-using static Microsoft.DotNet.Interactive.App.CodeExpansion;
+using static Polyglossy.Interactive.App.CodeExpansion;
 using static Pocket.Logger;
-using Formatter = Microsoft.DotNet.Interactive.Formatting.Formatter;
+using Formatter = Polyglossy.Interactive.Formatting.Formatter;
 
-namespace Microsoft.DotNet.Interactive.App;
+namespace Polyglossy.Interactive.App;
 
 public static class KernelBuilder
 {
@@ -143,7 +143,7 @@ public static class KernelBuilder
         return [
             new([
                     new("""
-                        #r "nuget:Microsoft.DotNet.Interactive.Kql, *-*"
+                        #r "nuget:Polyglossy.Interactive.Kql, *-*"
                         """, "csharp"),
                     new("""
                         #!connect kql --kernel-name @input --cluster @input --database @input
@@ -152,7 +152,7 @@ public static class KernelBuilder
                 new("Kusto Query Language", CodeExpansionKind.DataConnection)),
             new([
                     new("""
-                        #r "nuget:Microsoft.DotNet.Interactive.SqlServer, *-*"
+                        #r "nuget:Polyglossy.Interactive.SqlServer, *-*"
                         """, "csharp"),
                     new("""
                         #!connect mssql --kernel-name @input --connection-string @password

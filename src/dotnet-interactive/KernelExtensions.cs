@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,23 +10,23 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.App.Commands;
-using Microsoft.DotNet.Interactive.App.Events;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.PackageManagement;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Telemetry;
+using Polyglossy.Interactive.App.Commands;
+using Polyglossy.Interactive.App.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.PackageManagement;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Telemetry;
 using static System.IO.Path;
-using static Microsoft.DotNet.Interactive.App.CodeExpansion;
-using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;
+using static Polyglossy.Interactive.App.CodeExpansion;
+using static Polyglossy.Interactive.Formatting.PocketViewTags;
 
-namespace Microsoft.DotNet.Interactive.App;
+namespace Polyglossy.Interactive.App;
 
 public static class KernelExtensions
 {

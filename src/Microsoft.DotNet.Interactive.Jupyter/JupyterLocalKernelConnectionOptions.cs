@@ -1,14 +1,14 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.Tags;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
-using Microsoft.DotNet.Interactive.Jupyter.ZMQ;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Jupyter.ZMQ;
 
-namespace Microsoft.DotNet.Interactive.Jupyter;
+namespace Polyglossy.Interactive.Jupyter;
 
 public sealed class JupyterLocalKernelConnectionOptions : IJupyterKernelConnectionOptions
 {

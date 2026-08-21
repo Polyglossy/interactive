@@ -8,7 +8,7 @@ import * as path from 'path';
 use(require('chai-fs'));
 
 import { ClientMapper } from './../../src/vscode-common/clientMapper';
-import { TestDotnetInteractiveChannel } from './testDotnetInteractiveChannel';
+import { TestPolyglossyInteractiveChannel } from './testPolyglossyInteractiveChannel';
 import {
     CodeSubmissionReceivedType,
     CommandFailedType,
@@ -33,7 +33,7 @@ describe('Notebook tests', () => {
         it(`executes and returns expected value: ${language}`, async () => {
             const code = '1+1';
             const config = createChannelConfig(async (_notebookPath) =>
-                new TestDotnetInteractiveChannel({
+                new TestPolyglossyInteractiveChannel({
                     'SubmitCode': [
                         {
                             eventType: CodeSubmissionReceivedType,
@@ -91,7 +91,7 @@ Console.WriteLine(2);
 Guid.NewGuid().Display();
 Console.WriteLine(3);
 `;
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     eventType: CodeSubmissionReceivedType,
@@ -209,7 +209,7 @@ Console.WriteLine(3);
 
     it('returned json is properly parsed', async () => {
         const code = 'JObject.FromObject(new { a = 1, b = false })';
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     eventType: CodeSubmissionReceivedType,
@@ -264,7 +264,7 @@ Console.WriteLine(3);
 
     it('diagnostics are reported on CommandFailed', (done) => {
         const code = 'Console.WriteLin();';
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     eventType: CodeSubmissionReceivedType,
@@ -339,7 +339,7 @@ Console.WriteLine(3);
     it('diagnostics are reported on CommandSucceeded', async () => {
         const token = '123';
         const code = 'Console.WriteLine();';
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'SubmitCode': [
                 {
                     eventType: CodeSubmissionReceivedType,
@@ -407,7 +407,7 @@ Console.WriteLine(3);
     it('diagnostics are reported when directly requested', async () => {
 
         const code = 'Console.WriteLine();';
-        const config = createChannelConfig(async (_notebookPath) => new TestDotnetInteractiveChannel({
+        const config = createChannelConfig(async (_notebookPath) => new TestPolyglossyInteractiveChannel({
             'RequestDiagnostics': [
                 {
                     eventType: DiagnosticsProducedType,

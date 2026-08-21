@@ -8,13 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
-using Microsoft.DotNet.Interactive.ValueSharing;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.ValueSharing;
 
-namespace Microsoft.DotNet.Interactive.SqlServer;
+namespace Polyglossy.Interactive.SqlServer;
 
 public abstract class ToolsServiceKernel :
     Kernel,

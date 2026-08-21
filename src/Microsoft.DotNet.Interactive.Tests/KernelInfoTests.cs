@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -6,19 +6,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.DotNet.Interactive.App;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.FSharp;
-using Microsoft.DotNet.Interactive.PowerShell;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.App;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.FSharp;
+using Polyglossy.Interactive.PowerShell;
+using Polyglossy.Interactive.Tests.Utility;
 using Pocket;
 using Pocket.For.Xunit;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Interactive.Tests;
+namespace Polyglossy.Interactive.Tests;
 
 public class KernelInfoTests
 {
@@ -318,9 +318,9 @@ public class KernelInfoTests
                 new CSharpKernel()
             };
             var code = @"
-using Microsoft.DotNet.Interactive;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
+using Polyglossy.Interactive;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
 var compositeKernel = Kernel.Root as CompositeKernel;
 compositeKernel.Add(new CSharpKernel(""csharpTwo""), new []{""cs2""});
 ";

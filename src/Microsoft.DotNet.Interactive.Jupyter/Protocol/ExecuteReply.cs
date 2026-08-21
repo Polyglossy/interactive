@@ -4,7 +4,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Protocol;
+namespace Polyglossy.Interactive.Jupyter.Protocol;
 
 [JupyterMessageType(JupyterMessageContentTypes.ExecuteReply)]
 public class ExecuteReply : ReplyMessage

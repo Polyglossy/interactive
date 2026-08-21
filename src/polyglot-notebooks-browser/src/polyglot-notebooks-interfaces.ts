@@ -21,8 +21,7 @@ export interface KernelClient {
     submitCommand(commandType: string, command?: any): Promise<string>;
 }
 
-// Implemented by the client-side kernel.
-export interface DotnetInteractiveClient {
+export interface PolyglossyInteractiveClient {
     subscribeToKernelEvents(observer: commandsAndEvents.KernelEventEnvelopeObserver): DisposableSubscription;
     registerCommandHandler(handler: IKernelCommandHandler): void;
     getVariable(kernelName: string, variableName: string): Promise<any>;
@@ -42,16 +41,27 @@ export interface DotnetInteractiveClient {
     waitForAllEventsToPublish(commandToken: string): Promise<void>;
 }
 
+// Implemented by the client-side kernel.
+export type DotnetInteractiveClient = PolyglossyInteractiveClient;
+
 export interface KernelClientContainer {
     [key: string]: KernelClient;
 }
 
-export class DotnetInteractiveScopeContainer {
-    [key: string]: DotnetInteractiveScope
+export class PolyglossyInteractiveScope {
+    [key: string]: any
 }
 
-export class DotnetInteractiveScope {
-    [key: string]: any
+export class PolyglossyInteractiveScopeContainer {
+    [key: string]: PolyglossyInteractiveScope
+}
+
+// Legacy compatibility aliases for the transition window.
+export class DotnetInteractiveScope extends PolyglossyInteractiveScope {
+}
+
+// Legacy compatibility aliases for the transition window.
+export class DotnetInteractiveScopeContainer extends PolyglossyInteractiveScopeContainer {
 }
 
 export interface ClientFetch {

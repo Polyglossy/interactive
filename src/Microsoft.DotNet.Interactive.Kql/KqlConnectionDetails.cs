@@ -1,4 +1,4 @@
-﻿namespace Microsoft.DotNet.Interactive.Kql;
+namespace Polyglossy.Interactive.Kql;
 
 public class KqlConnectionDetails
 {

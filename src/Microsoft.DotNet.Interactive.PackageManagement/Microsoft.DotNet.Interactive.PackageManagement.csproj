@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <AssemblyName>Polyglossy.Interactive.PackageManagement</AssemblyName>
     <PackageId>Microsoft.DotNet.Interactive.PackageManagement</PackageId>
     <NoWarn>$(NoWarn);8002;CS8002</NoWarn>
   </PropertyGroup>
@@ -23,4 +24,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.DotNet.Interactive\Microsoft.DotNet.Interactive.csproj" />
   </ItemGroup>
+
+  <Target Name="CreateLegacyAssemblyFileName" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll"
+          DestinationFiles="$(TargetDir)Microsoft.DotNet.Interactive.PackageManagement.dll"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)$(AssemblyName).dll') and '$(AssemblyName)' != 'Microsoft.DotNet.Interactive.PackageManagement'" />
+    <Copy SourceFiles="$(TargetDir)$(AssemblyName).pdb"
+          DestinationFiles="$(TargetDir)Microsoft.DotNet.Interactive.PackageManagement.pdb"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)$(AssemblyName).pdb') and '$(AssemblyName)' != 'Microsoft.DotNet.Interactive.PackageManagement'" />
+  </Target>
 </Project>

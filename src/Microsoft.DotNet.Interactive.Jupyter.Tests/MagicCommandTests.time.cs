@@ -5,15 +5,15 @@ using System;
 using FluentAssertions;
 using System.Threading.Tasks;
 using FluentAssertions.Extensions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
-using static Microsoft.DotNet.Interactive.Formatting.Tests.Tags;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
+using static Polyglossy.Interactive.Formatting.Tests.Tags;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Tests;
+namespace Polyglossy.Interactive.Jupyter.Tests;
 
 public partial class MagicCommandTests
 {

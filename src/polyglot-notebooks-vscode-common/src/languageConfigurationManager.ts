@@ -22,7 +22,7 @@ export class LanguageConfigurationManager {
 
     ensureLanguageConfigurationForDocument(document: vscode.TextDocument) {
         const cell = vscode.workspace.notebookDocuments.flatMap(notebook => notebook.getCells()).find(cell => cell.document === document);
-        if (cell && metadataUtilities.isDotNetNotebook(cell.notebook)) {
+        if (cell && metadataUtilities.isPolyglossyNotebook(cell.notebook)) {
             const notebookCellMetadata = metadataUtilities.getNotebookCellMetadataFromNotebookCellElement(cell);
             if (notebookCellMetadata.kernelName) {
                 const languageConfiguration = this.dynamicTokensProvider.getLanguageConfigurationFromKernelNameOrAlias(cell.notebook, notebookCellMetadata.kernelName);

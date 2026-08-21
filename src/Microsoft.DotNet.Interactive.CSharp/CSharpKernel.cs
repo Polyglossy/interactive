@@ -16,15 +16,15 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.QuickInfo;
 using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.CSharp.SignatureHelp;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Utility;
-using Microsoft.DotNet.Interactive.ValueSharing;
-using CompletionItem = Microsoft.DotNet.Interactive.Events.CompletionItem;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.CSharp.SignatureHelp;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Utility;
+using Polyglossy.Interactive.ValueSharing;
+using CompletionItem = Polyglossy.Interactive.Events.CompletionItem;
 
-namespace Microsoft.DotNet.Interactive.CSharp;
+namespace Polyglossy.Interactive.CSharp;
 
 public class CSharpKernel :
     Kernel,
@@ -66,7 +66,7 @@ public class CSharpKernel :
                                  """;
         _workspace = new InteractiveWorkspace();
 
-        //For the VSCode-Add-In Directory.GetCurrentDirectory() would here return something like: c:\Users\<username>\AppData\Roaming\Code\User\globalStorage\ms-dotnettools.dotnet-interactive-vscode
+        //For the VSCode-Add-In Directory.GetCurrentDirectory() would here return something like: c:\Users\<username>\AppData\Roaming\Code\User\globalStorage\polyglossy-tools.polyglossy-interactive-vscode
         //...so we wait for RunAsync to read Directory.GetCurrentDirectory() the first time.
 
         _scriptOptions = ScriptOptions.Default

@@ -4,7 +4,7 @@
 using Microsoft.CodeAnalysis;
 using Newtonsoft.Json;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject;
+namespace Polyglossy.Interactive.CSharpProject;
 
 public class SerializableDiagnostic
 {

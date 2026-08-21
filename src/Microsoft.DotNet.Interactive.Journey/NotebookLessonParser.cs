@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,13 +10,13 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.Documents.Jupyter;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.Documents.Jupyter;
 
 #nullable enable
 
-namespace Microsoft.DotNet.Interactive.Journey;
+namespace Polyglossy.Interactive.Journey;
 
 public class NotebookLessonParser
 {

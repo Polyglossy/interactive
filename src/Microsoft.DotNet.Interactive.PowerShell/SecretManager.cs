@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -7,7 +7,7 @@ using System;
 using Pocket;
 using static Pocket.Logger;
 
-namespace Microsoft.DotNet.Interactive.PowerShell;
+namespace Polyglossy.Interactive.PowerShell;
 
 public class SecretManager
 {

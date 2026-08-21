@@ -26,7 +26,7 @@ The syntax to use the `#!connect` command:
 
 ## Querying
 
-To connect to data and query in Polyglot Notebooks in VS Code, follow the steps below: 
+To connect to data and query in Polyglossy Notebooks in VS Code, follow the steps below: 
 
 1. Create a new Polyglot Notebook starting with a C# cell. 
 
@@ -51,7 +51,7 @@ Kusto Example
 
 # Storing and Sharing Query Results
 
-Since Polyglot Notebooks not only allows you to use different languages in the same notebook but share variables between them, you might be interested in storing query results to pass of between language to language. 
+Since Polyglossy Notebooks not only allows you to use different languages in the same notebook but share variables between them, you might be interested in storing query results to pass of between language to language. 
 
 The syntax to store MSSQL or KQL queries: 
 

@@ -5,6 +5,7 @@ import * as compareVersions from 'compare-versions';
 import * as cp from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { InstallInteractiveArgs, ProcessStart } from "./interfaces";
 import { NotebookCellOutput, NotebookCellOutputItem, ReportChannel, Uri } from './interfaces/vscode-like';
 import * as commandsAndEvents from './polyglot-notebooks/commandsAndEvents';
@@ -73,9 +74,21 @@ export function toolManifestExists(globalStoragePath: string): boolean {
     ].some(file => fs.existsSync(file));
 }
 
+export function getConfigurationValue<T>(key: string, ...sectionNames: string[]): T | undefined {
+    for (const sectionName of sectionNames) {
+        const config = vscode.workspace.getConfiguration(sectionName);
+        const value = config.get<T>(key);
+        if (value !== undefined) {
+            return value;
+        }
+    }
+
+    return undefined;
+}
+
 export function createOutput(outputItems: Array<NotebookCellOutputItem>, outputId?: string): NotebookCellOutput {
     if (!outputId) {
-        outputId = createUuid();
+        outputId = commandsAndEvents.createUuid();
     }
 
     const output: NotebookCellOutput = {

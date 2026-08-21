@@ -1,13 +1,13 @@
 # Formatting
 
-When using a tool backed by .NET Interactive (including Polyglot Notebooks, Jupyter, and others), the output you typically see is produced using .NET Interactive formatters, a set of APIs under the `Microsoft.DotNet.Interactive.Formatting` namespace. (These APIs are available in a [NuGet package](https://www.nuget.org/packages/Microsoft.DotNet.Interactive.Formatting) that can be used independently of notebooks.) Formatters create string representations of objects. These string representations can vary from plain text to HTML to machine-readable formats like JSON and CSV. The following are examples of code you can write in a notebook that result in objects being formatted for display:
+When using a tool backed by .NET Interactive (including Polyglossy Notebooks, Jupyter, and others), the output you typically see is produced using .NET Interactive formatters, a set of APIs under the `Microsoft.DotNet.Interactive.Formatting` namespace. (These APIs are available in a [NuGet package](https://www.nuget.org/packages/Microsoft.DotNet.Interactive.Formatting) that can be used independently of notebooks.) Formatters create string representations of objects. These string representations can vary from plain text to HTML to machine-readable formats like JSON and CSV. The following are examples of code you can write in a notebook that result in objects being formatted for display:
 
 * A `return` statement or trailing expression at the end of a C# cell.
 * A trailing expression at the end of an F# cell.
 * A call to the `Display` and `ToDisplayString` extension methods, available for all objects in C# and F#.
 * A call to `Out-Display` in a PowerShell cell.
 
-Formatters are also used to format the output you see for .NET objects in the Polyglot Notebooks Variables View. (Formatting of values in other languages doesn't rely on .NET).
+Formatters are also used to format the output you see for .NET objects in the Polyglossy Notebooks Variables View. (Formatting of values in other languages doesn't rely on .NET).
 
 > _The term "formatting" refers to the process of creating a string representation of an object. This is done by the .NET Interactive kernel using the APIs described here. When a formatted string is then displayed in a notebook in VS Code or JupyterLab, that's referred to as "rendering."_
 
@@ -17,7 +17,7 @@ For any given object, many different string representations are possible. These 
 
 <img width="519" src="https://user-images.githubusercontent.com/547415/223595260-b465d560-1b09-479b-a930-3c5ba271992d.png">
 
-Note that the default MIME type in Polyglot Notebooks is `text/html`. This can vary from one .NET type to another, but in the example above, no custom settings have been applied for the `Rectangle` type. (We'll show more about how to do that below.)
+Note that the default MIME type in Polyglossy Notebooks is `text/html`. This can vary from one .NET type to another, but in the example above, no custom settings have been applied for the `Rectangle` type. (We'll show more about how to do that below.)
 
 > _Note: For a cell's return value in C# or F#, only the formatter for the default MIME type can be used._ 
 
@@ -25,7 +25,7 @@ You can also specify a different MIME type than the default when using `Display`
 
 <img width="512" alt="image" src="https://user-images.githubusercontent.com/547415/223600244-c21863d4-61cc-4f11-a5c7-06eeffc9428b.png">
 
-Another MIME type that's generally available is `application/json`. When using this MIME type in Polyglot Notebooks, the object is formatted using `System.Text.Json`.
+Another MIME type that's generally available is `application/json`. When using this MIME type in Polyglossy Notebooks, the object is formatted using `System.Text.Json`.
 
 <img width="511" alt="image" src="https://user-images.githubusercontent.com/547415/223600837-e50a3597-7589-4ed2-add7-254139e8aaec.png">
 
@@ -85,7 +85,7 @@ node2.Next = node1;
 node1
 ```
 
-This code produces the following output (presented here without the Polyglot Notebooks styling):
+This code produces the following output (presented here without the Polyglossy Notebooks styling):
 
 <details open="open" class="dni-treeview"><summary><span class="dni-code-hint"><code>Submission#3+Node</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Next</td><td><details class="dni-treeview"><summary><span class="dni-code-hint"><code>Submission#3+Node</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Next</td><td><details class="dni-treeview"><summary><span class="dni-code-hint"><code>Submission#3+Node</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Next</td><td><details class="dni-treeview"><summary><span class="dni-code-hint"><code>Submission#3+Node</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Next</td><td><details class="dni-treeview"><summary><span class="dni-code-hint"><code>Submission#3+Node</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Next</td><td><details class="dni-treeview"><summary><span class="dni-code-hint"><code>Submission#3+Node</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Next</td><td>Submission#3+Node</td></tr></tbody></table></div></details></td></tr></tbody></table></div></details></td></tr></tbody></table></div></details></td></tr></tbody></table></div></details></td></tr></tbody></table></div></details></td></tr></tbody></table></div></details>
 
@@ -103,7 +103,7 @@ Running this code now produces this shorter output:
 
 ###  Preferred MIME types
 
-We mentioned above that the default MIME type used for formatting in Polyglot Notebooks is `text/html`. This default is applied when using the `Display()` method without passing a value to the `mimeType` parameter, or when using a `return` statement or trailing expression in C# or F#. This default can be changed globally or for a specific type.
+We mentioned above that the default MIME type used for formatting in Polyglossy Notebooks is `text/html`. This default is applied when using the `Display()` method without passing a value to the `mimeType` parameter, or when using a `return` statement or trailing expression in C# or F#. This default can be changed globally or for a specific type.
 
 The following example changes the default for `Rectangle` to `text/plain`.
 

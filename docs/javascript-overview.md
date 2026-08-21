@@ -1,6 +1,6 @@
-# Using JavaScript in Polyglot Notebooks
+# Using JavaScript in Polyglossy Notebooks
 
-JavaScript is one of the languages supported by default in Polyglot Notebooks. JavaScript is widely used for visualization in notebooks since the most popular notebook technologies are browser-based. While many libraries are available in languages such as Python for plotting and visualization, these are usually wrappers around JavaScript libraries. For this reason, inclusion of JavaScript and the ability to share data easily from other languages makes it an appealing option to write visualization code in JavaScript directly.
+JavaScript is one of the languages supported by default in Polyglossy Notebooks. JavaScript is widely used for visualization in notebooks since the most popular notebook technologies are browser-based. While many libraries are available in languages such as Python for plotting and visualization, these are usually wrappers around JavaScript libraries. For this reason, inclusion of JavaScript and the ability to share data easily from other languages makes it an appealing option to write visualization code in JavaScript directly.
 
 ## Declaring variables
 
@@ -58,9 +58,9 @@ So why does the fourth example work? By not using the `let`, `const`, or `var` k
 console.log(window.declaredWithoutKeyword);
 ```
 
-What does this have to do with Polyglot Notebooks?
+What does this have to do with Polyglossy Notebooks?
 
-The Polyglot Notebooks JavaScript kernel executes your code submissions within an async arrow function, just like the above example:
+The Polyglossy Notebooks JavaScript kernel executes your code submissions within an async arrow function, just like the above example:
 
 ```javascript
 const doSomething = async () => {
@@ -159,7 +159,7 @@ var array = new[] { 1, 2, 3 };
 array
 ```
 
-When you run this code in Polyglot Notebooks, you can see that the `array` variable has been copied to the JavaScript kernel.
+When you run this code in Polyglossy Notebooks, you can see that the `array` variable has been copied to the JavaScript kernel.
 
 <img width="509" alt="image" src="https://github.com/dotnet/interactive/assets/547415/acecdcf8-5597-4258-a1d3-5cf10c3e54d8">
 

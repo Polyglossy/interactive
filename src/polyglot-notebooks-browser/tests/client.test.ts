@@ -24,6 +24,26 @@ describe("dotnet-interactive", () => {
                 .to
                 .equal('function');
         });
+
+        it("injects Polyglossy aliases for the browser globals", () => {
+            let global: any = {};
+            interactive.init(global);
+
+            expect(typeof (global.getPolyglossyInteractiveScope))
+                .to
+                .equal('function');
+            expect(typeof (global.createPolyglossyInteractiveClient))
+                .to
+                .equal('function');
+
+            expect(global.getPolyglossyInteractiveScope)
+                .to
+                .equal(global.getDotnetInteractiveScope);
+
+            expect(global.createPolyglossyInteractiveClient)
+                .to
+                .equal(global.createDotnetInteractiveClient);
+        });
     });
 
     describe("scopes", () => {

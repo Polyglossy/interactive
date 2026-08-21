@@ -4,6 +4,6 @@
 #nullable enable
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Parsing;
+namespace Polyglossy.Interactive.Parsing;
 
 internal delegate Task<DirectiveBindingResult<object?>> DirectiveBindingDelegate(DirectiveExpressionNode expressionNode);

@@ -7,17 +7,17 @@ using System.Linq;
 using System.Management.Automation;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Events;
-using Microsoft.DotNet.Interactive.Formatting;
-using Microsoft.DotNet.Interactive.Formatting.Tests.Utility;
-using Microsoft.DotNet.Interactive.Tests;
-using Microsoft.DotNet.Interactive.Tests.Utility;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Events;
+using Polyglossy.Interactive.Formatting;
+using Polyglossy.Interactive.Formatting.Tests.Utility;
+using Polyglossy.Interactive.Tests;
+using Polyglossy.Interactive.Tests.Utility;
 using Xunit;
 using Xunit.Abstractions;
-using Language = Microsoft.DotNet.Interactive.Tests.Language;
+using Language = Polyglossy.Interactive.Tests.Language;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Tests;
+namespace Polyglossy.Interactive.PowerShell.Tests;
 
 public class PowerShellKernelTests : LanguageKernelTestBase
 {

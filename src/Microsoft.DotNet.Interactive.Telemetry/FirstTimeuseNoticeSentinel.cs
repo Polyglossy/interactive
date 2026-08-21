@@ -4,7 +4,7 @@
 using System;
 using System.IO;
 
-namespace Microsoft.DotNet.Interactive.Telemetry;
+namespace Polyglossy.Interactive.Telemetry;
 
 public sealed class FirstTimeUseNoticeSentinel : IFirstTimeUseNoticeSentinel
 {

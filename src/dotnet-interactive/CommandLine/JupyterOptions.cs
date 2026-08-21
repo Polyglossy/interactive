@@ -3,7 +3,7 @@
 
 using System.IO;
 
-namespace Microsoft.DotNet.Interactive.App.CommandLine;
+namespace Polyglossy.Interactive.App.CommandLine;
 
 public class JupyterOptions
 {

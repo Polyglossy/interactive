@@ -10,10 +10,10 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Microsoft.DotNet.Interactive.Formatting.Csv;
-using Microsoft.DotNet.Interactive.Formatting.TabularData;
+using Polyglossy.Interactive.Formatting.Csv;
+using Polyglossy.Interactive.Formatting.TabularData;
 
-namespace Microsoft.DotNet.Interactive.Formatting;
+namespace Polyglossy.Interactive.Formatting;
 
 public static partial class Formatter
 {

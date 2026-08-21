@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Microsoft.DotNet.Interactive.App</RootNamespace>
-    <AssemblyName>Microsoft.DotNet.Interactive.App</AssemblyName>
+    <AssemblyName>Polyglossy.Interactive.App</AssemblyName>
     <LangVersion>Latest</LangVersion>
     <AssetTargetFallback>$(AssetTargetFallback);dotnet5.4;portable-net45+win8</AssetTargetFallback>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>Microsoft.dotnet-interactive</PackageId>
-    <ToolCommandName>dotnet-interactive</ToolCommandName>
+    <PackageId>polyglossy.interactive.tool</PackageId>
+    <ToolCommandName>polyglossy-interactive</ToolCommandName>
     <IsPackable>true</IsPackable>
     <PackageDescription>NOTE: THIS PACKAGE WILL BE DEPRECATED APRIL 24, 2026. Formerly: Command line tool for interactive programming with C#, F#, PowerShell, and more. Powered Polyglot Notebooks and provided .NET support for Jupyter.</PackageDescription>
     <PackageTags>polyglot notebook dotnet interactive Jupyter csharp fsharp PowerShell</PackageTags>
@@ -120,7 +120,8 @@
     <Compile Include="..\Microsoft.DotNet.Interactive.Formatting\JsonConverter.cs" Link="ParserServer\JsonConverter.cs" />
     <Compile Include="..\Microsoft.DotNet.Interactive\Utility\DictionaryExtensions.cs" Link="%28Recipes%29\DictionaryExtensions.cs" />
 
-    <TypescriptOutputFiles Include="$(JsApiRoot)dist/dotnet-interactive.js" />
+    <TypescriptOutputFiles Include="$(JsApiRoot)dist/polyglossy-interactive.js" />
+    <TypescriptOutputFiles Include="$(JsApiRoot)dist/dotnet-interactive.js" Condition="Exists('$(JsApiRoot)dist/dotnet-interactive.js')" />
 
     <EmbeddedResource Include="@(TypescriptOutputFiles)" LogicalName="$(AssemblyName).resources.%(FileName)%(Extension)" />
 
@@ -193,6 +194,17 @@
   -->
   <Target Name="ExportVersionNumberForAzureDevOps" AfterTargets="Build">
     <Message Text="##vso[task.setvariable variable=StableToolVersionNumber]$(Version)" Importance="high" />
+  </Target>
+
+  <Target Name="CopyPackageManagementLegacyFileName" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)Polyglossy.Interactive.PackageManagement.dll"
+          DestinationFiles="$(TargetDir)Microsoft.DotNet.Interactive.PackageManagement.dll"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)Polyglossy.Interactive.PackageManagement.dll')" />
+    <Copy SourceFiles="$(TargetDir)Polyglossy.Interactive.PackageManagement.pdb"
+          DestinationFiles="$(TargetDir)Microsoft.DotNet.Interactive.PackageManagement.pdb"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)Polyglossy.Interactive.PackageManagement.pdb')" />
   </Target>
 
 </Project>

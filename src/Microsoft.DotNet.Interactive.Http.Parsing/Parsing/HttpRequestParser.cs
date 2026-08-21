@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.DotNet.Interactive.Parsing;
-using SyntaxNode = Microsoft.DotNet.Interactive.Parsing.SyntaxNode;
-using SyntaxToken = Microsoft.DotNet.Interactive.Parsing.SyntaxToken;
+using Polyglossy.Interactive.Parsing;
+using SyntaxNode = Polyglossy.Interactive.Parsing.SyntaxNode;
+using SyntaxToken = Polyglossy.Interactive.Parsing.SyntaxToken;
 
-namespace Microsoft.DotNet.Interactive.Http.Parsing;
+namespace Polyglossy.Interactive.Http.Parsing;
 
 using LinePosition = CodeAnalysis.Text.LinePosition;
 using LinePositionSpan = CodeAnalysis.Text.LinePositionSpan;

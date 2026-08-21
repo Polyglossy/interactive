@@ -1,15 +1,15 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Interactive.Commands;
-using Microsoft.DotNet.Interactive.Directives;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Commands;
+using Polyglossy.Interactive.Directives;
+using Polyglossy.Interactive.Events;
 
-namespace Microsoft.DotNet.Interactive.PackageManagement;
+namespace Polyglossy.Interactive.PackageManagement;
 
 public static class KernelExtensions
 {

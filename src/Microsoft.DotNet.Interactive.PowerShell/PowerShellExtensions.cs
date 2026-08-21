@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Security;
 
-namespace Microsoft.DotNet.Interactive.PowerShell;
+namespace Polyglossy.Interactive.PowerShell;
 
 using System.Management.Automation;
 

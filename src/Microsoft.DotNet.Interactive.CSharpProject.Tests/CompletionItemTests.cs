@@ -2,11 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class CompletionItemTests
 {

@@ -3,9 +3,9 @@
 
 #nullable enable
 using System.Collections.Generic;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 
-namespace Microsoft.DotNet.Interactive.Directives;
+namespace Polyglossy.Interactive.Directives;
 
 public class KernelDirectiveCompletionContext
 {

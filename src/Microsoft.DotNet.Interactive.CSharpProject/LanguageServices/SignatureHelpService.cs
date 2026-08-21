@@ -7,12 +7,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.DotNet.Interactive.CSharpProject.Models;
-using Microsoft.DotNet.Interactive.CSharpProject.Models.SignatureHelp;
+using Polyglossy.Interactive.CSharpProject.Models;
+using Polyglossy.Interactive.CSharpProject.Models.SignatureHelp;
 
 // Adapted from https://github.com/OmniSharp/omnisharp-roslyn/blob/master/src/OmniSharp.Roslyn.CSharp/Services/Signatures/SignatureHelpService.cs
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.LanguageServices;
+namespace Polyglossy.Interactive.CSharpProject.LanguageServices;
 
 internal class SignatureHelpService
 {

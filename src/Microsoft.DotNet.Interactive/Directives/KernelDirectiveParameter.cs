@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Tags;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 
-namespace Microsoft.DotNet.Interactive.Directives;
+namespace Polyglossy.Interactive.Directives;
 
 public class KernelDirectiveParameter
 {

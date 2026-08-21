@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Pocket;
 using Xunit;
 using Xunit.Abstractions;
-using Microsoft.DotNet.Interactive.CSharpProject.Build;
+using Polyglossy.Interactive.CSharpProject.Build;
 using System.Threading;
 
-namespace Microsoft.DotNet.Interactive.CSharpProject.Tests;
+namespace Polyglossy.Interactive.CSharpProject.Tests;
 
 public class PrebuildTests : IDisposable
 {

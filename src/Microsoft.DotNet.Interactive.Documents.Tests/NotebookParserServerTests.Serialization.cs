@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.App.ParserServer;
+using Polyglossy.Interactive.App.ParserServer;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Documents.Tests;
+namespace Polyglossy.Interactive.Documents.Tests;
 
 public partial class NotebookParserServerTests
 {

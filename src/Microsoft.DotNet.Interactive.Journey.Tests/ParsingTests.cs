@@ -1,15 +1,15 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Documents;
-using Microsoft.DotNet.Interactive.Journey.Tests.Utilities;
+using Polyglossy.Interactive.Documents;
+using Polyglossy.Interactive.Journey.Tests.Utilities;
 using Xunit;
 
-namespace Microsoft.DotNet.Interactive.Journey.Tests;
+namespace Polyglossy.Interactive.Journey.Tests;
 
 public class ParsingTests : ProgressiveLearningTestBase
 {

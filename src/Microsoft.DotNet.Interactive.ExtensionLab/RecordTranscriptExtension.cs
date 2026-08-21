@@ -1,13 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.DotNet.Interactive.Connection;
-using Microsoft.DotNet.Interactive.Directives;
+using Polyglossy.Interactive.Connection;
+using Polyglossy.Interactive.Directives;
 
-namespace Microsoft.DotNet.Interactive.ExtensionLab;
+namespace Polyglossy.Interactive.ExtensionLab;
 
 public class RecordTranscriptExtension
 {

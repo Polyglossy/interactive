@@ -1,7 +1,7 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DotNet.Interactive.Jupyter.Connection;
+using Polyglossy.Interactive.Jupyter.Connection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Http;
+namespace Polyglossy.Interactive.Jupyter.Http;
 
 internal class JupyterHttpConnection : IJupyterConnection, IDisposable
 {

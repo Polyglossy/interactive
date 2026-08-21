@@ -5,7 +5,7 @@ using System;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 
-namespace Microsoft.DotNet.Interactive.PowerShell.Commands;
+namespace Polyglossy.Interactive.PowerShell.Commands;
 
 /// <summary>
 /// Connect to Azure PowerShell for code execution.

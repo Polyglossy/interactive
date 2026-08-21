@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import { expect } from "chai";
-import { createDotnetInteractiveClient } from "../src/kernel-client-impl";
+import { createDotnetInteractiveClient, createPolyglossyInteractiveClient } from "../src/kernel-client-impl";
 import * as fetchMock from "fetch-mock";
 import { configureFetchForKernelDiscovery, createMockChannel, MockKernelCommandAndEventChannel, asKernelClientContainer, delay } from "./testSupport";
 import * as commandsAndEvents from "../src/polyglot-notebooks/commandsAndEvents";
@@ -20,6 +20,10 @@ interface CustomCommand2 extends commandsAndEvents.KernelCommand {
 }
 
 describe("polyglot-notebooks", () => {
+
+    it("exposes Polyglossy and Dotnet client factory aliases", () => {
+        expect(createPolyglossyInteractiveClient).to.equal(createDotnetInteractiveClient);
+    });
 
 
     describe("langauge kernel", () => {

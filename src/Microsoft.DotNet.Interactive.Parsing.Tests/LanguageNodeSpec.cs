@@ -3,9 +3,9 @@
 
 using System;
 using FluentAssertions;
-using Microsoft.DotNet.Interactive.Parsing.Tests.Utility;
+using Polyglossy.Interactive.Parsing.Tests.Utility;
 
-namespace Microsoft.DotNet.Interactive.Parsing.Tests;
+namespace Polyglossy.Interactive.Parsing.Tests;
 
 internal class LanguageNodeSpec : SyntaxSpecBase<LanguageNode>
 {

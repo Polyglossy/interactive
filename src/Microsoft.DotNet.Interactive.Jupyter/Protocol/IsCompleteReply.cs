@@ -3,7 +3,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace Microsoft.DotNet.Interactive.Jupyter.Protocol;
+namespace Polyglossy.Interactive.Jupyter.Protocol;
 
 [JupyterMessageType(JupyterMessageContentTypes.IsCompleteReply)]
 public class IsCompleteReply : ReplyMessage
