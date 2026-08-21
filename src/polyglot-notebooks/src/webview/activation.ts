@@ -7,21 +7,13 @@ import * as connection from "../connection";
 import { Logger } from "../logger";
 import { KernelHost } from '../kernelHost';
 import { KernelInfo } from '../contracts';
-import { createUuid, KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
+import { KernelCommandEnvelope, KernelEventEnvelope } from '../commandsAndEvents';
+import { createUuid } from '../uuid';
 
 type KernelMessagingApi = {
     onDidReceiveKernelMessage: (arg: any) => any;
     postKernelMessage: (data: unknown) => void;
 };
-
-function createUuid(): string {
-    const value = globalThis.crypto?.randomUUID?.();
-    if (!value) {
-        throw new Error('crypto.randomUUID is not available.');
-    }
-
-    return value;
-}
 
 export function activate(context: KernelMessagingApi) {
     configure(window, context);
