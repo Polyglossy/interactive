@@ -1,0 +1,370 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      simulate:
+        description: 'Dry run — do not actually publish'
+        type: boolean
+        default: true
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false   # never cancel a publish mid-flight
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '22.22.3'
+  NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
+  DOTNET_INTERACTIVE_FRONTEND_NAME: CI
+  DOTNET_INTERACTIVE_SIGN_TYPE: Test
+
+jobs:
+  # ──────────────────────────────────────────────────────────
+  # 0. Compute shared flags so downstream jobs never rely on
+  #    implicit empty-string-is-falsy behaviour of inputs.
+  # ──────────────────────────────────────────────────────────
+  prepare:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    outputs:
+      simulate: ${{ steps.flags.outputs.simulate }}
+    steps:
+      - name: Resolve simulate flag
+        id: flags
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            simulate=false
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ "${{ inputs.simulate }}" == "true" ]]; then
+              simulate=true
+            else
+              simulate=false
+            fi
+          else
+            echo "Unsupported event '${{ github.event_name }}'" >&2
+            exit 1
+          fi
+          echo "simulate=$simulate" >> "$GITHUB_OUTPUT"
+          echo "Resolved simulate=$simulate"
+
+  # ──────────────────────────────────────────────────────────
+  # 1. Build, test, pack, and upload all publish artifacts
+  # ──────────────────────────────────────────────────────────
+  build:
+    needs: prepare
+    runs-on: windows-2022
+    timeout-minutes: 200
+    permissions:
+      contents: read
+      checks: write   # required by dorny/test-reporter inside composite action
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Configure git symlinks and long paths
+        run: |
+          git config --global core.symlinks true
+          git config --global core.longpaths true
+        shell: pwsh
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+
+      # For publish builds, OfficialBuildId drives deterministic versioning
+      - name: Compute OfficialBuildId
+        id: build-id
+        shell: pwsh
+        run: |
+          $date = Get-Date -Format 'yyyyMMdd'
+          $id = "$date.${{ github.run_number }}"
+          echo "OFFICIAL_BUILD_ID=$id" >> $env:GITHUB_ENV
+
+      - uses: ./.github/actions/build-and-test
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+        env:
+          OfficialBuildId: ${{ env.OFFICIAL_BUILD_ID }}
+
+      # Extract version from the built .nupkg filename
+      # (Azure DevOps sets StableToolVersionNumber via logging commands; in GHA
+      #  we derive it from the artifact instead.)
+      - name: Extract version from .nupkg
+        id: version
+        shell: pwsh
+        run: |
+          $packagePattern = '^Microsoft\.dotnet-interactive\.(?<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)\.nupkg$'
+          $packages = @(Get-ChildItem artifacts\packages\Release\Shipping\Microsoft.dotnet-interactive.*.nupkg -File -ErrorAction SilentlyContinue |
+                       Where-Object { $_.Name -notlike '*.symbols.nupkg' -and $_.Name -match $packagePattern })
+          if ($packages.Count -eq 0) {
+            Write-Error "No bare Microsoft.dotnet-interactive package with a SemVer filename found"
+            exit 1
+          }
+          if ($packages.Count -gt 1) {
+            Write-Error "Multiple bare Microsoft.dotnet-interactive packages found: $($packages.Name -join ', ')"
+            exit 1
+          }
+          $match = [regex]::Match($packages[0].Name, $packagePattern)
+          if (-not $match.Success) {
+            Write-Error "Package filename '$($packages[0].Name)' did not match expected SemVer pattern"
+            exit 1
+          }
+          $ver = $match.Groups['version'].Value
+          Write-Host "Detected version: $ver"
+          echo "version=$ver" >> $env:GITHUB_OUTPUT
+
+      - name: Validate version matches git tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}" -replace '^v', ''
+          $ver = "${{ steps.version.outputs.version }}"
+          if ($tag -ne $ver) {
+            Write-Error "Tag version '$tag' does not match package version '$ver'"
+            exit 1
+          }
+          Write-Host "Version '$ver' matches tag '${{ github.ref_name }}'"
+
+      - name: Pack VSCode extensions
+        shell: pwsh
+        # working-directory is load-bearing: PackVSCodeExtension.ps1 receives
+        # relative package directory names (e.g. "polyglot-notebooks-vscode") and
+        # calls Push-Location on them, so they must resolve under src/.
+        run: |
+          ${{ github.workspace }}\eng\package\PackVSCodeExtension.ps1 `
+            -stableToolVersionNumber '${{ steps.version.outputs.version }}' `
+            -outDir '${{ runner.temp }}\staging\vscode'
+        working-directory: src
+
+      - name: Pack NPM package
+        shell: pwsh
+        # working-directory is load-bearing: PackNpmPackage.ps1 uses Get-Location
+        # (the current directory) as the directory in which `npm pack` runs.
+        run: |
+          ${{ github.workspace }}\eng\package\PackNpmPackage.ps1 `
+            -packageVersionNumber '${{ steps.version.outputs.version }}' `
+            -outDir '${{ runner.temp }}\staging\npm'
+        working-directory: src/polyglot-notebooks
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        with:
+          name: packages
+          path: artifacts/packages/Release/Shipping
+          retention-days: 30
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        with:
+          name: vscode
+          path: '${{ runner.temp }}\staging\vscode'
+          retention-days: 30
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        with:
+          name: npm
+          path: '${{ runner.temp }}\staging\npm'
+          retention-days: 30
+
+      - name: Upload test results
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        if: always()
+        with:
+          name: publish-build-test-results
+          path: artifacts/TestResults/Release
+          retention-days: 30
+
+  # ──────────────────────────────────────────────────────────
+  # 2a. NuGet publish
+  #     environment: production triggers GitHub's built-in
+  #     reviewer gate — no separate approve job needed.
+  # ──────────────────────────────────────────────────────────
+  publish-nuget:
+    needs: [prepare, build]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        with:
+          name: packages
+          path: packages
+
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 #v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Push NuGet packages
+        if: needs.prepare.outputs.simulate != 'true'
+        run: |
+          set -eo pipefail
+          shopt -s globstar nullglob
+          for pkg in packages/**/*.nupkg; do
+            [[ "$pkg" == *.symbols.nupkg ]] && continue
+            dotnet nuget push "$pkg" \
+              --source https://api.nuget.org/v3/index.json \
+              --api-key "$NUGET_API_KEY" \
+              --skip-duplicate \
+              --no-symbols
+          done
+        shell: bash
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Simulate NuGet push
+        if: needs.prepare.outputs.simulate == 'true'
+        run: |
+          echo "Simulated — would push packages:"
+          find packages -name '*.nupkg' ! -name '*.symbols.nupkg'
+        shell: bash
+
+  # ──────────────────────────────────────────────────────────
+  # 2b. NPM publish
+  # ──────────────────────────────────────────────────────────
+  publish-npm:
+    needs: [prepare, build]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    environment: production
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        with:
+          name: npm
+          path: npm
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to npmjs.org
+        if: needs.prepare.outputs.simulate != 'true'
+        run: |
+          set -eo pipefail
+          tarballs=( npm/microsoft-polyglot-notebooks-*.tgz )
+          if [[ ${#tarballs[@]} -ne 1 || ! -f "${tarballs[0]}" ]]; then
+            echo "Expected exactly one NPM tarball, found: ${tarballs[*]}" >&2; exit 1
+          fi
+          npm publish "${tarballs[0]}" --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Simulate NPM publish
+        if: needs.prepare.outputs.simulate == 'true'
+        run: |
+          echo "Simulated — would publish:"
+          ls npm/*.tgz
+
+  # ──────────────────────────────────────────────────────────
+  # 2c. VSCode publish — runs after NuGet so that
+  #     VerifyVSCodeExtension.ps1 can confirm nuget.org has
+  #     the package before the VSIX goes live.
+  # ──────────────────────────────────────────────────────────
+  publish-vscode:
+    needs: [prepare, build, publish-nuget]
+    runs-on: windows-2022
+    timeout-minutes: 60
+    environment: production
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure git symlinks and long paths
+        run: |
+          git config --global core.symlinks true
+          git config --global core.longpaths true
+        shell: pwsh
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 #v6
+        with:
+          global-json-file: global.json
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        with:
+          name: vscode
+          # PackVSCodeExtension.ps1 writes stable/, stable-locked/, and insiders/
+          # under the uploaded directory. Downloading to artifacts\vscode keeps
+          # the stable/ and insiders/ layout expected by the publish helper.
+          path: '${{ runner.temp }}\artifacts\vscode'
+
+      # PublishStableExtensionAndNuGetPackages scans this path for .nupkg files.
+      # NuGet was already pushed by publish-nuget; --skip-duplicate makes re-push safe.
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        with:
+          name: packages
+          path: '${{ runner.temp }}\artifacts\packages\Shipping'
+
+      # Poll nuget.org until the expected version is indexed (up to 15 minutes),
+      # then VerifyVSCodeExtension.ps1's live query can find the package.
+      # A fixed sleep is unreliable: indexing can take seconds or >15 min.
+      - name: Wait for nuget.org propagation
+        if: needs.prepare.outputs.simulate != 'true'
+        shell: pwsh
+        run: |
+          $version = '${{ needs.build.outputs.version }}'
+          $packageId = 'Microsoft.dotnet-interactive'
+          $url = "https://api.nuget.org/v3-flatcontainer/$($packageId.ToLower())/index.json"
+          $timeout = [DateTimeOffset]::UtcNow.AddMinutes(15)
+          $consecutiveFailures = 0
+          $maxConsecutiveFailures = 6
+          do {
+            Start-Sleep -Seconds 10
+            try {
+              $index = (Invoke-RestMethod -Uri $url).versions
+              $consecutiveFailures = 0
+              if ($index -contains $version) {
+                Write-Host "Version $version is indexed on nuget.org"
+                break
+              }
+              Write-Host "Waiting for version $version to appear on nuget.org..."
+            } catch {
+              $consecutiveFailures++
+              Write-Host "Failed to query nuget.org: $_"
+              if ($consecutiveFailures -ge $maxConsecutiveFailures) {
+                Write-Error "Failed to query nuget.org $consecutiveFailures consecutive times while waiting for version $version"
+                exit 1
+              }
+            }
+          } while ([DateTimeOffset]::UtcNow -lt $timeout)
+          if ([DateTimeOffset]::UtcNow -ge $timeout) {
+            Write-Error "Timed out waiting for version $version to appear on nuget.org"
+            exit 1
+          }
+
+      - name: Login to Azure (OIDC)
+        if: needs.prepare.outputs.simulate != 'true'
+        uses: azure/login@f5d393ae46f8fde4be8b75f32e3fc50e654ad0ca #v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
+        shell: pwsh
+
+      # Note: PublishStablePolyglotsNotebooks.ps1 → PublishStableExtensionAndNuGetPackages
+      # also pushes these .nupkg files to nuget.org (with --skip-duplicate).
+      # The publish-nuget job above performs the primary OIDC-authenticated push;
+      # the re-push here is harmless but intentional so the PS script remains the
+      # single source of truth for the full publish sequence.
+      # For fork builds, DOTNET_INTERACTIVE_SIGN_TYPE=Test is expected and the
+      # helper script treats signature verification as non-fatal in that mode.
+      - name: Publish VSCode extensions (insiders then stable)
+        shell: pwsh
+        run: |
+          .\eng\publish\PublishStablePolyglotsNotebooks.ps1 `
+            -artifactsPath '${{ runner.temp }}\artifacts' `
+            -nugetToken $env:NUGET_API_KEY `
+            -isSimulated '${{ needs.prepare.outputs.simulate }}'
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
