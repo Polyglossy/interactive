@@ -71,6 +71,14 @@ try {
 
         # invoke regular build/test script
         $buildScript = (Join-Path $PSScriptRoot "common\build.ps1")
+
+        $packageVersion = $env:PackageVersion
+        $isPrerelease = $packageVersion -and ($packageVersion -match '-')
+
+        if ($ci -and $isPrerelease) {
+            $arguments = $arguments | Where-Object { $_ -ne '-publish' }
+        }
+
         Invoke-Expression "$buildScript -projects ""$PSScriptRoot\..\dotnet-interactive.sln"" $arguments"
         if ($LASTEXITCODE -ne 0) {
             exit $LASTEXITCODE
