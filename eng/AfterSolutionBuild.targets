@@ -30,13 +30,19 @@
   </Target>
 
   <!-- Removes the `.renamed` extension from the dotnet-* packages. -->
-  <Target Name="RestoreDotNetTryOutputPackage" AfterTargets="PackageReleasePackages">
-    <Move SourceFiles="%(StableVersionPackages.FullPath).renamed" DestinationFiles="%(StableVersionPackages.FullPath)" />
-    <Move SourceFiles="%(SymbolPackages.FullPath).renamed" DestinationFiles="%(SymbolPackages.FullPath)" />
-    <PropertyGroup>
-      <PreReleaseVersionLabel>$(OldPreReleaseVersionLabel)</PreReleaseVersionLabel>
-    </PropertyGroup>
-  </Target>
+<Target Name="RestoreDotNetTryOutputPackage" AfterTargets="PackageReleasePackages">
+  <ItemGroup>
+    <RenamedStableVersionPackages Include="%(StableVersionPackages.FullPath).renamed" Condition="Exists('%(StableVersionPackages.FullPath).renamed')" />
+    <RenamedSymbolPackages Include="%(SymbolPackages.FullPath).renamed" Condition="Exists('%(SymbolPackages.FullPath).renamed')" />
+  </ItemGroup>
+
+  <Move SourceFiles="@(RenamedStableVersionPackages)" DestinationFiles="@(RenamedStableVersionPackages->'%(FullPath)')" />
+  <Move SourceFiles="@(RenamedSymbolPackages)" DestinationFiles="@(RenamedSymbolPackages->'%(FullPath)')" />
+
+  <PropertyGroup>
+    <PreReleaseVersionLabel>$(OldPreReleaseVersionLabel)</PreReleaseVersionLabel>
+  </PropertyGroup>
+</Target>
 
   <!-- Removes files from the `*.symbols.nupkg` packages that cause errors with symbol publishing. -->
   <Target Name="StripFilesFromSymbolPackages" AfterTargets="Pack">
