@@ -1,14 +1,20 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
 using FluentAssertions;
 using Microsoft.AspNetCore.Html;
 using Xunit;
 
 namespace Polyglossy.Interactive.Tests;
 
-public class DataExplorerTests
+public class DataExplorerTests : IDisposable
 {
+    public DataExplorerTests()
+    {
+        DataExplorer.ResetToDefault();
+    }
+
     [Fact]
     public void when_there_is_single_DataExplorer_return_it_as_default()
     {
@@ -35,6 +41,11 @@ public class DataExplorerTests
         DataExplorer.SetDefault<string, AdvancedStringDataExplorer>();
         var dataExplorer = DataExplorer.CreateDefault("hello world");
         dataExplorer.Should().BeOfType<AdvancedStringDataExplorer>();
+    }
+
+    public void Dispose()
+    {
+        DataExplorer.ResetToDefault();
     }
 
 
