@@ -1,3 +1,7 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"name":"csharp"},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"html","languageName":"HTML"},{"name":"http","languageName":"HTTP"},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"mermaid","languageName":"Mermaid"},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"value"}]}}
+
 #!csharp
 
 #r {journey_dll_path}
@@ -12,7 +16,7 @@ Task.Run(() => Microsoft.DotNet.Interactive.Journey.Main.OnLoadAsync(Kernel.Root
 #!csharp
 
 using Microsoft.DotNet.Interactive;
-using Microsoft.DotNet.Interactive.Events;
+using Polyglossy.Interactive.Events;
 
 #!markdown
 
