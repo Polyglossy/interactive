@@ -18,6 +18,7 @@ using Polyglossy.Interactive.Jupyter;
 using Polyglossy.Interactive.PowerShell;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Pocket;
 using Serilog.Sinks.RollingFileAlternate;
 using static Pocket.Logger<Polyglossy.Interactive.App.Program>;
@@ -118,6 +119,7 @@ public class Program
         var startup = new Startup(httpStartupOptions, probingSettings);
         
         var hostBuilder = Host.CreateDefaultBuilder()
+            .ConfigureLogging(logging => logging.ClearProviders())
             .ConfigureWebHostDefaults(webHost =>
             {
                 webHost.UseKestrel();
