@@ -1,3 +1,4 @@
+
 <Project>
 
   <!--
@@ -21,8 +22,8 @@
 
   <!-- Appends the extension `.renamed` to the dotnet-* packages to force the glob `*.nupkg` to not pick it up. -->
   <Target Name="RenameDotNetTryOutputPackage" BeforeTargets="PackageReleasePackages">
-    <Move SourceFiles="%(StableVersionPackages.FullPath)" DestinationFiles="%(StableVersionPackages.FullPath).renamed" />
-    <Move SourceFiles="%(SymbolPackages.FullPath)" DestinationFiles="%(SymbolPackages.FullPath).renamed" />
+    <Move Condition="'@(StableVersionPackages)' != ''" SourceFiles="%(StableVersionPackages.FullPath)" DestinationFiles="%(StableVersionPackages.FullPath).renamed" />
+    <Move Condition="'@(SymbolPackages)' != ''" SourceFiles="%(SymbolPackages.FullPath)" DestinationFiles="%(SymbolPackages.FullPath).renamed" />
     <PropertyGroup>
       <OldPreReleaseVersionLabel>$(PreReleaseVersionLabel)</OldPreReleaseVersionLabel>
       <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
@@ -31,14 +32,8 @@
 
   <!-- Removes the `.renamed` extension from the dotnet-* packages. -->
   <Target Name="RestoreDotNetTryOutputPackage" AfterTargets="PackageReleasePackages">
-    <ItemGroup>
-      <RenamedStableVersionPackages Include="%(StableVersionPackages.FullPath).renamed" Condition="Exists('%(StableVersionPackages.FullPath).renamed')" />
-      <RenamedSymbolPackages Include="%(SymbolPackages.FullPath).renamed" Condition="Exists('%(SymbolPackages.FullPath).renamed')" />
-    </ItemGroup>
-
-    <Move SourceFiles="@(RenamedStableVersionPackages)" DestinationFiles="@(RenamedStableVersionPackages->'%(FullPath)')" />
-    <Move SourceFiles="@(RenamedSymbolPackages)" DestinationFiles="@(RenamedSymbolPackages->'%(FullPath)')" />
-
+    <Move Condition="'@(StableVersionPackages)' != ''" SourceFiles="%(StableVersionPackages.FullPath).renamed" DestinationFiles="%(StableVersionPackages.FullPath)" />
+    <Move Condition="'@(SymbolPackages)' != ''" SourceFiles="%(SymbolPackages.FullPath).renamed" DestinationFiles="%(SymbolPackages.FullPath)" />
     <PropertyGroup>
       <PreReleaseVersionLabel>$(OldPreReleaseVersionLabel)</PreReleaseVersionLabel>
     </PropertyGroup>
@@ -48,25 +43,19 @@
   <Target Name="StripFilesFromSymbolPackages" AfterTargets="Pack">
     <ItemGroup>
       <SymbolPackageWithBadFiles Include="$(ArtifactsShippingPackagesDir)\Microsoft.dotnet-interactive.*.symbols.nupkg" />
+
       <SymbolPackageFilesToStrip Include="tools/net10.0/any/runtimes/linux-musl-x64/native/libpsl-native.so" />
       <SymbolPackageFilesToStrip Include="tools/net10.0/any/runtimes/linux-x64/native/libmi.so" />
     </ItemGroup>
-
     <PropertyGroup>
-      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.IO.Path]::GetRandomFileName())</PackageTempPath>
+      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.Guid]::NewGuid())</PackageTempPath>
     </PropertyGroup>
 
-    <MakeDir Directories="$(PackageTempPath)" />
-
-  <Unzip SourceFiles="%(SymbolPackageWithBadFiles.Identity)" DestinationFolder="$(PackageTempPath)" />
-    <Delete Files="$(PackageTempPath)\%(SymbolPackageFilesToStrip.Identity)" />
-
-    <ZipDirectory
-        SourceDirectory="$(PackageTempPath)"
-    DestinationFile="%(SymbolPackageWithBadFiles.Identity)"
-        Overwrite="true" />
-
-    <RemoveDir Directories="$(PackageTempPath)" />
+    <MakeDir Condition="'@(SymbolPackageWithBadFiles)' != ''" Directories="$(PackageTempPath)" />
+    <Unzip Condition="'@(SymbolPackageWithBadFiles)' != ''" SourceFiles="%(SymbolPackageWithBadFiles.Identity)" DestinationFolder="$(PackageTempPath)" />
+    <Delete Condition="'@(SymbolPackageWithBadFiles)' != ''" Files="$(PackageTempPath)\%(SymbolPackageFilesToStrip.Identity)" />
+    <ZipDirectory Condition="'@(SymbolPackageWithBadFiles)' != ''" SourceDirectory="$(PackageTempPath)" DestinationFile="%(SymbolPackageWithBadFiles.Identity)" Overwrite="true" />
+    <RemoveDir Condition="'@(SymbolPackageWithBadFiles)' != ''" Directories="$(PackageTempPath)" />
   </Target>
 
 </Project>
