@@ -1,19 +1,19 @@
-Microsoft.DotNet.Interactive.DuckDB
-  public class ConnectDuckDBDirective : Microsoft.DotNet.Interactive.Connection.ConnectKernelDirective<ConnectDuckDBKernel>
+Polyglossy.Interactive.DuckDB
+  public class ConnectDuckDBDirective : Polyglossy.Interactive.Connection.ConnectKernelDirective<ConnectDuckDBKernel>
     .ctor()
-    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Microsoft.DotNet.Interactive.Kernel>> ConnectKernelsAsync(ConnectDuckDBKernel connectCommand, Microsoft.DotNet.Interactive.KernelInvocationContext context)
-  public class ConnectDuckDBKernel : Microsoft.DotNet.Interactive.Commands.ConnectKernelCommand, System.IEquatable<Microsoft.DotNet.Interactive.Commands.KernelCommand>
+    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Polyglossy.Interactive.Kernel>> ConnectKernelsAsync(ConnectDuckDBKernel connectCommand, Polyglossy.Interactive.KernelInvocationContext context)
+  public class ConnectDuckDBKernel : Polyglossy.Interactive.Commands.ConnectKernelCommand, System.IEquatable<Polyglossy.Interactive.Commands.KernelCommand>
     .ctor(System.String connectedKernelName)
     public System.String ConnectionString { get; set;}
-  public class DuckDBKernel : Microsoft.DotNet.Interactive.Kernel, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValue>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValueInfos>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, System.IDisposable
+  public class DuckDBKernel : Polyglossy.Interactive.Kernel, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValue>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValueInfos>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, System.IDisposable
     .ctor(System.String name, System.String connectionString)
     .ctor(System.String name, DuckDB.NET.Data.DuckDBConnection connection)
-    public Microsoft.DotNet.Interactive.Directives.KernelSpecifierDirective KernelSpecifierDirective { get;}
+    public Polyglossy.Interactive.Directives.KernelSpecifierDirective KernelSpecifierDirective { get;}
     public System.Boolean TryGetValue<T>(System.String name, ref T& value)
   public class DuckDBKernelConnector
     .ctor(System.String connectionString)
     public System.String ConnectionString { get;}
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Kernel> CreateKernelAsync(System.String kernelName)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Kernel> CreateKernelAsync(System.String kernelName)
   public class KernelExtension
-    public static System.Void Load(Microsoft.DotNet.Interactive.Kernel kernel)
+    public static System.Void Load(Polyglossy.Interactive.Kernel kernel)
     .ctor()

@@ -1,13 +1,13 @@
-Microsoft.DotNet.Interactive.Jupyter
-  public class CompleteRequestHandler : RequestHandlerBase<Microsoft.DotNet.Interactive.Jupyter.Protocol.CompleteRequest>, System.IDisposable
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
+Polyglossy.Interactive.Jupyter
+  public class CompleteRequestHandler : RequestHandlerBase<Polyglossy.Interactive.Jupyter.Protocol.CompleteRequest>, System.IDisposable
+    .ctor(Polyglossy.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
     public System.Threading.Tasks.Task Handle(JupyterRequestContext context)
-    protected System.Void OnKernelEventReceived(Microsoft.DotNet.Interactive.Events.KernelEvent event, JupyterRequestContext context)
+    protected System.Void OnKernelEventReceived(Polyglossy.Interactive.Events.KernelEvent event, JupyterRequestContext context)
   public class CondaEnvironment, IJupyterEnvironment
     public static System.String CondaPath { get;}
     public static System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyCollection<System.String>> GetEnvironmentNamesAsync()
     public System.String Name { get; set;}
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Utility.CommandLineResult> ExecuteAsync(System.String command, System.String args, System.IO.DirectoryInfo workingDir = null, System.Nullable<System.TimeSpan> timeout = null)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Utility.CommandLineResult> ExecuteAsync(System.String command, System.String args, System.IO.DirectoryInfo workingDir = null, System.Nullable<System.TimeSpan> timeout = null)
     public System.Diagnostics.Process StartProcess(System.String command, System.String args, System.IO.DirectoryInfo workingDir, System.Action<System.String> output = null, System.Action<System.String> error = null)
   public class ConnectionInformation
     public static ConnectionInformation Load(System.IO.FileInfo file)
@@ -21,7 +21,7 @@ Microsoft.DotNet.Interactive.Jupyter
     public System.String SignatureScheme { get; set;}
     public System.Int32 StdinPort { get; set;}
     public System.String Transport { get; set;}
-  public class ConnectJupyterKernel : Microsoft.DotNet.Interactive.Commands.ConnectKernelCommand, System.IEquatable<Microsoft.DotNet.Interactive.Commands.KernelCommand>
+  public class ConnectJupyterKernel : Polyglossy.Interactive.Commands.ConnectKernelCommand, System.IEquatable<Polyglossy.Interactive.Commands.KernelCommand>
     .ctor(System.String connectedKernelName)
     public System.String CondaEnv { get; set;}
     public System.String InitScript { get; set;}
@@ -29,64 +29,64 @@ Microsoft.DotNet.Interactive.Jupyter
     public System.String TargetUrl { get; set;}
     public System.String Token { get; set;}
     public System.Boolean UseBearerAuth { get; set;}
-  public class ConnectJupyterKernelDirective : Microsoft.DotNet.Interactive.Connection.ConnectKernelDirective<ConnectJupyterKernel>
+  public class ConnectJupyterKernelDirective : Polyglossy.Interactive.Connection.ConnectKernelDirective<ConnectJupyterKernel>
     .ctor()
-    public Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter InitScriptParameter { get;}
-    public Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter KernelSpecNameParameter { get;}
-    public ConnectJupyterKernelDirective AddConnectionOptions(Microsoft.DotNet.Interactive.Jupyter.Connection.IJupyterKernelConnectionOptions connectionOptions)
-    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Microsoft.DotNet.Interactive.Kernel>> ConnectKernelsAsync(ConnectJupyterKernel connectCommand, Microsoft.DotNet.Interactive.KernelInvocationContext context)
-  public class ExecuteRequestHandler : RequestHandlerBase<Microsoft.DotNet.Interactive.Jupyter.Protocol.ExecuteRequest>, System.IDisposable
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
+    public Polyglossy.Interactive.Directives.KernelDirectiveParameter InitScriptParameter { get;}
+    public Polyglossy.Interactive.Directives.KernelDirectiveParameter KernelSpecNameParameter { get;}
+    public ConnectJupyterKernelDirective AddConnectionOptions(Polyglossy.Interactive.Jupyter.Connection.IJupyterKernelConnectionOptions connectionOptions)
+    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Polyglossy.Interactive.Kernel>> ConnectKernelsAsync(ConnectJupyterKernel connectCommand, Polyglossy.Interactive.KernelInvocationContext context)
+  public class ExecuteRequestHandler : RequestHandlerBase<Polyglossy.Interactive.Jupyter.Protocol.ExecuteRequest>, System.IDisposable
+    .ctor(Polyglossy.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
     public System.Threading.Tasks.Task Handle(JupyterRequestContext context)
-    protected System.Void OnKernelEventReceived(Microsoft.DotNet.Interactive.Events.KernelEvent event, JupyterRequestContext context)
+    protected System.Void OnKernelEventReceived(Polyglossy.Interactive.Events.KernelEvent event, JupyterRequestContext context)
   public class Heartbeat, Microsoft.Extensions.Hosting.IHostedService
     .ctor(ConnectionInformation connectionInformation)
     public System.Threading.Tasks.Task StartAsync(System.Threading.CancellationToken cancellationToken)
     public System.Threading.Tasks.Task StopAsync(System.Threading.CancellationToken cancellationToken)
   public abstract class IJupyterEnvironment
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Utility.CommandLineResult> ExecuteAsync(System.String command, System.String args, System.IO.DirectoryInfo workingDir = null, System.Nullable<System.TimeSpan> timeout = null)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Utility.CommandLineResult> ExecuteAsync(System.String command, System.String args, System.IO.DirectoryInfo workingDir = null, System.Nullable<System.TimeSpan> timeout = null)
     public System.Diagnostics.Process StartProcess(System.String command, System.String args, System.IO.DirectoryInfo workingDir, System.Action<System.String> output = null, System.Action<System.String> error = null)
   public abstract class IJupyterKernelSpecModule
     public System.IO.DirectoryInfo GetDefaultKernelSpecDirectory()
     public IJupyterEnvironment GetEnvironment()
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Utility.CommandLineResult> InstallKernelAsync(System.IO.DirectoryInfo sourceDirectory)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Utility.CommandLineResult> InstallKernelAsync(System.IO.DirectoryInfo sourceDirectory)
     public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyDictionary<System.String,KernelSpec>> ListKernelsAsync()
   public abstract class IJupyterMessageResponseSender
-    public System.Void Send(Microsoft.DotNet.Interactive.Jupyter.Protocol.PubSubMessage message)
-    public System.Void Send(Microsoft.DotNet.Interactive.Jupyter.Protocol.ReplyMessage message)
-    public System.String Send(Microsoft.DotNet.Interactive.Jupyter.Protocol.InputRequest message)
-  public class InterruptRequestHandler : RequestHandlerBase<Microsoft.DotNet.Interactive.Jupyter.Protocol.InterruptRequest>, System.IDisposable
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
+    public System.Void Send(Polyglossy.Interactive.Jupyter.Protocol.PubSubMessage message)
+    public System.Void Send(Polyglossy.Interactive.Jupyter.Protocol.ReplyMessage message)
+    public System.String Send(Polyglossy.Interactive.Jupyter.Protocol.InputRequest message)
+  public class InterruptRequestHandler : RequestHandlerBase<Polyglossy.Interactive.Jupyter.Protocol.InterruptRequest>, System.IDisposable
+    .ctor(Polyglossy.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
     public System.Threading.Tasks.Task Handle(JupyterRequestContext context)
-    protected System.Void OnKernelEventReceived(Microsoft.DotNet.Interactive.Events.KernelEvent event, JupyterRequestContext context)
-  public class IsCompleteRequestHandler : RequestHandlerBase<Microsoft.DotNet.Interactive.Jupyter.Protocol.IsCompleteRequest>, System.IDisposable
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
+    protected System.Void OnKernelEventReceived(Polyglossy.Interactive.Events.KernelEvent event, JupyterRequestContext context)
+  public class IsCompleteRequestHandler : RequestHandlerBase<Polyglossy.Interactive.Jupyter.Protocol.IsCompleteRequest>, System.IDisposable
+    .ctor(Polyglossy.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler = null)
     public System.Threading.Tasks.Task Handle(JupyterRequestContext context)
-    protected System.Void OnKernelEventReceived(Microsoft.DotNet.Interactive.Events.KernelEvent event, JupyterRequestContext context)
+    protected System.Void OnKernelEventReceived(Polyglossy.Interactive.Events.KernelEvent event, JupyterRequestContext context)
   public class JupyterClientKernelExtension
-    public static System.Threading.Tasks.Task LoadAsync(Microsoft.DotNet.Interactive.Kernel kernel)
+    public static System.Threading.Tasks.Task LoadAsync(Polyglossy.Interactive.Kernel kernel)
     .ctor()
-  public class JupyterHttpKernelConnectionOptions, Microsoft.DotNet.Interactive.Jupyter.Connection.IJupyterKernelConnectionOptions
+  public class JupyterHttpKernelConnectionOptions, Polyglossy.Interactive.Jupyter.Connection.IJupyterKernelConnectionOptions
     .ctor()
-    public Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter TargetUrl { get;}
-    public Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter Token { get;}
-    public Microsoft.DotNet.Interactive.Jupyter.Connection.IJupyterConnection GetConnection(ConnectJupyterKernel connectCommand)
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter> GetParameters()
+    public Polyglossy.Interactive.Directives.KernelDirectiveParameter TargetUrl { get;}
+    public Polyglossy.Interactive.Directives.KernelDirectiveParameter Token { get;}
+    public Polyglossy.Interactive.Jupyter.Connection.IJupyterConnection GetConnection(ConnectJupyterKernel connectCommand)
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Directives.KernelDirectiveParameter> GetParameters()
   public class JupyterKernelSpecModule, IJupyterKernelSpecModule
     .ctor(IJupyterEnvironment environment = null)
     public System.IO.DirectoryInfo GetDefaultKernelSpecDirectory()
     public IJupyterEnvironment GetEnvironment()
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Utility.CommandLineResult> InstallKernelAsync(System.IO.DirectoryInfo sourceDirectory)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Utility.CommandLineResult> InstallKernelAsync(System.IO.DirectoryInfo sourceDirectory)
     public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyDictionary<System.String,KernelSpec>> ListKernelsAsync()
-  public class JupyterLocalKernelConnectionOptions, Microsoft.DotNet.Interactive.Jupyter.Connection.IJupyterKernelConnectionOptions
+  public class JupyterLocalKernelConnectionOptions, Polyglossy.Interactive.Jupyter.Connection.IJupyterKernelConnectionOptions
     .ctor()
-    public Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter CondaEnv { get;}
-    public Microsoft.DotNet.Interactive.Jupyter.Connection.IJupyterConnection GetConnection(ConnectJupyterKernel connectCommand)
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter> GetParameters()
+    public Polyglossy.Interactive.Directives.KernelDirectiveParameter CondaEnv { get;}
+    public Polyglossy.Interactive.Jupyter.Connection.IJupyterConnection GetConnection(ConnectJupyterKernel connectCommand)
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Directives.KernelDirectiveParameter> GetParameters()
   public class JupyterRequestContext
-    .ctor(IJupyterMessageResponseSender jupyterMessageSender, Microsoft.DotNet.Interactive.Jupyter.Messaging.Message request)
+    .ctor(IJupyterMessageResponseSender jupyterMessageSender, Polyglossy.Interactive.Jupyter.Messaging.Message request)
     public IJupyterMessageResponseSender JupyterMessageSender { get;}
-    public Microsoft.DotNet.Interactive.Jupyter.Messaging.Message JupyterRequestMessageEnvelope { get;}
+    public Polyglossy.Interactive.Jupyter.Messaging.Message JupyterRequestMessageEnvelope { get;}
     public System.String Token { get;}
     public System.Void Complete()
     public System.Threading.Tasks.Task Done()
@@ -94,15 +94,15 @@ Microsoft.DotNet.Interactive.Jupyter
   public static class JupyterRequestContextExtensions
     public static System.String GetKernelName()
   public class JupyterRequestContextHandler
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel)
+    .ctor(Polyglossy.Interactive.Kernel kernel)
     public System.Threading.Tasks.Task Handle(JupyterRequestContext context)
   public class JupyterRequestContextScheduler
     .ctor(System.Func<JupyterRequestContext,System.Threading.Tasks.Task> handle)
     public System.Threading.Tasks.Task Schedule(JupyterRequestContext context)
   public static class KernelExtensions
     public static T UseDefaultMagicCommands<T>()
-    public static Microsoft.DotNet.Interactive.CSharp.CSharpKernel UseJupyterHelpers()
-    public static Microsoft.DotNet.Interactive.PowerShell.PowerShellKernel UseJupyterHelpers()
+    public static Polyglossy.Interactive.CSharp.CSharpKernel UseJupyterHelpers()
+    public static Polyglossy.Interactive.PowerShell.PowerShellKernel UseJupyterHelpers()
   public class KernelSpec
     .ctor()
     public System.Collections.Generic.IReadOnlyList<System.String> CommandArguments { get; set;}
@@ -114,43 +114,43 @@ Microsoft.DotNet.Interactive.Jupyter
     public System.String Name { get; set;}
   public abstract class RequestHandlerBase<T>, System.IDisposable
     public System.Void Dispose()
-    protected Microsoft.DotNet.Interactive.Kernel get_Kernel()
-    protected System.IObservable<Microsoft.DotNet.Interactive.Events.KernelEvent> get_KernelEvents()
-    protected System.Void OnKernelEventReceived(Microsoft.DotNet.Interactive.Events.KernelEvent event, JupyterRequestContext context)
-    protected System.Threading.Tasks.Task SendAsync(JupyterRequestContext jupyterContext, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    protected Polyglossy.Interactive.Kernel get_Kernel()
+    protected System.IObservable<Polyglossy.Interactive.Events.KernelEvent> get_KernelEvents()
+    protected System.Void OnKernelEventReceived(Polyglossy.Interactive.Events.KernelEvent event, JupyterRequestContext context)
+    protected System.Threading.Tasks.Task SendAsync(JupyterRequestContext jupyterContext, Polyglossy.Interactive.Commands.KernelCommand command)
   public class Shell, Microsoft.Extensions.Hosting.IHostedService
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel, JupyterRequestContextScheduler scheduler, ConnectionInformation connectionInformation, Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime)
+    .ctor(Polyglossy.Interactive.Kernel kernel, JupyterRequestContextScheduler scheduler, ConnectionInformation connectionInformation, Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime)
     public System.Threading.Tasks.Task StartAsync(System.Threading.CancellationToken cancellationToken)
     public System.Threading.Tasks.Task StopAsync(System.Threading.CancellationToken cancellationToken)
-  public class ShutdownRequestHandler : RequestHandlerBase<Microsoft.DotNet.Interactive.Jupyter.Protocol.ShutdownRequest>, System.IDisposable
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler)
+  public class ShutdownRequestHandler : RequestHandlerBase<Polyglossy.Interactive.Jupyter.Protocol.ShutdownRequest>, System.IDisposable
+    .ctor(Polyglossy.Interactive.Kernel kernel, System.Reactive.Concurrency.IScheduler scheduler)
     public System.Threading.Tasks.Task Handle(JupyterRequestContext context)
-    protected System.Void OnKernelEventReceived(Microsoft.DotNet.Interactive.Events.KernelEvent event, JupyterRequestContext context)
+    protected System.Void OnKernelEventReceived(Polyglossy.Interactive.Events.KernelEvent event, JupyterRequestContext context)
   public class SupportedDirectives
-    .ctor(System.String kernelName, System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Directives.KernelDirective> directives)
-    public System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Directives.KernelDirective> Directives { get;}
+    .ctor(System.String kernelName, System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Directives.KernelDirective> directives)
+    public System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Directives.KernelDirective> Directives { get;}
     public System.String KernelName { get;}
   public static class TopLevelMethods
     public static System.String input(System.String prompt = )
-    public static Microsoft.DotNet.Interactive.PasswordString password(System.String prompt = )
-Microsoft.DotNet.Interactive.Jupyter.Connection
+    public static Polyglossy.Interactive.PasswordString password(System.String prompt = )
+Polyglossy.Interactive.Jupyter.Connection
   public abstract class IJupyterConnection
     public System.Threading.Tasks.Task<IJupyterKernelConnection> CreateKernelConnectionAsync(System.String kernelSpecName)
-    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Microsoft.DotNet.Interactive.Jupyter.KernelSpec>> GetKernelSpecsAsync()
+    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Polyglossy.Interactive.Jupyter.KernelSpec>> GetKernelSpecsAsync()
   public abstract class IJupyterKernelConnection, System.IDisposable
-    public Microsoft.DotNet.Interactive.Jupyter.Messaging.IMessageReceiver Receiver { get;}
-    public Microsoft.DotNet.Interactive.Jupyter.Messaging.IMessageSender Sender { get;}
+    public Polyglossy.Interactive.Jupyter.Messaging.IMessageReceiver Receiver { get;}
+    public Polyglossy.Interactive.Jupyter.Messaging.IMessageSender Sender { get;}
     public System.Uri Uri { get;}
     public System.Threading.Tasks.Task StartAsync()
   public abstract class IJupyterKernelConnectionOptions
-    public IJupyterConnection GetConnection(Microsoft.DotNet.Interactive.Jupyter.ConnectJupyterKernel connectCommand)
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter> GetParameters()
-Microsoft.DotNet.Interactive.Jupyter.Formatting
+    public IJupyterConnection GetConnection(Polyglossy.Interactive.Jupyter.ConnectJupyterKernel connectCommand)
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Directives.KernelDirectiveParameter> GetParameters()
+Polyglossy.Interactive.Jupyter.Formatting
   public class MathString
     public static MathString op_Implicit(System.String source)
     .ctor(System.String latexCode)
     public System.String ToString()
-Microsoft.DotNet.Interactive.Jupyter.Messaging
+Polyglossy.Interactive.Jupyter.Messaging
   public class Header
     public static Header Create<T>(T messageContent, System.String session)
     public static Header Create<T>(System.String session)
@@ -174,10 +174,10 @@ Microsoft.DotNet.Interactive.Jupyter.Messaging
     public static Message Create<T>(T content, Header parentHeader = null, System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> identifiers = null, System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object> metaData = null, System.String signature = null, System.String channel = shell)
     public static Message CreatePubSub<T>(T content, Message request, System.String kernelIdentity = null)
     public static Message CreateReply<T>(T content, Message request, System.String channel = shell)
-    .ctor(Header header, Microsoft.DotNet.Interactive.Jupyter.Protocol.Message content = null, Header parentHeader = null, System.String signature = null, System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object> metaData = null, System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> identifiers = null, System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> buffers = null, System.String channel = shell)
+    .ctor(Header header, Polyglossy.Interactive.Jupyter.Protocol.Message content = null, Header parentHeader = null, System.String signature = null, System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object> metaData = null, System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> identifiers = null, System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> buffers = null, System.String channel = shell)
     public System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> Buffers { get;}
     public System.String Channel { get;}
-    public Microsoft.DotNet.Interactive.Jupyter.Protocol.Message Content { get;}
+    public Polyglossy.Interactive.Jupyter.Protocol.Message Content { get;}
     public Header Header { get;}
     public System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IReadOnlyList<System.Byte>> Identifiers { get;}
     public System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object> MetaData { get;}
@@ -190,12 +190,12 @@ Microsoft.DotNet.Interactive.Jupyter.Messaging
   public static class MessageFormatter
     public static System.Text.Json.JsonSerializerOptions SerializerOptions { get;}
   public static class MessageObservableExtensions
-    public static System.IObservable<Microsoft.DotNet.Interactive.Jupyter.Protocol.Message> Content()
+    public static System.IObservable<Polyglossy.Interactive.Jupyter.Protocol.Message> Content()
     public static System.IObservable<Message> ResponseOf(Message parentMessage)
-    public static System.IObservable<Microsoft.DotNet.Interactive.Jupyter.Protocol.Message> TakeUntilMessageType(System.String[] messageTypes)
+    public static System.IObservable<Polyglossy.Interactive.Jupyter.Protocol.Message> TakeUntilMessageType(System.String[] messageTypes)
   public static class MetadataExtensions
     public static System.Collections.Generic.Dictionary<System.String,System.Object> DeserializeMetadataFromJsonString(System.String metadataJson)
-Microsoft.DotNet.Interactive.Jupyter.Protocol
+Polyglossy.Interactive.Jupyter.Protocol
   public class ClearOutput : PubSubMessage
     .ctor(System.Boolean wait = False)
     public System.Boolean Wait { get;}
@@ -406,15 +406,15 @@ Microsoft.DotNet.Interactive.Jupyter.Protocol
     public System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object> MetaData { get;}
     public System.String Source { get;}
     public System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object> Transient { get;}
-Microsoft.DotNet.Interactive.Jupyter.ZMQ
+Polyglossy.Interactive.Jupyter.ZMQ
   public class MessageReceiver
     .ctor(NetMQ.NetMQSocket socket)
-    public Microsoft.DotNet.Interactive.Jupyter.Messaging.Message Receive()
+    public Polyglossy.Interactive.Jupyter.Messaging.Message Receive()
   public class MessageSender
     .ctor(NetMQ.IOutgoingSocket socket, SignatureValidator signatureValidator)
-    public System.Void Send(Microsoft.DotNet.Interactive.Jupyter.Messaging.Message message)
+    public System.Void Send(Polyglossy.Interactive.Jupyter.Messaging.Message message)
   public static class NetMQExtensions
-    public static Microsoft.DotNet.Interactive.Jupyter.Messaging.Message GetMessage()
+    public static Polyglossy.Interactive.Jupyter.Messaging.Message GetMessage()
   public class SignatureValidator
     .ctor(System.String key, System.String algorithm)
     public System.Text.Encoding Encoding { get;}

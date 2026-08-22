@@ -1,13 +1,13 @@
-Microsoft.DotNet.Interactive.SQLite
-  public class ConnectSQLiteDirective : Microsoft.DotNet.Interactive.Connection.ConnectKernelDirective<ConnectSQLiteKernel>
+Polyglossy.Interactive.SQLite
+  public class ConnectSQLiteDirective : Polyglossy.Interactive.Connection.ConnectKernelDirective<ConnectSQLiteKernel>
     .ctor()
-    public Microsoft.DotNet.Interactive.Directives.KernelDirectiveParameter ConnectionStringParameter { get;}
-    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Microsoft.DotNet.Interactive.Kernel>> ConnectKernelsAsync(ConnectSQLiteKernel connectCommand, Microsoft.DotNet.Interactive.KernelInvocationContext context)
-  public class ConnectSQLiteKernel : Microsoft.DotNet.Interactive.Commands.ConnectKernelCommand, System.IEquatable<Microsoft.DotNet.Interactive.Commands.KernelCommand>
+    public Polyglossy.Interactive.Directives.KernelDirectiveParameter ConnectionStringParameter { get;}
+    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Polyglossy.Interactive.Kernel>> ConnectKernelsAsync(ConnectSQLiteKernel connectCommand, Polyglossy.Interactive.KernelInvocationContext context)
+  public class ConnectSQLiteKernel : Polyglossy.Interactive.Commands.ConnectKernelCommand, System.IEquatable<Polyglossy.Interactive.Commands.KernelCommand>
     .ctor(System.String connectedKernelName)
     public System.String ConnectionString { get; set;}
-  public class SQLiteKernel : Microsoft.DotNet.Interactive.Kernel, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, System.IDisposable
-    public static System.Void AddSQLiteKernelConnectorTo(Microsoft.DotNet.Interactive.CompositeKernel kernel)
+  public class SQLiteKernel : Polyglossy.Interactive.Kernel, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, System.IDisposable
+    public static System.Void AddSQLiteKernelConnectorTo(Polyglossy.Interactive.CompositeKernel kernel)
     public static System.Void AddSQLiteKernelConnectorToCurrentRoot()
     .ctor(System.String name, System.String connectionString)
   public class SqlRow : System.Collections.Generic.Dictionary<System.String,System.Object>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.String,System.Object>>, System.Collections.Generic.IDictionary<System.String,System.Object>, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<System.String,System.Object>>, System.Collections.Generic.IReadOnlyDictionary<System.String,System.Object>, System.Collections.ICollection, System.Collections.IDictionary, System.Collections.IEnumerable, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable

@@ -1,4 +1,4 @@
-Microsoft.DotNet.Interactive.Formatting
+Polyglossy.Interactive.Formatting
   public static class BinaryFormatter
     public static System.String FormatBytes(System.Byte[] bytes)
     public static System.Void FormatBytesTo(System.Byte[] bytes, System.IO.TextWriter writer)
@@ -150,8 +150,8 @@ Microsoft.DotNet.Interactive.Formatting
   public abstract class ITypeFormatterSource
     public System.Collections.Generic.IEnumerable<ITypeFormatter> CreateTypeFormatters()
   public static class JsonExtensions
-    public static Microsoft.DotNet.Interactive.Formatting.TabularData.TabularDataResource ToTabularDataResource()
-    public static Microsoft.DotNet.Interactive.Formatting.TabularData.TabularDataResource ToTabularDataResource()
+    public static Polyglossy.Interactive.Formatting.TabularData.TabularDataResource ToTabularDataResource()
+    public static Polyglossy.Interactive.Formatting.TabularData.TabularDataResource ToTabularDataResource()
   public static class JsonFormatter
     public static System.Text.Json.JsonSerializerOptions SerializerOptions { get;}
     public static ITypeFormatter GetPreferredFormatterFor(System.Type type)
@@ -291,15 +291,15 @@ Microsoft.DotNet.Interactive.Formatting
     .ctor(System.Type formatterSourceType)
     public System.Type FormatterSourceType { get;}
     public System.String[] PreferredMimeTypes { get; set;}
-Microsoft.DotNet.Interactive.Formatting.Csv
+Polyglossy.Interactive.Formatting.Csv
   public static class CsvFormatter
-    public static Microsoft.DotNet.Interactive.Formatting.ITypeFormatter GetPreferredFormatterFor(System.Type type)
+    public static Polyglossy.Interactive.Formatting.ITypeFormatter GetPreferredFormatterFor(System.Type type)
     public static ITypeFormatter<T> GetPreferredFormatterFor<T>()
-  public class CsvFormatter<T> : TypeFormatter<T>, ITypeFormatter<T>, Microsoft.DotNet.Interactive.Formatting.ITypeFormatter
+  public class CsvFormatter<T> : TypeFormatter<T>, ITypeFormatter<T>, Polyglossy.Interactive.Formatting.ITypeFormatter
     .ctor(FormatDelegate<T> format)
     public System.String MimeType { get;}
-    public System.Boolean Format(T value, Microsoft.DotNet.Interactive.Formatting.FormatContext context)
-Microsoft.DotNet.Interactive.Formatting.TabularData
+    public System.Boolean Format(T value, Polyglossy.Interactive.Formatting.FormatContext context)
+Polyglossy.Interactive.Formatting.TabularData
   public class TableDataFieldDescriptors, System.Collections.Generic.IEnumerable<TableSchemaFieldDescriptor>, System.Collections.Generic.IReadOnlyCollection<TableSchemaFieldDescriptor>, System.Collections.IEnumerable
     .ctor()
     public System.Int32 Count { get;}
@@ -339,16 +339,16 @@ Microsoft.DotNet.Interactive.Formatting.TabularData
     public static System.Text.Json.JsonSerializerOptions JsonSerializerOptions { get;}
     public static TableSchemaFieldType ToTableSchemaFieldType()
     public static TabularDataResource ToTabularDataResource<T>()
-  public class TabularDataResourceFormatter<T> : TypeFormatter<T>, ITypeFormatter<T>, Microsoft.DotNet.Interactive.Formatting.ITypeFormatter
+  public class TabularDataResourceFormatter<T> : TypeFormatter<T>, ITypeFormatter<T>, Polyglossy.Interactive.Formatting.ITypeFormatter
     .ctor(FormatDelegate<T> format)
-    .ctor(Action<T,Microsoft.DotNet.Interactive.Formatting.FormatContext> format)
+    .ctor(Action<T,Polyglossy.Interactive.Formatting.FormatContext> format)
     public System.String MimeType { get;}
-    public System.Boolean Format(T value, Microsoft.DotNet.Interactive.Formatting.FormatContext context)
-  public class TabularDataResourceJsonString : Microsoft.DotNet.Interactive.Formatting.JsonString, Microsoft.AspNetCore.Html.IHtmlContent
+    public System.Boolean Format(T value, Polyglossy.Interactive.Formatting.FormatContext context)
+  public class TabularDataResourceJsonString : Polyglossy.Interactive.Formatting.JsonString, Microsoft.AspNetCore.Html.IHtmlContent
     public static TabularDataResourceJsonString Create(System.Collections.Generic.IReadOnlyDictionary<System.String,System.Type> fields, System.Collections.Generic.IReadOnlyList<System.Collections.Generic.IDictionary<System.String,System.Object>> data)
     .ctor(System.String json)
 System
   public static class DisplayExtensions
-    public static Microsoft.DotNet.Interactive.Formatting.DisplayedValue Display(String[] mimeTypes)
-    public static Microsoft.DotNet.Interactive.Formatting.DisplayedValue DisplayAs(String mimeType)
-    public static Microsoft.DotNet.Interactive.Formatting.DisplayedValue DisplayTable<T>(String[] mimeTypes)
+    public static Polyglossy.Interactive.Formatting.DisplayedValue Display(String[] mimeTypes)
+    public static Polyglossy.Interactive.Formatting.DisplayedValue DisplayAs(String mimeType)
+    public static Polyglossy.Interactive.Formatting.DisplayedValue DisplayTable<T>(String[] mimeTypes)

@@ -1,4 +1,24 @@
 Microsoft.DotNet.Interactive
+  public abstract class Kernel : Polyglossy.Interactive.Kernel, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, System.IDisposable
+  public class KernelCommandResult : Polyglossy.Interactive.KernelCommandResult
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command)
+  public class KernelInfo : Polyglossy.Interactive.KernelInfo
+    .ctor(System.String localName, System.String[] aliases = null, System.Boolean isProxy = False, System.Boolean isComposite = False, System.String description = null)
+  public class KernelInvocationContext
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command)
+    public System.Threading.CancellationToken CancellationToken { get;}
+    public Polyglossy.Interactive.Commands.KernelCommand Command { get;}
+    public System.Boolean IsComplete { get;}
+    public System.Void Complete(Polyglossy.Interactive.Commands.KernelCommand command)
+    public System.Void Fail(Polyglossy.Interactive.Commands.KernelCommand command, System.Exception exception = null, System.String message = null)
+Microsoft.DotNet.Interactive.Commands
+  public abstract class KernelCommand : Polyglossy.Interactive.Commands.KernelCommand, System.IEquatable<Polyglossy.Interactive.Commands.KernelCommand>
+Microsoft.DotNet.Interactive.Events
+  public abstract class KernelEvent : Polyglossy.Interactive.Events.KernelEvent
+Microsoft.DotNet.Interactive.Parsing
+  public class SubmissionParser : Polyglossy.Interactive.Parsing.SubmissionParser
+    .ctor(Polyglossy.Interactive.Kernel kernel)
+Polyglossy.Interactive
   public class AutomationEnvironment : FrontendEnvironment
     .ctor()
   public class Base64EncodedAssembly
@@ -13,7 +33,7 @@ Microsoft.DotNet.Interactive
     public System.Void Stamp(System.Uri uri)
     public System.Void StampAs(System.Uri uri, System.String tag)
     public System.Void StampAsArrived(System.Uri uri)
-  public class CompositeKernel : Kernel, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, System.Collections.Generic.IEnumerable<Kernel>, System.Collections.IEnumerable, System.IDisposable
+  public class CompositeKernel : Kernel, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, System.Collections.Generic.IEnumerable<Kernel>, System.Collections.IEnumerable, System.IDisposable
     .ctor(System.String name = null)
     public KernelCollection ChildKernels { get;}
     public System.String DefaultKernelName { get; set;}
@@ -21,10 +41,10 @@ Microsoft.DotNet.Interactive
     public System.Void Add(Kernel kernel, System.Collections.Generic.IEnumerable<System.String> aliases = null)
     public System.Void AddConnectDirective<T>(ConnectKernelDirective<T> connectDirective)
     public System.Collections.Generic.IEnumerator<Kernel> GetEnumerator()
-     Kernel GetHandlingKernel(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
-     System.Threading.Tasks.Task HandleRequestKernelInfoAsync(Microsoft.DotNet.Interactive.Commands.RequestKernelInfo command, KernelInvocationContext context)
+     Kernel GetHandlingKernel(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
+     System.Threading.Tasks.Task HandleRequestKernelInfoAsync(Polyglossy.Interactive.Commands.RequestKernelInfo command, KernelInvocationContext context)
     public System.Void SetDefaultTargetKernelNameForCommand(System.Type commandType, System.String kernelName)
-    protected System.Void SetHandlingKernel(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
+    protected System.Void SetHandlingKernel(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
   public static class DataExplorer
     public static DataExplorer<TData> Create<TData>(System.String dataExplorerTypeName, TData data)
     public static DataExplorer<TData> CreateDefault<TData>(TData data)
@@ -52,7 +72,7 @@ Microsoft.DotNet.Interactive
     public System.Void Stamp(System.Uri uri)
   public abstract class FrontendEnvironment
     public System.Threading.Tasks.Task ExecuteClientScript(System.String code, KernelInvocationContext context)
-  public class HtmlKernel : Kernel, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, System.IDisposable
+  public class HtmlKernel : Kernel, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, System.IDisposable
     .ctor()
   public abstract class IKernelCommandHandler<TCommand>
     public System.Threading.Tasks.Task HandleAsync(TCommand command, KernelInvocationContext context)
@@ -71,50 +91,50 @@ Microsoft.DotNet.Interactive
     public System.Collections.Generic.IEnumerable<System.String> FormatAsPlainTextLines()
   public abstract class IStaticContentSource
     public System.String Name { get;}
-  public class JavaScriptKernel : Kernel, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SendValue>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, System.IDisposable
-    .ctor(Microsoft.DotNet.Interactive.Connection.KernelClientBase client = null)
+  public class JavaScriptKernel : Kernel, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, IKernelCommandHandler<Polyglossy.Interactive.Commands.SendValue>, IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, System.IDisposable
+    .ctor(Polyglossy.Interactive.Connection.KernelClientBase client = null)
     protected Func<TCommand,KernelInvocationContext,System.Threading.Tasks.Task> CreateDefaultHandlerForCommandType<TCommand>()
-    public System.Threading.Tasks.Task HandleAsync(Microsoft.DotNet.Interactive.Commands.SendValue command, KernelInvocationContext context)
-  public abstract class Kernel, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, System.IDisposable
+    public System.Threading.Tasks.Task HandleAsync(Polyglossy.Interactive.Commands.SendValue command, KernelInvocationContext context)
+  public abstract class Kernel, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, System.IDisposable
     public static Kernel Current { get;}
     public static Kernel Root { get;}
     public static System.Void CSS(System.String content)
-    public static Microsoft.DotNet.Interactive.Formatting.DisplayedValue display(System.Object value, System.String[] mimeTypes)
+    public static Polyglossy.Interactive.Formatting.DisplayedValue display(System.Object value, System.String[] mimeTypes)
     public static System.Threading.Tasks.Task<System.String> GetInputAsync(System.String prompt = , System.String typeHint = text)
-    public static System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<System.String,System.String>> GetInputsAsync(System.Collections.Generic.IEnumerable<Microsoft.DotNet.Interactive.Commands.InputDescription> inputDescriptions)
+    public static System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<System.String,System.String>> GetInputsAsync(System.Collections.Generic.IEnumerable<Polyglossy.Interactive.Commands.InputDescription> inputDescriptions)
     public static System.Threading.Tasks.Task<PasswordString> GetPasswordAsync(System.String prompt = )
     public static Microsoft.AspNetCore.Html.IHtmlContent HTML(System.String content)
     public static System.Void Javascript(System.String scriptContent)
     public FrontendEnvironment FrontendEnvironment { get; set;}
-    public System.IObservable<Microsoft.DotNet.Interactive.Events.KernelEvent> KernelEvents { get;}
+    public System.IObservable<Polyglossy.Interactive.Events.KernelEvent> KernelEvents { get;}
     public KernelInfo KernelInfo { get;}
-    public Microsoft.DotNet.Interactive.Directives.KernelSpecifierDirective KernelSpecifierDirective { get;}
+    public Polyglossy.Interactive.Directives.KernelSpecifierDirective KernelSpecifierDirective { get;}
     public System.String Name { get;}
     public CompositeKernel ParentKernel { get;}
     public Kernel RootKernel { get;}
     public System.Int32 SubmissionCount { get;}
-    public Microsoft.DotNet.Interactive.Parsing.SubmissionParser SubmissionParser { get;}
-    public System.Void AddDirective(Microsoft.DotNet.Interactive.Directives.KernelActionDirective directive, KernelCommandInvocation handler)
-    public System.Void AddDirective<TCommand>(Microsoft.DotNet.Interactive.Directives.KernelActionDirective directive, Func<TCommand,KernelInvocationContext,System.Threading.Tasks.Task> handler)
+    public Polyglossy.Interactive.Parsing.SubmissionParser SubmissionParser { get;}
+    public System.Void AddDirective(Polyglossy.Interactive.Directives.KernelActionDirective directive, KernelCommandInvocation handler)
+    public System.Void AddDirective<TCommand>(Polyglossy.Interactive.Directives.KernelActionDirective directive, Func<TCommand,KernelInvocationContext,System.Threading.Tasks.Task> handler)
     public System.Void AddMiddleware(KernelCommandPipelineMiddleware middleware, System.String caller = null)
-     System.Boolean CanHandle(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+     System.Boolean CanHandle(Polyglossy.Interactive.Commands.KernelCommand command)
     protected Func<TCommand,KernelInvocationContext,System.Threading.Tasks.Task> CreateDefaultHandlerForCommandType<TCommand>()
-    public System.Void DeferCommand(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    public System.Void DeferCommand(Polyglossy.Interactive.Commands.KernelCommand command)
     public System.Void Dispose()
     protected System.Boolean get_IsDisposed()
-     KernelScheduler<Microsoft.DotNet.Interactive.Commands.KernelCommand,KernelCommandResult> get_Scheduler()
-     Kernel GetHandlingKernel(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
-     System.Threading.Tasks.Task HandleRequestKernelInfoAsync(Microsoft.DotNet.Interactive.Commands.RequestKernelInfo command, KernelInvocationContext context)
-     System.Boolean HasDynamicHandlerFor(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
-     System.Void PublishEvent(Microsoft.DotNet.Interactive.Events.KernelEvent kernelEvent)
+     KernelScheduler<Polyglossy.Interactive.Commands.KernelCommand,KernelCommandResult> get_Scheduler()
+     Kernel GetHandlingKernel(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
+     System.Threading.Tasks.Task HandleRequestKernelInfoAsync(Polyglossy.Interactive.Commands.RequestKernelInfo command, KernelInvocationContext context)
+     System.Boolean HasDynamicHandlerFor(Polyglossy.Interactive.Commands.KernelCommand command)
+     System.Void PublishEvent(Polyglossy.Interactive.Events.KernelEvent kernelEvent)
     public System.Void RegisterCommandHandler<TCommand>(Func<TCommand,KernelInvocationContext,System.Threading.Tasks.Task> handler)
     public System.Void RegisterCommandType<TCommand>()
     public System.Void RegisterForDisposal(System.Action dispose)
     public System.Void RegisterForDisposal(System.IDisposable disposable)
-    public System.Threading.Tasks.Task<KernelCommandResult> SendAsync(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Threading.CancellationToken cancellationToken = null)
-    protected System.Void SetHandlingKernel(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
-     System.Void SetScheduler(KernelScheduler<Microsoft.DotNet.Interactive.Commands.KernelCommand,KernelCommandResult> scheduler)
-    protected System.Threading.Tasks.Task SetValueAsync(Microsoft.DotNet.Interactive.Commands.SendValue command, KernelInvocationContext context, SetValueAsyncDelegate onSetValueAsync)
+    public System.Threading.Tasks.Task<KernelCommandResult> SendAsync(Polyglossy.Interactive.Commands.KernelCommand command, System.Threading.CancellationToken cancellationToken = null)
+    protected System.Void SetHandlingKernel(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
+     System.Void SetScheduler(KernelScheduler<Polyglossy.Interactive.Commands.KernelCommand,KernelCommandResult> scheduler)
+    protected System.Threading.Tasks.Task SetValueAsync(Polyglossy.Interactive.Commands.SendValue command, KernelInvocationContext context, SetValueAsyncDelegate onSetValueAsync)
     public System.Boolean SupportsCommandType(System.Type commandType)
     public System.String ToString()
   public class KernelCollection, System.Collections.Generic.IEnumerable<Kernel>, System.Collections.Generic.IReadOnlyCollection<Kernel>, System.Collections.IEnumerable
@@ -138,26 +158,26 @@ Microsoft.DotNet.Interactive
     public System.String ToString()
   public delegate KernelCommandInvocation : System.MulticastDelegate, System.ICloneable, System.Runtime.Serialization.ISerializable
     .ctor(System.Object object, System.IntPtr method)
-    public System.IAsyncResult BeginInvoke(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context, System.AsyncCallback callback, System.Object object)
+    public System.IAsyncResult BeginInvoke(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context, System.AsyncCallback callback, System.Object object)
     public System.Threading.Tasks.Task EndInvoke(System.IAsyncResult result)
-    public System.Threading.Tasks.Task Invoke(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
+    public System.Threading.Tasks.Task Invoke(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
   public delegate KernelCommandPipelineMiddleware : System.MulticastDelegate, System.ICloneable, System.Runtime.Serialization.ISerializable
     .ctor(System.Object object, System.IntPtr method)
-    public System.IAsyncResult BeginInvoke(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context, KernelPipelineContinuation next, System.AsyncCallback callback, System.Object object)
+    public System.IAsyncResult BeginInvoke(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context, KernelPipelineContinuation next, System.AsyncCallback callback, System.Object object)
     public System.Threading.Tasks.Task EndInvoke(System.IAsyncResult result)
-    public System.Threading.Tasks.Task Invoke(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context, KernelPipelineContinuation next)
+    public System.Threading.Tasks.Task Invoke(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context, KernelPipelineContinuation next)
   public class KernelCommandResult
-    public Microsoft.DotNet.Interactive.Commands.KernelCommand Command { get;}
-    public System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Events.KernelEvent> Events { get;}
-  public class KernelCommandScheduler : KernelScheduler<Microsoft.DotNet.Interactive.Commands.KernelCommand,KernelCommandResult>, IKernelScheduler<Microsoft.DotNet.Interactive.Commands.KernelCommand,KernelCommandResult>, System.IDisposable
+    public Polyglossy.Interactive.Commands.KernelCommand Command { get;}
+    public System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Events.KernelEvent> Events { get;}
+  public class KernelCommandScheduler : KernelScheduler<Polyglossy.Interactive.Commands.KernelCommand,KernelCommandResult>, IKernelScheduler<Polyglossy.Interactive.Commands.KernelCommand,KernelCommandResult>, System.IDisposable
     .ctor()
-    protected System.Boolean IsChildOperation(Microsoft.DotNet.Interactive.Commands.KernelCommand current, Microsoft.DotNet.Interactive.Commands.KernelCommand incoming)
+    protected System.Boolean IsChildOperation(Polyglossy.Interactive.Commands.KernelCommand current, Polyglossy.Interactive.Commands.KernelCommand incoming)
   public class KernelExtensionLoadException : System.Exception, System.Runtime.Serialization.ISerializable
     .ctor(System.Exception innerException)
   public static class KernelExtensions
     public static Kernel FindKernelByName(System.String name)
     public static System.Collections.Generic.IEnumerable<Kernel> FindKernels(System.Func<Kernel,System.Boolean> predicate)
-    public static System.Threading.Tasks.Task LoadAndRunInteractiveDocument(System.IO.FileInfo file, Microsoft.DotNet.Interactive.Commands.KernelCommand parentCommand = null)
+    public static System.Threading.Tasks.Task LoadAndRunInteractiveDocument(System.IO.FileInfo file, Polyglossy.Interactive.Commands.KernelCommand parentCommand = null)
     public static System.Threading.Tasks.Task<KernelCommandResult> SubmitCodeAsync(System.String code)
     public static TKernel UseImportMagicCommand<TKernel>()
     public static T UseQuitCommand<T>(System.Func<System.Threading.Tasks.Task> onQuitAsync = null)
@@ -172,8 +192,8 @@ Microsoft.DotNet.Interactive
     public System.Uri Uri { get;}
     public System.Threading.Tasks.Task ConnectAndWaitAsync()
     public System.Threading.Tasks.Task ConnectAsync()
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Connection.ProxyKernel> ConnectProxyKernelAsync(System.String localName, System.Func<System.String,System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Connection.ProxyKernel>> createKernelAsync, System.Uri remoteKernelUri, System.String[] aliases = null)
-    public System.Threading.Tasks.Task<Microsoft.DotNet.Interactive.Connection.ProxyKernel> ConnectProxyKernelOnDefaultConnectorAsync(System.String localName, System.Uri remoteKernelUri, System.String[] aliases = null)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Connection.ProxyKernel> ConnectProxyKernelAsync(System.String localName, System.Func<System.String,System.Threading.Tasks.Task<Polyglossy.Interactive.Connection.ProxyKernel>> createKernelAsync, System.Uri remoteKernelUri, System.String[] aliases = null)
+    public System.Threading.Tasks.Task<Polyglossy.Interactive.Connection.ProxyKernel> ConnectProxyKernelOnDefaultConnectorAsync(System.String localName, System.Uri remoteKernelUri, System.String[] aliases = null)
     public System.Void Dispose()
   public class KernelInfo
     .ctor(System.String localName, System.String[] aliases = null, System.Boolean isProxy = False, System.Boolean isComposite = False, System.String description = null)
@@ -186,33 +206,33 @@ Microsoft.DotNet.Interactive
     public System.String LanguageVersion { get; set;}
     public System.String LocalName { get;}
     public System.Uri RemoteUri { get; set;}
-    public System.Collections.Generic.ICollection<Microsoft.DotNet.Interactive.Directives.KernelDirective> SupportedDirectives { get; set;}
+    public System.Collections.Generic.ICollection<Polyglossy.Interactive.Directives.KernelDirective> SupportedDirectives { get; set;}
     public System.Collections.Generic.ICollection<KernelCommandInfo> SupportedKernelCommands { get; set;}
     public System.Uri Uri { get; set;}
     public System.String ToString()
   public class KernelInvocationContext, System.IDisposable
     public static KernelInvocationContext Current { get;}
-    public static KernelInvocationContext GetOrCreateAmbientContext(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Concurrent.ConcurrentDictionary<System.String,KernelInvocationContext> contextsByRootToken = null)
+    public static KernelInvocationContext GetOrCreateAmbientContext(Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Concurrent.ConcurrentDictionary<System.String,KernelInvocationContext> contextsByRootToken = null)
     public System.Threading.CancellationToken CancellationToken { get;}
-    public Microsoft.DotNet.Interactive.Commands.KernelCommand Command { get;}
+    public Polyglossy.Interactive.Commands.KernelCommand Command { get;}
     public Kernel HandlingKernel { get;}
     public System.Boolean IsComplete { get;}
-    public System.IObservable<Microsoft.DotNet.Interactive.Events.KernelEvent> KernelEvents { get;}
+    public System.IObservable<Polyglossy.Interactive.Events.KernelEvent> KernelEvents { get;}
     public KernelCommandResult Result { get;}
-    public System.Void Complete(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    public System.Void Complete(Polyglossy.Interactive.Commands.KernelCommand command)
     public System.Void Dispose()
-    public System.Void Fail(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Exception exception = null, System.String message = null)
+    public System.Void Fail(Polyglossy.Interactive.Commands.KernelCommand command, System.Exception exception = null, System.String message = null)
     public System.Void OnComplete(System.Action<KernelInvocationContext> onComplete)
-    public System.Void Publish(Microsoft.DotNet.Interactive.Events.KernelEvent event)
-    public System.Void Publish(Microsoft.DotNet.Interactive.Events.KernelEvent event, System.Boolean publishOnAmbientContextOnly)
+    public System.Void Publish(Polyglossy.Interactive.Events.KernelEvent event)
+    public System.Void Publish(Polyglossy.Interactive.Events.KernelEvent event, System.Boolean publishOnAmbientContextOnly)
   public static class KernelInvocationContextExtensions
-    public static Microsoft.DotNet.Interactive.Formatting.DisplayedValue Display(System.Object value, System.String[] mimeTypes)
-    public static Microsoft.DotNet.Interactive.Formatting.DisplayedValue DisplayAs(System.String value, System.String mimeType)
+    public static Polyglossy.Interactive.Formatting.DisplayedValue Display(System.Object value, System.String[] mimeTypes)
+    public static Polyglossy.Interactive.Formatting.DisplayedValue DisplayAs(System.String value, System.String mimeType)
   public delegate KernelPipelineContinuation : System.MulticastDelegate, System.ICloneable, System.Runtime.Serialization.ISerializable
     .ctor(System.Object object, System.IntPtr method)
-    public System.IAsyncResult BeginInvoke(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context, System.AsyncCallback callback, System.Object object)
+    public System.IAsyncResult BeginInvoke(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context, System.AsyncCallback callback, System.Object object)
     public System.Threading.Tasks.Task EndInvoke(System.IAsyncResult result)
-    public System.Threading.Tasks.Task Invoke(Microsoft.DotNet.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
+    public System.Threading.Tasks.Task Invoke(Polyglossy.Interactive.Commands.KernelCommand command, KernelInvocationContext context)
   public class KernelScheduler<T,TResult>, IKernelScheduler<T,TResult>, System.IDisposable
     .ctor()
     public T CurrentValue { get;}
@@ -232,10 +252,10 @@ Microsoft.DotNet.Interactive
     public System.IAsyncResult BeginInvoke(T value, System.AsyncCallback callback, System.Object object)
     public Task<TResult> EndInvoke(System.IAsyncResult result)
     public Task<TResult> Invoke(T value)
-  public class KeyValueStoreKernel : Kernel, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValue>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValueInfos>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SendValue>, IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, System.IDisposable
+  public class KeyValueStoreKernel : Kernel, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValue>, IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValueInfos>, IKernelCommandHandler<Polyglossy.Interactive.Commands.SendValue>, IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, System.IDisposable
     .ctor(System.String name = value, System.Net.Http.HttpClient httpClient = null)
-    public Microsoft.DotNet.Interactive.Directives.KernelSpecifierDirective KernelSpecifierDirective { get;}
-    public System.Collections.Generic.IReadOnlyDictionary<System.String,Microsoft.DotNet.Interactive.Formatting.FormattedValue> Values { get;}
+    public Polyglossy.Interactive.Directives.KernelSpecifierDirective KernelSpecifierDirective { get;}
+    public System.Collections.Generic.IReadOnlyDictionary<System.String,Polyglossy.Interactive.Formatting.FormattedValue> Values { get;}
   public class LinePosition, System.IEquatable<LinePosition>
     public static LinePosition FromCodeAnalysisLinePosition(Microsoft.CodeAnalysis.Text.LinePosition linePosition)
     public static System.Boolean op_Equality(LinePosition left, LinePosition right)
@@ -271,7 +291,7 @@ Microsoft.DotNet.Interactive
     public Microsoft.CodeAnalysis.Text.LinePositionSpan ToCodeAnalysisLinePositionSpan()
     public System.String ToString()
   public class NoSuitableKernelException : System.Exception, System.Runtime.Serialization.ISerializable
-    .ctor(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command)
   public class PackageReference
     public static System.Boolean TryParse(System.String value, ref PackageReference& reference)
     .ctor(System.String packageName, System.String packageVersion = null)
@@ -280,8 +300,8 @@ Microsoft.DotNet.Interactive
     public System.String PackageVersion { get;}
     public System.String ToString()
   public class ParameterInformation
-    .ctor(System.String label, Microsoft.DotNet.Interactive.Formatting.FormattedValue documentation)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue Documentation { get;}
+    .ctor(System.String label, Polyglossy.Interactive.Formatting.FormattedValue documentation)
+    public Polyglossy.Interactive.Formatting.FormattedValue Documentation { get;}
     public System.String Label { get;}
   public class PasswordString
     .ctor(System.String clearTextPassword)
@@ -306,14 +326,14 @@ Microsoft.DotNet.Interactive
     public System.String ScriptValue { get;}
     public System.Void WriteTo(System.IO.TextWriter writer, System.Text.Encodings.Web.HtmlEncoder encoder)
   public class SignatureInformation
-    .ctor(System.String label, Microsoft.DotNet.Interactive.Formatting.FormattedValue documentation, System.Collections.Generic.IReadOnlyList<ParameterInformation> parameters)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue Documentation { get;}
+    .ctor(System.String label, Polyglossy.Interactive.Formatting.FormattedValue documentation, System.Collections.Generic.IReadOnlyList<ParameterInformation> parameters)
+    public Polyglossy.Interactive.Formatting.FormattedValue Documentation { get;}
     public System.String Label { get;}
     public System.Collections.Generic.IReadOnlyList<ParameterInformation> Parameters { get;}
-  public class TabularDataResourceSummaryExplorer : DataExplorer<Microsoft.DotNet.Interactive.Formatting.TabularData.TabularDataResource>
-    .ctor(Microsoft.DotNet.Interactive.Formatting.TabularData.TabularDataResource data)
+  public class TabularDataResourceSummaryExplorer : DataExplorer<Polyglossy.Interactive.Formatting.TabularData.TabularDataResource>
+    .ctor(Polyglossy.Interactive.Formatting.TabularData.TabularDataResource data)
     protected Microsoft.AspNetCore.Html.IHtmlContent ToHtml()
-Microsoft.DotNet.Interactive.Commands
+Polyglossy.Interactive.Commands
   public class AddPackage : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String packageName, System.String packageVersion = null, System.String targetKernelName = null)
     public System.String PackageName { get;}
@@ -323,18 +343,18 @@ Microsoft.DotNet.Interactive.Commands
     public System.String PackageSource { get;}
   public class Cancel : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String targetKernelName = null)
-    public System.Threading.Tasks.Task InvokeAsync(Microsoft.DotNet.Interactive.KernelInvocationContext context)
+    public System.Threading.Tasks.Task InvokeAsync(Polyglossy.Interactive.KernelInvocationContext context)
   public abstract class ConnectKernelCommand : KernelDirectiveCommand, System.IEquatable<KernelCommand>
     public System.String ConnectedKernelName { get;}
-    public System.Collections.Generic.IEnumerable<System.String> GetValidationErrors(Microsoft.DotNet.Interactive.CompositeKernel kernel)
+    public System.Collections.Generic.IEnumerable<System.String> GetValidationErrors(Polyglossy.Interactive.CompositeKernel kernel)
   public class DisplayError : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String message)
     public System.String Message { get;}
   public class DisplayValue : KernelCommand, System.IEquatable<KernelCommand>
-    .ctor(Microsoft.DotNet.Interactive.Formatting.FormattedValue formattedValue, System.String valueId = null)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue FormattedValue { get;}
+    .ctor(Polyglossy.Interactive.Formatting.FormattedValue formattedValue, System.String valueId = null)
+    public Polyglossy.Interactive.Formatting.FormattedValue FormattedValue { get;}
     public System.String ValueId { get;}
-    public System.Threading.Tasks.Task InvokeAsync(Microsoft.DotNet.Interactive.KernelInvocationContext context)
+    public System.Threading.Tasks.Task InvokeAsync(Polyglossy.Interactive.KernelInvocationContext context)
   public class ImportDocument : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String filePath, System.String targetKernelName = null)
     public System.String FilePath { get;}
@@ -347,33 +367,33 @@ Microsoft.DotNet.Interactive.Commands
     public System.String GetPropertyNameForJsonSerialization()
   public abstract class KernelCommand, System.IEquatable<KernelCommand>
     public System.Uri DestinationUri { get; set;}
-    public Microsoft.DotNet.Interactive.KernelCommandInvocation Handler { get; set;}
+    public Polyglossy.Interactive.KernelCommandInvocation Handler { get; set;}
     public System.Uri OriginUri { get; set;}
     public KernelCommand Parent { get;}
-    public Microsoft.DotNet.Interactive.CommandRoutingSlip RoutingSlip { get;}
+    public Polyglossy.Interactive.CommandRoutingSlip RoutingSlip { get;}
     public System.String TargetKernelName { get;}
     public System.Boolean Equals(KernelCommand other)
     public System.String GetOrCreateToken()
-    public System.Threading.Tasks.Task InvokeAsync(Microsoft.DotNet.Interactive.KernelInvocationContext context)
+    public System.Threading.Tasks.Task InvokeAsync(Polyglossy.Interactive.KernelInvocationContext context)
     public System.Void SetParent(KernelCommand parent, System.Boolean bubbleEvents = False)
     public System.Void SetToken(System.String token)
   public abstract class KernelDirectiveCommand : KernelCommand, System.IEquatable<KernelCommand>
-    public System.Collections.Generic.IEnumerable<System.String> GetValidationErrors(Microsoft.DotNet.Interactive.CompositeKernel kernel)
+    public System.Collections.Generic.IEnumerable<System.String> GetValidationErrors(Polyglossy.Interactive.CompositeKernel kernel)
   public abstract class LanguageServiceCommand : KernelCommand, System.IEquatable<KernelCommand>
     public System.String Code { get;}
-    public Microsoft.DotNet.Interactive.LinePosition LinePosition { get;}
+    public Polyglossy.Interactive.LinePosition LinePosition { get;}
     protected System.Void set_Code(System.String value)
-    protected System.Void set_LinePosition(Microsoft.DotNet.Interactive.LinePosition value)
+    protected System.Void set_LinePosition(Polyglossy.Interactive.LinePosition value)
   public class Quit : KernelCommand, System.IEquatable<KernelCommand>
     .ctor()
-    public System.Threading.Tasks.Task InvokeAsync(Microsoft.DotNet.Interactive.KernelInvocationContext context)
+    public System.Threading.Tasks.Task InvokeAsync(Polyglossy.Interactive.KernelInvocationContext context)
   public class RequestCompletions : LanguageServiceCommand, System.IEquatable<KernelCommand>
-    .ctor(System.String code, Microsoft.DotNet.Interactive.LinePosition linePosition, System.String targetKernelName = null)
+    .ctor(System.String code, Polyglossy.Interactive.LinePosition linePosition, System.String targetKernelName = null)
   public class RequestDiagnostics : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String code, System.String targetKernelName = null)
     public System.String Code { get;}
   public class RequestHoverText : LanguageServiceCommand, System.IEquatable<KernelCommand>
-    .ctor(System.String code, Microsoft.DotNet.Interactive.LinePosition linePosition, System.String targetKernelName = null)
+    .ctor(System.String code, Polyglossy.Interactive.LinePosition linePosition, System.String targetKernelName = null)
   public class RequestInput : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String prompt, System.String inputTypeHint = null)
     public System.String InputTypeHint { get; set;}
@@ -388,7 +408,7 @@ Microsoft.DotNet.Interactive.Commands
     .ctor(System.String targetKernelName = null)
     .ctor(System.Uri destinationUri)
   public class RequestSignatureHelp : LanguageServiceCommand, System.IEquatable<KernelCommand>
-    .ctor(System.String code, Microsoft.DotNet.Interactive.LinePosition linePosition, System.String targetKernelName = null)
+    .ctor(System.String code, Polyglossy.Interactive.LinePosition linePosition, System.String targetKernelName = null)
   public class RequestValue : KernelCommand, System.IEquatable<KernelCommand>
     .ctor(System.String name, System.String mimeType = application/json, System.String targetKernelName = null)
     public System.String MimeType { get;}
@@ -402,8 +422,8 @@ Microsoft.DotNet.Interactive.Commands
     public System.Nullable<System.Int32> InsertAtPosition { get; set;}
     public System.String KernelName { get;}
   public class SendValue : KernelCommand, System.IEquatable<KernelCommand>
-    .ctor(System.String name, System.Object value, Microsoft.DotNet.Interactive.Formatting.FormattedValue formattedValue = null, System.String targetKernelName = null)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue FormattedValue { get;}
+    .ctor(System.String name, System.Object value, Polyglossy.Interactive.Formatting.FormattedValue formattedValue = null, System.String targetKernelName = null)
+    public Polyglossy.Interactive.Formatting.FormattedValue FormattedValue { get;}
     public System.String Name { get;}
     public System.Object Value { get;}
   public class SubmitCode : KernelCommand, System.IEquatable<KernelCommand>
@@ -412,38 +432,38 @@ Microsoft.DotNet.Interactive.Commands
     public System.Collections.Generic.IDictionary<System.String,System.String> Parameters { get; set;}
     public System.String ToString()
   public class UpdateDisplayedValue : KernelCommand, System.IEquatable<KernelCommand>
-    .ctor(Microsoft.DotNet.Interactive.Formatting.FormattedValue formattedValue, System.String valueId)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue FormattedValue { get;}
+    .ctor(Polyglossy.Interactive.Formatting.FormattedValue formattedValue, System.String valueId)
+    public Polyglossy.Interactive.Formatting.FormattedValue FormattedValue { get;}
     public System.String ValueId { get;}
-    public System.Threading.Tasks.Task InvokeAsync(Microsoft.DotNet.Interactive.KernelInvocationContext context)
-Microsoft.DotNet.Interactive.Connection
+    public System.Threading.Tasks.Task InvokeAsync(Polyglossy.Interactive.KernelInvocationContext context)
+Polyglossy.Interactive.Connection
   public class CommandOrEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.KernelCommand kernelCommand)
-    .ctor(Microsoft.DotNet.Interactive.Events.KernelEvent kernelEvent, System.Boolean isParseError = False)
-    public Microsoft.DotNet.Interactive.Commands.KernelCommand Command { get;}
-    public Microsoft.DotNet.Interactive.Events.KernelEvent Event { get;}
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand kernelCommand)
+    .ctor(Polyglossy.Interactive.Events.KernelEvent kernelEvent, System.Boolean isParseError = False)
+    public Polyglossy.Interactive.Commands.KernelCommand Command { get;}
+    public Polyglossy.Interactive.Events.KernelEvent Event { get;}
     public System.Boolean IsParseError { get;}
     public System.String ToString()
   public static class CompositeKernelExtensions
-    public static Microsoft.DotNet.Interactive.KernelHost UseHost(IKernelCommandAndEventSender sender, IKernelCommandAndEventReceiver receiver, System.Uri hostUri)
-  public abstract class ConnectKernelDirective<TCommand> : Microsoft.DotNet.Interactive.Directives.KernelActionDirective
+    public static Polyglossy.Interactive.KernelHost UseHost(IKernelCommandAndEventSender sender, IKernelCommandAndEventReceiver receiver, System.Uri hostUri)
+  public abstract class ConnectKernelDirective<TCommand> : Polyglossy.Interactive.Directives.KernelActionDirective
     public System.String ConnectedKernelDescription { get; set;}
-    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Microsoft.DotNet.Interactive.Kernel>> ConnectKernelsAsync(TCommand connectCommand, Microsoft.DotNet.Interactive.KernelInvocationContext context)
+    public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Polyglossy.Interactive.Kernel>> ConnectKernelsAsync(TCommand connectCommand, Polyglossy.Interactive.KernelInvocationContext context)
   public abstract class IKernelCommandAndEventReceiver, System.IObservable<CommandOrEvent>
   public abstract class IKernelCommandAndEventSender
     public System.Uri RemoteHostUri { get;}
-    public System.Threading.Tasks.Task SendAsync(Microsoft.DotNet.Interactive.Commands.KernelCommand kernelCommand, System.Threading.CancellationToken cancellationToken)
-    public System.Threading.Tasks.Task SendAsync(Microsoft.DotNet.Interactive.Events.KernelEvent kernelEvent, System.Threading.CancellationToken cancellationToken)
+    public System.Threading.Tasks.Task SendAsync(Polyglossy.Interactive.Commands.KernelCommand kernelCommand, System.Threading.CancellationToken cancellationToken)
+    public System.Threading.Tasks.Task SendAsync(Polyglossy.Interactive.Events.KernelEvent kernelEvent, System.Threading.CancellationToken cancellationToken)
   public abstract class IKernelCommandEnvelope
-    public Microsoft.DotNet.Interactive.Commands.KernelCommand Command { get;}
+    public Polyglossy.Interactive.Commands.KernelCommand Command { get;}
     public System.String CommandType { get;}
     public System.String Token { get;}
   public abstract class IKernelEventEnvelope
-    public Microsoft.DotNet.Interactive.Events.KernelEvent Event { get;}
+    public Polyglossy.Interactive.Events.KernelEvent Event { get;}
     public System.String EventType { get;}
   public abstract class KernelClientBase
-    public System.IObservable<Microsoft.DotNet.Interactive.Events.KernelEvent> KernelEvents { get;}
-    public System.Threading.Tasks.Task SendAsync(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.String token = null)
+    public System.IObservable<Polyglossy.Interactive.Events.KernelEvent> KernelEvents { get;}
+    public System.Threading.Tasks.Task SendAsync(Polyglossy.Interactive.Commands.KernelCommand command, System.String token = null)
   public class KernelCommandAndEventReceiver, IKernelCommandAndEventReceiver, System.IDisposable, System.IObservable<CommandOrEvent>
     public static KernelCommandAndEventReceiver FromNamedPipe(System.IO.Pipes.PipeStream stream)
     public static KernelCommandAndEventReceiver FromObservable(System.IObservable<System.String> messages)
@@ -459,16 +479,16 @@ Microsoft.DotNet.Interactive.Connection
     .ctor(System.IObserver<System.String> observer, System.Uri remoteHostUri)
     .ctor(System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task> sendAsync, System.Uri remoteHostUri)
     public System.Uri RemoteHostUri { get;}
-    public System.Threading.Tasks.Task SendAsync(Microsoft.DotNet.Interactive.Commands.KernelCommand kernelCommand, System.Threading.CancellationToken cancellationToken)
-    public System.Threading.Tasks.Task SendAsync(Microsoft.DotNet.Interactive.Events.KernelEvent kernelEvent, System.Threading.CancellationToken cancellationToken)
+    public System.Threading.Tasks.Task SendAsync(Polyglossy.Interactive.Commands.KernelCommand kernelCommand, System.Threading.CancellationToken cancellationToken)
+    public System.Threading.Tasks.Task SendAsync(Polyglossy.Interactive.Events.KernelEvent kernelEvent, System.Threading.CancellationToken cancellationToken)
   public abstract class KernelCommandEnvelope, IKernelCommandEnvelope
-    public static IKernelCommandEnvelope Create(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    public static IKernelCommandEnvelope Create(Polyglossy.Interactive.Commands.KernelCommand command)
     public static IKernelCommandEnvelope Deserialize(System.String json)
     public static IKernelCommandEnvelope Deserialize(System.Text.Json.JsonElement json)
     public static System.Void RegisterCommand<T>()
     public static System.Void RegisterCommand(System.Type commandType)
     public static System.Void RegisterDefaults()
-    public static System.String Serialize(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    public static System.String Serialize(Polyglossy.Interactive.Commands.KernelCommand command)
     public static System.String Serialize(IKernelCommandEnvelope envelope)
     public System.String CommandType { get;}
     public System.String Token { get;}
@@ -477,15 +497,15 @@ Microsoft.DotNet.Interactive.Connection
     public T Command { get;}
     public System.String CommandType { get;}
   public abstract class KernelEventEnvelope, IKernelEventEnvelope
-    public static IKernelEventEnvelope Create(Microsoft.DotNet.Interactive.Events.KernelEvent event)
+    public static IKernelEventEnvelope Create(Polyglossy.Interactive.Events.KernelEvent event)
     public static IKernelEventEnvelope Deserialize(System.String json)
     public static IKernelEventEnvelope Deserialize(System.Text.Json.JsonElement jsonObject)
-    public static IKernelEventEnvelope DeserializeWithCommand(System.String json, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
-    public static IKernelEventEnvelope DeserializeWithCommand(System.Text.Json.JsonElement jsonObject, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    public static IKernelEventEnvelope DeserializeWithCommand(System.String json, Polyglossy.Interactive.Commands.KernelCommand command)
+    public static IKernelEventEnvelope DeserializeWithCommand(System.Text.Json.JsonElement jsonObject, Polyglossy.Interactive.Commands.KernelCommand command)
     public static System.Void RegisterDefaults()
     public static System.Void RegisterEvent<TEvent>()
     public static System.Void RegisterEvent(System.Type eventType)
-    public static System.String Serialize(Microsoft.DotNet.Interactive.Events.KernelEvent event)
+    public static System.String Serialize(Polyglossy.Interactive.Events.KernelEvent event)
     public static System.String Serialize(IKernelEventEnvelope eventEnvelope)
     public System.String CommandType { get;}
     public System.String EventType { get;}
@@ -493,11 +513,11 @@ Microsoft.DotNet.Interactive.Connection
     .ctor(T event)
     public T Event { get;}
     public System.String EventType { get;}
-  public class ProxyKernel : Microsoft.DotNet.Interactive.Kernel, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, System.IDisposable
+  public class ProxyKernel : Polyglossy.Interactive.Kernel, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, System.IDisposable
     .ctor(System.String name, IKernelCommandAndEventSender sender, IKernelCommandAndEventReceiver receiver, System.Uri remoteUri = null)
-    protected Func<TCommand,Microsoft.DotNet.Interactive.KernelInvocationContext,System.Threading.Tasks.Task> CreateDefaultHandlerForCommandType<TCommand>()
-     System.Threading.Tasks.Task HandleRequestKernelInfoAsync(Microsoft.DotNet.Interactive.Commands.RequestKernelInfo command, Microsoft.DotNet.Interactive.KernelInvocationContext context)
-    public System.Void UpdateKernelInfo(Microsoft.DotNet.Interactive.KernelInfo kernelInfo)
+    protected Func<TCommand,Polyglossy.Interactive.KernelInvocationContext,System.Threading.Tasks.Task> CreateDefaultHandlerForCommandType<TCommand>()
+     System.Threading.Tasks.Task HandleRequestKernelInfoAsync(Polyglossy.Interactive.Commands.RequestKernelInfo command, Polyglossy.Interactive.KernelInvocationContext context)
+    public System.Void UpdateKernelInfo(Polyglossy.Interactive.KernelInfo kernelInfo)
   public delegate ReadCommandOrEvent : System.MulticastDelegate, System.ICloneable, System.Runtime.Serialization.ISerializable
     .ctor(System.Object object, System.IntPtr method)
     public System.IAsyncResult BeginInvoke(System.Threading.CancellationToken cancellationToken, System.AsyncCallback callback, System.Object object)
@@ -516,26 +536,26 @@ Microsoft.DotNet.Interactive.Connection
     .ctor(System.String[] command, System.String rootProxyKernelLocalName, System.Uri kernelHostUri, System.IO.DirectoryInfo workingDirectory = null)
     public System.Nullable<System.Int32> ProcessId { get;}
     public System.Threading.Tasks.Task<ProxyKernel> CreateProxyKernelAsync(System.String remoteName, System.String localNameOverride = null)
-    public System.Threading.Tasks.Task<ProxyKernel> CreateProxyKernelAsync(Microsoft.DotNet.Interactive.KernelInfo remoteInfo, System.String localNameOverride = null)
+    public System.Threading.Tasks.Task<ProxyKernel> CreateProxyKernelAsync(Polyglossy.Interactive.KernelInfo remoteInfo, System.String localNameOverride = null)
     public System.Threading.Tasks.Task<ProxyKernel> CreateRootProxyKernelAsync()
     public System.Void Dispose()
-Microsoft.DotNet.Interactive.Directives
+Polyglossy.Interactive.Directives
   public class KernelActionDirective : KernelDirective
     .ctor(System.String name, System.String description = null)
     public System.Type KernelCommandType { get; set;}
     public KernelActionDirective Parent { get;}
     public System.Collections.Generic.ICollection<KernelActionDirective> Subcommands { get; set;}
-    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Events.CompletionItem>> GetChildCompletionsAsync()
+    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Events.CompletionItem>> GetChildCompletionsAsync()
   public abstract class KernelDirective
     public System.String Description { get; set;}
     public System.Boolean Hidden { get; set;}
     public System.String Name { get; set;}
     public System.Collections.Generic.ICollection<KernelDirectiveParameter> Parameters { get; set;}
-    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Events.CompletionItem>> GetChildCompletionsAsync()
+    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Events.CompletionItem>> GetChildCompletionsAsync()
     public System.String ToString()
   public class KernelDirectiveCompletionContext
     .ctor()
-    public System.Collections.Generic.IList<Microsoft.DotNet.Interactive.Events.CompletionItem> CompletionItems { get;}
+    public System.Collections.Generic.IList<Polyglossy.Interactive.Events.CompletionItem> CompletionItems { get;}
   public class KernelDirectiveParameter
     .ctor(System.String name, System.String description = null)
     public System.Boolean AllowImplicitName { get; set;}
@@ -547,27 +567,27 @@ Microsoft.DotNet.Interactive.Directives
     public System.String TypeHint { get; set;}
     public KernelDirectiveParameter AddCompletions(System.Func<KernelDirectiveCompletionContext,System.Threading.Tasks.Task> getCompletions)
     public KernelDirectiveParameter AddCompletions(System.Func<System.Collections.Generic.IEnumerable<System.String>> getCompletions)
-    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Events.CompletionItem>> GetValueCompletionsAsync()
+    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Events.CompletionItem>> GetValueCompletionsAsync()
     public System.String ToString()
   public class KernelSpecifierDirective : KernelDirective
     .ctor(System.String name, System.String kernelName)
     public System.String KernelName { get;}
-Microsoft.DotNet.Interactive.Events
+Polyglossy.Interactive.Events
   public class CodeSubmissionReceived : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.SubmitCode command)
+    .ctor(Polyglossy.Interactive.Commands.SubmitCode command)
     public System.String Code { get;}
     public System.String ToString()
   public class CommandFailed : KernelCommandCompletionEvent
-    .ctor(System.Exception exception, Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.String message = null, System.Nullable<System.Int32> executionOrder = null)
-    .ctor(System.String message, Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Nullable<System.Int32> executionOrder = null)
+    .ctor(System.Exception exception, Polyglossy.Interactive.Commands.KernelCommand command, System.String message = null, System.Nullable<System.Int32> executionOrder = null)
+    .ctor(System.String message, Polyglossy.Interactive.Commands.KernelCommand command, System.Nullable<System.Int32> executionOrder = null)
     public System.Exception Exception { get;}
     public System.String Message { get; set;}
     public System.String ToString()
   public class CommandSucceeded : KernelCommandCompletionEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Int32 executionOrder = 0)
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command, System.Int32 executionOrder = 0)
     public System.String ToString()
   public class CompleteCodeSubmissionReceived : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.SubmitCode submitCode)
+    .ctor(Polyglossy.Interactive.Commands.SubmitCode submitCode)
     public System.String Code { get;}
     public System.String ToString()
   public class CompletionItem
@@ -581,38 +601,38 @@ Microsoft.DotNet.Interactive.Events
     public System.String SortText { get;}
     public System.String ToString()
   public class CompletionsProduced : KernelEvent
-    .ctor(System.Collections.Generic.IReadOnlyCollection<CompletionItem> completions, Microsoft.DotNet.Interactive.Commands.RequestCompletions command, Microsoft.DotNet.Interactive.LinePositionSpan linePositionSpan = null)
+    .ctor(System.Collections.Generic.IReadOnlyCollection<CompletionItem> completions, Polyglossy.Interactive.Commands.RequestCompletions command, Polyglossy.Interactive.LinePositionSpan linePositionSpan = null)
     public System.Collections.Generic.IEnumerable<CompletionItem> Completions { get;}
-    public Microsoft.DotNet.Interactive.LinePositionSpan LinePositionSpan { get;}
+    public Polyglossy.Interactive.LinePositionSpan LinePositionSpan { get;}
   public class DiagnosticsProduced : KernelEvent
-    .ctor(System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Diagnostic> diagnostics, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedDiagnostics, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Diagnostic> Diagnostics { get;}
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> FormattedDiagnostics { get;}
+    .ctor(System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Diagnostic> diagnostics, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedDiagnostics, Polyglossy.Interactive.Commands.KernelCommand command)
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Diagnostic> Diagnostics { get;}
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> FormattedDiagnostics { get;}
     public System.String ToString()
   public class DisplayedValueProduced : DisplayEvent
-    .ctor(System.Object value, Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
+    .ctor(System.Object value, Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
   public class DisplayedValueUpdated : DisplayEvent
-    .ctor(System.Object value, System.String valueId, Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedValues = null)
+    .ctor(System.Object value, System.String valueId, Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedValues = null)
   public abstract class DisplayEvent : KernelEvent
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> FormattedValues { get;}
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> FormattedValues { get;}
     public System.Object Value { get;}
     public System.String ValueId { get;}
     public System.String ToString()
   public class ErrorProduced : DisplayEvent
-    .ctor(System.String message, Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedValues = null)
+    .ctor(System.String message, Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedValues = null)
     public System.String Message { get;}
     public System.String ToString()
   public class HoverTextProduced : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.RequestHoverText command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> content, Microsoft.DotNet.Interactive.LinePositionSpan linePositionSpan = null)
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> Content { get;}
-    public Microsoft.DotNet.Interactive.LinePositionSpan LinePositionSpan { get;}
+    .ctor(Polyglossy.Interactive.Commands.RequestHoverText command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> content, Polyglossy.Interactive.LinePositionSpan linePositionSpan = null)
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> Content { get;}
+    public Polyglossy.Interactive.LinePositionSpan LinePositionSpan { get;}
   public class IncompleteCodeSubmissionReceived : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.SubmitCode submitCode)
+    .ctor(Polyglossy.Interactive.Commands.SubmitCode submitCode)
   public class InputProduced : KernelEvent
-    .ctor(System.String value, Microsoft.DotNet.Interactive.Commands.RequestInput command)
+    .ctor(System.String value, Polyglossy.Interactive.Commands.RequestInput command)
     public System.String Value { get;}
   public class InputsProduced : KernelEvent
-    .ctor(System.Collections.Generic.Dictionary<System.String,System.String> values, Microsoft.DotNet.Interactive.Commands.RequestInputs command)
+    .ctor(System.Collections.Generic.Dictionary<System.String,System.String> values, Polyglossy.Interactive.Commands.RequestInputs command)
     public System.Collections.Generic.Dictionary<System.String,System.String> Values { get;}
   public enum InsertTextFormat : System.Enum, System.IComparable, System.IConvertible, System.IFormattable, System.ISpanFormattable
     PlainText=1
@@ -620,55 +640,55 @@ Microsoft.DotNet.Interactive.Events
   public abstract class KernelCommandCompletionEvent : KernelEvent
     public System.Nullable<System.Int32> ExecutionOrder { get;}
   public abstract class KernelEvent
-    public Microsoft.DotNet.Interactive.Commands.KernelCommand Command { get;}
-    public Microsoft.DotNet.Interactive.EventRoutingSlip RoutingSlip { get;}
+    public Polyglossy.Interactive.Commands.KernelCommand Command { get;}
+    public Polyglossy.Interactive.EventRoutingSlip RoutingSlip { get;}
     public System.String ToString()
   public class KernelExtensionLoaded : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.KernelCommand command)
-    .ctor(Microsoft.DotNet.Interactive.IKernelExtension kernelExtension, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
-    public Microsoft.DotNet.Interactive.IKernelExtension KernelExtension { get;}
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command)
+    .ctor(Polyglossy.Interactive.IKernelExtension kernelExtension, Polyglossy.Interactive.Commands.KernelCommand command)
+    public Polyglossy.Interactive.IKernelExtension KernelExtension { get;}
   public class KernelInfoProduced : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.KernelInfo kernelInfo, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
+    .ctor(Polyglossy.Interactive.KernelInfo kernelInfo, Polyglossy.Interactive.Commands.KernelCommand command)
     public System.String ConnectionShortcutCode { get;}
     public System.Reflection.Assembly ConnectionSourceAssembly { get;}
-    public Microsoft.DotNet.Interactive.KernelInfo KernelInfo { get;}
+    public Polyglossy.Interactive.KernelInfo KernelInfo { get;}
   public class KernelReady : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.KernelInfo[] kernelInfos)
-    public Microsoft.DotNet.Interactive.KernelInfo[] KernelInfos { get;}
+    .ctor(Polyglossy.Interactive.KernelInfo[] kernelInfos)
+    public Polyglossy.Interactive.KernelInfo[] KernelInfos { get;}
   public class PackageAdded : KernelEvent
-    .ctor(Microsoft.DotNet.Interactive.ResolvedPackageReference packageReference, Microsoft.DotNet.Interactive.Commands.KernelCommand command)
-    public Microsoft.DotNet.Interactive.ResolvedPackageReference PackageReference { get;}
+    .ctor(Polyglossy.Interactive.ResolvedPackageReference packageReference, Polyglossy.Interactive.Commands.KernelCommand command)
+    public Polyglossy.Interactive.ResolvedPackageReference PackageReference { get;}
     public System.String ToString()
   public class ReturnValueProduced : DisplayEvent
-    .ctor(System.Object value, Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
+    .ctor(System.Object value, Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
   public class SignatureHelpProduced : KernelEvent
-    public static SignatureHelpProduced Empty(Microsoft.DotNet.Interactive.Commands.RequestSignatureHelp command)
-    .ctor(Microsoft.DotNet.Interactive.Commands.RequestSignatureHelp command, System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.SignatureInformation> signatures, System.Int32 activeSignatureIndex, System.Int32 activeParameterIndex)
+    public static SignatureHelpProduced Empty(Polyglossy.Interactive.Commands.RequestSignatureHelp command)
+    .ctor(Polyglossy.Interactive.Commands.RequestSignatureHelp command, System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.SignatureInformation> signatures, System.Int32 activeSignatureIndex, System.Int32 activeParameterIndex)
     public System.Int32 ActiveParameterIndex { get;}
     public System.Int32 ActiveSignatureIndex { get;}
-    public System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.SignatureInformation> Signatures { get;}
+    public System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.SignatureInformation> Signatures { get;}
   public class StandardErrorValueProduced : DisplayEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
   public class StandardOutputValueProduced : DisplayEvent
-    .ctor(Microsoft.DotNet.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
+    .ctor(Polyglossy.Interactive.Commands.KernelCommand command, System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.Formatting.FormattedValue> formattedValues = null, System.String valueId = null)
   public class ValueInfosProduced : KernelEvent
-    .ctor(System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.ValueSharing.KernelValueInfo> valueInfos, Microsoft.DotNet.Interactive.Commands.RequestValueInfos command)
-    public System.Collections.Generic.IReadOnlyCollection<Microsoft.DotNet.Interactive.ValueSharing.KernelValueInfo> ValueInfos { get;}
+    .ctor(System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.ValueSharing.KernelValueInfo> valueInfos, Polyglossy.Interactive.Commands.RequestValueInfos command)
+    public System.Collections.Generic.IReadOnlyCollection<Polyglossy.Interactive.ValueSharing.KernelValueInfo> ValueInfos { get;}
   public class ValueProduced : KernelEvent
-    .ctor(System.Object value, System.String name, Microsoft.DotNet.Interactive.Formatting.FormattedValue formattedValue, Microsoft.DotNet.Interactive.Commands.RequestValue command)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue FormattedValue { get;}
+    .ctor(System.Object value, System.String name, Polyglossy.Interactive.Formatting.FormattedValue formattedValue, Polyglossy.Interactive.Commands.RequestValue command)
+    public Polyglossy.Interactive.Formatting.FormattedValue FormattedValue { get;}
     public System.String Name { get;}
     public System.Object Value { get;}
-Microsoft.DotNet.Interactive.Http
+Polyglossy.Interactive.Http
   public static class JavascriptUtilities
     public static System.String GetCodeForEnsureRequireJs(System.Uri requireJsUri = null, System.String onRequirejsLoadedCallBackName = null)
-Microsoft.DotNet.Interactive.Parsing
+Polyglossy.Interactive.Parsing
   public class SubmissionParser
-    .ctor(Microsoft.DotNet.Interactive.Kernel kernel)
-    public Microsoft.DotNet.Interactive.Documents.DirectiveParseResult ParseDirectiveLine(System.String directiveLine)
-    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Commands.KernelCommand>> SplitSubmission(Microsoft.DotNet.Interactive.Commands.SubmitCode submitCode)
-    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Microsoft.DotNet.Interactive.Commands.KernelCommand>> SplitSubmission(Microsoft.DotNet.Interactive.Commands.RequestDiagnostics requestDiagnostics)
-Microsoft.DotNet.Interactive.Utility
+    .ctor(Polyglossy.Interactive.Kernel kernel)
+    public Polyglossy.Interactive.Documents.DirectiveParseResult ParseDirectiveLine(System.String directiveLine)
+    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Commands.KernelCommand>> SplitSubmission(Polyglossy.Interactive.Commands.SubmitCode submitCode)
+    public System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Polyglossy.Interactive.Commands.KernelCommand>> SplitSubmission(Polyglossy.Interactive.Commands.RequestDiagnostics requestDiagnostics)
+Polyglossy.Interactive.Utility
   public class AddPackageResult : CommandLineResult
     .ctor(System.Int32 exitCode, System.Collections.Generic.IReadOnlyCollection<System.String> output = null, System.Collections.Generic.IReadOnlyCollection<System.String> error = null)
     public System.Collections.Generic.IEnumerable<System.String> DetailedErrors { get;}
@@ -847,10 +867,10 @@ Microsoft.DotNet.Interactive.Utility
     public static System.String UserProfile { get;}
   public static class SourceUtilities
     public static System.Int32 ComputeReplacementStartPosition(System.String code, System.Int32 cursorPosition)
-    public static System.Int32 GetCursorOffsetFromPosition(System.String code, Microsoft.DotNet.Interactive.LinePosition position)
-    public static Microsoft.DotNet.Interactive.LinePositionSpan GetLinePositionSpanFromStartAndEndIndices(System.String code, System.Int32 startIndex, System.Int32 endIndex)
-    public static Microsoft.DotNet.Interactive.LinePosition GetPositionFromCursorOffset(System.String code, System.Int32 cursorOffset)
-Microsoft.DotNet.Interactive.ValueSharing
+    public static System.Int32 GetCursorOffsetFromPosition(System.String code, Polyglossy.Interactive.LinePosition position)
+    public static Polyglossy.Interactive.LinePositionSpan GetLinePositionSpanFromStartAndEndIndices(System.String code, System.Int32 startIndex, System.Int32 endIndex)
+    public static Polyglossy.Interactive.LinePosition GetPositionFromCursorOffset(System.String code, System.Int32 cursorOffset)
+Polyglossy.Interactive.ValueSharing
   public class KernelValue
     .ctor(KernelValueInfo valueInfo, System.Object value, System.String kernelName)
     public System.String KernelName { get;}
@@ -858,8 +878,8 @@ Microsoft.DotNet.Interactive.ValueSharing
     public System.Type Type { get;}
     public System.Object Value { get;}
   public class KernelValueInfo
-    .ctor(System.String name, Microsoft.DotNet.Interactive.Formatting.FormattedValue formattedValue, System.Type type = null, System.String typeName = null)
-    public Microsoft.DotNet.Interactive.Formatting.FormattedValue FormattedValue { get;}
+    .ctor(System.String name, Polyglossy.Interactive.Formatting.FormattedValue formattedValue, System.Type type = null, System.String typeName = null)
+    public Polyglossy.Interactive.Formatting.FormattedValue FormattedValue { get;}
     public System.String Name { get;}
     public System.Collections.Generic.IReadOnlyCollection<System.String> PreferredMimeTypes { get; set;}
     public System.Type Type { get;}

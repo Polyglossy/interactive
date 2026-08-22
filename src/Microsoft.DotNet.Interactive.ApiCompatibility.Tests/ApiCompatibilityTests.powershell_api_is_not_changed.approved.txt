@@ -1,9 +1,9 @@
-Microsoft.DotNet.Interactive.PowerShell
-  public class PowerShellKernel : Microsoft.DotNet.Interactive.Kernel, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestCompletions>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestDiagnostics>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValue>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValueInfos>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SendValue>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, System.IDisposable
+Polyglossy.Interactive.PowerShell
+  public class PowerShellKernel : Polyglossy.Interactive.Kernel, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestCompletions>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestDiagnostics>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValue>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValueInfos>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.SendValue>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, System.IDisposable
     .ctor()
     .ctor(System.String name)
     public System.Func<System.String,System.String> ReadInput { get; set;}
-    public System.Func<System.String,Microsoft.DotNet.Interactive.PasswordString> ReadPassword { get; set;}
+    public System.Func<System.String,Polyglossy.Interactive.PasswordString> ReadPassword { get; set;}
     public System.Void AddAccelerator(System.String name, System.Type type)
     public System.Void AddModulePath(System.String modulePath)
     public System.Boolean TryGetValue<T>(System.String name, ref T& value)
@@ -14,7 +14,7 @@ Microsoft.DotNet.Interactive.PowerShell
     public System.String VaultName { get;}
     public System.Void SetValue(System.String name, System.String value)
     public System.Boolean TryGetValue(System.String name, ref System.String& value)
-Microsoft.DotNet.Interactive.PowerShell.Commands
+Polyglossy.Interactive.PowerShell.Commands
   public class EnterAzShellCommand : System.Management.Automation.PSCmdlet
     .ctor()
     public System.Guid TenantId { get; set;}
@@ -25,7 +25,7 @@ Microsoft.DotNet.Interactive.PowerShell.Commands
     public System.String MimeType { get; set;}
     public System.Management.Automation.SwitchParameter PassThru { get; set;}
     protected System.Void ProcessRecord()
-Microsoft.DotNet.Interactive.PowerShell.Host
+Polyglossy.Interactive.PowerShell.Host
   public class PSKernelHost : System.Management.Automation.Host.PSHost, System.Management.Automation.Host.IHostSupportsInteractiveSession
     public System.Globalization.CultureInfo CurrentCulture { get;}
     public System.Globalization.CultureInfo CurrentUICulture { get;}

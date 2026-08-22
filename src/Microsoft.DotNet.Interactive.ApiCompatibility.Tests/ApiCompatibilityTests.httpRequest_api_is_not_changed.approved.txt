@@ -1,5 +1,5 @@
-Microsoft.DotNet.Interactive.Http
-  public class ClearValues : Microsoft.DotNet.Interactive.Commands.KernelCommand, System.IEquatable<Microsoft.DotNet.Interactive.Commands.KernelCommand>
+Polyglossy.Interactive.Http
+  public class ClearValues : Polyglossy.Interactive.Commands.KernelCommand, System.IEquatable<Polyglossy.Interactive.Commands.KernelCommand>
     .ctor(System.String targetKernelName = null)
   public class EmptyHttpResponse
     .ctor()
@@ -9,12 +9,12 @@ Microsoft.DotNet.Interactive.Http
     public System.String ContentType { get;}
     public System.Collections.Generic.Dictionary<System.String,System.String[]> Headers { get;}
     public System.String Raw { get;}
-  public class HttpKernel : Microsoft.DotNet.Interactive.Kernel, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestDiagnostics>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestKernelInfo>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValue>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.RequestValueInfos>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SendValue>, Microsoft.DotNet.Interactive.IKernelCommandHandler<Microsoft.DotNet.Interactive.Commands.SubmitCode>, Microsoft.DotNet.Interactive.IKernelCommandHandler<ClearValues>, System.IDisposable
+  public class HttpKernel : Polyglossy.Interactive.Kernel, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestDiagnostics>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestKernelInfo>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValue>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.RequestValueInfos>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.SendValue>, Polyglossy.Interactive.IKernelCommandHandler<Polyglossy.Interactive.Commands.SubmitCode>, Polyglossy.Interactive.IKernelCommandHandler<ClearValues>, System.IDisposable
     .ctor(System.String name = null, System.Net.Http.HttpClient client = null, System.Int32 responseDelayThresholdInMilliseconds = 1000, System.Int32 contentByteLengthThreshold = 500000)
     public System.TimeSpan RequestTimeout { get; set;}
-    public System.Threading.Tasks.Task HandleAsync(ClearValues command, Microsoft.DotNet.Interactive.KernelInvocationContext context)
+    public System.Threading.Tasks.Task HandleAsync(ClearValues command, Polyglossy.Interactive.KernelInvocationContext context)
   public class HttpKernelExtension
-    public static System.Void Load(Microsoft.DotNet.Interactive.Kernel kernel, System.Net.Http.HttpClient httpClient = null, System.Int32 responseDelayThresholdInMilliseconds = 1000, System.Int32 contentByteLengthThreshold = 500000)
+    public static System.Void Load(Polyglossy.Interactive.Kernel kernel, System.Net.Http.HttpClient httpClient = null, System.Int32 responseDelayThresholdInMilliseconds = 1000, System.Int32 contentByteLengthThreshold = 500000)
     .ctor()
   public class HttpRequest
     .ctor(System.String method, System.String version, System.Collections.Generic.Dictionary<System.String,System.String[]> headers, System.String uri = null, HttpContent content = null)

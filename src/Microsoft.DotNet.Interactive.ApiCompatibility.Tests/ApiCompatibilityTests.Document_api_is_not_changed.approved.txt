@@ -1,4 +1,4 @@
-Microsoft.DotNet.Interactive.Documents
+Polyglossy.Interactive.Documents
   public static class CodeSubmission
     public static InteractiveDocument Parse(System.String content, KernelInfoCollection kernelInfos = null)
     public static InteractiveDocument Read(System.IO.Stream stream, KernelInfoCollection kernelInfos)
@@ -76,13 +76,13 @@ Microsoft.DotNet.Interactive.Documents
     .ctor(System.String text, System.String name = stdout)
     public System.String Name { get;}
     public System.String Text { get;}
-Microsoft.DotNet.Interactive.Documents.Jupyter
+Polyglossy.Interactive.Documents.Jupyter
   public class InputCellMetadata
     .ctor(System.String kernelName = null, System.String language = null)
     public System.String KernelName { get;}
     public System.String Language { get;}
   public static class Notebook
-    public static Microsoft.DotNet.Interactive.Documents.InteractiveDocument Parse(System.String json, Microsoft.DotNet.Interactive.Documents.KernelInfoCollection kernelInfos = null)
-    public static Microsoft.DotNet.Interactive.Documents.InteractiveDocument Read(System.IO.Stream stream, Microsoft.DotNet.Interactive.Documents.KernelInfoCollection kernelInfos)
+    public static Polyglossy.Interactive.Documents.InteractiveDocument Parse(System.String json, Polyglossy.Interactive.Documents.KernelInfoCollection kernelInfos = null)
+    public static Polyglossy.Interactive.Documents.InteractiveDocument Read(System.IO.Stream stream, Polyglossy.Interactive.Documents.KernelInfoCollection kernelInfos)
     public static System.String ToJupyterJson(System.String defaultLanguage = null)
-    public static System.Void Write(Microsoft.DotNet.Interactive.Documents.InteractiveDocument document, System.IO.Stream stream, Microsoft.DotNet.Interactive.Documents.KernelInfoCollection kernelInfos)
+    public static System.Void Write(Polyglossy.Interactive.Documents.InteractiveDocument document, System.IO.Stream stream, Polyglossy.Interactive.Documents.KernelInfoCollection kernelInfos)
