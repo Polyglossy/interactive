@@ -30,19 +30,19 @@
   </Target>
 
   <!-- Removes the `.renamed` extension from the dotnet-* packages. -->
-<Target Name="RestoreDotNetTryOutputPackage" AfterTargets="PackageReleasePackages">
-  <ItemGroup>
-    <RenamedStableVersionPackages Include="%(StableVersionPackages.FullPath).renamed" Condition="Exists('%(StableVersionPackages.FullPath).renamed')" />
-    <RenamedSymbolPackages Include="%(SymbolPackages.FullPath).renamed" Condition="Exists('%(SymbolPackages.FullPath).renamed')" />
-  </ItemGroup>
+  <Target Name="RestoreDotNetTryOutputPackage" AfterTargets="PackageReleasePackages">
+    <ItemGroup>
+      <RenamedStableVersionPackages Include="%(StableVersionPackages.FullPath).renamed" Condition="Exists('%(StableVersionPackages.FullPath).renamed')" />
+      <RenamedSymbolPackages Include="%(SymbolPackages.FullPath).renamed" Condition="Exists('%(SymbolPackages.FullPath).renamed')" />
+    </ItemGroup>
 
-  <Move SourceFiles="@(RenamedStableVersionPackages)" DestinationFiles="@(RenamedStableVersionPackages->'%(FullPath)')" />
-  <Move SourceFiles="@(RenamedSymbolPackages)" DestinationFiles="@(RenamedSymbolPackages->'%(FullPath)')" />
+    <Move SourceFiles="@(RenamedStableVersionPackages)" DestinationFiles="@(RenamedStableVersionPackages->'%(FullPath)')" />
+    <Move SourceFiles="@(RenamedSymbolPackages)" DestinationFiles="@(RenamedSymbolPackages->'%(FullPath)')" />
 
-  <PropertyGroup>
-    <PreReleaseVersionLabel>$(OldPreReleaseVersionLabel)</PreReleaseVersionLabel>
-  </PropertyGroup>
-</Target>
+    <PropertyGroup>
+      <PreReleaseVersionLabel>$(OldPreReleaseVersionLabel)</PreReleaseVersionLabel>
+    </PropertyGroup>
+  </Target>
 
   <!-- Removes files from the `*.symbols.nupkg` packages that cause errors with symbol publishing. -->
   <Target Name="StripFilesFromSymbolPackages" AfterTargets="Pack">
@@ -53,16 +53,17 @@
     </ItemGroup>
 
     <PropertyGroup>
-      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.Guid]::NewGuid())</PackageTempPath>
+      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.IO.Path]::GetRandomFileName())</PackageTempPath>
     </PropertyGroup>
 
     <MakeDir Directories="$(PackageTempPath)" />
 
     <Unzip SourceFiles="@(SymbolPackageWithBadFiles)" DestinationFolder="$(PackageTempPath)" />
     <Delete Files="$(PackageTempPath)\%(SymbolPackageFilesToStrip.Identity)" />
+
     <ZipDirectory
         SourceDirectory="$(PackageTempPath)"
-        DestinationFile="@(SymbolPackageWithBadFiles)"
+        DestinationFile="%(SymbolPackageWithBadFiles.FullPath)"
         Overwrite="true" />
 
     <RemoveDir Directories="$(PackageTempPath)" />
