@@ -59,8 +59,9 @@ runs:
     - name: Build (Windows)
       if: runner.os == 'Windows'
       shell: cmd
-      run: eng\CIBuild.cmd -configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }}
+      run: eng\CIBuild.cmd -configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }} /p:DisableArcade=1
       env:
+        DisableArcade: '1'
         BUILD_BUILDNUMBER: ${{ github.run_number }}
         NUGET_PACKAGES: ${{ github.workspace }}\.packages
         POCKETLOGGER_LOG_PATH: ${{ github.workspace }}\artifacts\TestResults\${{ inputs.build-config }}\pocketlogger.test.log
@@ -85,8 +86,9 @@ runs:
     - name: Build (Linux)
       if: runner.os == 'Linux'
       shell: bash
-      run: ./eng/cibuild.sh --configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }}
+      run: ./eng/cibuild.sh --configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }} /p:DisableArcade=1
       env:
+        DisableArcade: '1'
         BUILD_BUILDNUMBER: ${{ github.run_number }}
         NUGET_PACKAGES: ${{ github.workspace }}/.packages
         POCKETLOGGER_LOG_PATH: ${{ github.workspace }}/artifacts/TestResults/${{ inputs.build-config }}/pocketlogger.test.log
