@@ -58,12 +58,12 @@
 
     <MakeDir Directories="$(PackageTempPath)" />
 
-    <Unzip SourceFiles="@(SymbolPackageWithBadFiles)" DestinationFolder="$(PackageTempPath)" />
+  <Unzip SourceFiles="%(SymbolPackageWithBadFiles.Identity)" DestinationFolder="$(PackageTempPath)" />
     <Delete Files="$(PackageTempPath)\%(SymbolPackageFilesToStrip.Identity)" />
 
     <ZipDirectory
         SourceDirectory="$(PackageTempPath)"
-        DestinationFile="%(SymbolPackageWithBadFiles.FullPath)"
+    DestinationFile="%(SymbolPackageWithBadFiles.Identity)"
         Overwrite="true" />
 
     <RemoveDir Directories="$(PackageTempPath)" />
