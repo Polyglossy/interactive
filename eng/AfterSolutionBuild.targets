@@ -48,18 +48,23 @@
   <Target Name="StripFilesFromSymbolPackages" AfterTargets="Pack">
     <ItemGroup>
       <SymbolPackageWithBadFiles Include="$(ArtifactsShippingPackagesDir)\Microsoft.dotnet-interactive.*.symbols.nupkg" />
-
       <SymbolPackageFilesToStrip Include="tools/net10.0/any/runtimes/linux-musl-x64/native/libpsl-native.so" />
       <SymbolPackageFilesToStrip Include="tools/net10.0/any/runtimes/linux-x64/native/libmi.so" />
     </ItemGroup>
+
     <PropertyGroup>
-      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.Guid]::NewGuid())</PackageTempPath>
+      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.IO.Guid]::NewGuid())</PackageTempPath>
     </PropertyGroup>
 
     <MakeDir Directories="$(PackageTempPath)" />
-    <Unzip SourceFiles="%(SymbolPackageWithBadFiles.Identity)" DestinationFolder="$(PackageTempPath)" />
+
+    <Unzip SourceFiles="@(SymbolPackageWithBadFiles)" DestinationFolder="$(PackageTempPath)" />
     <Delete Files="$(PackageTempPath)\%(SymbolPackageFilesToStrip.Identity)" />
-    <ZipDirectory SourceDirectory="$(PackageTempPath)" DestinationFile="%(SymbolPackageWithBadFiles.Identity)" Overwrite="true" />
+    <ZipDirectory
+        SourceDirectory="$(PackageTempPath)"
+        DestinationFile="@(SymbolPackageWithBadFiles)"
+        Overwrite="true" />
+
     <RemoveDir Directories="$(PackageTempPath)" />
   </Target>
 
