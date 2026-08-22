@@ -413,7 +413,7 @@ var f = new { Field= ""string value""};", Language.CSharp.LanguageName()));
 
         using var client = new HttpClient();
 
-        var response = await client.GetAsync($"http://localhost:{port}/resources/dotnet-interactive.js");
+        var response = await client.GetAsync($"http://localhost:{port}/resources/polyglossy-interactive.js");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 

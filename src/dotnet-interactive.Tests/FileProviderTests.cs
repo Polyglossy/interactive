@@ -23,7 +23,7 @@ public class FileProviderTests : LanguageKernelTestBase
         var kernel = CreateKernel(language);
         var provider = new FileProvider(kernel, typeof(Program).Assembly);
 
-        var file = provider.GetFileInfo("resources/dotnet-interactive.js");
+        var file = provider.GetFileInfo("resources/polyglossy-interactive.js");
 
         file.Should()
             .NotBeNull();
