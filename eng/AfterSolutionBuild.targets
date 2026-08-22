@@ -53,7 +53,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.IO.Guid]::NewGuid())</PackageTempPath>
+      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.Guid]::NewGuid())</PackageTempPath>
     </PropertyGroup>
 
     <MakeDir Directories="$(PackageTempPath)" />
