@@ -196,13 +196,13 @@ public static class KernelExtensions
             throw new InvalidOperationException($"A command handler for {nameof(SendValue)} is already registered on kernel {kernel.Name}.");
         }
 
-        var barrier = new Barrier(2);
-        kernel.RegisterForDisposal(barrier);
-        ConcurrentDictionary<string, FormattedValue> receivedValues = new(StringComparer.OrdinalIgnoreCase);
+        ConcurrentDictionary<string, TaskCompletionSource<FormattedValue>> pendingForms = new(StringComparer.OrdinalIgnoreCase);
 
         kernel.RegisterCommandHandler<RequestInputs>(async (requestInputs, context) =>
         {
             var formId = Guid.NewGuid().ToString("N");
+            var completionSource = new TaskCompletionSource<FormattedValue>(TaskCreationOptions.RunContinuationsAsynchronously);
+            pendingForms[formId] = completionSource;
 
             var inputDescriptions = requestInputs.Inputs;
 
@@ -238,12 +238,11 @@ public static class KernelExtensions
 
             context.Display(html);
 
-            await Task.Yield();
+            using var cancellationRegistration = context.CancellationToken.Register(() => completionSource.TrySetCanceled(context.CancellationToken));
 
-            barrier.SignalAndWait(context.CancellationToken);
-
-            if (receivedValues.TryGetValue(formId, out var formattedValue))
+            try
             {
+                var formattedValue = await completionSource.Task;
                 var values = JsonSerializer.Deserialize<Dictionary<string, string>>(formattedValue.Value);
 
                 if (secretManager is not null)
@@ -264,19 +263,20 @@ public static class KernelExtensions
                                     values,
                                     requestInputs));
             }
-            else
+            catch (OperationCanceledException) when (context.CancellationToken.IsCancellationRequested)
             {
-                context.Fail(requestInputs, message: "No input received.");
+                throw;
+            }
+            finally
+            {
+                pendingForms.TryRemove(formId, out var _);
             }
         });
         kernel.RegisterCommandHandler<SendValue>((sendValue, context) =>
         {
-            receivedValues[sendValue.Name] = sendValue.FormattedValue;
-
-            // don't wait on the barrier if the form hasn't been displayed 
-            if (barrier.ParticipantsRemaining == 1)
+            if (pendingForms.TryGetValue(sendValue.Name, out var completionSource))
             {
-                barrier.SignalAndWait(context.CancellationToken);
+                completionSource.TrySetResult(sendValue.FormattedValue);
             }
 
             return Task.CompletedTask;

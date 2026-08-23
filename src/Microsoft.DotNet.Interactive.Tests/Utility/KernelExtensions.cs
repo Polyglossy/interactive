@@ -44,14 +44,28 @@ public static class KernelExtensions
         this CompositeKernel kernel,
         Dictionary<string, string> formValues)
     {
+        var respondedFormIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         var subscription = kernel.KernelEvents.Subscribe(e =>
         {
             if (e is DisplayedValueProduced dvp)
             {
                 // Grab the form id from the displayed value
-                var formId = Regex.Match(
+                var match = Regex.Match(
                     dvp.FormattedValues.Single().Value,
-                    "form id=\"([a-zA-Z0-9]*)\"").Groups[1].Value;
+                    "form id=\"([a-zA-Z0-9]*)\"");
+
+                if (!match.Success)
+                {
+                    return;
+                }
+
+                var formId = match.Groups[1].Value;
+
+                if (!respondedFormIds.Add(formId))
+                {
+                    return;
+                }
 
                 var sendValue = new SendValue(formId, formValues, FormattedValue.CreateSingleFromObject(formValues, "application/json"));
 

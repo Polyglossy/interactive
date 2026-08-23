@@ -143,6 +143,16 @@ public class PowerShellKernel :
 
         var psModulePath = Environment.GetEnvironmentVariable(PSModulePathEnvName);
 
+        if (!string.IsNullOrWhiteSpace(psModulePath))
+        {
+            var existingPaths = psModulePath.Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries);
+
+            if (existingPaths.Contains(modulePath, StringComparer.OrdinalIgnoreCase))
+            {
+                return;
+            }
+        }
+
         Environment.SetEnvironmentVariable(
             PSModulePathEnvName,
             $"{modulePath}{Path.PathSeparator}{psModulePath}");
