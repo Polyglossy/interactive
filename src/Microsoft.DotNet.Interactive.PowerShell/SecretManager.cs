@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.IO;
 using Pocket;
 using static Pocket.Logger;
 
@@ -31,35 +32,35 @@ public class SecretManager
             return;
         }
 
-        var code = $"""
-                    Get-SecretVault -Name '{VaultName}' | Out-Null
-                    """;
+        // initialize or repair the app-owned SecretVault registration in case the saved module path is stale
+        // across workspace moves or output layout changes.
+        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification = "This is a default value used to bootstrap the secret manager.")]
+        const string defaultPassword = "P@ssW0rD!";
+        var secretStoreModulePath = Path.Combine(
+            Path.GetDirectoryName(typeof(PowerShellKernel).Assembly.Location)!,
+            "Modules",
+            "Microsoft.PowerShell.SecretStore",
+            "Microsoft.PowerShell.SecretStore.psd1");
 
-        if (!_kernel.RunLocally(code, out var errorMessage, true))
+        var registrationCode =
+            $$"""
+              Register-SecretVault -Name {{VaultName}} -ModuleName '{{secretStoreModulePath}}' -AllowClobber
+               
+              $storeConfiguration = @{
+                  Authentication = 'None'
+                  Interaction = 'None'
+                  Password = ConvertTo-SecureString "{{defaultPassword}}" -AsPlainText -Force
+                  Confirm = $false
+              }
+              Set-SecretStoreConfiguration @storeConfiguration
+              """;
+
+        if (!_kernel.RunLocally(registrationCode, out var errorMessage, true))
         {
-            // initialize the SecretVault
-            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification = "This is a default value used to bootstrap the secret manager.")]
-            const string defaultPassword = "P@ssW0rD!";
-            var registrationCode =
-                $$"""
-                  Register-SecretVault -Name {{VaultName}} -ModuleName Microsoft.PowerShell.SecretStore
-                   
-                  $storeConfiguration = @{
-                      Authentication = 'None'
-                      Interaction = 'None'
-                      Password = ConvertTo-SecureString "{{defaultPassword}}" -AsPlainText -Force
-                      Confirm = $false
-                  }
-                  Set-SecretStoreConfiguration @storeConfiguration
-                  """;
-
-            if (!_kernel.RunLocally(registrationCode, out errorMessage, true))
-            {
-                throw new InvalidOperationException(errorMessage);
-            }
-
-            _initialized = true;
+            throw new InvalidOperationException(errorMessage);
         }
+
+        _initialized = true;
     }
 
     public string VaultName => "DotnetInteractive";
