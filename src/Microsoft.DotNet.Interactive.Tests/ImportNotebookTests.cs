@@ -231,7 +231,7 @@ public class ImportNotebookTests
         {
             new InteractiveDocumentElement
             {
-                Contents = "#r \"nuget: Polyglossy.Interactive.AIUtilities, 1.0.0-beta.23517.1\"",
+                Contents = "#r \"nuget: Microsoft.DotNet.Interactive, 1.0.0-beta.26120.1\"",
                 KernelName = "csharp"
             }
         };
