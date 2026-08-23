@@ -48,9 +48,33 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
     {
         if (_currentlyRunningTopLevelOperation is { } operation)
         {
+            RecordCancellationCutoff();
             _currentlyRunningTopLevelOperation = null;
             _currentlyRunningOperation = null;
             operation.TaskCompletionSource.TrySetCanceled(_schedulerDisposalSource.Token);
+        }
+    }
+
+    private void RecordCancellationCutoff()
+    {
+        var cancellationCutoff = Interlocked.Read(ref _topLevelOperationSequence);
+
+        while (true)
+        {
+            var currentCutoff = Interlocked.Read(ref _cancelScheduledOperationsThroughSequence);
+
+            if (currentCutoff >= cancellationCutoff)
+            {
+                return;
+            }
+
+            if (Interlocked.CompareExchange(
+                    ref _cancelScheduledOperationsThroughSequence,
+                    cancellationCutoff,
+                    currentCutoff) == currentCutoff)
+            {
+                return;
+            }
         }
     }
 
@@ -92,6 +116,12 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
                 scope: scope,
                 topLevelSequenceNumber: Interlocked.Increment(ref _topLevelOperationSequence),
                 cancellationToken: cancellationToken);
+
+            if (cancellationToken.CanBeCanceled)
+            {
+                cancellationToken.Register(RecordCancellationCutoff);
+            }
+
             EnqueueTopLevelOperation(operation);
         }
 
@@ -187,14 +217,6 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
                 operationTask,
                 operation.TaskCompletionSource.Task
             }, _schedulerDisposalSource.Token);
-
-            if (!operation.IsChildOperation &&
-                operation.TaskCompletionSource.Task.IsCanceled)
-            {
-                Interlocked.Exchange(
-                    ref _cancelScheduledOperationsThroughSequence,
-                    Interlocked.Read(ref _topLevelOperationSequence));
-            }
 
             logOp.Succeed();
         }
