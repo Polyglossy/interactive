@@ -101,15 +101,15 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          $packagePattern = '^Microsoft\.dotnet-interactive\.(?<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)\.nupkg$'
-          $packages = @(Get-ChildItem artifacts\packages\Release\Shipping\Microsoft.dotnet-interactive.*.nupkg -File -ErrorAction SilentlyContinue |
+          $packagePattern = '^polyglossy\.interactive\.tool\.(?<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)\.nupkg$'
+          $packages = @(Get-ChildItem artifacts\packages\Release\Shipping\polyglossy.interactive.tool.*.nupkg -File -ErrorAction SilentlyContinue |
                        Where-Object { $_.Name -notlike '*.symbols.nupkg' -and $_.Name -match $packagePattern })
           if ($packages.Count -eq 0) {
-            Write-Error "No bare Microsoft.dotnet-interactive package with a SemVer filename found"
+            Write-Error "No bare polyglossy.interactive.tool package with a SemVer filename found"
             exit 1
           }
           if ($packages.Count -gt 1) {
-            Write-Error "Multiple bare Microsoft.dotnet-interactive packages found: $($packages.Name -join ', ')"
+            Write-Error "Multiple bare polyglossy.interactive.tool packages found: $($packages.Name -join ', ')"
             exit 1
           }
           $match = [regex]::Match($packages[0].Name, $packagePattern)
