@@ -2,7 +2,7 @@
   "token": "the-token",
   "commandType": "AddPackage",
   "command": {
-    "packageName": "Microsoft.DotNet.Interactive",
+    "packageName": "Polyglossy.Interactive",
     "packageVersion": "*-*",
     "targetKernelName": null,
     "originUri": null,
