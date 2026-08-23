@@ -25,6 +25,9 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
     private ScheduledOperation _currentlyRunningTopLevelOperation;
     private ScheduledOperation _currentlyRunningOperation;
     private readonly Barrier _childOperationsBarrier = new(1);
+    private long _topLevelOperationSequence;
+    private long _cancelScheduledOperationsThroughSequence;
+
 
     public KernelScheduler()
     {
@@ -75,7 +78,7 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
                 currentlyRunningOperation,
                 executionContext: null,
                 scope,
-                cancellationToken);
+                cancellationToken: cancellationToken);
             currentlyRunningOperation.AddChild(operation);
             RunChildOperation(operation);
         }
@@ -87,6 +90,7 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
                 parentOperation: null,
                 ExecutionContext.Capture(),
                 scope: scope,
+                topLevelSequenceNumber: Interlocked.Increment(ref _topLevelOperationSequence),
                 cancellationToken: cancellationToken);
             EnqueueTopLevelOperation(operation);
         }
@@ -117,6 +121,12 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
         {
             foreach (var operation in _topLevelScheduledOperations.GetConsumingEnumerable(_schedulerDisposalSource.Token))
             {
+                if (ShouldCancelWithoutExecuting(operation))
+                {
+                    operation.TaskCompletionSource.TrySetCanceled();
+                    continue;
+                }
+
                 _currentlyRunningTopLevelOperation = operation;
 
                 var executionContext = operation.ExecutionContext;
@@ -141,6 +151,12 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
         }
     }
 
+    private bool ShouldCancelWithoutExecuting(ScheduledOperation operation)
+    {
+        return operation.TopLevelSequenceNumber > 0 &&
+               operation.TopLevelSequenceNumber <= Interlocked.Read(ref _cancelScheduledOperationsThroughSequence);
+    }
+
     private void Run(ScheduledOperation operation)
     {
         using var logOp = Log.OnEnterAndConfirmOnExit(arg: operation.Value);
@@ -152,25 +168,33 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
             var operationTask = operation
                                 .ExecuteAsync()
                                 .ContinueWith(t =>
-                                {
-                                    if (!operation.IsCompleted)
-                                    {
-                                        if (t.GetIsCompletedSuccessfully())
-                                        {
-                                            CompleteWithResult(t.Result);
-                                        }
-                                        else if (t.Exception is { })
-                                        {
-                                            CompleteWithException(t.Exception);
-                                        }
-                                    }
-                                });
+            {
+                if (!operation.IsCompleted)
+                {
+                    if (t.GetIsCompletedSuccessfully())
+                    {
+                        CompleteWithResult(t.Result);
+                    }
+                    else if (t.Exception is { })
+                    {
+                        CompleteWithException(t.Exception);
+                    }
+                }
+            });
 
             Task.WaitAny(new[]
             {
                 operationTask,
                 operation.TaskCompletionSource.Task
             }, _schedulerDisposalSource.Token);
+
+            if (!operation.IsChildOperation &&
+                operation.TaskCompletionSource.Task.IsCanceled)
+            {
+                Interlocked.Exchange(
+                    ref _cancelScheduledOperationsThroughSequence,
+                    Interlocked.Read(ref _topLevelOperationSequence));
+            }
 
             logOp.Succeed();
         }
@@ -340,6 +364,7 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
             ScheduledOperation parentOperation = null,
             ExecutionContext executionContext = default,
             string scope = "default",
+            long topLevelSequenceNumber = 0,
             CancellationToken cancellationToken = default)
         {
             Value = value;
@@ -348,6 +373,7 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
             _onExecuteAsync = onExecuteAsync;
             CancellationToken = cancellationToken;
             Scope = scope;
+            TopLevelSequenceNumber = topLevelSequenceNumber;
 
             TaskCompletionSource = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
@@ -383,6 +409,8 @@ public class KernelScheduler<T, TResult> : IDisposable, IKernelScheduler<T, TRes
         public ExecutionContext ExecutionContext { get; }
 
         public string Scope { get; }
+
+        public long TopLevelSequenceNumber { get; }
 
         public Task<TResult> ExecuteAsync()
         {
