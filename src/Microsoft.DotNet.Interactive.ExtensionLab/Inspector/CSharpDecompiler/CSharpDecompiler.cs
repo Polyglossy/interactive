@@ -20,6 +20,7 @@ internal static class CSharpDecompiler
         using var systemPrivateCoreLib = new PEFile(Path.GetFileName(systemPrivateCoreLibLocation), peStream);
         var targetFramework = systemPrivateCoreLib.DetectTargetFrameworkId();
         var assemblyResolver = new UniversalAssemblyResolver($"{Defaults.InternalAssemblyName}.dll", true, targetFramework);
+        assemblyResolver.AddSearchDirectory(Path.GetDirectoryName(systemPrivateCoreLibLocation));
         var settings = new DecompilerSettings(decompilationLanguageVersion);
         var decompiler = new ICSharpCode.Decompiler.CSharp.CSharpDecompiler(module: assembly, assemblyResolver: assemblyResolver, settings: settings)
         {
