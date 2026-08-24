@@ -7,16 +7,36 @@ param (
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+function Invoke-ExternalCommand([scriptblock]$command, [string]$errorMessage) {
+    $output = & $command
+    if ($LASTEXITCODE -ne 0) {
+        throw "$errorMessage Exit code: $LASTEXITCODE"
+    }
+
+    return $output
+}
+
 function Build-NpmPackage() {
     $packageJsonPath = Join-Path (Get-Location) "package.json"
+    $originalPackageJsonBytes = [System.IO.File]::ReadAllBytes($packageJsonPath)
     $packageJsonContents = ReadJson -packageJsonPath $packageJsonPath
-    SetNpmVersionNumber -packageJsonContents $packageJsonContents -packageVersionNumber $packageVersionNumber
-    SaveJson -packageJsonPath $packagejsonPath -packageJsonContents $packageJsonContents
 
-    # pack
-    Write-Host "Packing package"
-    npm pack
-    Copy-Item -Path (Join-Path (Get-Location) "microsoft-polyglot-notebooks-$packageVersionNumber.tgz") -Destination $outDir
+    try {
+        SetNpmVersionNumber -packageJsonContents $packageJsonContents -packageVersionNumber $packageVersionNumber
+        SaveJson -packageJsonPath $packagejsonPath -packageJsonContents $packageJsonContents
+
+        Write-Host "Packing package"
+        $packOutput = Invoke-ExternalCommand -command { npm pack } -errorMessage 'NPM package creation failed.'
+        $tarballName = $packOutput | Select-Object -Last 1
+        if ([string]::IsNullOrWhiteSpace($tarballName)) {
+            throw 'NPM package creation did not report an output tarball name.'
+        }
+
+        Copy-Item -Path (Join-Path (Get-Location) $tarballName.Trim()) -Destination $outDir
+    }
+    finally {
+        [System.IO.File]::WriteAllBytes($packageJsonPath, $originalPackageJsonBytes)
+    }
 }
 
 try {
