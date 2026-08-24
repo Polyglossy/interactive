@@ -66,6 +66,22 @@ runs:
         NUGET_PACKAGES: ${{ github.workspace }}\.packages
         POCKETLOGGER_LOG_PATH: ${{ github.workspace }}\artifacts\TestResults\${{ inputs.build-config }}\pocketlogger.test.log
 
+    - name: Stage tool package for shipping (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        $buildConfig = '${{ inputs.build-config }}'
+        $sourceDir = Join-Path '${{ github.workspace }}' "artifacts\bin\dotnet-interactive\$buildConfig"
+        $shippingDir = Join-Path '${{ github.workspace }}' "artifacts\packages\$buildConfig\Shipping"
+        $packages = @(Get-ChildItem (Join-Path $sourceDir 'polyglossy.interactive.tool.*.nupkg') -File -ErrorAction SilentlyContinue)
+        if ($packages.Count -eq 0) {
+          Write-Error "No polyglossy.interactive.tool packages were found in '$sourceDir'"
+          exit 1
+        }
+        New-Item -ItemType Directory -Path $shippingDir -Force | Out-Null
+        Copy-Item -Path $packages.FullName -Destination $shippingDir -Force
+        Write-Host "Staged tool packages to '$shippingDir': $($packages.Name -join ', ')"
+
     - name: Copy build resources (Linux)
       if: runner.os == 'Linux'
       shell: bash
