@@ -106,7 +106,7 @@ steps:
     condition: succeededOrFailed()
 
   # Prevent symbols packages from being saved in the following `packages` artifact because they're incomplete.
-  # See `eng/AfterSolutionBuild.targets:StripFilesFromSymbolPackages` for details.
+  # See `eng/targets/Shipping.targets:StripFilesFromShippingSymbolPackages` for details.
   - script: del /S $(Build.SourcesDirectory)\artifacts\packages\$(_BuildConfig)\*.symbols.nupkg
     displayName: Clean symbol packages
 

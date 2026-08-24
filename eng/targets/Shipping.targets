@@ -1,0 +1,29 @@
+<Project>
+
+  <PropertyGroup Condition="'$(DisableArcade)' == '1' and '$(IsPackable)' == 'true'">
+    <PackageOutputPath>$(ArtifactsShippingPackagesDir)</PackageOutputPath>
+  </PropertyGroup>
+
+  <Target Name="EnsureShippingPackageDirectory" BeforeTargets="Pack" Condition="'$(DisableArcade)' == '1' and '$(IsPackable)' == 'true'">
+    <MakeDir Directories="$(PackageOutputPath)" />
+  </Target>
+
+  <Target Name="StripFilesFromShippingSymbolPackages" AfterTargets="Pack" Condition="'$(DisableArcade)' == '1' and '$(PackageId)' == 'polyglossy.interactive.tool'">
+    <ItemGroup>
+      <SymbolPackageWithBadFiles Include="$(ArtifactsShippingPackagesDir)$(PackageId).*.symbols.nupkg" />
+
+      <SymbolPackageFilesToStrip Include="tools/net10.0/any/runtimes/linux-musl-x64/native/libpsl-native.so" />
+      <SymbolPackageFilesToStrip Include="tools/net10.0/any/runtimes/linux-x64/native/libmi.so" />
+    </ItemGroup>
+    <PropertyGroup>
+      <PackageTempPath>$([System.IO.Path]::GetTempPath())/$([System.Guid]::NewGuid())</PackageTempPath>
+    </PropertyGroup>
+
+    <MakeDir Condition="'@(SymbolPackageWithBadFiles)' != ''" Directories="$(PackageTempPath)" />
+    <Unzip Condition="'@(SymbolPackageWithBadFiles)' != ''" SourceFiles="%(SymbolPackageWithBadFiles.Identity)" DestinationFolder="$(PackageTempPath)" />
+    <Delete Condition="'@(SymbolPackageWithBadFiles)' != ''" Files="$(PackageTempPath)\%(SymbolPackageFilesToStrip.Identity)" />
+    <ZipDirectory Condition="'@(SymbolPackageWithBadFiles)' != ''" SourceDirectory="$(PackageTempPath)" DestinationFile="%(SymbolPackageWithBadFiles.Identity)" Overwrite="true" />
+    <RemoveDir Condition="'@(SymbolPackageWithBadFiles)' != ''" Directories="$(PackageTempPath)" />
+  </Target>
+
+</Project>

@@ -12,6 +12,8 @@
   
   <PropertyGroup Condition="'$(DisableArcade)' == '1'">
     <ArtifactsBinDir>$(MSBuildThisFileDirectory)artifacts\bin\</ArtifactsBinDir>
+    <ArtifactsPackagesDir>$(MSBuildThisFileDirectory)artifacts\packages\$(Configuration)\</ArtifactsPackagesDir>
+    <ArtifactsShippingPackagesDir>$(ArtifactsPackagesDir)Shipping\</ArtifactsShippingPackagesDir>
     <BaseOutputPath>$(ArtifactsBinDir)$(MSBuildProjectName)\</BaseOutputPath>
     <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
   </PropertyGroup>
