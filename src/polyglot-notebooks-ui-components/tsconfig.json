@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./out",
+    "rootDir": "./src",
     "target": "es5",
     "lib": [
       "dom",
@@ -12,6 +13,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "ignoreDeprecations": "5.0",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
@@ -23,5 +25,11 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "node_modules",
+    "out",
+    "out-test"
   ]
 }

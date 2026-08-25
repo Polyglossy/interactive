@@ -14,12 +14,13 @@
     "build": "webpack --mode production",
     "buildDev": "webpack --mode development",
     "compile": "npm run lint && tsc -p ./",
+    "compile-tests": "tsc -p tsconfig.test.json",
     "compile-only": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "watch": "tsc -watch -p ./",
-    "pretest": "",
-    "test": "",
-    "ciTest": ""
+    "pretest": "npm run compile && npm run compile-tests",
+    "test": "mocha \"out-test/**/*.test.js\"",
+    "ciTest": "node ../ensure-testresults-directory.js && npm test -- --reporter mocha-multi-reporters --reporter-options configFile=testConfig.json"
   },
   "eslintConfig": {
     "extends": [
@@ -27,6 +28,8 @@
     ]
   },
   "devDependencies": {
+    "@types/jsdom": "16.2.14",
+    "@types/mocha": "9.1.1",
     "@stylistic/eslint-plugin": "3.1.0",
     "@types/node": "16.18.11",
     "@types/react": "18.0.26",
@@ -38,6 +41,10 @@
     "eslint-plugin-deprecation": "3.0.0",
     "file-loader": "6.2.0",
     "html-webpack-plugin": "5.5.0",
+    "jsdom": "20.0.0",
+    "mocha": "10.8.2",
+    "mocha-multi-reporters": "1.5.1",
+    "mocha-trx-reporter": "3.3.1",
     "source-map-loader": "4.0.1",
     "style-loader": "3.3.1",
     "ts-loader": "9.4.2",

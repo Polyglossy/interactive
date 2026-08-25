@@ -59,7 +59,7 @@ runs:
     - name: Build (Windows)
       if: runner.os == 'Windows'
       shell: cmd
-      run: eng\CIBuild.cmd -configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }} /p:DisableArcade=1
+      run: eng\CIBuild.cmd -test -configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }} /p:DisableArcade=1
       env:
         DisableArcade: '1'
         BUILD_BUILDNUMBER: ${{ github.run_number }}
@@ -102,7 +102,7 @@ runs:
     - name: Build (Linux)
       if: runner.os == 'Linux'
       shell: bash
-      run: ./eng/cibuild.sh --configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }} /p:DisableArcade=1
+      run: ./eng/cibuild.sh --test --configuration ${{ inputs.build-config }} /p:SignType=Test /p:PreReleaseVersionLabel=${{ inputs.prerelease-label }} /p:DisableArcade=1
       env:
         DisableArcade: '1'
         BUILD_BUILDNUMBER: ${{ github.run_number }}
