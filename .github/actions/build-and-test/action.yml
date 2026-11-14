@@ -95,6 +95,34 @@ runs:
         DisableArcade: '1'
         POCKETLOGGER_LOG_PATH: ${{ github.workspace }}/artifacts/TestResults/${{ inputs.build-config }}/pocketlogger.test.log
 
+    # JS tests, as the Azure Pipelines build ran them:
+    # https://github.com/BenjaminMichaelis/interactive/blob/55a09aeaba91f7ba0496bcd9b627a519af66c8f5/eng/build.ps1#L53
+    # They run after "Run tests" so a JS failure can't skip it, and with !cancelled() so a .NET
+    # failure doesn't hide the JS results.
+    - name: Test polyglot-notebooks (npm)
+      if: ${{ !cancelled() }}
+      shell: bash
+      working-directory: src/polyglot-notebooks
+      run: npm run ciTest
+
+    - name: Test polyglot-notebooks-browser (npm)
+      if: ${{ !cancelled() }}
+      shell: bash
+      working-directory: src/polyglot-notebooks-browser
+      run: npm run ciTest
+
+    - name: Test polyglot-notebooks-vscode (npm)
+      if: ${{ !cancelled() }}
+      shell: bash
+      working-directory: src/polyglot-notebooks-vscode
+      run: npm run ciTest
+
+    - name: Test polyglot-notebooks-vscode-insiders (npm)
+      if: ${{ !cancelled() }}
+      shell: bash
+      working-directory: src/polyglot-notebooks-vscode-insiders
+      run: npm run ciTest
+
     - name: Report test results
       # Fork PRs get a read-only GITHUB_TOKEN regardless of permissions declarations,
       # so dorny/test-reporter cannot create check runs for fork PRs.

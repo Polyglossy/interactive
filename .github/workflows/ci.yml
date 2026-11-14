@@ -125,6 +125,14 @@ jobs:
             -outDir '${{ runner.temp }}\staging\npm'
         working-directory: src/polyglot-notebooks
 
+      # Symbols packages are incomplete (see StripFilesFromSymbolPackages in eng/AfterSolutionBuild.targets),
+      # so keep them out of the packages artifact, as the Azure Pipelines build did:
+      # https://github.com/BenjaminMichaelis/interactive/blob/55a09aeaba91f7ba0496bcd9b627a519af66c8f5/eng/templates/build-and-test-tasks.yml#L108-L111
+      - name: Remove symbols packages (Windows)
+        if: always() && runner.os == 'Windows'
+        shell: pwsh
+        run: Remove-Item artifacts/packages/Release/Shipping/*.symbols.nupkg -Force -ErrorAction SilentlyContinue
+
       - name: Upload packages (Windows)
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         if: always() && runner.os == 'Windows'
@@ -156,3 +164,11 @@ jobs:
           name: ${{ runner.os }}-test-results
           path: artifacts/TestResults/Release
           retention-days: 30
+
+      - name: Upload build logs
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        if: always()
+        with:
+          name: ${{ runner.os }}-build-logs
+          path: artifacts/log/Release
+          retention-days: 14

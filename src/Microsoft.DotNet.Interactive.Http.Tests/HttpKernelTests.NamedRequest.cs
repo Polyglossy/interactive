@@ -751,7 +751,23 @@ namespace Microsoft.DotNet.Interactive.Http.Tests
             [Fact]
             public async Task responses_can_be_accessed_through_headers_in_later_requests()
             {
-                using var kernel = new HttpKernel();
+                var sentServerHeader = string.Empty;
+                var handler = new InterceptingHttpMessageHandler((message, _) =>
+                {
+                    if (message.Headers.TryGetValues("Server", out var values))
+                    {
+                        sentServerHeader = values.First();
+                    }
+
+                    var response = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        RequestMessage = message,
+                        Content = new StringContent("{}", Encoding.UTF8, "application/json")
+                    };
+                    response.Headers.Add("Server", "test-server/1.0");
+                    return Task.FromResult(response);
+                });
+                using var kernel = new HttpKernel("http", new HttpClient(handler));
 
                 using var _ = new AssertionScope();
 
@@ -779,6 +795,8 @@ namespace Microsoft.DotNet.Interactive.Http.Tests
                 var secondResult = await kernel.SendAsync(new SubmitCode(secondCode));
 
                 secondResult.Events.Should().NotContainErrors();
+
+                sentServerHeader.Should().Be("test-server/1.0");
             }
 
 
