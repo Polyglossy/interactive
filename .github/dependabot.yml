@@ -1,0 +1,37 @@
+version: 2
+updates:
+  # Keep GitHub Actions up to date in workflows and composite actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    labels:
+      - dependencies
+
+  # Keep npm packages up to date
+  - package-ecosystem: npm
+    directories:
+      - /src/polyglot-notebooks
+      - /src/polyglot-notebooks-ui-components
+      - /src/polyglot-notebooks-vscode
+      - /src/polyglot-notebooks-vscode-insiders
+      - /src/polyglot-notebooks-browser
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+
+  # Keep NuGet packages up to date
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies

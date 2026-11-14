@@ -177,8 +177,10 @@ internal partial class JupyterKernel
                                 .TakeUntil(m => m.MessageType == JupyterMessageContentTypes.Error || (messagesProcessed && results is not null));
         // run until kernel idle or until execution is done
 
+        var processMessagesTask = processMessages.ToTask(context.CancellationToken);
+
         await Sender.SendAsync(executeRequest);
-        await processMessages.ToTask(context.CancellationToken);
+        await processMessagesTask;
 
         if (results is not null && results.Status != StatusValues.Ok)
         {
