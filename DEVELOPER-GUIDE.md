@@ -12,7 +12,7 @@ If you would like to build `dotnet-interactive` tool and its associated librarie
 
     **N.b., using symbolic links in Windows requires the drive be formatted as NTFS.**
 
-This project depends on .NET 9.0. Before working on the project, check that the .NET prerequisites have been met:
+This project depends on the .NET 11 SDK (see `global.json`). Before working on the project, check that the .NET prerequisites have been met:
 
 - [Prerequisites for .NET on Windows](https://learn.microsoft.com/en-us/dotnet/core/install/windows)
 - [Prerequisites for .NET on Linux](https://learn.microsoft.com/en-us/dotnet/core/install/linux)
@@ -90,7 +90,7 @@ To get started, you'll need:
 
 1. [Visual Studio Code Insiders](https://code.visualstudio.com/insiders/).
 
-2. [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download).
+2. [.NET 11 SDK](https://dotnet.microsoft.com/en-us/download).
 
 3. The LTS version of [nodejs](https://nodejs.org/en/download/).
 
@@ -123,7 +123,7 @@ If you've made changes to `dotnet-interactive` and want to try them out with Vis
       ```json
         "dotnet-interactive.kernelTransportArgs": [
             "{dotnet_path}",
-            "/PATH/TO/REPO/ROOT/artifacts/bin/dotnet-interactive/Debug/net10.0/Microsoft.DotNet.Interactive.App.dll",
+            "/PATH/TO/REPO/ROOT/artifacts/bin/dotnet-interactive/Debug/net11.0/Microsoft.DotNet.Interactive.App.dll",
             "[vscode]",
             "stdio",
             "--log-path",
@@ -135,7 +135,7 @@ If you've made changes to `dotnet-interactive` and want to try them out with Vis
 
         "dotnet-interactive.notebookParserArgs": [
             "{dotnet_path}",
-            "/PATH/TO/REPO/ROOT/artifacts/bin/dotnet-interactive/Debug/net10.0/Microsoft.DotNet.Interactive.App.dll",
+            "/PATH/TO/REPO/ROOT/artifacts/bin/dotnet-interactive/Debug/net11.0/Microsoft.DotNet.Interactive.App.dll",
             "notebook-parser",
             "--log-path",
             "/path/to/a/folder/for/your/parser-logs/",

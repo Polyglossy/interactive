@@ -2,12 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
-using Microsoft.DotNet.Interactive.ExtensionLab.Inspector.JitAsmDecompiler;
-
-using Microsoft.Diagnostics.Runtime;
 
 using LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 
@@ -17,12 +11,6 @@ internal static class Defaults
 {
     internal const string DefaultIndent = "    ";
     internal const string InternalAssemblyName = "InsightsAssembly";
-
-    internal static readonly Pool<ClrRuntime> DefaultRuntimePool = new Pool<ClrRuntime>(() => {
-        using var currentProcess = Process.GetCurrentProcess();
-        var dataTarget = DataTarget.AttachToProcess(currentProcess.Id, suspend: false);
-        return dataTarget.ClrVersions.Single(c => c.Flavor == ClrFlavor.Core).CreateRuntime();
-    });
 
     internal static readonly string[] DefaultCSharpImports =
     {

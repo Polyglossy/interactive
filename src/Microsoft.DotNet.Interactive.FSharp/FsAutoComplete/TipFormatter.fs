@@ -1057,6 +1057,7 @@ let private formatTaggedText (t: TaggedText) : string =
   | TextTag.StringLiteral
   | TextTag.Text
   | TextTag.Punctuation
+  | TextTag.UnresolvedName
   | TextTag.UnknownType -> t.Text
   | TextTag.UnknownEntity
   | TextTag.Enum
@@ -1072,14 +1073,15 @@ let private formatTaggedText (t: TaggedText) : string =
 
 let private formatUntaggedText (t: TaggedText) = t.Text
 
-let private formatUntaggedTexts = Array.map formatUntaggedText >> String.concat ""
+let private formatUntaggedTexts (t: RichText) =
+  t.Parts |> Array.map formatUntaggedText |> String.concat ""
 
 let private formatTaggedTexts =
   Array.map formatTaggedText >> String.concat "" >> (fun s -> s.Replace("``", ""))
 
-let private formatGenericParameters (typeMappings: TaggedText[] list) =
+let private formatGenericParameters (typeMappings: RichText list) =
   typeMappings
-  |> List.map (fun typeMap -> $"* {formatTaggedTexts typeMap}")
+  |> List.map (fun typeMap -> $"* {formatTaggedTexts typeMap.Parts}")
   |> String.concat nl
 
 /// CompletionItems are formatted with an unmodified signature since the signature portion of the
@@ -1358,7 +1360,7 @@ let formatDocumentationFromXmlDoc xmlDoc =
   | TryGetXmlDocMemberResult.Error -> TipFormatterResult.Error ERROR_WHILE_PARSING_DOC_COMMENT
 
 let extractSignature (ToolTipText tips) =
-  let getSignature (t: TaggedText[]) =
+  let getSignature (t: RichText) =
     let str = formatUntaggedTexts t
     let nlpos = str.IndexOfAny([| '\r'; '\n' |])
 
@@ -1376,7 +1378,7 @@ let extractSignature (ToolTipText tips) =
     | ToolTipElement.Group gs ->
       List.tryPick
         (fun (t: ToolTipElementData) ->
-          if not (Array.isEmpty t.MainDescription) then
+          if not t.MainDescription.IsEmpty then
             Some t.MainDescription
           else
             None)

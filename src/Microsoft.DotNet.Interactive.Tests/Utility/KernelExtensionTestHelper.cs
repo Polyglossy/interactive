@@ -197,7 +197,7 @@ public static class KernelExtensionTestHelper
                  <Project Sdk="Microsoft.NET.Sdk">
                  
                    <PropertyGroup>
-                     <TargetFramework>net10.0</TargetFramework>
+                     <TargetFramework>net11.0</TargetFramework>
                      <IsPackable>true</IsPackable>
                      <PackageId>{packageName}</PackageId>
                      <PackageVersion>{packageVersion}</PackageVersion>
@@ -231,7 +231,7 @@ public static class KernelExtensionTestHelper
                 """
                 {
                   "sdk": {
-                    "version": "10.0.100",
+                    "version": "11.0.100",
                     "allowPrerelease": true,
                     "rollForward": "latestMinor"
                   }
@@ -341,7 +341,7 @@ public static class KernelExtensionTestHelper
                  <Project Sdk="Microsoft.NET.Sdk">
 
                    <PropertyGroup>
-                     <TargetFramework>net10.0</TargetFramework>
+                     <TargetFramework>net11.0</TargetFramework>
                      <AssemblyName>{extensionName}</AssemblyName>
                    </PropertyGroup>
 
@@ -358,7 +358,7 @@ public static class KernelExtensionTestHelper
                 """
                 {
                   "sdk": {
-                    "version": "10.0.100",
+                    "version": "11.0.100",
                     "allowPrerelease": true,
                     "rollForward": "latestMinor"
                   }

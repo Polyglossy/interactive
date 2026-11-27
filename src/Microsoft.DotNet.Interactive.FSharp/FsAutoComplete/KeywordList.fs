@@ -7,6 +7,22 @@ open FSharp.Compiler.Symbols
 
 module KeywordList =
 
+  // FSharp.Compiler.Service 43.13 made RichText the type of a tooltip's main description, but gave it no public
+  // constructor, so the only way to turn tagged text into one for a hand-built tooltip is its internal constructor.
+  // Any change to that constructor surfaces as the failure of the keyword hover tests, not as a silent regression.
+  let private richTextOfTaggedText =
+    let constructor =
+      typeof<RichText>.GetConstructor(
+        System.Reflection.BindingFlags.Instance
+        ||| System.Reflection.BindingFlags.Public
+        ||| System.Reflection.BindingFlags.NonPublic,
+        null,
+        [| typeof<TaggedText[]> |],
+        null
+      )
+
+    fun (parts: TaggedText[]) -> constructor.Invoke([| box parts |]) :?> RichText
+
   let keywordDescriptions = FSharpKeywords.KeywordsWithDescription |> dict
 
   let keywordTooltips =
@@ -19,7 +35,7 @@ module KeywordList =
       let tip =
         ToolTipText
           [ ToolTipElement.Single(
-              [| TaggedText.tagText kv.Key |],
+              richTextOfTaggedText [| TaggedText.tagText kv.Key |],
               FSharpXmlDoc.FromXmlText(FSharp.Compiler.Xml.XmlDoc(allLines, Range.range0))
             ) ]
 

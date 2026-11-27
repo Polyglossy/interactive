@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.DotNet.Interactive.CSharp.Tests;
 
-// These tests deliberately avoid C# 15 features that need runtime support newer than net10.0 (for example `union` types).
+// This project targets net11.0, so C# 15 features that need new runtime types (for example `union` types) can be covered here.
 public class CSharp15Tests
 {
     [Fact]
@@ -96,6 +96,40 @@ public class CSharp15Tests
               .Value
               .Should()
               .Be(1);
+    }
+
+    [Fact]
+    public async Task Union_types_are_accepted_and_exhaustively_matched()
+    {
+        // `union` declarations rely on runtime types that first shipped in .NET 11, which is why this project targets net11.0.
+        using var kernel = new CSharpKernel();
+
+        var result = await kernel.SendAsync(
+                         new SubmitCode(
+                             """
+                             public record class Cat(string Name);
+                             public record class Dog(string Name);
+
+                             public union Pet(Cat, Dog);
+
+                             Pet pet = new Dog("Rex");
+
+                             pet switch
+                             {
+                                 Cat c => "cat:" + c.Name,
+                                 Dog d => "dog:" + d.Name,
+                             }
+                             """));
+
+        result.Events.Should().NotContainErrors();
+
+        result.Events
+              .Should()
+              .ContainSingle<ReturnValueProduced>()
+              .Which
+              .Value
+              .Should()
+              .Be("dog:Rex");
     }
 
     [Fact]

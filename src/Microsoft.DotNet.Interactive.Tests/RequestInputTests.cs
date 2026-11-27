@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -11,6 +12,7 @@ using Microsoft.DotNet.Interactive.App;
 using Microsoft.DotNet.Interactive.Commands;
 using Microsoft.DotNet.Interactive.CSharp;
 using Microsoft.DotNet.Interactive.Events;
+using Microsoft.DotNet.Interactive.Formatting;
 using Microsoft.DotNet.Interactive.PowerShell;
 using Microsoft.DotNet.Interactive.Tests.Utility;
 using Xunit;
@@ -136,6 +138,53 @@ public class RequestInputTests
         kernel.RespondToRequestInputsFormWith(formValues);
 
         var result = await kernel.SendAsync(requestInputs);
+
+        result.Events.Should().NotContainErrors();
+
+        result.Events.Should().ContainSingle<InputsProduced>()
+              .Which.Values.Should().BeEquivalentTo(formValues);
+    }
+
+    [Fact]
+    public async Task Multiple_inputs_request_completes_when_the_form_response_is_handled_before_the_request_handler_waits_for_it()
+    {
+        using var kernel = CreateKernel()
+            .UseFormsForMultipleInputs();
+
+        var formValues = new Dictionary<string, string>
+        {
+            ["Fruit"] = "cherry"
+        };
+
+        // Handle the SendValue command synchronously from within the event that announces the form. That
+        // guarantees that it has been completely handled before the RequestInputs handler has had a chance
+        // to wait for it, which is a timing that otherwise depends on thread scheduling.
+        using var subscription = kernel.KernelEvents.Subscribe(e =>
+        {
+            if (e is DisplayedValueProduced displayedValueProduced)
+            {
+                var formId = Regex.Match(
+                    displayedValueProduced.FormattedValues.Single().Value,
+                    "form id=\"([a-zA-Z0-9]*)\"").Groups[1].Value;
+
+                kernel.SendAsync(
+                    new SendValue(
+                        formId,
+                        formValues,
+                        FormattedValue.CreateSingleFromObject(formValues, "application/json"))).GetAwaiter().GetResult();
+            }
+        });
+
+        var sendTask = kernel.SendAsync(new RequestInputs
+        {
+            Inputs = [new("Fruit")]
+        });
+
+        var completedTask = await Task.WhenAny(sendTask, Task.Delay(TimeSpan.FromSeconds(30)));
+
+        completedTask.Should().BeSameAs(sendTask, "the form response was already received, so the request should not wait for another one");
+
+        var result = await sendTask;
 
         result.Events.Should().NotContainErrors();
 

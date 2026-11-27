@@ -196,9 +196,28 @@ public static class KernelExtensions
             throw new InvalidOperationException($"A command handler for {nameof(SendValue)} is already registered on kernel {kernel.Name}.");
         }
 
-        var barrier = new Barrier(2);
-        kernel.RegisterForDisposal(barrier);
         ConcurrentDictionary<string, FormattedValue> receivedValues = new(StringComparer.OrdinalIgnoreCase);
+
+        // One rendezvous per form, keyed by form id. The RequestInputs handler waits on it and the SendValue
+        // handler completes it. Whichever side gets there first creates it, so it doesn't matter which one
+        // runs first. (A shared Barrier can't express that: if the SendValue command is handled after the
+        // form is displayed but before the RequestInputs handler has reached the barrier, the SendValue
+        // handler sees that nobody is waiting yet and does not signal, and the RequestInputs handler then
+        // waits forever.)
+        ConcurrentDictionary<string, TaskCompletionSource<bool>> formSignals = new(StringComparer.OrdinalIgnoreCase);
+
+        TaskCompletionSource<bool> GetFormSignal(string formId) =>
+            formSignals.GetOrAdd(
+                formId,
+                _ => new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously));
+
+        kernel.RegisterForDisposal(() =>
+        {
+            foreach (var signal in formSignals.Values)
+            {
+                signal.TrySetCanceled();
+            }
+        });
 
         kernel.RegisterCommandHandler<RequestInputs>(async (requestInputs, context) =>
         {
@@ -236,11 +255,18 @@ public static class KernelExtensions
                     ]());
             }
 
-            context.Display(html);
+            var formSignal = GetFormSignal(formId);
 
-            await Task.Yield();
+            try
+            {
+                context.Display(html);
 
-            barrier.SignalAndWait(context.CancellationToken);
+                await formSignal.Task.WaitAsync(context.CancellationToken);
+            }
+            finally
+            {
+                formSignals.TryRemove(formId, out TaskCompletionSource<bool> _);
+            }
 
             if (receivedValues.TryGetValue(formId, out var formattedValue))
             {
@@ -273,11 +299,8 @@ public static class KernelExtensions
         {
             receivedValues[sendValue.Name] = sendValue.FormattedValue;
 
-            // don't wait on the barrier if the form hasn't been displayed 
-            if (barrier.ParticipantsRemaining == 1)
-            {
-                barrier.SignalAndWait(context.CancellationToken);
-            }
+            // release the RequestInputs handler waiting on this form (or, if it hasn't got that far yet, make sure it won't wait)
+            GetFormSignal(sendValue.Name).TrySetResult(true);
 
             return Task.CompletedTask;
         });

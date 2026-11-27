@@ -42,20 +42,20 @@ namespace Microsoft.DotNet.Interactive.Tests
             //
             // When arcade is disabled:
             // D:\interactive\src\Microsoft.DotNet.Interactive.NetFramework.Tests\bin\Debug\net472\Microsoft.DotNet.Interactive.NetFramework.Tests.dll ->
-            //     D:\interactive\src\dotnet-interactive\bin\debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
-            // D:\interactive\src\Microsoft.DotNet.Interactive.Tests\bin\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.Tests.dll ->
-            //     D:\interactive\src\dotnet-interactive\bin\debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
+            //     D:\interactive\src\dotnet-interactive\bin\debug\net11.0\Microsoft.DotNet.Interactive.App.dll.
+            // D:\interactive\src\Microsoft.DotNet.Interactive.Tests\bin\Debug\net11.0\Microsoft.DotNet.Interactive.Tests.dll ->
+            //     D:\interactive\src\dotnet-interactive\bin\debug\net11.0\Microsoft.DotNet.Interactive.App.dll.
             //
             // When arcade is enabled:
             // D:\interactive2\artifacts\bin\Microsoft.DotNet.Interactive.NetFramework.Tests\Debug\net472\Microsoft.DotNet.Interactive.NetFramework.Tests.dll ->
-            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
-            // D:\interactive2\artifacts\bin\Microsoft.DotNet.Interactive.Tests\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.Tests.dll ->
-            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\<TargetFramework>net10.0</TargetFramework>\Microsoft.DotNet.Interactive.App.dll.
+            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\net11.0\Microsoft.DotNet.Interactive.App.dll.
+            // D:\interactive2\artifacts\bin\Microsoft.DotNet.Interactive.Tests\Debug\net11.0\Microsoft.DotNet.Interactive.Tests.dll ->
+            //     D:\interactive\artifacts\bin\dotnet-interactive\Debug\net11.0\Microsoft.DotNet.Interactive.App.dll.
 
             var toolAppDllPath =
                 currentAssemblyPath.Replace(currentAssemblyName, "Microsoft.DotNet.Interactive.App.dll");
             toolAppDllPath = toolAppDllPath.Replace(currentAssemblyProjectName, "dotnet-interactive");
-            toolAppDllPath = toolAppDllPath.Replace("net472", "<TargetFramework>net10.0</TargetFramework>");
+            toolAppDllPath = toolAppDllPath.Replace("net472", "net11.0");
 
             var hostUri = KernelHost.CreateHostUri("host");
             var connector = new StdIoKernelConnector(

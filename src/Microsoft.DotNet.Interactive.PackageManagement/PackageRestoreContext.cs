@@ -17,7 +17,7 @@ namespace Microsoft.DotNet.Interactive.PackageManagement;
 
 public class PackageRestoreContext : IDisposable
 {
-    private const string restoreTfm = "net10.0";
+    private const string restoreTfm = "net11.0";
     private readonly ConcurrentDictionary<string, PackageReference> _requestedPackageReferences = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, ResolvedPackageReference> _resolvedPackageReferences = new(StringComparer.OrdinalIgnoreCase);
 
@@ -227,7 +227,7 @@ public class PackageRestoreContext : IDisposable
         string executionTfm,
         ResolvingErrorReport reportError)
     {
-        IDependencyManagerProvider iDependencyManager = _dependencyProvider.TryFindDependencyManagerByKey(Enumerable.Empty<string>(), "", reportError, "nuget");
+        IDependencyManagerProvider iDependencyManager = _dependencyProvider.TryFindDependencyManagerByKey(Enumerable.Empty<string>(), "", sdkDirOverride: null, reportError, "nuget");
 
         if (iDependencyManager is null)
         {

@@ -291,7 +291,10 @@ module Syntax =
       | SynExpr.Record(_, _, fields, _) ->
 
         fields
-        |> List.iter (fun (SynExprRecordField(fieldName = (_, _); expr = e)) -> e |> Option.iter walkExpr)
+        |> List.iter (fun field ->
+          match field with
+          | SynExprRecordFieldOrSpread.Field(field = SynExprRecordField(expr = e)) -> e |> Option.iter walkExpr
+          | SynExprRecordFieldOrSpread.Spread(spread = SynExprSpread(expr = e)) -> walkExpr e)
       | SynExpr.ObjExpr(ty, argOpt, _, bindings, _, ifaces, _, _) ->
 
         argOpt |> Option.iter (fun (e, _) -> walkExpr e)
@@ -310,9 +313,9 @@ module Syntax =
       | SynExpr.TypeApp(e, _, tys, _, _, _, _) ->
         List.iter walkType tys
         walkExpr e
-      | SynExpr.LetOrUse(bindings = bindings; body = e; range = _) ->
-        List.iter walkBinding bindings
-        walkExpr e
+      | SynExpr.LetOrUse letOrUse ->
+        List.iter walkBinding letOrUse.Bindings
+        walkExpr letOrUse.Body
       | SynExpr.TryWith(tryExpr = e; withCases = clauses; range = _) ->
         List.iter walkClause clauses
         walkExpr e
@@ -445,7 +448,7 @@ module Syntax =
       | SynMemberDefn.ImplicitInherit(inheritType = t; inheritArgs = e) ->
         walkType t
         walkExpr e
-      | SynMemberDefn.LetBindings(bindings, _, _, _) -> List.iter walkBinding bindings
+      | SynMemberDefn.LetBindings(bindings, _, _, _, _) -> List.iter walkBinding bindings
       | SynMemberDefn.Interface(t, _, members, _) ->
         walkType t
         members |> Option.iter (List.iter walkMember)
@@ -483,7 +486,12 @@ module Syntax =
       match s with
       | SynTypeDefnSimpleRepr.Enum(cases, _) -> List.iter walkEnumCase cases
       | SynTypeDefnSimpleRepr.Union(_, cases, _) -> List.iter walkUnionCase cases
-      | SynTypeDefnSimpleRepr.Record(_, fields, _) -> List.iter walkField fields
+      | SynTypeDefnSimpleRepr.Record(_, fields, _) ->
+        fields
+        |> List.iter (fun field ->
+          match field with
+          | SynFieldOrSpread.Field field -> walkField field
+          | SynFieldOrSpread.Spread(SynTypeSpread(ty = t)) -> walkType t)
       | SynTypeDefnSimpleRepr.TypeAbbrev(_, t, _) -> walkType t
       | SynTypeDefnSimpleRepr.General _ -> ()
       | SynTypeDefnSimpleRepr.LibraryOnlyILAssembly _ -> ()
@@ -492,7 +500,7 @@ module Syntax =
 
     and walkComponentInfo
       (SynComponentInfo(
-        attributes = AllAttrs attrs; typeParams = typars; constraints = constraints; longId = _; range = _) as s)
+        attributes = AllAttrs attrs; typeParams = typars; constraints = constraints; range = _) as s)
       =
       walker.WalkComponentInfo s
       List.iter walkAttribute attrs
@@ -531,7 +539,7 @@ module Syntax =
       | SynModuleDecl.NestedModule(info, _, modules, _, _, _) ->
         walkComponentInfo info
         List.iter walkSynModuleDecl modules
-      | SynModuleDecl.Let(_, bindings, _) -> List.iter walkBinding bindings
+      | SynModuleDecl.Let(_, bindings, _, _) -> List.iter walkBinding bindings
       | SynModuleDecl.Expr(expr, _) -> walkExpr expr
       | SynModuleDecl.Types(types, _) -> List.iter walkTypeDefn types
       | SynModuleDecl.Attributes(attributes = AllAttrs attrs; range = _) -> List.iter walkAttribute attrs
@@ -602,7 +610,8 @@ module FoldingRange =
 
     override _.WalkInterpolatedStringPart i =
       match i with
-      | SynInterpolatedStringPart.FillExpr(qualifiers = Some ident) -> addIfInside ident.idRange
+      | SynInterpolatedStringPart.FillExpr(formatting = SynInterpolationFormatting.DotNet(format = Some ident)) -> addIfInside ident.idRange
+      | SynInterpolatedStringPart.FillExpr(formatting = SynInterpolationFormatting.Printf(range = r)) -> addIfInside r
       | SynInterpolatedStringPart.String(_, r) -> addIfInside r
       | _ -> ()
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.DotNet.Interactive.Commands;
 using Microsoft.DotNet.Interactive.Connection;
 using Microsoft.DotNet.Interactive.CSharpProject.Commands;
@@ -65,7 +66,8 @@ public class CSharpProjectKernel :
     {
         _prebuildFinder = prebuildFinder;
         KernelInfo.LanguageName = "C#";
-        KernelInfo.LanguageVersion = "13.0";
+        // The workspace compiles in-process with the project's LangVersion, which the console prebuild sets to "latest".
+        KernelInfo.LanguageVersion = LanguageVersion.Latest.MapSpecifiedToEffectiveVersion().ToDisplayString();
     }
 
     async Task IKernelCommandHandler<OpenProject>.HandleAsync(OpenProject command, KernelInvocationContext context)

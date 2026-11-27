@@ -66,7 +66,7 @@ module Lexer =
         | _ -> defines, langVersion)
 
     let sourceTokenizer =
-      FSharpSourceTokenizer(Seq.toList defines, Some "/tmp.fsx", langVersion, None)
+      FSharpSourceTokenizer(Seq.toList defines, Some "/tmp.fsx", langVersion)
 
     let lineTokenizer = sourceTokenizer.CreateLineTokenizer lineStr
 

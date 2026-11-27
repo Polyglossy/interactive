@@ -25,6 +25,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -47,8 +48,6 @@ internal sealed class JitAsmDecompiler
         SpaceAfterOperandSeparator = true
     };
 
-    private readonly Pool<ClrRuntime> _runtimePool;
-
     public static string Decompile(Stream dll)
     {
         if (dll is null)
@@ -57,15 +56,10 @@ internal sealed class JitAsmDecompiler
         dll.Seek(0, SeekOrigin.Begin);
 
         var jitDecompilation = new StringWriter();
-        var jitDecompiler = new JitAsmDecompiler(Defaults.DefaultRuntimePool);
+        var jitDecompiler = new JitAsmDecompiler();
         jitDecompiler.Decompile(dll, jitDecompilation);
 
         return jitDecompilation.ToString();
-    }
-
-    private JitAsmDecompiler(Pool<ClrRuntime> runtimePool)
-    {
-        _runtimePool = runtimePool;
     }
 
     private void Decompile(Stream dll, TextWriter codeWriter)
@@ -75,20 +69,88 @@ internal sealed class JitAsmDecompiler
             var assembly = loadContext.LoadFromStream(dll);
             ValidateStaticConstructors(assembly);
 
-            using var runtimeLease = _runtimePool.GetOrCreate();
-            var runtime = runtimeLease.Object;
-            runtime.FlushCachedData();
-
-            var context = new JitWriteContext(codeWriter, runtime);
-
-            WriteJitInfo(runtime.ClrInfo, codeWriter);
+            // Everything has to be JIT-compiled *before* the snapshot of this process is taken:
+            // ClrMD cannot attach to its own process, so it works on a point-in-time snapshot
+            // that cannot see methods compiled after it was created.
             foreach (var type in assembly.DefinedTypes)
             {
                 if (type.IsNested)
-                    continue; // it's easier to handle nested generic types recursively, so we suppress all nested for consistency
-                DisassembleAndWriteMembers(context, type);
+                    continue;
+                PrepareMembers(type);
+            }
+
+            DataTarget dataTarget;
+            ClrRuntime runtime;
+            try
+            {
+                using var currentProcess = Process.GetCurrentProcess();
+                dataTarget = DataTarget.CreateSnapshotAndAttach(currentProcess.Id);
+                try
+                {
+                    runtime = dataTarget.ClrVersions.First(c => c.Flavor == ClrFlavor.Core).CreateRuntime();
+                }
+                catch
+                {
+                    dataTarget.Dispose();
+                    throw;
+                }
+            }
+            catch (Exception exception)
+            {
+                codeWriter.WriteLine($"; JIT assembly is not available: unable to inspect the current process ({exception.GetType().Name}: {exception.Message}).");
+                return;
+            }
+
+            // The snapshot is only valid while the DataTarget is alive; the runtime is disposed before it.
+            using (dataTarget)
+            using (runtime)
+            {
+                var context = new JitWriteContext(codeWriter, runtime);
+
+                WriteJitInfo(runtime.ClrInfo, codeWriter);
+                foreach (var type in assembly.DefinedTypes)
+                {
+                    if (type.IsNested)
+                        continue; // it's easier to handle nested generic types recursively, so we suppress all nested for consistency
+                    DisassembleAndWriteMembers(context, type);
+                }
             }
         }
+    }
+
+    private static void PrepareMembers(TypeInfo type)
+    {
+        if (type.IsGenericTypeDefinition)
+            return; // open generics are not JIT-compiled, see DisassembleAndWriteMethod
+
+        foreach (var constructor in type.DeclaredConstructors)
+        {
+            PrepareMethod(constructor);
+        }
+
+        foreach (var method in type.DeclaredMethods)
+        {
+            if (method.IsAbstract)
+                continue;
+            PrepareMethod(method);
+        }
+
+        foreach (var nested in type.DeclaredNestedTypes)
+        {
+            PrepareMembers(nested);
+        }
+    }
+
+    private static void PrepareMethod(MethodBase method)
+    {
+        // Mirrors the cases DisassembleAndWriteMethod actually disassembles.
+        if ((method.MethodImplementationFlags & MethodImplAttributes.Runtime) == MethodImplAttributes.Runtime)
+            return;
+
+        if (method.IsGenericMethodDefinition || (method.DeclaringType?.IsGenericTypeDefinition ?? false))
+            return;
+
+        RuntimeHelpers.PrepareMethod(method.MethodHandle);
     }
 
     private void ValidateStaticConstructors(Assembly assembly)
@@ -177,18 +239,11 @@ internal sealed class JitAsmDecompiler
 
     private void DisassembleAndWriteSimpleMethod(JitWriteContext context, MethodBase method)
     {
+        // The method was already JIT-compiled by PrepareMembers, before the snapshot was taken.
         var handle = method.MethodHandle;
-        RuntimeHelpers.PrepareMethod(handle);
 
         var clrMethod = context.Runtime.GetMethodByHandle((ulong)handle.Value.ToInt64());
         var regions = FindNonEmptyHotColdInfo(clrMethod);
-
-        if (clrMethod is null || regions is null)
-        {
-            context.Runtime.FlushCachedData();
-            clrMethod = context.Runtime.GetMethodByHandle((ulong)handle.Value.ToInt64());
-            regions = FindNonEmptyHotColdInfo(clrMethod);
-        }
 
         if (clrMethod is null || regions is null)
         {
@@ -258,7 +313,7 @@ internal sealed class JitAsmDecompiler
         context.Writer.WriteLine();
 
         var md = (ulong)method.MethodHandle.Value.ToInt64();
-        var signature = context.Runtime.DacLibrary.SOSDacInterface.GetMethodDescName(md);
+        var signature = context.Runtime.GetMethodByHandle(md)?.Signature;
 
         context.Writer.WriteLine(signature ?? "Unknown Method");
     }
